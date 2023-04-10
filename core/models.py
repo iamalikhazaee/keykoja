@@ -15,6 +15,7 @@ class Time(models.Model):
         verbose_name_plural = 'Times'
 
 class Profile(models.Model):
+
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     email = models.EmailField(null=False, blank=False)
@@ -28,3 +29,31 @@ class Profile(models.Model):
         managed = True
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
+
+
+class Event(models.Model):
+    name = models.CharField(max_length=255,null=False,blank=False)
+    MY_CHOICES_type = (
+        ('a', 'یک به یک'),
+        ('b', 'گروهی')
+    )
+    type = models.CharField(max_length=1, choices=MY_CHOICES_type)
+    MY_CHOICES_place = (
+        ('a', 'حضوری'),
+        ('b', 'Google meet'),
+        ('c', 'Skype'),
+        ('d', 'Whatsapp'),
+    )
+    place = models.CharField(max_length=1, choices=MY_CHOICES_place)
+    massage = models.TextField(blank=True)
+    default_time = models.ForeignKey(Time, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        self.name
+
+    class Meta:
+        db_table = ''
+        managed = True
+        verbose_name = 'Event'
+        verbose_name_plural = 'Events'
