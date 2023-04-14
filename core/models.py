@@ -51,6 +51,7 @@ class Event(models.Model):
         ('b', 'گروهی')
     )
     type = models.CharField(max_length=1, choices=MY_CHOICES_type)
+    time = models.TimeField()
     MY_CHOICES_place = (
         ('a', 'حضوری'),
         ('b', 'Google meet'),
@@ -59,11 +60,11 @@ class Event(models.Model):
     )
     place = models.CharField(max_length=1, choices=MY_CHOICES_place)
     massage = models.TextField(blank=True)
-    default_time = models.ForeignKey(Availability, on_delete=models.CASCADE)
+    event_domain = models.CharField(max_length=255)
 
 
     def __str__(self):
-        self.name
+        self.event_domain
 
     class Meta:
         db_table = ''
