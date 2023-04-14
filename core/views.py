@@ -8,3 +8,7 @@ from .serializer import *
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+
+class NewEventViewSet(viewsets.ModelViewSet):
+    queryset = Event.objects.all()
+    serializer_class = NewEventSerializer
