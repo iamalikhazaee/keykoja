@@ -7,6 +7,11 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ["first_name"]
 
+class GuestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Guest
+        fields = "__all__"
+
 class NewEventSerializer(serializers.ModelSerializer):
 
      class Meta:
