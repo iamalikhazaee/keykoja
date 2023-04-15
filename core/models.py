@@ -43,6 +43,20 @@ class Profile(models.Model):
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
 
+class Guest(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    event = models.ForeignKey('Event',on_delete=models.CASCADE)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.name + " joined in " + self.event}'
+
+    class Meta:
+        db_table = ''
+        managed = True
+        verbose_name = 'Guest'
+        verbose_name_plural = 'Guests'
 
 class Event(models.Model):
     name = models.CharField(max_length=255,null=False,blank=False)
@@ -59,12 +73,17 @@ class Event(models.Model):
         ('d', 'Whatsapp'),
     )
     place = models.CharField(max_length=1, choices=MY_CHOICES_place)
+    address = models.CharField(max_length=255,default=' ')
     massage = models.TextField(blank=True)
     event_domain = models.CharField(max_length=255)
 
+    #advanced setting 
+    event_per_day = models.IntegerField(default=5)
+    rest_before = models.TimeField()
+    rest_after = models.TimeField()
 
     def __str__(self):
-        self.event_domain
+        return self.event_domain
 
     class Meta:
         db_table = ''
