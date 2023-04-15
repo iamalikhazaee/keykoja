@@ -35,7 +35,7 @@ class Profile(models.Model):
     
     availability = models.ManyToManyField(Availability)
     def __str__(self):
-        self.first_name + self.last_name
+       return self.first_name + self.last_name
 
     class Meta:
         db_table = ''
@@ -61,18 +61,18 @@ class Guest(models.Model):
 class Event(models.Model):
     name = models.CharField(max_length=255,null=False,blank=False)
     MY_CHOICES_type = (
-        ('a', 'یک به یک'),
-        ('b', 'گروهی')
+        ('یک به یک', 'یک به یک'),
+        ('گروهی', 'گروهی')
     )
-    type = models.CharField(max_length=1, choices=MY_CHOICES_type)
+    type = models.CharField(max_length=50, choices=MY_CHOICES_type)
     time = models.TimeField()
     MY_CHOICES_place = (
-        ('a', 'حضوری'),
-        ('b', 'Google meet'),
-        ('c', 'Skype'),
-        ('d', 'Whatsapp'),
+        ('حضوری', 'حضوری'),
+        ('Google meet', 'Google meet'),
+        ('Skype', 'Skype'),
+        ('Whatsapp', 'Whatsapp'),
     )
-    place = models.CharField(max_length=1, choices=MY_CHOICES_place)
+    place = models.CharField(max_length=50, choices=MY_CHOICES_place)
     address = models.CharField(max_length=255,default=' ')
     massage = models.TextField(blank=True)
     event_domain = models.CharField(max_length=255)
