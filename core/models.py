@@ -47,10 +47,12 @@ class Guest(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField()
     event = models.ForeignKey('Event',on_delete=models.CASCADE)
-    active = models.BooleanField(default=True)
+    time = models.OneToOneField(to=Availability, on_delete=models.CASCADE)
+    approve = models.BooleanField(default=False)
+
 
     def __str__(self):
-        return f'{self.name + " joined in " + self.event}'
+        return f'{self.name}'
 
     class Meta:
         db_table = ''
@@ -59,6 +61,7 @@ class Guest(models.Model):
         verbose_name_plural = 'Guests'
 
 class Event(models.Model):
+    owner = models.ForeignKey(Profile,on_delete=models.CASCADE)
     name = models.CharField(max_length=255,null=False,blank=False)
     MY_CHOICES_type = (
         ('یک به یک', 'یک به یک'),
@@ -73,7 +76,7 @@ class Event(models.Model):
         ('Whatsapp', 'Whatsapp'),
     )
     place = models.CharField(max_length=50, choices=MY_CHOICES_place)
-    address = models.CharField(max_length=255,default=' ')
+    address = models.CharField(max_length=255,default=' ',blank=True)
     massage = models.TextField(blank=True)
     event_domain = models.CharField(max_length=255)
 
