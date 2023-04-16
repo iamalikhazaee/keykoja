@@ -5,7 +5,7 @@ from .models import *
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ["first_name"]
+        fields = ["email", "password", "first_name", "last_name", "domain", "availability"]
 
 class GuestSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,4 +16,5 @@ class NewEventSerializer(serializers.ModelSerializer):
 
      class Meta:
         model = Event
-        fields = ['name', 'type', 'time', 'place', 'massage', 'event_domain']
+        fields = ['owner', 'name', 'type', 'time', 'place', 'massage', 'event_domain']
+
