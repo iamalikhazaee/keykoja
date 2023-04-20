@@ -26,6 +26,10 @@ class ProfileViewSet(viewsets.ModelViewSet):
         guests = Guest.objects.filter(event__owner=profile)
         serializer = GuestSerializer(guests, many=True)
         return Response(serializer.data)
+
+class AvailabilityViewset(viewsets.ModelViewSet):
+    queryset =  Availability.objects.all()
+    serializer_class = AvailabilitySerializer
     
 class GuestViewSet(viewsets.ModelViewSet):
     queryset = Guest.objects.all()
