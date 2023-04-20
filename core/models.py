@@ -1,8 +1,9 @@
 from django.db import models
-
+from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 
 class Availability(models.Model):
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
     DAYS_OF_WEEK = (
         ('Monday', 'Monday'),
         ('Tuesday', 'Tuesday'),
@@ -25,11 +26,12 @@ class Availability(models.Model):
     class Meta:
         db_table = ''
         managed = True
+        # unique_together = ('profile',)
         verbose_name = 'Availability'
         verbose_name_plural = 'Availabilities'
 
     def __str__(self):
-        return  f'{self.day_of_week}' + f'{str(self.start_time)}'
+        return  f'{self.profile}' + "-----" + f'{self.day_of_week}' + "-----" + f'{str(self.start_time)}'
     
 class Profile(models.Model):
     email = models.EmailField(null=False, blank=False)
@@ -39,7 +41,8 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=255)
     domain = models.CharField(max_length=50)
     
-    availability = models.ManyToManyField(Availability)
+    # availability = models.ManyToManyField(Availability)
+    # free_time = ArrayField(ArrayField(models.CharField(max_length=10), size=2), default=list)
     def __str__(self):
        return self.first_name + self.last_name
 
