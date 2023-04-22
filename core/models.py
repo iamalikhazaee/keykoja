@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 # Create your models here.
@@ -17,12 +18,6 @@ class Availability(models.Model):
     start_time = models.TimeField()
     end_time = models.TimeField()
     time_unit = models.DecimalField(max_digits = 5,decimal_places = 1,default=1.5)
-    TYPE_UNIT = {
-        ('hour','hour'),
-        ('minute','minute')
-    }
-    type_unit = models.CharField(max_length=10, choices=TYPE_UNIT , default='hour')
-
     class Meta:
         db_table = ''
         managed = True
