@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
-
+from datetime import timedelta, datetime
 
 from .models import *
 from .serializer import *
@@ -26,10 +26,39 @@ class ProfileViewSet(viewsets.ModelViewSet):
         guests = Guest.objects.filter(event__owner=profile)
         serializer = GuestSerializer(guests, many=True)
         return Response(serializer.data)
+    
+    @action(detail=True, methods=['get'])
+    def free_times(self, request, pk=None):
+        profile = self.get_object()
+        availability = Availability.objects.filter(profile = profile)
+        serializer = AvailabilitySerializer(availability, many =True)
+        return Response(serializer.data)
 
 class AvailabilityViewset(viewsets.ModelViewSet):
     queryset =  Availability.objects.all()
     serializer_class = AvailabilitySerializer
+    
+    @action(detail=True, methods=['get'], url_path='time-units')
+    def get_time_units(self, request, pk=None):
+        availability = Availability.objects.get(pk=pk)
+        start_hour = availability.start_time.hour
+        end_hour = availability.end_time.hour
+        unit_time = availability.time_unit
+        count = (end_hour - start_hour)/unit_time
+        time_units = []
+        time_units.append(start_hour)
+
+        while count > 0 :
+            start_hour = start_hour + unit_time
+            count = count - 1 
+            if (start_hour <= end_hour) and (start_hour + unit_time <= end_hour) :
+                time_units.append(start_hour)
+
+        return Response({
+            'start_hour': start_hour,
+            'end_hour': end_hour,
+            'time_units': time_units,
+        })
     
 class GuestViewSet(viewsets.ModelViewSet):
     queryset = Guest.objects.all()
