@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from core import url as app_url
+from core.views import ProfileViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('core/', include(app_url)),
+    path('signup/', ProfileViewSet.as_view({'post': 'list'})),
     path('__debug__/', include('debug_toolbar.urls')),
 ]
