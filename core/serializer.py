@@ -10,7 +10,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class AvailabilitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Availability
-        fields = ["id", "profile", "day_of_week", "start_time", "end_time", "time_unit", "type_unit"]
+        fields = ["id", "profile", "day_of_week", "start_time", "end_time", "time_unit"]
 
 class GuestSerializer(serializers.ModelSerializer):
     class Meta:
