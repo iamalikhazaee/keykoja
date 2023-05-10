@@ -17,7 +17,7 @@ class Availability(models.Model):
     day_of_week = models.CharField(max_length=255 ,choices=DAYS_OF_WEEK)
     start_time = models.TimeField()
     end_time = models.TimeField()
-    time_unit = models.DecimalField(max_digits = 5,decimal_places = 1,default=1.5)
+    
     class Meta:
         db_table = ''
         managed = True
@@ -53,7 +53,7 @@ class Guest(models.Model):
     event = models.ForeignKey('Event',on_delete=models.CASCADE)
     time = models.OneToOneField(to=Availability, on_delete=models.CASCADE)
     approve = models.BooleanField(default=False)
-
+    
 
     def __str__(self):
         return f'{self.name}'
@@ -73,6 +73,7 @@ class Event(models.Model):
     )
     type = models.CharField(max_length=50, choices=MY_CHOICES_type)
     time = models.TimeField()
+    time_unit = models.DecimalField(max_digits = 5,decimal_places = 1,default=1.5)
     MY_CHOICES_place = (
         ('حضوری', 'حضوری'),
         ('Google meet', 'Google meet'),
