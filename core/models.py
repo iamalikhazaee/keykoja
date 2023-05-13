@@ -1,4 +1,4 @@
-import datetime
+from datetime import timedelta
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 # Create your models here.
@@ -47,22 +47,6 @@ class Profile(models.Model):
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
 
-class Guest(models.Model):
-    name = models.CharField(max_length=50)
-    email = models.EmailField()
-    event = models.ForeignKey('Event',on_delete=models.CASCADE)
-    time = models.OneToOneField(to=Availability, on_delete=models.CASCADE)
-    approve = models.BooleanField(default=False)
-    
-
-    def __str__(self):
-        return f'{self.name}'
-
-    class Meta:
-        db_table = ''
-        managed = True
-        verbose_name = 'Guest'
-        verbose_name_plural = 'Guests'
 
 class Event(models.Model):
     owner = models.ForeignKey(Profile,on_delete=models.CASCADE)
@@ -98,3 +82,35 @@ class Event(models.Model):
         managed = True
         verbose_name = 'Event'
         verbose_name_plural = 'Events'
+
+class Event_time(models.Model):
+    profile = models.ForeignKey(Profile , on_delete=models.CASCADE,null=True)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE,null=True)
+    start_hour = models.DateTimeField()
+    # time_unit = models.DecimalField(max_digits = 5,decimal_places = 1,default=1.5) 
+    duration = models.DurationField(default=timedelta(hours=1, minutes=30))
+    end_hour = models.DateTimeField(null=True, blank=True)  
+    is_enable = models.BooleanField(default=True)
+
+    def save(self, *args, **kwargs):
+        if self.start_hour and self.duration:
+            self.end_hour = self.start_hour + self.duration
+        super().save(*args, **kwargs)
+
+
+class Guest(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    event = models.ForeignKey('Event',on_delete=models.CASCADE)
+    time = models.OneToOneField(to=Event_time, on_delete=models.CASCADE)
+    approve = models.BooleanField(default=False)
+    
+
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta:
+        db_table = ''
+        managed = True
+        verbose_name = 'Guest'
+        verbose_name_plural = 'Guests'
