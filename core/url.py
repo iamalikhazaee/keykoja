@@ -8,6 +8,7 @@ router.register(r'Profiles', ProfileViewSet, basename='Profiles')
 router.register(r'NewEvent', NewEventViewSet, basename='New_Event')
 router.register(r'Guests', GuestViewSet, basename='Guests')
 router.register(r'Availability', AvailabilityViewset, basename='Availabilities')
+router.register(r'EventTime', EventTimeViewSet, basename='Event_Time')
 
 urlpatterns = [
     path('', include(router.urls))
