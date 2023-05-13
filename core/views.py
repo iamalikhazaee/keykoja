@@ -78,3 +78,7 @@ class NewEventViewSet(viewsets.ModelViewSet):
 
     def create_link():
         pass
+
+class EventTimeViewSet(viewsets.ModelViewSet):
+    queryset = Event_time.objects.all()
+    serializer_class = EventTimeSerializer
