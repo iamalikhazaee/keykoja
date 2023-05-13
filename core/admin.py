@@ -7,4 +7,5 @@ admin.site.register(models.Profile,PersonAdmin)
 admin.site.register(models.Availability)
 admin.site.register(models.Event)
 admin.site.register(models.Guest)
+admin.site.register(models.Event_time)
 # Register your models here.
