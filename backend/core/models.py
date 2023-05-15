@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 
+
 class Availability(models.Model):
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
     DAYS_OF_WEEK = (
@@ -50,14 +51,14 @@ class Profile(models.Model):
 
 class Event(models.Model):
     owner = models.ForeignKey(Profile,on_delete=models.CASCADE)
-    name = models.CharField(max_length=255,null=False,blank=False)
+    name = models.CharField(max_length=255, null=False, blank=False)
     MY_CHOICES_type = (
         ('یک به یک', 'یک به یک'),
         ('گروهی', 'گروهی')
     )
     type = models.CharField(max_length=50, choices=MY_CHOICES_type)
-    time = models.TimeField()
-    time_unit = models.DecimalField(max_digits = 5,decimal_places = 1,default=1.5)
+    # time = models.TimeField()
+    time_unit = models.DecimalField(max_digits=5, decimal_places=1, default=1.5)
     MY_CHOICES_place = (
         ('حضوری', 'حضوری'),
         ('Google meet', 'Google meet'),
@@ -70,9 +71,9 @@ class Event(models.Model):
     event_domain = models.CharField(max_length=255)
 
     #advanced setting 
-    event_per_day = models.IntegerField(default=5)
-    rest_before = models.TimeField()
-    rest_after = models.TimeField()
+    # event_per_day = models.IntegerField(default=5)
+    # rest_before = models.TimeField()
+    # rest_after = models.TimeField()
 
     def __str__(self):
         return self.event_domain
