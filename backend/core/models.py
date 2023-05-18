@@ -87,7 +87,8 @@ class Event(models.Model):
 class Event_time(models.Model):
     profile = models.ForeignKey(Profile , on_delete=models.CASCADE,null=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE,null=True)
-    start_hour = models.DateTimeField()
+    date = models.DateField(null=True)
+    start_hour = models.TimeField()
     # time_unit = models.DecimalField(max_digits = 5,decimal_places = 1,default=1.5) 
     duration = models.DurationField(default=timedelta(hours=1, minutes=30))
     end_hour = models.DateTimeField(null=True, blank=True)  

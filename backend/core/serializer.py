@@ -27,5 +27,5 @@ class EventTimeSerializer(serializers.ModelSerializer):
 
      class Meta:
         model = Event_time
-        fields = ["id", 'profile','event', 'start_hour', 'duration', 'end_hour', 'is_enable']
+        fields = ["id", 'profile', 'event', 'date', 'start_hour', 'duration', 'end_hour', 'is_enable']
 # 'profile','event',
