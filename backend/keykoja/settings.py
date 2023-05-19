@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'core',
     'corsheaders',
     'rest_framework',
+    'rest_framework_simplejwt',
     "debug_toolbar",
 ]
 
@@ -98,8 +99,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'keykoja',
-        'USER': 'fateme',
-        'PASSWORD': '1234',
+        'USER': 'alikhazaei',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -151,3 +152,17 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
   'http://localhost:3000',
 )
+
+AUTHENTICATION_BACKENDS = [
+    'core.custome_auth.EmailBackend',
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
