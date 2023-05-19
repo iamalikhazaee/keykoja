@@ -153,9 +153,6 @@ CORS_ORIGIN_WHITELIST = (
   'http://localhost:3000',
 )
 
-AUTHENTICATION_BACKENDS = [
-    'core.custome_auth.EmailBackend',
-]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
