@@ -1,6 +1,7 @@
 from datetime import timedelta
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -30,13 +31,23 @@ class Availability(models.Model):
         return  f'{self.profile}' + "-----" + f'{self.day_of_week}' + "-----" + f'{str(self.start_time)}'
     
 class Profile(models.Model):
-    email = models.EmailField(null=False, blank=False)
+    user = models.OneToOneField(User , on_delete=models.CASCADE ,null=True,blank=True)
+    email = models.EmailField(null=False, blank=False ,unique=True)
     password = models.CharField(max_length=255)
 
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    domain = models.CharField(max_length=50)
-    
+    domain = models.CharField(max_length=50,unique=True)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:  # If the profile is being created
+            user = User.objects.create_user(username=self.domain, email=self.email, password=self.password)
+            user.first_name = self.first_name
+            user.last_name = self.last_name
+            user.save()
+            self.user = user
+        super().save(*args, **kwargs)
+
     # availability = models.ManyToManyField(Availability)
     # free_time = ArrayField(ArrayField(models.CharField(max_length=10), size=2), default=list)
     def __str__(self):
