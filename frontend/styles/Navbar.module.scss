@@ -1,0 +1,215 @@
+.navbar {
+    background-color: #E57F84;
+    padding: .25rem 1rem;
+
+    .navbarContainer {
+        max-width: 1280px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 auto;
+        padding: .5rem;
+
+        .navbarLogo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+
+            #logo {
+                margin-left: .5rem;
+                font-size: 30px;
+            }
+
+            h1 {
+                align-self: center;
+                margin-right: .5rem;
+                font-weight: 600;
+                white-space: nowrap;
+                font-size: 20px;
+                margin: 0;
+            }
+        }
+
+        .userMenu {
+            display: flex;
+            align-items: center;
+
+            @media screen and (min-width: 768px) {
+                order: 2;
+            }
+
+            .userBtn {
+                display: flex;
+                margin-right: .75rem;
+                font-size: 14px;
+                line-height: 20px;
+                background: none;
+                border: none;
+
+                @media screen and (min-width: 768px) {
+                    margin-right: 0;
+                }
+
+                .openMenu {
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    padding: 0;
+                    margin: -1px;
+                    overflow: hidden;
+                    clip: rect(0, 0, 0, 0);
+                    white-space: nowrap;
+                    border-width: 0;
+                }
+            }
+
+            .menu {
+                z-index: 50;
+                position: absolute;
+                top: 4rem;
+                left: 0;
+                // margin: 1rem 0;
+                font-size: 16px;
+                line-height: 24px;
+                background-color: #F4EAE6;
+                border-radius: .5rem;
+
+                .menuHeader {
+                    padding: .75rem;
+
+                    span {
+                        display: block;
+                        font-size: 14px;
+                        line-height: 20px;
+                        color: rgb(107, 114, 128);
+                    }
+                }
+
+                .menuList {
+                    padding: .5rem 0;
+                    list-style: none;
+                    margin: 0;
+
+                    .links {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        padding: .5rem 1rem;
+                        color: rgb(107, 114, 128);
+                        text-decoration: none;
+                        font-size: 12px;
+
+                        &:hover {
+                            background-color: rgb(243, 244, 246);
+                        }
+
+                        .icon {
+                            margin-left: .5rem;
+                            font-size: 15px;
+                            color: gray;
+                        }
+                    }
+                }
+            }
+
+            .burgerBtn {
+                display: inline-flex;
+                margin-right: .75rem;
+                align-items: center;
+                padding: .5rem;
+                margin-left: .25rem;
+                font-size: 14px;
+                line-height: 20px;
+                color: rgb(107 114 128);
+                border-radius: 8px;
+                border: none;
+                outline: none;
+
+                @media screen and (min-width:768px) {
+                    display: none;
+                }
+
+                &:hover {
+                    background-color: rgb(243 244 246);
+                }
+
+                &:focus {
+                    border: none;
+                    outline: none;
+                }
+
+                span {
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    padding: 0;
+                    margin: -1px;
+                    overflow: hidden;
+                    clip: rect(0, 0, 0, 0);
+                    white-space: nowrap;
+                    border-width: 0;
+                }
+
+                svg {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                }
+            }
+        }
+
+        .middleMenu {
+            transition: ease-in-out .5s;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+
+            @media screen and (min-width: 768px) {
+                display: flex;
+                width: auto;
+                order: 1;
+            }
+
+            .menu {
+                display: flex;
+                flex-direction: column;
+                font-weight: 500;
+                padding: 1rem;
+                margin-top: 1rem;
+                margin-bottom: 0;
+                border: 1px solid rgb(243 244 246);
+                border-radius: 8px;
+                background-color: #E57F84;
+                list-style: none;
+
+                @media screen and (min-width: 768px) {
+                    padding: 0px;
+                    flex-direction: row;
+                    margin-top: 0px;
+                    border-width: 0px;
+                }
+
+                li {
+                    a {
+                        text-decoration: none;
+                        display: block;
+                        padding: .5rem 1rem;
+                        margin-left: 28px;
+                        color: #fff;
+                        border-radius: 12px;
+
+                        &:hover {
+                            background-color: #F4EAE6;
+                            color: #E57F84;
+                        }
+                    }
+                }
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    }
+}

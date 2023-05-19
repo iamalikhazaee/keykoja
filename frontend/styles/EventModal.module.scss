@@ -1,0 +1,101 @@
+.modal {
+
+    // .header { }
+
+
+    .body {
+        margin-top: 1.5rem;
+        direction: rtl;
+
+        form {
+            text-align: right;
+
+            .fieldsContainer {
+                display: flex;
+                justify-content: space-between;
+                width: 100% !important;
+
+                @media screen and (max-width: 768px) {
+                    flex-direction: column;
+                }
+
+                .field {
+                    width: 45%;
+                    margin-bottom: 1.5rem;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: center;
+
+                    @media screen and (max-width: 768px) {
+                        width: 100%;
+                    }
+
+                    label {
+                        display: block;
+                        margin-bottom: .5rem;
+                        font-size: 14px;
+                        line-height: 20px;
+                        font-weight: 500;
+                        color: rgb(17 24 39);
+                    }
+
+                    input,
+                    textarea {
+                        background-color: rgb(243 244 246);
+                        border: 1px solid rgb(209 213 219);
+                        color: rgb(17 24 39);
+                        font-size: 14px;
+                        line-height: 20px;
+                        border-radius: 8px;
+                        display: block;
+                        width: 100%;
+                        padding: 1rem;
+
+                        &:focus {
+                            outline: none;
+                            border: 1px solid #E57F84;
+                        }
+
+                    }
+
+                    select {
+                        background-color: rgb(243 244 246);
+                        border: 1px solid rgb(209 213 219);
+                        color: rgb(17 24 39);
+                        font-size: 14px;
+                        line-height: 20px;
+                        border-radius: 8px;
+                        display: block;
+                        width: 100%;
+                        padding: .5rem 1rem;
+
+                        &:focus {
+                            outline: none;
+                            border: 1px solid #E57F84;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .footer {
+        .btn {
+            background-color: #E57F84;
+            border: none;
+            padding: .5rem 1rem;
+            font-size: 12px;
+
+            &:hover {
+                opacity: .9;
+            }
+
+            &:focus {
+                border: none;
+                outline: none;
+            }
+        }
+    }
+
+}
