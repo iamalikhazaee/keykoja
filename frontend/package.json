@@ -1,11 +1,30 @@
 {
+  "name": "test",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@mui/material": "^5.13.1",
+    "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
-    "moment": "^2.29.4",
-    "moment-range": "^4.0.2",
-    "react-advance-jalaali-datepicker": "^1.4.0",
-    "react-animated-css": "^1.2.1",
+    "framer-motion": "^10.12.12",
+    "next": "13.4.3",
+    "node-sass": "^7.0.3",
+    "react": "18.2.0",
     "react-bootstrap": "^2.7.4",
-    "react-hichestan-datetimepicker": "^3.0.24"
+    "react-dom": "18.2.0",
+    "react-multi-date-picker": "^4.0.0",
+    "sass": "^1.62.1",
+    "styled-components": "^5.3.10"
   }
 }
