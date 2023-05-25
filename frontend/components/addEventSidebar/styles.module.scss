@@ -44,8 +44,8 @@
 
 
 .sidebarContainer {
-    width: 17% !important;
-    border-left: 1px solid lightgray;
+    // width: 17% !important;
+    // border-left: 1px solid lightgray;
     padding: 2rem 1rem;
     min-height: 100vh !important;
     display: flex;
@@ -53,11 +53,11 @@
     align-items: center;
 
     @media screen and (max-width:1050px) {
-        width: 18% !important;
+        // width: 18% !important;
     }
 
     @media screen and (max-width:992px) {
-        width: fit-content !important;
+        // width: fit-content !important;
     }
 
     @media screen and (max-width: 480px) {
