@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import EventModal from "@/components/EventModal";
+import EventModal from "@/components/addEventModal";
 import Navbar from "@/components/Navbar";
 import styles from '@/styles/dashboard.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

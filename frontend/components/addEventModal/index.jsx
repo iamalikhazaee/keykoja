@@ -1,16 +1,15 @@
 ("next");
 import { useState } from "react";
 import axios from "axios";
-import styles from "@/styles/EventModal.module.scss";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Calendar } from "react-multi-date-picker";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
+import styles from "./styles.module.scss";
 
-export default function EventModal (props) {
-
+export default function EventModal(props) {
   const [open, setOpen] = useState(false);
   const [owner, setOwner] = useState("فاطمه حنیفی");
   const [name, setName] = useState("");
@@ -19,26 +18,24 @@ export default function EventModal (props) {
   const [message, setMessage] = useState("");
   const [domain, setDomain] = useState("");
   const [unit, setUnit] = useState("");
-  const [time, setTime] = useState(new Date().toLocaleDateString('fa-IR'));
+  const [time, setTime] = useState(new Date().toLocaleDateString("fa-IR"));
 
   const addEvent = () => {
-    // axios
-    //   .post("http://127.0.0.1:8000/core/NewEvent/", {
-    //     owner: 1,
-    //     name: name,
-    //     type: type,
-    //     place: place,
-    //     massage: message,
-    //     event_domain: domain,
-    //     time_unit: unit,
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     alert("رویداد جدید با موفقیت افزوده شد.");
-    //     props.setOpen(false);
-    //   });
-
-    console.log(time.unix);
+    axios
+      .post("http://127.0.0.1:8000/core/NewEvent/", {
+        owner: 1,
+        name: name,
+        type: type,
+        place: place,
+        massage: message,
+        event_domain: domain,
+        time_unit: unit,
+      })
+      .then((res) => {
+        console.log(res.data);
+        alert("رویداد جدید با موفقیت افزوده شد.");
+        props.setOpen(false);
+      });
   };
 
   const handleMessage = (event) => {
@@ -65,7 +62,7 @@ export default function EventModal (props) {
               <div className={`${styles.field} w-100`}>
                 <label htmlFor="time">تایم رویداد</label>
                 <DatePicker
-                id="time"
+                  id="time"
                   className={styles.fieldّ}
                   value={time}
                   onChange={(date) => {
@@ -200,4 +197,4 @@ export default function EventModal (props) {
       </Modal>
     </>
   );
-};
+}

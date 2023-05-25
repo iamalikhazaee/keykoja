@@ -1,0 +1,105 @@
+.responsiveMenuContainer {
+    display: none;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+
+    @media screen and (max-width: 480px) {
+        display: block;
+    }
+
+    .responsiveMenu {
+        width: 100%;
+
+        .menu {
+            list-style: none;
+            display: flex;
+            overflow-x: scroll;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            padding: 1rem .5rem;
+
+            .menuItem {
+                min-width: 130px !important;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .itemLink {
+                    text-decoration: none;
+                    font-size: 12px;
+
+                    .itemIcon {
+                        margin-left: .3rem;
+                    }
+
+                    .itemText {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.sidebarContainer {
+    width: 17% !important;
+    border-left: 1px solid lightgray;
+    padding: 2rem 1rem;
+    min-height: 100vh !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media screen and (max-width:1050px) {
+        width: 18% !important;
+    }
+
+    @media screen and (max-width:992px) {
+        width: fit-content !important;
+    }
+
+    @media screen and (max-width: 480px) {
+        display: none;
+    }
+
+    .sidebarMenu {
+        width: 100%;
+
+        .menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: .5rem !important;
+            margin: 0 !important;
+
+            .menuItem {
+                margin: 1rem 0;
+
+                .itemLink {
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+
+                    .itemIcon {
+                        margin-left: .5rem;
+
+                        @media screen and (max-width:992px) {
+                            font-size: 15px !important;
+                        }
+                    }
+
+                    .itemText {
+                        font-size: 13px;
+
+                        @media screen and (max-width:992px) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
