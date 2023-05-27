@@ -36,6 +36,15 @@ export default function EventModal(props) {
         alert("رویداد جدید با موفقیت افزوده شد.");
         props.setOpen(false);
       });
+    console.log({
+      owner: 1,
+      name: name,
+      type: type,
+      place: place,
+      massage: message,
+      event_domain: domain,
+      time_unit: unit,
+    });
   };
 
   const handleMessage = (event) => {

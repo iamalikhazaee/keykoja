@@ -36,7 +36,7 @@ const backdropVariants = {
 
 const expandingTransition = {
     type: "spring",
-    duration: 2.3,
+    duration: 2,
     stiffness: 30,
 };
 
