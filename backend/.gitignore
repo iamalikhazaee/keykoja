@@ -1,5 +1,5 @@
 *.pyc
 __pycache__/
 **/__pycache__/
-**/migrations/
+.core/migrations/
 backend/keykoja/settings.py
