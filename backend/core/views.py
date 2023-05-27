@@ -1,16 +1,53 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate
 
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 from datetime import timedelta, datetime
 
 from .models import *
 from .serializer import *
 # Create your views here.
+class CustomLoginView(APIView):
+    serializer_class = CustomLoginSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        email = serializer.validated_data.get('email')
+        password = serializer.validated_data.get('password')
+
+        # Authenticate the user
+        user = authenticate(request, email=email, password=password)
+
+        if user is not None:
+            # Generate new tokens
+            refresh = RefreshToken.for_user(user)
+
+            # Return the tokens in the response
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            })
+        else:
+            # Authentication failed
+            return Response({'detail': 'Authentication failed'})
+
+class RegisterViewSet(viewsets.ModelViewSet):
+    queryset = ProfileUser.objects.all()
+    serializer_class = ProfileSerializer
+
+
 class ProfileViewSet(viewsets.ModelViewSet):
-    queryset = Profile.objects.all()
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = ProfileUser.objects.all()
     serializer_class = ProfileSerializer
 
     @action(detail=True, methods=['get'])

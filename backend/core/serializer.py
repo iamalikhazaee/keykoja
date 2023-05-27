@@ -1,14 +1,41 @@
 from rest_framework import serializers
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework import serializers
 from .models import *
 
+
+class CustomLoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
+
+    def validate(self, attrs):
+        email = attrs.get('email')
+        password = attrs.get('password')
+
+        # Perform additional validation if needed
+        # For example, check if the email and password are valid
+
+        return attrs
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id','username','password','email']
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Profile
-        fields = ["id", "email", "password", "first_name", "last_name", "domain"]
+        model = ProfileUser
+        fields = ['email', 'password', 'first_name', 'last_name', 'domain', 'token']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def get_token(self, obj):
+        refresh = RefreshToken.for_user(obj)
+        return {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        }
+
+    def create(self, validated_data):
+        user = ProfileUser.objects.create_user(**validated_data)
+        return user
 
 class AvailabilitySerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,4 +58,3 @@ class EventTimeSerializer(serializers.ModelSerializer):
      class Meta:
         model = Event_time
         fields = ["id", 'profile', 'event', 'date', 'start_hour', 'duration', 'end_hour', 'is_enable']
-# 'profile','event',
