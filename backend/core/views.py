@@ -34,8 +34,6 @@ class CustomLoginView(APIView):
             serialized_user = ProfileSerializer(user).data
             # Return the tokens in the response
             return Response({
-                'refresh': str(refresh),
-                'access': str(refresh.access_token),
                 'user': serialized_user
             })
         else:

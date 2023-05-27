@@ -16,18 +16,14 @@ class CustomLoginSerializer(serializers.Serializer):
         # For example, check if the email and password are valid
 
         return attrs
-
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id','username','password','email']
-
-
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProfileUser
-        fields = ['email', 'password', 'first_name', 'last_name', 'domain']
+        fields = ['email', 'password', 'first_name', 'last_name', 'domain', 'token']
         extra_kwargs = {'password': {'write_only': True}}
 
     def get_token(self, obj):
@@ -41,25 +37,21 @@ class ProfileSerializer(serializers.ModelSerializer):
         user = ProfileUser.objects.create_user(**validated_data)
         return user
 
-
 class AvailabilitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Availability
         fields = ["id", "profile", "day_of_week", "start_time", "end_time"]
-
 
 class GuestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Guest
         fields = "__all__"
 
-
 class NewEventSerializer(serializers.ModelSerializer):
 
      class Meta:
         model = Event
         fields = ["id", 'owner', 'name', 'type', 'place', 'massage', 'event_domain', "time_unit"]
-
 
 class EventTimeSerializer(serializers.ModelSerializer):
 
