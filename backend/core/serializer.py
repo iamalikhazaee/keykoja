@@ -23,7 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProfileUser
-        fields = ['email', 'password', 'first_name', 'last_name', 'domain', 'token']
+        fields = ['email', 'password', 'first_name', 'last_name', 'domain']
         extra_kwargs = {'password': {'write_only': True}}
 
     def get_token(self, obj):

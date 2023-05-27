@@ -29,11 +29,12 @@ class CustomLoginView(APIView):
         if user is not None:
             # Generate new tokens
             refresh = RefreshToken.for_user(user)
-
+            serialized_user = ProfileSerializer(user).data
             # Return the tokens in the response
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
+                'user': serialized_user
             })
         else:
             # Authentication failed
