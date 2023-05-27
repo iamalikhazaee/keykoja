@@ -36,7 +36,7 @@ export default function Dashboard() {
         axios.get('http://127.0.0.1:8000/core/NewEvent/').then((res) => {
             setEvents(res.data)
         })
-        console.log(user.token.access)
+        // console.log(user)
     }, [])
 
     return (
