@@ -1,24 +1,27 @@
-// import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faUserCircle, faCalendar, faPuzzlePiece, faShareAlt, faGem, faInfoCircle, faSignOutAlt, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import styles from "./styles.module.scss";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
   const [userMenu, setUserMenu] = useState(false);
   const [items, setItems] = useState(false);
+  const user = localStorage.getItem('userDetails');
+  const user_details2 = JSON.parse(user);
+  const router = useRouter()
+
+  const handleLogout = () => {
+    localStorage.removeItem('userDetails')
+    router.push({
+      pathname: '/'
+    })
+  }
 
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarContainer}>
         <a href="/" className={styles.navbarLogo}>
-          {/* <Image
-            src="/next.svg"
-            class="h-8 mr-3"
-            alt="Flowbite Logo"
-            width={50}
-            height={50}
-          /> */}
           <FontAwesomeIcon icon={faCalendarAlt} id={styles.logo} />
           <h1>
             کی کجا
@@ -46,12 +49,8 @@ export default function Navbar() {
               id={styles.userDropdown}
             >
               <div className={styles.menuHeader}>
-                <span>
-                  فاطمه حنیفی
-                </span>
-                <span>
-                  fatemehanifi@gmail.com
-                </span>
+                <span>{user_details2.first_name} {user_details2.last_name}</span>
+                <span>{user_details2.email}</span>
               </div>
               <ul className={styles.menuList} aria-labelledby="user-menu-button">
                 <li>
@@ -108,9 +107,9 @@ export default function Navbar() {
                     راهنما
                   </a>
                 </li>
-                <li>
+                <li onClick={handleLogout}>
                   <a
-                    href="#"
+                    href=""
                     className={styles.links}
                   >
                     <FontAwesomeIcon icon={faSignOutAlt} className={styles.icon} />
