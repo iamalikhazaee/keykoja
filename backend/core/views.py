@@ -47,8 +47,13 @@ class RegisterViewSet(viewsets.ModelViewSet):
 class ProfileViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
-    queryset = ProfileUser.objects.all()
+    
     serializer_class = ProfileSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = ProfileUser.objects.filter(email=user.email)
+        return queryset
 
     @action(detail=True, methods=['get'])
     def events(self, request, pk=None):
