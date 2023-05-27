@@ -11,6 +11,8 @@ import axios from "axios";
 import Switch from '@mui/material/Switch';
 import { alpha, styled } from '@mui/material/styles';
 import { pink } from '@mui/material/colors';
+import { useRecoilValue } from "recoil";
+import { current_user } from "@/atoms";
 
 
 const PinkSwitch = styled(Switch)(({ theme }) => ({
@@ -28,11 +30,13 @@ const PinkSwitch = styled(Switch)(({ theme }) => ({
 export default function Dashboard() {
     const [showModal, setShowModal] = useState(false);
     const [events, setEvents] = useState([]);
+    const user = useRecoilValue(current_user)
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/core/NewEvent/').then((res) => {
             setEvents(res.data)
         })
+        console.log(user.token.access)
     }, [])
 
     return (

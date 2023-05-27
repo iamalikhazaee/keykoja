@@ -13,6 +13,8 @@ from datetime import timedelta, datetime
 from .models import *
 from .serializer import *
 # Create your views here.
+
+
 class CustomLoginView(APIView):
     serializer_class = CustomLoginSerializer
 
@@ -39,6 +41,7 @@ class CustomLoginView(APIView):
         else:
             # Authentication failed
             return Response({'detail': 'Authentication failed'})
+
 
 class RegisterViewSet(viewsets.ModelViewSet):
     queryset = ProfileUser.objects.all()
@@ -119,7 +122,7 @@ class NewEventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = NewEventSerializer
 
-    def create_link():
+    def create_link(self):
         pass
 
 class EventTimeViewSet(viewsets.ModelViewSet):

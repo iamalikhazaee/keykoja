@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'core',
     'corsheaders',
     'rest_framework',
-    "debug_toolbar",
+    'debug_toolbar',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
 ]
@@ -50,7 +50,8 @@ AUTH_USER_MODEL = 'core.ProfileUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication'
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
 
@@ -114,8 +115,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'keykoja',
-        'USER': 'alikhazaei',
-        'PASSWORD': '',
+        'USER': 'fateme',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '5432',
     }
