@@ -1,7 +1,7 @@
 // import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faUserCircle, faCalendar, faPuzzlePiece, faShareAlt, faGem, faInfoCircle, faSignOutAlt, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
-import styles from "@/styles/Navbar.module.scss";
+import styles from "./styles.module.scss";
 import { useState } from "react";
 
 export default function Navbar() {
