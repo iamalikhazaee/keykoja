@@ -41,6 +41,7 @@ class CustomLoginView(APIView):
             # Authentication failed
             return Response({'detail': 'Authentication failed'})
 
+
 class RegisterViewSet(viewsets.ModelViewSet):
     queryset = ProfileUser.objects.all()
     serializer_class = ProfileSerializer
@@ -120,7 +121,7 @@ class NewEventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = NewEventSerializer
 
-    def create_link():
+    def create_link(self):
         pass
 
 class EventTimeViewSet(viewsets.ModelViewSet):
