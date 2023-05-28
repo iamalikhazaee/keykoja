@@ -13,6 +13,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem('userDetails')
+    localStorage.removeItem('token')
     router.push({
       pathname: '/'
     })

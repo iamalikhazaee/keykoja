@@ -29,6 +29,7 @@ export function LoginForm(props) {
         console.log(res.data.user);
         // setCurrentUser(res.data);
         localStorage.setItem("userDetails", JSON.stringify(res.data.user));
+        localStorage.setItem("token", JSON.stringify(res.data.access));
         router.push({
           pathname: "/dashboard",
         });
@@ -38,8 +39,18 @@ export function LoginForm(props) {
   return (
     <BoxContainer>
       <FormContainer>
-        <Input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="ایمیل" />
-        <Input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="رمز عبور" />
+        <Input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          placeholder="ایمیل"
+        />
+        <Input
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          placeholder="رمز عبور"
+        />
       </FormContainer>
       <Marginer direction="vertical" margin={10} />
       <MutedLink href="#">رمز عبور خود را فراموش کرده اید؟</MutedLink>

@@ -36,7 +36,8 @@ export function SignupForm() {
       .then((res) => {
         console.log(res);
         setCurrentUser(res.data)
-        localStorage.setItem('token', res.data.token.access)
+        localStorage.setItem('userDetails', JSON.stringify(res.data))
+        localStorage.setItem('token', JSON.stringify(res.data.token))
         router.push({
           pathname: "/dashboard",
         });
