@@ -30,10 +30,15 @@ class CustomLoginView(APIView):
 
         if user is not None:
             # Generate new tokens
-            refresh = RefreshToken.for_user(user)
+            refresh_token = RefreshToken.for_user(user)
+            access_token = refresh_token.access_token
+            
+
             serialized_user = ProfileSerializer(user).data
             # Return the tokens in the response
             return Response({
+                'refresh': str(refresh_token),
+                'access': str(access_token),
                 'user': serialized_user
             })
         else:
