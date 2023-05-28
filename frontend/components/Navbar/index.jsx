@@ -1,5 +1,16 @@
+import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faUserCircle, faCalendar, faPuzzlePiece, faShareAlt, faGem, faInfoCircle, faSignOutAlt, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faUserCircle,
+  faCalendar,
+  faPuzzlePiece,
+  faShareAlt,
+  faGem,
+  faInfoCircle,
+  faSignOutAlt,
+  faCalendarAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import styles from "./styles.module.scss";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -7,26 +18,28 @@ import { useRouter } from "next/router";
 export default function Navbar() {
   const [userMenu, setUserMenu] = useState(false);
   const [items, setItems] = useState(false);
-  const user = localStorage.getItem('userDetails');
-  const user_details2 = JSON.parse(user);
-  const router = useRouter()
+  const router = useRouter();
+  const [userDetails, setUserDetails] = useState({})
+
+  useEffect(() => {
+    const user = localStorage.getItem("userDetails");
+    setUserDetails(JSON.parse(user));
+  }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('userDetails')
-    localStorage.removeItem('token')
+    localStorage.removeItem("userDetails");
+    localStorage.removeItem("token");
     router.push({
-      pathname: '/'
-    })
-  }
+      pathname: "/",
+    });
+  };
 
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarContainer}>
         <a href="/" className={styles.navbarLogo}>
           <FontAwesomeIcon icon={faCalendarAlt} id={styles.logo} />
-          <h1>
-            کی کجا
-          </h1>
+          <h1>کی کجا</h1>
         </a>
         <div className={styles.userMenu}>
           <button
@@ -45,75 +58,74 @@ export default function Navbar() {
             />
           </button>
           {userMenu && (
-            <div
-              className={styles.menu}
-              id={styles.userDropdown}
-            >
+            <div className={styles.menu} id={styles.userDropdown}>
               <div className={styles.menuHeader}>
-                <span>{user_details2.first_name} {user_details2.last_name}</span>
-                <span>{user_details2.email}</span>
+                <span>
+                  {userDetails.first_name} {userDetails.last_name}
+                </span>
+                <span>{userDetails.email}</span>
               </div>
-              <ul className={styles.menuList} aria-labelledby="user-menu-button">
+              <ul
+                className={styles.menuList}
+                aria-labelledby="user-menu-button"
+              >
                 <li>
-                  <a
-                    href="#"
-                    className={styles.links}
-                  >
-                    <FontAwesomeIcon icon={faUserCircle} className={styles.icon} />
+                  <a href="#" className={styles.links}>
+                    <FontAwesomeIcon
+                      icon={faUserCircle}
+                      className={styles.icon}
+                    />
                     تنظیمات حساب
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    className={styles.links}
-                  >
-                    <FontAwesomeIcon icon={faCalendar} className={styles.icon} />
+                  <a href="#" className={styles.links}>
+                    <FontAwesomeIcon
+                      icon={faCalendar}
+                      className={styles.icon}
+                    />
                     اتصال تقویم ها
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    className={styles.links}
-                  >
-                    <FontAwesomeIcon icon={faPuzzlePiece} className={styles.icon} />
+                  <a href="#" className={styles.links}>
+                    <FontAwesomeIcon
+                      icon={faPuzzlePiece}
+                      className={styles.icon}
+                    />
                     یکپارچه سازی
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    className={styles.links}
-                  >
-                    <FontAwesomeIcon icon={faShareAlt} className={styles.icon} />
+                  <a href="#" className={styles.links}>
+                    <FontAwesomeIcon
+                      icon={faShareAlt}
+                      className={styles.icon}
+                    />
                     هم رسانی لینک
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    className={styles.links}
-                  >
+                  <a href="#" className={styles.links}>
                     <FontAwesomeIcon icon={faGem} className={styles.icon} />
                     مدیریت اشتراک
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    className={styles.links}
-                  >
-                    <FontAwesomeIcon icon={faInfoCircle} className={styles.icon} />
+                  <a href="#" className={styles.links}>
+                    <FontAwesomeIcon
+                      icon={faInfoCircle}
+                      className={styles.icon}
+                    />
                     راهنما
                   </a>
                 </li>
                 <li onClick={handleLogout}>
-                  <a
-                    href=""
-                    className={styles.links}
-                  >
-                    <FontAwesomeIcon icon={faSignOutAlt} className={styles.icon} />
+                  <a href="" className={styles.links}>
+                    <FontAwesomeIcon
+                      icon={faSignOutAlt}
+                      className={styles.icon}
+                    />
                     خروج
                   </a>
                 </li>
@@ -144,33 +156,22 @@ export default function Navbar() {
           </button>
         </div>
         <div
-          className={`${styles.middleMenu} ${items === true ? styles.hidden : null}`}
+          className={`${styles.middleMenu} ${
+            items === true ? styles.hidden : null
+          }`}
           id={styles.mobileMenu2}
         >
-          <ul
-            className={styles.menu}
-          >
+          <ul className={styles.menu}>
             <li>
-              <a
-                href="#"
-                aria-current="page"
-              >
+              <a href="#" aria-current="page">
                 رویدادهای ثبت شده
               </a>
             </li>
             <li>
-              <a
-                href="#"
-              >
-                الگوهای زمانی
-              </a>
+              <a href="#">الگوهای زمانی</a>
             </li>
             <li>
-              <a
-                href="#"
-              >
-                گردش کار
-              </a>
+              <a href="#">گردش کار</a>
             </li>
           </ul>
         </div>
