@@ -3,10 +3,6 @@ import { useState } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { Calendar } from "react-multi-date-picker";
-import DatePicker from "react-multi-date-picker";
-import persian from "react-date-object/calendars/persian";
-import persian_fa from "react-date-object/locales/persian_fa";
 import styles from "./styles.module.scss";
 
 export default function EventModal(props) {

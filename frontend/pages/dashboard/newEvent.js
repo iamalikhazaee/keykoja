@@ -9,6 +9,7 @@ import { Row, Col } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 import { current_form } from "@/atoms";
+import FreeTime from "@/components/FreeTime";
 
 export default function newEvent() {
     const router = useRouter();
@@ -43,10 +44,10 @@ export default function newEvent() {
                 </nav>
             </Row>
             <Row className="m-0">
-                <Col lg={2}>
+                <Col lg={3} md={3} sm={3} xs={12}>
                     <SidebarMenu />
                 </Col>
-                <Col lg={10} className={styles.formContainer}>
+                <Col lg={9} md={9} sm={9} xs={12} className={styles.formContainer}>
                     <div className={styles.container}>
                         {form === 'تنظیمات پایه' ?
                             (<form>
@@ -99,6 +100,11 @@ export default function newEvent() {
                                 </div>
                             </form>)
                             : <></>
+                        }
+
+                        {form === 'زمان های آزاد' ? (
+                            <FreeTime />
+                        ) : <></>
                         }
                     </div>
                 </Col>
