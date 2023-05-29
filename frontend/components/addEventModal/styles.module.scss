@@ -42,7 +42,7 @@
 
                     input,
                     textarea {
-                        background-color: rgb(243 244 246);
+                        // background-color: rgb(243 244 246);
                         border: 1px solid rgb(209 213 219);
                         color: rgb(17 24 39);
                         font-size: 14px;
@@ -60,7 +60,7 @@
                     }
 
                     select {
-                        background-color: rgb(243 244 246);
+                        // background-color: rgb(243 244 246);
                         border: 1px solid rgb(209 213 219);
                         color: rgb(17 24 39);
                         font-size: 14px;
@@ -72,7 +72,30 @@
 
                         &:focus {
                             outline: none;
-                            border: 1px solid #E57F84;
+                            border: 2px solid #E57F84;
+                        }
+                    }
+
+                    .inputGroup {
+                        direction: ltr !important;
+                        width: 100% !important;
+                        display: flex;
+                        align-items: center;
+
+                        .mutedText{
+                            background-color: rgb(243 244 246);
+                            border: 1px solid rgb(209 213 219);
+                            line-height: 20px;
+                            padding: 1rem;
+                            border-radius: 8px 0 0 8px;
+                            direction: ltr !important;
+                            font-size: 14px;
+                            font-weight: 600;
+                            color: rgba(#000, .6);
+                        }
+
+                        input {
+                            border-radius: 0 8px 8px 0;
                         }
                     }
                 }

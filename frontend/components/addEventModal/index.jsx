@@ -11,7 +11,6 @@ import styles from "./styles.module.scss";
 
 export default function EventModal(props) {
   const [open, setOpen] = useState(false);
-  const [owner, setOwner] = useState("فاطمه حنیفی");
   const [name, setName] = useState("");
   const [type, setType] = useState("یک به یک");
   const [place, setPlace] = useState("حضوری");
@@ -19,6 +18,9 @@ export default function EventModal(props) {
   const [domain, setDomain] = useState("");
   const [unit, setUnit] = useState("");
   const [time, setTime] = useState(new Date().toLocaleDateString("fa-IR"));
+  const user_details = localStorage.getItem("userDetails");
+  const user = JSON.parse(user_details);
+  const [owner, setOwner] = useState(`${user.first_name} ${user.last_name}`);
 
   const addEvent = () => {
     axios
@@ -67,7 +69,7 @@ export default function EventModal(props) {
         </Modal.Header>
         <Modal.Body className={styles.body}>
           <form>
-            <div className={`${styles.fieldsContainer} w-100`}>
+            {/* <div className={`${styles.fieldsContainer} w-100`}>
               <div className={`${styles.field} w-100`}>
                 <label htmlFor="time">تایم رویداد</label>
                 <DatePicker
@@ -83,7 +85,7 @@ export default function EventModal(props) {
                   calendarPosition="bottom-right"
                 />
               </div>
-            </div>
+            </div> */}
 
             <div className={styles.fieldsContainer}>
               <div className={styles.field}>
@@ -124,9 +126,9 @@ export default function EventModal(props) {
               </div>
 
               <div className={styles.field}>
-                <label htmlFor="type">محل برگزاری رویداد</label>
+                <label htmlFor="location">محل برگزاری رویداد</label>
                 <select
-                  id="type"
+                  id="location"
                   value={place}
                   onChange={(e) => setPlace(e.target.value)}
                 >
@@ -138,7 +140,7 @@ export default function EventModal(props) {
               </div>
             </div>
 
-            <div className={`${styles.fieldsContainer} w-100`}>
+            <div className={styles.fieldsContainer}>
               <div className={`${styles.field} w-100`}>
                 <label htmlFor="message">پیام مربوطه</label>
                 <textarea
@@ -152,18 +154,21 @@ export default function EventModal(props) {
             </div>
 
             <div className={styles.fieldsContainer}>
-              <div className={styles.field}>
+              <div className={`${styles.field} w-100`}>
                 <label htmlFor="link">لینک رویداد</label>
-                <input
-                  type="text"
-                  id="link"
-                  value={domain}
-                  onChange={(e) => setDomain(e.target.value)}
-                  required
-                />
+                <div className={styles.inputGroup}>
+                  <div className={styles.mutedText}>{user.domain}/</div>
+                  <input
+                    type="text"
+                    id="link"
+                    value={domain}
+                    onChange={(e) => setDomain(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
 
-              <div className={styles.field}>
+              {/* <div className={styles.field}>
                 <label htmlFor="duration">مدت زمان رویداد</label>
                 <input
                   type="text"
@@ -172,7 +177,7 @@ export default function EventModal(props) {
                   onChange={(e) => setUnit(e.target.value)}
                   required
                 />
-              </div>
+              </div> */}
             </div>
 
             {/* <div className="mb-6" style={{ direction: "ltr" }}>

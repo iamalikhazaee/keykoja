@@ -10,8 +10,8 @@ import { Marginer } from "@/components/marginer";
 import { useContext, useState } from "react";
 import { AccountContext } from "./accountContext";
 import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
-import { current_user } from '../../../atoms'
+// import { useRecoilState } from "recoil";
+// import { current_user } from '../../../atoms'
 import axios from "axios";
 
 export function SignupForm() {
@@ -22,7 +22,7 @@ export function SignupForm() {
   const [password, setPassword] = useState("");
   const [link, setLink] = useState("");
   const router = useRouter();
-  const [currentUser, setCurrentUser] = useRecoilState(current_user)
+  // const [currentUser, setCurrentUser] = useRecoilState(current_user)
 
   const handleRegister = () => {
     axios
@@ -35,8 +35,9 @@ export function SignupForm() {
       })
       .then((res) => {
         console.log(res);
-        setCurrentUser(res.data)
-        localStorage.setItem('token', res.data.token.access)
+        // setCurrentUser(res.data)
+        localStorage.setItem('userDetails', JSON.stringify(res.data))
+        localStorage.setItem('token', JSON.stringify(res.data.token.access))
         router.push({
           pathname: "/dashboard",
         });
