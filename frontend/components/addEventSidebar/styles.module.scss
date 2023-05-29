@@ -85,6 +85,8 @@
             .menuItem {
                 margin: 1rem 0;
 
+                
+
                 .itemLink {
                     text-decoration: none;
                     display: flex;
@@ -112,6 +114,10 @@
                             display: none;
                         }
                     }
+                }
+
+                .active {
+                    color: #E57F84 !important;
                 }
             }
         }
