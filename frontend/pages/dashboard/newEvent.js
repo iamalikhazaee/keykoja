@@ -10,16 +10,29 @@ import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 import { current_form } from "@/atoms";
 import FreeTime from "@/components/FreeTime";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function newEvent() {
     const router = useRouter();
     const form = useRecoilValue(current_form)
+    const [userDetails, setUserDetails] = useState({})
+    const [userToken, setUserToken] = useState()
+    const [location, setLocation] = useState()
+
+    useEffect(() => {
+        setUserDetails(JSON.parse(localStorage.getItem("userDetails")))
+        setUserToken(localStorage.getItem("token"))
+    }, [])
 
     const handleBackBtn = () => {
         router.push({
             pathname: '/dashboard'
         })
     }
+
+    console.log(userDetails)
+    console.log(userToken)
 
     return (
         <>
@@ -33,13 +46,6 @@ export default function newEvent() {
                                 بازگشت به داشبورد
                             </button>
                         </div>
-                        {/* <div className={styles.addEvent}>
-                            <button
-                                onClick={() => setShowModal(true)}>
-                                افزودن رویداد جدید
-                                <FontAwesomeIcon icon={faAdd} />
-                            </button>
-                        </div> */}
                     </div>
                 </nav>
             </Row>
@@ -51,6 +57,17 @@ export default function newEvent() {
                     <div className={styles.container}>
                         {form === 'تنظیمات پایه' ?
                             (<form>
+                                <div className={styles.field}>
+                                    <label htmlFor="owner">صاحب رویداد</label>
+                                    <input
+                                        readOnly
+                                        type="text"
+                                        id="owner"
+                                        aria-label="disabled input 2"
+                                        value={`${userDetails.first_name} ${userDetails.last_name}`}
+                                    // onChange={(e) => setOwner(e.target.value)}
+                                    />
+                                </div>
                                 <div className={styles.field}>
                                     <label htmlFor="title">عنوان رویداد</label>
                                     <input id="title" type="text" />
@@ -68,13 +85,34 @@ export default function newEvent() {
                                 <div className={styles.field}>
                                     <label htmlFor="location">محل برگزاری رویداد</label>
                                     <select
-                                        id="location">
+                                        id="location"
+                                        value={location}
+                                        onChange={(e) => setLocation(e.target.value)}
+                                        defaultValue={''}
+                                    >
+                                        <option>محل برگزاری را انتخاب کنید</option>
                                         <option>حضوری</option>
                                         <option>Google meet</option>
                                         <option>Skype</option>
                                         <option>Whatsapp</option>
                                     </select>
                                 </div>
+
+                                {location === undefined || location === 'محل برگزاری را انتخاب کنید' ? (
+                                    <></>) :
+                                    (
+                                        <div className={styles.field}>
+                                            <label htmlFor="title">
+                                                {location === 'حضوری' && 'آدرس'}
+                                                {location === 'Google meet' && 'لینک'}
+                                                {location === 'Skype' && 'شماره تلفن'}
+                                                {location === 'Whatsapp' && 'شماره تلفن'}
+                                            </label>
+                                            <input id="title" type="text" />
+                                        </div>
+                                    )
+                                }
+
 
                                 <div className={styles.field}>
                                     <div className={`w-100`}>
@@ -90,7 +128,7 @@ export default function newEvent() {
                                 <div className={styles.field}>
                                     <label htmlFor="link">لینک رویداد</label>
                                     <div className={styles.inputGroup}>
-                                        <div className={styles.mutedText}>/</div>
+                                        <div className={styles.mutedText}>{userDetails.domain}/</div>
                                         <input
                                             type="text"
                                             id="link"

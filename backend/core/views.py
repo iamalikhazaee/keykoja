@@ -83,6 +83,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
         serializer = AvailabilitySerializer(availability, many =True)
         return Response(serializer.data)
 
+
 class AvailabilityViewset(viewsets.ModelViewSet):
     queryset =  Availability.objects.all()
     serializer_class = AvailabilitySerializer
@@ -107,7 +108,8 @@ class AvailabilityViewset(viewsets.ModelViewSet):
     #         'end_hour': end_hour,
     #         'time_units': time_units,
     #     })
-    
+
+
 class GuestViewSet(viewsets.ModelViewSet):
     queryset = Guest.objects.all()
     serializer_class = GuestSerializer

@@ -19,11 +19,10 @@ export default function Navbar() {
   const [userMenu, setUserMenu] = useState(false);
   const [items, setItems] = useState(false);
   const router = useRouter();
-  const [userDetails, setUserDetails] = useState({})
+  const [userDetails, setUserDetails] = useState({});
 
   useEffect(() => {
-    const user = localStorage.getItem("userDetails");
-    setUserDetails(JSON.parse(user));
+    setUserDetails(JSON.parse(localStorage.getItem("userDetails")));
   }, []);
 
   const handleLogout = () => {

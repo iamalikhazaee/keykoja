@@ -10,6 +10,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
+
 class Availability(models.Model):
     profile = models.ForeignKey('ProfileUser', on_delete=models.CASCADE)
     DAYS_OF_WEEK = (
@@ -34,6 +35,8 @@ class Availability(models.Model):
 
     def __str__(self):
         return  f'{self.profile}' + "-----" + f'{self.day_of_week}' + "-----" + f'{str(self.start_time)}'
+
+
 class MyProfileUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
