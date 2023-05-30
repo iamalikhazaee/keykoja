@@ -6,6 +6,7 @@
   font-family: 'IRAN-SANS';
   src: url('../public/FontsFree-Net-ir_sans.ttf');
 }
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -30,7 +31,28 @@ body {
     rgb(var(--background-start-rgb));
 } */
 
-*{
+* {
   font-family: 'IRAN-SANS';
   direction: rtl !important;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px !important;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #fff;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: lightgray;
+    transition: ease-in .5s !important;
+    border-radius: 12px !important;
+
+    &:hover {
+      background: #555;
+    }
+  }
 }
