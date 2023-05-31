@@ -153,10 +153,10 @@ class Event_time(models.Model):
     end_hour = models.DateTimeField(null=True, blank=True)  
     is_enable = models.BooleanField(default=True)
 
-    def save(self, *args, **kwargs):
-        if self.start_hour and self.duration:
-            self.end_hour = self.start_hour + self.duration
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if self.start_hour and self.duration:
+    #         self.end_hour = self.start_hour + self.duration
+    #     super().save(*args, **kwargs)
 
 
 class Guest(models.Model):

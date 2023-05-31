@@ -44,6 +44,7 @@ export default function newEvent() {
     const addEvent = (e) => {
         e.preventDefault()
         const token = jwt(JSON.parse(userToken))
+        console.log(token)
         // console.log(token)
         // console.log({ owner: token.user_id, name: name, type: type, place: location, address: address, message: message, event_domain: domain })
         axios.post('http://127.0.0.1:8000/core/NewEvent/',
@@ -75,7 +76,7 @@ export default function newEvent() {
                     </div>
                 </nav>
             </Row>
-            <Row className="m-0">
+            <Row className="m-0" style={{direction: 'rtl'}}>
                 <Col lg={3} md={3} sm={3} xs={12}>
                     <SidebarMenu />
                 </Col>
@@ -183,12 +184,12 @@ export default function newEvent() {
                                 <Row className={styles.cardsContainer}>
                                     {times.map((item, index) => <FreeTime key={index} />)}
                                 </Row>
-                                <div className={styles.addBtn}>
+                                {/* <div className={styles.addBtn}>
                                     <button onClick={handleAddTime}>
                                         افزودن زمان
                                         <FontAwesomeIcon icon={faAdd} />
                                     </button>
-                                </div>
+                                </div> */}
                             </div>
                         ) : <></>
                         }
