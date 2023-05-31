@@ -142,6 +142,7 @@ class Event(models.Model):
         verbose_name = 'Event'
         verbose_name_plural = 'Events'
 
+
 class Event_time(models.Model):
     profile = models.ForeignKey(ProfileUser , on_delete=models.CASCADE,null=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE,null=True)

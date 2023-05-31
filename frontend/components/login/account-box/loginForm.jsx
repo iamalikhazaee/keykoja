@@ -10,6 +10,7 @@ import {
 import { Marginer } from "@/components/marginer";
 import { AccountContext } from "./accountContext";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 
 export function LoginForm(props) {
@@ -30,9 +31,8 @@ export function LoginForm(props) {
         // setCurrentUser(res.data);
         localStorage.setItem("userDetails", JSON.stringify(res.data.user));
         localStorage.setItem("token", JSON.stringify(res.data.access));
-        router.push({
-          pathname: "/dashboard",
-        });
+        Cookies.set("auth", true);
+        router.push("/dashboard");
       });
   };
 

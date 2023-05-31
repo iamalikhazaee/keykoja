@@ -12,6 +12,7 @@ import { AccountContext } from "./accountContext";
 import { useRouter } from "next/router";
 // import { useRecoilState } from "recoil";
 // import { current_user } from '../../../atoms'
+import Cookies from "js-cookie";
 import axios from "axios";
 
 export function SignupForm() {
@@ -38,9 +39,8 @@ export function SignupForm() {
         // setCurrentUser(res.data)
         localStorage.setItem('userDetails', JSON.stringify(res.data))
         localStorage.setItem('token', JSON.stringify(res.data.token.access))
-        router.push({
-          pathname: "/dashboard",
-        });
+        Cookies.set("auth", true);
+        router.push("/dashboard");
       });
   };
 

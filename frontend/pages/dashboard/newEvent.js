@@ -1,24 +1,30 @@
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar"
 import SidebarMenu from "@/components/addEventSidebar"
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import styles from '@/styles/newEvent.module.scss'
 import { Row, Col } from "react-bootstrap";
 import { useRouter } from "next/router";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { current_form } from "@/atoms";
 import FreeTime from "@/components/FreeTime";
-import { useEffect } from "react";
-import { useState } from "react";
+import jwt from 'jwt-decode'
+import axios from "axios";
 
 export default function newEvent() {
     const router = useRouter();
-    const form = useRecoilValue(current_form)
+    const [form, setForm] = useRecoilState(current_form)
     const [userDetails, setUserDetails] = useState({})
     const [userToken, setUserToken] = useState()
-    const [location, setLocation] = useState()
+    const [event, setEvent] = useState()
+    const [name, setName] = useState("");
+    const [type, setType] = useState("یک به یک");
+    const [location, setLocation] = useState("")
+    const [address, setAddress] = useState("")
+    const [message, setMessage] = useState("");
+    const [domain, setDomain] = useState("");
+    const [times, setTimes] = useState([new Date()]);
 
     useEffect(() => {
         setUserDetails(JSON.parse(localStorage.getItem("userDetails")))
@@ -31,8 +37,28 @@ export default function newEvent() {
         })
     }
 
-    console.log(userDetails)
-    console.log(userToken)
+    const handleMessage = (event) => {
+        setMessage(event.target.value);
+    };
+
+    const addEvent = (e) => {
+        e.preventDefault()
+        const token = jwt(JSON.parse(userToken))
+        // console.log(token)
+        // console.log({ owner: token.user_id, name: name, type: type, place: location, address: address, message: message, event_domain: domain })
+        axios.post('http://127.0.0.1:8000/core/NewEvent/',
+            { owner: token.user_id, name: name, type: type, place: location, address: address, message: message, event_domain: domain })
+            .then((res) => {
+                setForm('زمان های آزاد')
+                setEvent(res.data.id)
+                console.log(res.data.id)
+            })
+    }
+
+    const handleAddTime = () => {
+        const newTime = new Date()
+        setTimes(v => [...v, newTime])
+    }
 
     return (
         <>
@@ -70,13 +96,18 @@ export default function newEvent() {
                                 </div>
                                 <div className={styles.field}>
                                     <label htmlFor="title">عنوان رویداد</label>
-                                    <input id="title" type="text" />
+                                    <input id="title" type="text"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)} />
                                 </div>
 
                                 <div className={styles.field}>
                                     <label htmlFor="type">نوع رویداد</label>
                                     <select
-                                        id="type">
+                                        id="type"
+                                        value={type}
+                                        onChange={(e) => setType(e.target.value)}
+                                    >
                                         <option>یک به یک</option>
                                         <option>گروهی</option>
                                     </select>
@@ -88,7 +119,6 @@ export default function newEvent() {
                                         id="location"
                                         value={location}
                                         onChange={(e) => setLocation(e.target.value)}
-                                        defaultValue={''}
                                     >
                                         <option>محل برگزاری را انتخاب کنید</option>
                                         <option>حضوری</option>
@@ -108,12 +138,12 @@ export default function newEvent() {
                                                 {location === 'Skype' && 'شماره تلفن'}
                                                 {location === 'Whatsapp' && 'شماره تلفن'}
                                             </label>
-                                            <input id="title" type="text" />
+                                            <input id="title" type="text"
+                                                value={address}
+                                                onChange={(e) => setAddress(e.target.value)} />
                                         </div>
                                     )
                                 }
-
-
                                 <div className={styles.field}>
                                     <div className={`w-100`}>
                                         <label htmlFor="message">پیام مربوطه</label>
@@ -121,6 +151,8 @@ export default function newEvent() {
                                             id="message"
                                             // rows="2"
                                             placeholder="پیام مربوط به رویداد را بنویسید..."
+                                            value={message}
+                                            onChange={handleMessage}
                                         ></textarea>
                                     </div>
                                 </div>
@@ -133,15 +165,31 @@ export default function newEvent() {
                                             type="text"
                                             id="link"
                                             required
+                                            value={domain}
+                                            onChange={(e) => setDomain(e.target.value)}
                                         />
                                     </div>
+                                </div>
+
+                                <div className={styles.submitBtn}>
+                                    <button onClick={addEvent}>تائید و ادامه</button>
                                 </div>
                             </form>)
                             : <></>
                         }
 
                         {form === 'زمان های آزاد' ? (
-                            <FreeTime />
+                            <div className={styles.timeContainer}>
+                                <Row className={styles.cardsContainer}>
+                                    {times.map((item, index) => <FreeTime key={index} />)}
+                                </Row>
+                                <div className={styles.addBtn}>
+                                    <button onClick={handleAddTime}>
+                                        افزودن زمان
+                                        <FontAwesomeIcon icon={faAdd} />
+                                    </button>
+                                </div>
+                            </div>
                         ) : <></>
                         }
                     </div>

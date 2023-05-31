@@ -14,6 +14,7 @@ import {
 import styles from "./styles.module.scss";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 export default function Navbar() {
   const [userMenu, setUserMenu] = useState(false);
@@ -28,9 +29,8 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("userDetails");
     localStorage.removeItem("token");
-    router.push({
-      pathname: "/",
-    });
+    Cookies.remove("auth")
+    router.push("http://localhost:3000/");
   };
 
   return (
