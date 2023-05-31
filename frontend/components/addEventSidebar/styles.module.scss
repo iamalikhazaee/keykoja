@@ -42,6 +42,10 @@
                         width: 100%;
                     }
                 }
+
+                .active {
+                    color: #E57F84 !important;
+                }
             }
         }
     }
@@ -84,8 +88,6 @@
 
             .menuItem {
                 margin: 1rem 0;
-
-
 
                 .itemLink {
                     text-decoration: none;
