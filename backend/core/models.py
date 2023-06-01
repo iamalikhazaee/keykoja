@@ -150,7 +150,7 @@ class Event_time(models.Model):
     start_hour = models.TimeField()
     # time_unit = models.DecimalField(max_digits = 5,decimal_places = 1,default=1.5) 
     duration = models.DurationField(default=timedelta(hours=1, minutes=30))
-    end_hour = models.DateTimeField(null=True, blank=True)  
+    end_hour = models.TimeField(null=True)
     is_enable = models.BooleanField(default=True)
 
     # def save(self, *args, **kwargs):

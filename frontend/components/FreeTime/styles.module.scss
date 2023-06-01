@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 250px;
+    width: 300px;
     padding: 1.5rem;
     // border: 1px solid #2F5061;
     border-radius: 15px;
@@ -50,7 +50,7 @@
             font-size: 13px;
 
             .costumInput {
-                width: 200px !important;
+                width: 250px !important;
                 padding: .7rem;
                 border: 1px solid lightgray;
                 border-radius: 10px;
@@ -211,6 +211,61 @@
                 background-color: #4297A0;
                 color: #fff;
             }
+        }
+    }
+}
+
+.timeTableContainer {
+    border-radius: 15px;
+    -webkit-box-shadow: 0px 1px 9px -2px #C8B4AF;
+    box-shadow: 0px 1px 9px -2px #C8B4AF;
+    padding: 2rem;
+    max-height: 345px;
+    overflow-y: scroll;
+
+    .timeTable {
+        width: 100%;
+        padding: 1rem;
+        border-radius: 12px;
+
+        th {
+            padding: 1.5rem 0;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            border-bottom: 1px solid lightgray;
+        }
+
+        td {
+            padding: 1.5rem 0;
+            text-align: center;
+            font-size: 12px;
+            border-bottom: 1px solid lightgray;
+        }
+    }
+}
+
+.addAllBtn {
+    margin: 3rem 0;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        width: fit-content;
+        padding: 1rem;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 12px;
+        background-color: #fff;
+        color: #4297A0;
+        border: 1px solid #4297A0;
+        transition: ease-in .3s;
+
+        &:hover {
+            background-color: #4297A0;
+            color: #fff;
         }
     }
 }

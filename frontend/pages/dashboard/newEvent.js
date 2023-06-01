@@ -180,17 +180,18 @@ export default function newEvent() {
                         }
 
                         {form === 'زمان های آزاد' ? (
-                            <div className={styles.timeContainer}>
-                                <Row className={styles.cardsContainer}>
-                                    {times.map((item, index) => <FreeTime key={index} />)}
-                                </Row>
-                                {/* <div className={styles.addBtn}>
-                                    <button onClick={handleAddTime}>
-                                        افزودن زمان
-                                        <FontAwesomeIcon icon={faAdd} />
-                                    </button>
-                                </div> */}
-                            </div>
+                            <FreeTime event_id={event} />
+                            // <div className={styles.timeContainer}>
+                            //     <Row className={styles.cardsContainer}>
+                            //         {times.map((item, index) => <FreeTime key={index} />)}
+                            //     </Row>
+                            //     {/* <div className={styles.addBtn}>
+                            //         <button onClick={handleAddTime}>
+                            //             افزودن زمان
+                            //             <FontAwesomeIcon icon={faAdd} />
+                            //         </button>
+                            //     </div> */}
+                            // </div>
                         ) : <></>
                         }
                     </div>

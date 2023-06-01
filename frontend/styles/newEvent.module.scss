@@ -160,15 +160,14 @@
                 font-size: 12px;
                 // font-weight: 600;
                 border-radius: 12px;
-                background-color: #F4EAE6;
+                background-color: #fff;
                 color: #4297A0;
-
-                border: none;
+                border: 1px solid #4297A0;
                 transition: ease-in .3s;
 
                 &:hover {
                     background-color: #4297A0;
-                    color: #F4EAE6;
+                    color: #fff;
                 }
             }
         }
@@ -191,10 +190,10 @@
                     border-radius: 12px;
                     background-color: #fff;
                     color: #4297A0;
+                    border: 1px solid #4297A0;
                     display: flex;
                     align-items: center;
                     transition: ease-in .3s;
-                    border: 1px solid #4297A0;
 
                     svg {
                         margin-right: .2rem;
