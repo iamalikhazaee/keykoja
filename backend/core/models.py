@@ -142,6 +142,7 @@ class Event(models.Model):
         verbose_name = 'Event'
         verbose_name_plural = 'Events'
 
+
 class Event_time(models.Model):
     profile = models.ForeignKey(ProfileUser , on_delete=models.CASCADE,null=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE,null=True)
@@ -149,13 +150,13 @@ class Event_time(models.Model):
     start_hour = models.TimeField()
     # time_unit = models.DecimalField(max_digits = 5,decimal_places = 1,default=1.5) 
     duration = models.DurationField(default=timedelta(hours=1, minutes=30))
-    end_hour = models.DateTimeField(null=True, blank=True)  
+    end_hour = models.TimeField(null=True)
     is_enable = models.BooleanField(default=True)
 
-    def save(self, *args, **kwargs):
-        if self.start_hour and self.duration:
-            self.end_hour = self.start_hour + self.duration
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if self.start_hour and self.duration:
+    #         self.end_hour = self.start_hour + self.duration
+    #     super().save(*args, **kwargs)
 
 
 class Guest(models.Model):

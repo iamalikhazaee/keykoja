@@ -64,7 +64,7 @@ export default function Dashboard() {
                     </DropdownButton>
                     <div className={styles.addEvent}>
                         <button
-                            onClick={() => router.push({pathname: '/dashboard/newEvent'})}>
+                            onClick={() => router.push({pathname: '/dashboard/newEvent/'})}>
                             افزودن رویداد جدید
                             <FontAwesomeIcon icon={faAdd} />
                         </button>
