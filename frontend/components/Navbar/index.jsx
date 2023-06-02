@@ -30,6 +30,7 @@ export default function Navbar() {
     localStorage.removeItem("userDetails");
     localStorage.removeItem("token");
     Cookies.remove("auth")
+    Cookies.remove("token")
     router.push("http://localhost:3000/");
   };
 

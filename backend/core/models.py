@@ -2,6 +2,7 @@ from datetime import timedelta
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager ,PermissionsMixin
 from rest_framework_simplejwt.tokens import RefreshToken    
 from django.db import models
+import datetime
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import User
 # Create your models here.
@@ -146,11 +147,11 @@ class Event(models.Model):
 class Event_time(models.Model):
     profile = models.ForeignKey(ProfileUser , on_delete=models.CASCADE,null=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE,null=True)
-    date = models.DateField(null=True)
-    start_hour = models.TimeField()
+    date = models.CharField(max_length=255, null=False, default=datetime.date.today())
+    start_hour = models.CharField(max_length=255, null=False, default=datetime.time().strftime('%H:%M'))
     # time_unit = models.DecimalField(max_digits = 5,decimal_places = 1,default=1.5) 
     duration = models.DurationField(default=timedelta(hours=1, minutes=30))
-    end_hour = models.TimeField(null=True)
+    end_hour = models.CharField(max_length=255, null=False, default=datetime.time().strftime('%H:%M'))
     is_enable = models.BooleanField(default=True)
 
     # def save(self, *args, **kwargs):

@@ -30,7 +30,8 @@ export default function FreeTime(props) {
 
   const handleAddTime = () => {
     const d = new Date(date.unix * 1000).toLocaleDateString("en");
-    console.log(typeof d);
+    let options2 = { year: "numeric", month: "numeric", day: "numeric" };
+    console.log(typeof new Date(d).toLocaleDateString("en", options2));
     let options = { hour: "numeric", minute: "numeric", seconds: 0 };
     const start_hour = new Date(start.unix * 1000).toLocaleTimeString(
       "fa-IR-u-nu-latn",
@@ -41,7 +42,7 @@ export default function FreeTime(props) {
       "fa-IR-u-nu-latn",
       options
     );
-    console.log(typeof end_hour);
+    console.log(end_hour);
 
     const newTime = { date: d, start_hour: start_hour, end_hour: end_hour };
     setTimes((v) => [...v, newTime]);
@@ -50,15 +51,17 @@ export default function FreeTime(props) {
   const handleAddAll = () => {
     const token = jwt(JSON.parse(localStorage.getItem("token")));
     for (let i = 0; i < times.length; i++) {
-      axios.post("http://127.0.0.1:8000/core/EventTime/", {
-        profile: token.user_id,
-        event: props.event_id,
-        date: times[i].date,
-        start_hour: times[i].start_hour,
-        end_hour: times[i].end_hour
-      }).then((res) => {
-        console.log(res.data)
-      })
+      axios
+        .post("http://127.0.0.1:8000/core/EventTime/", {
+          profile: token.user_id,
+          event: props.event_id,
+          date: times[i].date,
+          start_hour: times[i].start_hour,
+          end_hour: times[i].end_hour,
+        })
+        .then((res) => {
+          console.log(res.data);
+        });
     }
   };
 
@@ -141,18 +144,22 @@ export default function FreeTime(props) {
 
         <Col lg={7} className={styles.timeTableContainer}>
           <table className={styles.timeTable}>
-            <tr>
-              <th>تاریخ</th>
-              <th>ساعت شروع</th>
-              <th>ساعت پایان</th>
-            </tr>
-            {times.map((item, index) => (
-              <tr key={index}>
-                <td>{item.date}</td>
-                <td>{item.start_hour}</td>
-                <td>{item.end_hour}</td>
+            <thead>
+              <tr>
+                <th>تاریخ</th>
+                <th>ساعت شروع</th>
+                <th>ساعت پایان</th>
               </tr>
-            ))}
+            </thead>
+            <tbody>
+              {times.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.date}</td>
+                  <td>{item.start_hour}</td>
+                  <td>{item.end_hour}</td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </Col>
       </Row>
