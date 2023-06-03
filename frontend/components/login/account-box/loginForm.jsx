@@ -32,6 +32,7 @@ export function LoginForm(props) {
         localStorage.setItem("userDetails", JSON.stringify(res.data.user));
         localStorage.setItem("token", JSON.stringify(res.data.access));
         Cookies.set("auth", true);
+        Cookies.set("token", JSON.stringify(res.data.access));
         router.push("/dashboard");
       });
   };
