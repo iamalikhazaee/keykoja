@@ -62,13 +62,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
         queryset = ProfileUser.objects.filter(email=user.email)
         return queryset
 
-    @action(detail=True, methods=['get'])
-    def events(self, request, pk=None):
-        profile = self.get_object()
-        events = Event.objects.filter(owner=profile)
-        serializer = NewEventSerializer(events, many=True)
-        return Response(serializer.data)
-    
+
     @action(detail=True, methods=['get'])
     def guests(self, request, pk=None):
         profile = self.get_object()
@@ -124,8 +118,16 @@ class GuestViewSet(viewsets.ModelViewSet):
     
 
 class NewEventViewSet(viewsets.ModelViewSet):
-    queryset = Event.objects.all()
+    # queryset = Event.objects.all()
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
     serializer_class = NewEventSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Event.objects.filter(owner=user) 
+        return queryset
 
     def create_link(self):
         pass
