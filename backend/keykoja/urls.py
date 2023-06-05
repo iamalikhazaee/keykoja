@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from core import url as app_url
-from core.views import CustomLoginView
+from core.views import CustomLoginView,voucher,getTimeForReservation
 
 
 
@@ -26,4 +26,6 @@ urlpatterns = [
     path('core/', include(app_url)),
     path('core/login/', CustomLoginView.as_view()),
     path('__debug__/', include('debug_toolbar.urls')),
+    path('<str:username>/<str:event_name>/', voucher.as_view({'get': 'list'}) , name='event'),
+    path('<str:username>/<str:event_name>/time', getTimeForReservation.as_view({'get': 'list'}) , name='event'),
 ]

@@ -128,7 +128,7 @@ class Event(models.Model):
     address = models.CharField(max_length=255,default=' ',blank=True)
     massage = models.TextField(blank=True)
     event_domain = models.CharField(max_length=255)
-
+    is_enable = models.BooleanField(default=True)
     #advanced setting 
     # event_per_day = models.IntegerField(default=5)
     # rest_before = models.TimeField()
