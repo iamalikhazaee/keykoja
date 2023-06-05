@@ -14,7 +14,7 @@ export default function eventName() {
 
     return (
         <Row className={styles.container}>
-            <Col lg={3} className={styles.eventDetails}>
+            <Col lg={3} md={3} sm={12} className={styles.eventDetails}>
                 <div className={styles.title}>
                     <FontAwesomeIcon icon={faCalendarAlt} />
                     <span>کی کجا</span>
@@ -32,10 +32,10 @@ export default function eventName() {
                     <span>یادداشت</span>
                 </div> */}
             </Col>
-            <Col lg={5}>
+            <Col lg={5} md={9} sm={12}>
                 <Calender setDate={setSelectedDate} />
             </Col>
-            <Col lg={3} className={styles.timesContainer}>
+            <Col lg={3} md={12} sm={12} className={styles.timesContainer}>
                 <div className={styles.header}>
                     <span>تایم های قابل انتخاب</span>
                 </div>
