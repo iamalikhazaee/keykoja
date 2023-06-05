@@ -135,3 +135,11 @@ class NewEventViewSet(viewsets.ModelViewSet):
 class EventTimeViewSet(viewsets.ModelViewSet):
     queryset = Event_time.objects.all()
     serializer_class = EventTimeSerializer
+
+class voucher(viewsets.ModelViewSet):
+    serializer_class = NewEventSerializer
+    def get_queryset(self):
+        username = self.kwargs.get('username')
+        event_name = self.kwargs.get('event_name')
+        queryset = Event.objects.filter(event_domain = event_name , owner__domain = username)
+        return queryset
