@@ -16,8 +16,8 @@ export function middleware(request) {
         }
 
         else if (cookie) {
-            const tokenExp = new Date(jwtDecode(userToken).exp * 1000).toLocaleString('fa-IR-u-nu-latn')
-            const currentTime = new Date().toLocaleString('fa-IR-u-nu-latn')
+            const tokenExp = new Date(jwtDecode(userToken).exp * 1000)
+            const currentTime = new Date()
             if (currentTime > tokenExp) {
                 request.cookies.delete('auth')
                 request.cookies.delete('token')
