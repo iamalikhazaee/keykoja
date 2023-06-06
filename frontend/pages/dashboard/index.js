@@ -14,6 +14,7 @@ import { pink } from '@mui/material/colors';
 import { useRecoilValue } from "recoil";
 import { current_user } from "@/atoms";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 
 const PinkSwitch = styled(Switch)(({ theme }) => ({
@@ -33,9 +34,14 @@ export default function Dashboard() {
     const [events, setEvents] = useState([]);
     const user = useRecoilValue(current_user)
     const router = useRouter()
-
+    
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/core/NewEvent/').then((res) => {
+        const token = JSON.parse(Cookies.get('token'));
+        axios.get('http://127.0.0.1:8000/core/NewEvent/',{
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then((res) => {
             setEvents(res.data)
         })
         // if (!localStorage.getItem('token')) {
