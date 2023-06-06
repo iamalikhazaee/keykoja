@@ -58,7 +58,7 @@ class NewEventSerializer(serializers.ModelSerializer):
 
      class Meta:
         model = Event
-        fields = ["id", 'owner', 'name', 'type', 'place', 'address', 'massage', 'event_domain', "time_unit"]
+        fields = ["id", 'owner', 'name', 'type', 'place', 'address', 'massage', 'event_domain', "time_unit","is_enable"]
 
 
 class EventTimeSerializer(serializers.ModelSerializer):
