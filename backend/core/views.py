@@ -105,8 +105,15 @@ class AvailabilityViewset(viewsets.ModelViewSet):
 
 
 class GuestViewSet(viewsets.ModelViewSet):
-    queryset = Guest.objects.all()
+    # authentication_classes = [JWTAuthentication]
+    # permission_classes = [IsAuthenticated]
+
     serializer_class = GuestSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Guest.objects.filter(event__owner = user)
+        return queryset
 
     @action(detail=True, methods=['Get','put'])
     def approve(self, request, pk=None):
