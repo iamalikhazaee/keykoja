@@ -1,5 +1,47 @@
+<!DOCTYPE html>
 <html>
-    <body>
-        <h1>Hello world</h1>
-    </body>
+<head>
+  <title>Welcome to My Website</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <h1>Welcome to My Website</h1>
+    </header>
+
+    <div class="container">
+      <div class="text">
+        <h2>About Us</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet rutrum elit. Morbi sit amet sagittis mauris, sed interdum leo. Donec ut elementum enim. Mauris feugiat pharetra ligula at aliquet. Aenean tincidunt faucibus est, in tristique velit semper eu.</p>
+      </div>
+      
+      <div class="slideshow">
+        <div class="slideshow-img">
+          <img id="slideshow-img" src="image1.jpg" alt="Slideshow Image">
+        </div>
+        <div class="slideshow-text">
+          <h2 id="slideshow-text-heading">Construction Image 1</h2>
+          <p id="slideshow-text-desc">Description for Construction Image 1</p>
+        </div>
+      </div>
+      
+      <div class="slideshow-arrows">
+        <span class="prev" onclick="changeSlide(-1)">&#10094;</span>
+        <span class="next" onclick="changeSlide(1)">&#10095;</span>
+      </div>
+      
+      <h2>Join Us</h2>
+      <p>Join us to explore and enjoy our platform!</p>
+      <a class="btn btn-login" href="login.html">Login</a>
+      <a class="btn btn-signup" href="signup.html">Sign Up</a>
+    </div>
+
+    <footer>
+      &copy; 2023 My Website. All rights reserved.
+    </footer>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
 </html>
