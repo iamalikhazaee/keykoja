@@ -39,25 +39,6 @@ export default function Navbar() {
     }
   }, []);
 
-
-  // function useOutsideAlerter(ref) {
-  //   useEffect(() => {
-  //     // Function for click event
-  //     function handleOutsideClick(event) {
-  //       if (ref.current && !ref.current.contains(event.target)) {
-  //         console.log("object");
-  //         console.log("2", userMenu);
-  //         if (!userMenu) {
-  //           setUserMenu(false);
-  //         }
-  //       }
-  //     }
-
-  //     document.addEventListener("click", handleOutsideClick);
-  //     return () => document.removeEventListener("click", handleOutsideClick);
-  //   }, [ref]);
-  // }
-
   const handleLogout = () => {
     localStorage.removeItem("userDetails");
     localStorage.removeItem("token");
