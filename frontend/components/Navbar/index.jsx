@@ -20,8 +20,7 @@ export default function Navbar() {
   const [items, setItems] = useState(false);
   const router = useRouter();
   const [userDetails, setUserDetails] = useState({});
-  const wrapperRef = useRef(null);
-  // useOutsideAlerter(wrapperRef);
+  const wrapperRef = useRef();
 
   useEffect(() => {
     setUserDetails(JSON.parse(localStorage.getItem("userDetails")));
@@ -29,11 +28,8 @@ export default function Navbar() {
     window.onclick = (event) => {
       if (event.target.contains(wrapperRef.current)
         && event.target !== wrapperRef.current) {
-        // setIsInside(false);
-        console.log(`You clicked Outside the box at ${new Date().toLocaleString()}`);
         setUserMenu(false)
       } else {
-        // setIsInside(true);
         console.log(`You clicked Inside the box at ${new Date().toLocaleString()}`);
       }
     }

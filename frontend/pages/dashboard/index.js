@@ -15,6 +15,7 @@ import { useRecoilValue } from "recoil";
 import { current_user } from "@/atoms";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import EventCard from "@/components/EventCard";
 
 
 const PinkSwitch = styled(Switch)(({ theme }) => ({
@@ -32,17 +33,20 @@ const PinkSwitch = styled(Switch)(({ theme }) => ({
 export default function Dashboard() {
     const [showModal, setShowModal] = useState(false);
     const [events, setEvents] = useState([]);
-    const user = useRecoilValue(current_user)
+    // const user = useRecoilValue(current_user)
+    // const [eventId, setEventId] = useState()
+    const [eventEnable, setEventEnable] = useState(true)
     const router = useRouter()
-    
+
     useEffect(() => {
         const token = JSON.parse(Cookies.get('token'));
-        axios.get('http://127.0.0.1:8000/core/NewEvent/',{
+        axios.get('http://127.0.0.1:8000/core/NewEvent/', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         }).then((res) => {
             setEvents(res.data)
+            console.log(res.data)
         })
         // if (!localStorage.getItem('token')) {
         //     router.push({
@@ -51,6 +55,26 @@ export default function Dashboard() {
         // }
         // console.log(user)
     }, [])
+
+    const handleEventEnable = (e, id) => {
+        const token = JSON.parse(Cookies.get('token'));
+        axios.patch(`http://127.0.0.1:8000/core/NewEvent/${id}/`, { is_enable: e.target.checked }, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then((res) => {
+            console.log(res)
+            axios.get('http://127.0.0.1:8000/core/NewEvent/', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then((res) => {
+                setEvents(res.data)
+                console.log(res.data)
+            })
+        })
+    }
+
 
     return (
         <>
@@ -70,7 +94,7 @@ export default function Dashboard() {
                     </DropdownButton>
                     <div className={styles.addEvent}>
                         <button
-                            onClick={() => router.push({pathname: '/dashboard/newEvent/'})}>
+                            onClick={() => router.push({ pathname: '/dashboard/newEvent/' })}>
                             افزودن رویداد جدید
                             <FontAwesomeIcon icon={faAdd} />
                         </button>
@@ -81,34 +105,7 @@ export default function Dashboard() {
             <Container className={styles.container}>
                 <Row className={styles.row}>
                     {events.map((item, index) => (
-                        <Col lg={3} md={4} sm={6} xs={12} key={index}>
-                            <Card className={styles.card}>
-                                <Card.Header className={styles.cardHeader}>
-                                    <PinkSwitch defaultChecked size="small" />
-                                    <div className={styles.icons}>
-                                        <FontAwesomeIcon icon={faPen} />
-                                        <FontAwesomeIcon icon={faEllipsisVertical} />
-                                    </div>
-                                </Card.Header>
-                                <Card.Body>
-                                    <Card.Title className={styles.cardTitle}>{item.name}</Card.Title>
-                                    <Card.Subtitle className={`${styles.cardSubtitle} mb-2 text-muted`}>{item.type}</Card.Subtitle>
-                                    {/* <Card.Text className={styles.cardText}>
-                                        Some quick example text to build on the card title and make up the
-                                        bulk of the card's content.
-                                    </Card.Text> */}
-                                </Card.Body>
-                                <Card.Footer className={styles.cardFooter}>
-                                    <a href="#">{item.event_domain}</a>
-                                    <Button className={styles.copyBtn}>
-                                        <span>
-                                            کپی لینک
-                                        </span>
-                                        <FontAwesomeIcon icon={faCopy} />
-                                    </Button>
-                                </Card.Footer>
-                            </Card>
-                        </Col>
+                        <EventCard item={item} handleEnable={handleEventEnable} />
                     ))}
                 </Row>
             </Container>

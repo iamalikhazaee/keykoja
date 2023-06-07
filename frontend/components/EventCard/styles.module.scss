@@ -1,0 +1,82 @@
+.cardContainer {
+
+    @media screen and (max-width:768px) {
+        margin-bottom: 1.5rem;
+    }
+
+    .card {
+
+        // border-radius: 15px;
+        .cardHeader {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #F4EAE6;
+            // border-radius: 15px;
+
+            .icons {
+                font-size: 14px;
+                color: gray;
+
+                svg {
+                    padding: 0 .5rem;
+                    margin: 0 .5rem;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .cardTitle {
+            font-size: 17px;
+            font-weight: 600;
+            margin: .5rem 0;
+        }
+
+        .cardSubtitle {
+            font-size: 13px;
+            margin: .5rem 0;
+        }
+
+        .cardFooter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+
+            .copyBtn {
+                font-size: 11px;
+                background-color: #4297A0;
+                border: none;
+                outline: none;
+
+                &:focus {
+                    border: none;
+                    outline: none;
+                }
+
+                svg {
+                    margin-right: .5rem;
+                }
+            }
+        }
+
+        .disabledBody {
+            opacity: .5;
+        }
+
+        .disabledFooter {
+            opacity: .5;
+
+            a {
+                cursor: not-allowed;
+                pointer-events: none;
+            }
+
+            .copyBtn {
+                cursor: not-allowed;
+                pointer-events: none;
+            }
+        }
+    }
+}
