@@ -150,7 +150,8 @@ class voucher(viewsets.ModelViewSet):
         event_name = self.kwargs.get('event_name')
         queryset = Event.objects.filter(event_domain = event_name , owner__domain = username , is_enable = True)
         return queryset
-    
+
+
 class getTimeForReservation(viewsets.ModelViewSet):
     serializer_class = EventTimeSerializer
     def get_queryset(self):

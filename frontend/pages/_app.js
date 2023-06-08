@@ -6,6 +6,8 @@ import { RecoilRoot } from 'recoil';
 import { SSRProvider } from 'react-bootstrap'
 config.autoAddCss = false;
 
+// process.env.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=false;
+
 export default function App({ Component, pageProps }) {
   return (
     <SSRProvider>

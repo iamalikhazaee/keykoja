@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -12,7 +12,6 @@ import {
   faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./styles.module.scss";
-import { useState } from "react";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 
@@ -21,16 +20,26 @@ export default function Navbar() {
   const [items, setItems] = useState(false);
   const router = useRouter();
   const [userDetails, setUserDetails] = useState({});
+  const wrapperRef = useRef();
 
   useEffect(() => {
     setUserDetails(JSON.parse(localStorage.getItem("userDetails")));
+
+    window.onclick = (event) => {
+      if (event.target.contains(wrapperRef.current)
+        && event.target !== wrapperRef.current) {
+        setUserMenu(false)
+      } else {
+        console.log(`You clicked Inside the box at ${new Date().toLocaleString()}`);
+      }
+    }
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("userDetails");
     localStorage.removeItem("token");
-    Cookies.remove("auth")
-    Cookies.remove("token")
+    Cookies.remove("auth");
+    Cookies.remove("token");
     router.push("http://localhost:3000/");
   };
 
@@ -58,12 +67,16 @@ export default function Navbar() {
             />
           </button>
           {userMenu && (
-            <div className={styles.menu} id={styles.userDropdown}>
+            <div
+              className={styles.menu}
+              id={styles.userDropdown}
+              ref={wrapperRef}
+            >
               <div className={styles.menuHeader}>
                 <span>
                   {userDetails.first_name} {userDetails.last_name}
                 </span>
-                <span>{userDetails.email}</span>
+                {/* <span>{userDetails.email}</span> */}
               </div>
               <ul
                 className={styles.menuList}
@@ -157,7 +170,7 @@ export default function Navbar() {
         </div>
         <div
           className={`${styles.middleMenu} ${
-            items === true ? styles.hidden : null
+            items === true ? styles.hidden : ""
           }`}
           id={styles.mobileMenu2}
         >

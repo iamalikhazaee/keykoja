@@ -22,6 +22,7 @@ const Calender = (props) => {
   const [days, setDays] = useState("");
   const [now, setNow] = useState("");
   const [change, setChange] = useState(0);
+  const [availableDates, setAvailableDates] = useState([]);
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);
 
   const jalali = JalaliDateTime();
@@ -29,17 +30,47 @@ const Calender = (props) => {
     setInitialRenderComplete(true);
     const today = jalali.toObject(new Date());
     setNow(today);
-    console.log(now);
+    // console.log(now);
     if (today.month + change < 13) {
       const result = jalali.calendar(
         `${today.year}-${today.month + change < 10 ? "0" : ""}${
           today.month + change
         }`
       );
-      console.log(result);
+      // console.log(result);
       setDays(result);
     }
+    const dates = [];
+    for (let i = 0; i < props.dates.length; i++) {
+      const d = jalali.toObject(new Date(props.dates[i]));
+      dates.push(d);
+    }
+    setAvailableDates(dates);
   }, [change]);
+
+  console.log(availableDates);
+  const isAvailable = availableDates[0]?.day ? true : false;
+
+  // const renderDays = (d) => {
+  //   for (let i = 0; i < availableDates.length; i++) {
+  //     console.log(i)
+  //     if (
+  //       availableDates[i].day === d.day &&
+  //       `${availableDates[i].year}-${availableDates[i].month < 10 ? "0" : ""}${
+  //         availableDates[i].month
+  //       }` === d.month
+  //     ) {
+  //       return (
+  //         <div className="test3">
+  //           <FontAwesomeIcon icon={faSun} style={{ color: "yellow" }} />
+  //         </div>
+  //       );
+  //     }
+  //     else {
+  //       return toPersianNum(d.day)
+  //     }
+  //   }
+  // };
 
   if (initialRenderComplete) {
     return (
@@ -52,70 +83,6 @@ const Calender = (props) => {
         isVisible={true}
       >
         <ContainerStyled>
-          {/* <HeaderStyled>
-            <div className="font__h1__bold " style={{ color: "#fff" }}>
-              چه زمانی؟
-            </div>
-            <Link to="/new">
-            <div onClick={() => setActiveCalender(false)}>
-              <img src={CloseIcon} alt="close" className="margin__right__8px" />
-            </div>
-            </Link>
-          </HeaderStyled> */}
-          {/* <DatesContainer>
-            <DatesStyled
-              background="rgba(252, 212, 64, 0.05)"
-              hasBorder={hasBorder.today}
-              color="#FCD440"
-              onClick={() =>
-                setHasBorder({ ...hasBorder, today: !hasBorder.today })
-              }
-            >
-              <img src={CloseIcon} alt="date icon" />
-              <DatesText className="margin__right__8px" color="#FCD440">
-                امروز
-              </DatesText>
-            </DatesStyled>
-            <DatesStyled
-              background="rgba(174, 185, 209, 0.05)"
-              hasBorder={hasBorder.tonight}
-              color="#AEB9D1"
-              onClick={() =>
-                setHasBorder({ ...hasBorder, tonight: !hasBorder.tonight })
-              }
-            >
-              <img src={CloseIcon} alt="date icon" />
-              <DatesText className="margin__right__8px" color="#AEB9D1">
-                امشب
-              </DatesText>
-            </DatesStyled>
-          </DatesContainer>
-          <DatesContainer>
-            <DatesStyled
-              background="rgba(253, 50, 110, 0.05)"
-              hasBorder={hasBorder.tomorrow}
-              color="#FD326E"
-              onClick={() =>
-                setHasBorder({ ...hasBorder, tomorrow: !hasBorder.tomorrow })
-              }
-            >
-              <img src={CloseIcon} alt="date icon" />
-              <DatesText className="margin__right__8px" color="#FD326E">
-                فردا
-              </DatesText>
-            </DatesStyled>
-            <DatesStyled
-              background="rgba(253, 50, 110, 0.05)"
-              hasBorder={hasBorder.dat}
-              color="#FD326E"
-              onClick={() => setHasBorder({ ...hasBorder, dat: !hasBorder.dat })}
-            >
-              <img src={CloseIcon} alt="date icon" />
-              <DatesText className="margin__right__8px" color="#FD326E">
-                پس‌فردا
-              </DatesText>
-            </DatesStyled>
-          </DatesContainer> */}
           <CalenderHeader>
             <div onClick={() => setChange(change - 1)}>
               <FontAwesomeIcon icon={faChevronRight} />
@@ -208,8 +175,8 @@ const Calender = (props) => {
           </WeekdaysHeader>
           <div className="test2" style={{ width: "100%" }}>
             {days &&
-              days.weeks.map((day, index) => (
-                <DaysRow key={index}>
+              days.weeks.map((day, i) => (
+                <DaysRow key={i}>
                   {day.map((d, index) => (
                     <DayStyled
                       month={days.month}
@@ -217,69 +184,61 @@ const Calender = (props) => {
                       key={index}
                       onClick={() => props.setDate(d)}
                     >
-                      {now.day === d.day &&
-                      `${now.year}-${now.month < 10 ? "0" : ""}${now.month}` ===
-                        d.month ? (
-                        <div className="test3">
-                          {/* <img src={CloseIcon} alt="date icon" /> */}
-                          <FontAwesomeIcon
-                            icon={faSun}
-                            style={{ color: "yellow" }}
-                          />
-                        </div>
+                      {/* {availableDates ? (
+                        availableDates.map((item) =>
+                          item.day === d.day &&
+                          `${item.year}-${item.month < 10 ? "0" : ""}${item.month}` === d.month ? (
+                            <div className="test3">
+                              <FontAwesomeIcon
+                                icon={faSun}
+                                style={{ color: "yellow" }}
+                              />
+                            </div>
+                          ) : (
+                            toPersianNum(d.day)
+                          )
+                        )
                       ) : (
-                        toPersianNum(d.day)
-                      )}
+                        <></>
+                      )} */}
+                      {toPersianNum(d.day)}
+                      {
+                        isAvailable &&
+                          availableDates.map((date, index) =>
+                            date.day == d.day ? (
+                              <div className="test3">
+                                <FontAwesomeIcon
+                                  icon={faSun}
+                                  style={{ color: "yellow" }}
+                                />
+                              </div>
+                            ) : (
+                              // toPersianNum(d.day)
+                              <></>
+                            )
+                            // console.log(date.day==d.day)
+                          )
+                        // ? (
+                        // <div className="test3">
+                        //   <FontAwesomeIcon
+                        //     icon={faSun}
+                        //     style={{ color: "yellow" }}
+                        //   />
+                        // </div>
+                        //   console.log(availableDates[0]?.day === d.day)
+                        // ) : (
+                        //   toPersianNum(d.day)
+                        // )
+                      }
                     </DayStyled>
                   ))}
                 </DaysRow>
               ))}
           </div>
-          {/* <div className="test4">
-            <DatesStyled
-              background="rgba(58, 165, 154, 0.05)"
-              hasBorder={hasBorder.anytime}
-              color="#3AA59A"
-              onClick={() =>
-                setHasBorder({ ...hasBorder, anytime: !hasBorder.anytime })
-              }
-            >
-              <img src={CloseIcon} alt="date icon" />
-              <DatesText className="margin__right__8px" color="#3AA59A">
-                هر وقت
-              </DatesText>
-            </DatesStyled>
-            <DatesStyled
-              background="#232D37"
-              hasBorder={hasBorder.notime}
-              color="#828CA0"
-              onClick={() =>
-                setHasBorder({ ...hasBorder, notime: !hasBorder.notime })
-              }
-            >
-              <img src={CloseIcon} alt="date icon" />
-              <DatesText
-                className="margin__right__8px"
-                color="#828CA0"
-                notBold={true}
-              >
-                بدون زمان
-              </DatesText>
-            </DatesStyled>
-          </div> */}
-          {/* <AddReminderStyled>
-            <div className="test3">
-              <img src={CloseIcon} alt="plus" />
-            </div>
-            <div className="font__h2__bold" style={{ color: "#fff" }}>
-              اضافه کردن یادآوری
-            </div>
-          </AddReminderStyled> */}
         </ContainerStyled>
       </Animated>
     );
-  }
-  else {
+  } else {
     return null;
   }
 };
