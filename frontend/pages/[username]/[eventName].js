@@ -17,10 +17,9 @@ export default function eventName() {
     const [time, setTime] = useState()
     const jalali = JalaliDateTime();
 
-    console.log(selectedDate)
+    // console.log(selectedDate)
 
     useEffect(() => {
-        // console.log(window.location.pathname)
         axios.all([
             axios.get(`http://127.0.0.1:8000${window.location.pathname}/`),
             axios.get(`http://127.0.0.1:8000${window.location.pathname}/time`)
@@ -40,17 +39,17 @@ export default function eventName() {
             }))
     }, [])
 
-    // console.log(dates)
-    if (eventTimes && selectedDate) {
+    const setDateAndTime = (d) => {
+        const t = []
+        setSelectedDate(d)
         for (let i = 0; i < eventTimes.length; i++) {
-            let d = jalali.toObject(new Date(eventTimes[i].date))
-            if (d.day === selectedDate.day && `${d.year}-${d.month < 10 ? "0" : ""}${d.month}` === selectedDate.month){
-                console.log(eventTimes[i].start_hour)
+            let day = jalali.toObject(new Date(eventTimes[i].date))
+            if (day.day === d.day && `${day.year}-${day.month < 10 ? "0" : ""}${day.month}` === d.month) {
+                t.push(eventTimes[i].start_hour)
             }
-            // console.log(jalali.toObject(new Date(eventTimes[i].date)))
         }
+        setTime(t)
     }
-
 
     return (
         <Row className={styles.container}>
@@ -75,7 +74,7 @@ export default function eventName() {
                 </div> */}
                     </Col>
                     <Col lg={5} md={9} sm={12}>
-                        <Calender setDate={setSelectedDate} dates={dates} />
+                        <Calender setDate={setSelectedDate} dates={dates} setDateAndTime={setDateAndTime} />
                     </Col>
 
                     <Col lg={3} md={12} sm={12} className={styles.timesContainer}>
@@ -83,11 +82,13 @@ export default function eventName() {
                             <span>تایم های قابل انتخاب</span>
                         </div>
                         <div className={styles.times}>
-                            {eventTimes.map((item, index) => (
-                                <div key={index} className={styles.time}>
-                                    <span>{item.start_hour}</span>
-                                </div>
-                            ))}
+                            {time &&
+                                time.map((item, index) => (
+                                    <div key={index} className={styles.time}>
+                                        <span>{item}</span>
+                                    </div>
+                                ))
+                            }
                         </div>
                     </Col>
                 </>
