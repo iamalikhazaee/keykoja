@@ -23,7 +23,7 @@ export function SignupForm() {
   const [password, setPassword] = useState("");
   const [link, setLink] = useState("");
   const router = useRouter();
-  // const [currentUser, setCurrentUser] = useRecoilState(current_user)
+  const [currentUser, setCurrentUser] = useRecoilState(current_user)
 
   const handleRegister = () => {
     axios

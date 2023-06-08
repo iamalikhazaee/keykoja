@@ -34,8 +34,6 @@ export default function Dashboard() {
     const [showModal, setShowModal] = useState(false);
     const [events, setEvents] = useState([]);
     // const user = useRecoilValue(current_user)
-    // const [eventId, setEventId] = useState()
-    const [eventEnable, setEventEnable] = useState(true)
     const router = useRouter()
 
     useEffect(() => {
@@ -46,7 +44,8 @@ export default function Dashboard() {
             }
         }).then((res) => {
             setEvents(res.data)
-            console.log(res.data)
+            // console.log(res.data)
+            // console.log(user)
         })
         // if (!localStorage.getItem('token')) {
         //     router.push({
@@ -105,7 +104,7 @@ export default function Dashboard() {
             <Container className={styles.container}>
                 <Row className={styles.row}>
                     {events.map((item, index) => (
-                        <EventCard item={item} handleEnable={handleEventEnable} />
+                        <EventCard key={index} item={item} handleEnable={handleEventEnable} />
                     ))}
                 </Row>
             </Container>
