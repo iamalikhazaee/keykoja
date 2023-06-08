@@ -182,6 +182,7 @@ const Calender = (props) => {
                       month={days.month}
                       today={d.month}
                       key={index}
+                      d={d}
                       onClick={() => props.setDate(d)}
                     >
                       {/* {availableDates ? (

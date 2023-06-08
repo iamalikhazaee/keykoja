@@ -69,6 +69,7 @@ export const DayStyled = styled.div`
   cursor: ${(props) => (props.month === props.today ? "pointer" : "none)")};
   pointer-events: ${(props) => (props.month === props.today ? "allowed" : "not-allowed)")};
   padding: 6px;
+  // background-color: ${(props) => (props.isAvailable === true ? "red" : ")")};
   border-radius: 10px;
   transition: ease-in .1s;
 
