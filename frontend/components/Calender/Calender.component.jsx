@@ -48,7 +48,7 @@ const Calender = (props) => {
     setAvailableDates(dates);
   }, [change]);
 
-  console.log(availableDates);
+  // console.log(availableDates);
   const isAvailable = availableDates[0]?.day ? true : false;
 
   // const renderDays = (d) => {
@@ -182,7 +182,8 @@ const Calender = (props) => {
                       month={days.month}
                       today={d.month}
                       key={index}
-                      onClick={() => props.setDate(d)}
+                      d={d}
+                      onClick={() => props.setDateAndTime(d)}
                     >
                       {/* {availableDates ? (
                         availableDates.map((item) =>
