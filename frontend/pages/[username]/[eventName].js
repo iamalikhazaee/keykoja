@@ -73,18 +73,23 @@ export default function eventName() {
             alert('لطفا مشخصات خود را بصورت کامل وارد کنید.')
         }
         else {
-            axios.post('http://localhost:8000/core/GuestsReg/', {
+            axios.all([
+                axios.post('http://localhost:8000/core/GuestsReg/', {
                 name: guestName, email: guestEmail, approve: false, event: eventDetails.id, time: selectedTime.id
-            }).then((res) => {
-                console.log(res.data)
-            })
+            }),
+            axios.patch(`http://localhost:8000/core/EventTime/${selectedTime.id}/`, {is_enable: false})
+            ]).then(axios.spread((res1, res2) => {
+                console.log(res1)
+                console.log(res2)
+            }))
+
             // console.log(selectedTime)
             // console.log(eventDetails)
         }
     }
 
     // console.log(dates)
-    console.log(eventDetails)
+    // console.log(eventDetails)
 
     return (
         <>
