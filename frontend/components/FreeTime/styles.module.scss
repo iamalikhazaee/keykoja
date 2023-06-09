@@ -30,7 +30,7 @@
 
             &:focus {
                 outline: none;
-                border: 1px solid #4297A0;
+                border: 1px solid #709680;
             }
         }
     }
@@ -60,7 +60,7 @@
 
                 &:focus {
                     outline: none;
-                    border: 1px solid #4297A0;
+                    border: 1px solid #709680;
                 }
             }
 
@@ -197,18 +197,18 @@
             font-size: 10px;
             border-radius: 10px;
             background-color: #fff;
-            color: #4297A0;
+            color: #709680;
             display: flex;
             align-items: center;
             transition: ease-in .2s;
-            border: 1px solid #4297A0;
+            border: 1px solid #709680;
 
             svg {
                 margin-right: .2rem;
             }
 
             &:hover {
-                background-color: #4297A0;
+                background-color: #709680;
                 color: #fff;
             }
         }
@@ -259,12 +259,12 @@
         font-weight: 600;
         border-radius: 12px;
         background-color: #fff;
-        color: #4297A0;
-        border: 1px solid #4297A0;
+        color: #709680;
+        border: 1px solid #709680;
         transition: ease-in .3s;
 
         &:hover {
-            background-color: #4297A0;
+            background-color: #709680;
             color: #fff;
         }
     }

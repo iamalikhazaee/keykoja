@@ -33,7 +33,7 @@
             padding-right: 15px;
             font-size: 16px;
             font-weight: 600;
-            color: #4297A0;
+            color: #2F3E46;
         }
 
         .eventTime {
@@ -92,7 +92,7 @@
 
             .time {
                 width: 50%;
-                border: 1px solid pink;
+                border: 1px solid #354F52;
                 border-radius: 12px;
                 padding: 10px 30px;
                 font-size: 18px;
@@ -104,8 +104,8 @@
                 margin: 15px 0;
 
                 &:hover {
-                    background-color: pink;
-                    color: red;
+                    background-color: #84A98C;
+                    color: #fff;
                 }
             }
         }
@@ -145,7 +145,7 @@
                 font-size: 13px;
 
                 &:focus {
-                    border: 1px solid #4297A0;
+                    border: 1px solid #709680;
                     outline: none;
                 }
             }
@@ -163,14 +163,14 @@
             font-size: 12px;
             border-radius: 10px;
             background-color: #fff;
-            color: #4B88A2;
-            border: 1px solid #4B88A2;
+            color: #709680;
+            border: 1px solid #709680;
             display: flex;
             align-items: center;
             transition: ease-in .2s;
 
             &:hover {
-                background-color: #4B88A2;
+                background-color: #709680;
                 color: #fff;
             }
         }
