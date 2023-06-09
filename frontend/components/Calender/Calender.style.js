@@ -61,21 +61,23 @@ export const DaysRow = styled.div`
 export const DayStyled = styled.div`
   font-weight: ${(props) => (props.month === props.today ? "900" : "400")};
   font-size: ${(props) => (props.month === props.today ? "16px" : "13px)")};
-  color: ${(props) =>
-    props.month === props.today ? "#000" : "rgba(0, 0, 0, 0.25)"};
+  // color: ${(props) => props.month === props.today ? "#000" : "rgba(0, 0, 0, 0.25)"};
+  color: rgba(0, 0, 0, 0.25);
   width: 40px;
   display: flex;
   justify-content: center;
-  cursor: ${(props) => (props.month === props.today ? "pointer" : "none)")};
-  pointer-events: ${(props) => (props.month === props.today ? "allowed" : "not-allowed)")};
+  // cursor: ${(props) => (props.month === props.today ? "pointer" : "none)")};
+  // pointer-events: ${(props) => (props.month === props.today ? "allowed" : "not-allowed)")};
+  // cursor: none;
+  pointer-events: not-allowed;
   padding: 6px;
-  // background-color: ${(props) => (props.isAvailable === true ? "red" : ")")};
   border-radius: 10px;
   transition: ease-in .1s;
+  z-index: 1;
 
   :hover {
-    background-color: #E57F84;
-    color: #F4EAE6;
+    // background-color: #E57F84;
+    // color: #F4EAE6;
   }
 `;
 export const AddReminderStyled = styled.div`
@@ -97,3 +99,29 @@ export const HeaderStyled = styled.div`
   margin-bottom: 16px;
   height: 40px;
 `;
+
+export const AvailableDate = styled.div`
+  // width: 40px;
+  // background-color: #E57F84;
+  // color: #F4EAE6;
+  // margin-right: -10px;
+  // position: relative;
+  // z-index: -1;
+  color: #000;
+  cursor: pointer;
+    pointer-events: allowed;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 40px;
+    height: 100%;
+    margin-right: -27px;
+    // margin-top: -2px;
+    padding: 6px;
+    background-color: #E57F84;
+    border-radius: 10px;
+    position: relative;
+    z-index: -1;
+  }
+`

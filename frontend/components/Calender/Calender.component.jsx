@@ -11,6 +11,7 @@ import {
   DayStyled,
   AddReminderStyled,
   HeaderStyled,
+  AvailableDate,
 } from "./Calender.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -182,7 +183,6 @@ const Calender = (props) => {
                       month={days.month}
                       today={d.month}
                       key={index}
-                      d={d}
                       onClick={() => props.setDateAndTime(d)}
                     >
                       {/* {availableDates ? (
@@ -207,12 +207,12 @@ const Calender = (props) => {
                         isAvailable &&
                           availableDates.map((date, index) =>
                             date.day == d.day ? (
-                              <div className="test3">
-                                <FontAwesomeIcon
+                              <AvailableDate day={d.day}>
+                                {/* <FontAwesomeIcon
                                   icon={faSun}
                                   style={{ color: "yellow" }}
-                                />
-                              </div>
+                                /> */}
+                              </AvailableDate>
                             ) : (
                               // toPersianNum(d.day)
                               <></>

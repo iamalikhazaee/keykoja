@@ -51,6 +51,8 @@ export default function eventName() {
         setTime(t)
     }
 
+    console.log(selectedDate)
+
     return (
         <Row className={styles.container}>
             {eventDetails && eventTimes && (
