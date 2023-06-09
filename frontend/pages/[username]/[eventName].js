@@ -82,14 +82,8 @@ export default function eventName() {
                 console.log(res1)
                 console.log(res2)
             }))
-
-            // console.log(selectedTime)
-            // console.log(eventDetails)
         }
     }
-
-    // console.log(dates)
-    // console.log(eventDetails)
 
     return (
         <>
@@ -110,9 +104,6 @@ export default function eventName() {
                                 <FontAwesomeIcon icon={faLocationPin} />
                                 <span>محل برگزاری: {eventDetails.address}</span>
                             </div>
-                            {/* <div>
-                    <span>یادداشت</span>
-                </div> */}
                         </Col>
                         <Col lg={5} md={9} sm={12}>
                             <Calender setDate={setSelectedDate} dates={dates} setDateAndTime={setDateAndTime} />
