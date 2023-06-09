@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #E57F84;
+    background-color: #52819A;
     padding: .25rem 1rem;
     direction: rtl !important;
 
@@ -192,7 +192,7 @@
                 margin-bottom: 0;
                 border: 1px solid rgb(243 244 246);
                 border-radius: 8px;
-                background-color: #E57F84;
+                background-color: #52819A;
                 list-style: none;
 
                 @media screen and (min-width: 768px) {
@@ -216,8 +216,8 @@
                         border-radius: 12px;
 
                         &:hover {
-                            background-color: #F4EAE6;
-                            color: #E57F84;
+                            background-color: #6D9BB0;
+                            color: #fff;
                         }
                     }
                 }

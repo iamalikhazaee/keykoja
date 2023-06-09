@@ -105,8 +105,8 @@ class AvailabilityViewset(viewsets.ModelViewSet):
 
 
 class GuestViewSet(viewsets.ModelViewSet):
-    # authentication_classes = [JWTAuthentication]
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
     serializer_class = GuestSerializer
 
@@ -122,7 +122,10 @@ class GuestViewSet(viewsets.ModelViewSet):
         Guest.save()
         serializer = self.get_serializer(Guest)
         return Response(serializer.data)
-    
+
+class GuestRegisterViewSet(viewsets.ModelViewSet):
+    queryset = Guest.objects.all()
+    serializer_class = GuestSerializer
 
 class NewEventViewSet(viewsets.ModelViewSet):
     # queryset = Event.objects.all()

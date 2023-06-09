@@ -1,0 +1,117 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header, footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+}
+
+h1 {
+  color: #333;
+}
+
+.container {
+  max-width: 800px;
+  flex: 1;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.slideshow {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.slideshow-img img {
+  max-width: 100%;
+  height: auto;
+}
+
+.slideshow-text {
+  background-color: #eee;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+/* ... previous styles ... */
+
+.slideshow-arrows {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+  user-select: none;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  margin: 0 5px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.prev:hover,
+.next:hover {
+  background-color: #555;
+  margin: 0 8px;
+}
+
+
+/* ... previous styles ... */
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  margin: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #555;
+}
+
+.btn-signup {
+  background-color: #428bca;
+}
+
+.btn-login {
+  background-color: #5cb85c;
+}
