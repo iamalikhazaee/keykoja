@@ -4,34 +4,11 @@ export const ContainerStyled = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 18px;
-  background: #F4EAE6;
+  background: #CAD2C5;
   border-radius: 12px;
   direction: rtl;
 `;
-// export const DatesContainer = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   width: 100%;
-//   margin-bottom: 16px;
-// `;
-// export const DatesStyled = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   background-color: ${(props) => props.background};
-//   border-radius: 8px;
-//   width: 47%;
-//   height: 40px;
-//   border: 1px solid ${(props) => (props.hasBorder ? props.color : props.background)};
-//   /* padding: 8px 32px; */
-// `;
-// export const DatesText = styled.div`
-//   font-family: "Vazirmatn", sans-serif;
-//   font-weight: ${(props) => (props.notBold ? "400" : 900)};
-//   font-size: 16px;
-//   color: ${(props) => props.color};
-// `;
+
 export const CalenderHeader = styled.div`
   display: flex;
   width: 100%;
@@ -59,37 +36,22 @@ export const DaysRow = styled.div`
   margin-top: 10px;
 `;
 export const DayStyled = styled.div`
-  font-weight: ${(props) => (props.month === props.today ? "900" : "400")};
+  font-weight: 900;
   font-size: ${(props) => (props.month === props.today ? "16px" : "13px)")};
-  // color: ${(props) => props.month === props.today ? "#000" : "rgba(0, 0, 0, 0.25)"};
-  color: rgba(0, 0, 0, 0.25);
+  color: ${(props) => props.month === props.today ? "#000" : "rgba(0, 0, 0, 0.25)"};
   width: 40px;
   display: flex;
   justify-content: center;
-  // cursor: ${(props) => (props.month === props.today ? "pointer" : "none)")};
-  // pointer-events: ${(props) => (props.month === props.today ? "allowed" : "not-allowed)")};
-  // cursor: none;
+  cursor: pointer;
   pointer-events: not-allowed;
   padding: 6px;
   border-radius: 10px;
   transition: ease-in .1s;
-  z-index: 1;
 
   :hover {
     // background-color: #E57F84;
     // color: #F4EAE6;
   }
-`;
-export const AddReminderStyled = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  border: 0.5px solid #ffffff;
-  border-radius: 8px;
-  width: 100%;
-  /* padding: 8px; */
-  height: 40px;
 `;
 export const HeaderStyled = styled.div`
   display: flex;
@@ -101,27 +63,22 @@ export const HeaderStyled = styled.div`
 `;
 
 export const AvailableDate = styled.div`
-  // width: 40px;
-  // background-color: #E57F84;
-  // color: #F4EAE6;
-  // margin-right: -10px;
-  // position: relative;
-  // z-index: -1;
+  font-weight: 900;
+  font-size: 16px;
   color: #000;
+  // color: rgba(0, 0, 0, 0.25);
+  width: 40px;
+  display: flex;
+  justify-content: center;
   cursor: pointer;
-    pointer-events: allowed;
+  pointer-events: allowed;
+  background-color: #84A98C;
+  padding: 6px;
+  border-radius: 10px;
+  transition: ease-in .1s;
 
-  &::before {
-    content: "";
-    display: inline-block;
-    width: 40px;
-    height: 100%;
-    margin-right: -27px;
-    // margin-top: -2px;
-    padding: 6px;
-    background-color: #E57F84;
-    border-radius: 10px;
-    position: relative;
-    z-index: -1;
+  :hover {
+    background-color: #52796F;
+    color: #F4EAE6;
   }
-`
+`;

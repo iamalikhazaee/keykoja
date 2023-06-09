@@ -11,6 +11,10 @@
         padding: 20px 0;
         border-radius: 12px;
 
+        @media screen and (max-width:768px) {
+            margin-bottom: 30px;
+        }
+
         .title {
             width: 100%;
             display: flex;
@@ -75,6 +79,10 @@
         max-height: 350px;
         overflow-y: scroll;
 
+        @media screen and (max-width:992px) {
+            margin-top: 30px;
+        }
+
         .header {
             padding-right: 15px;
             margin-bottom: 15px;
@@ -106,6 +114,7 @@
                 &:hover {
                     background-color: #84A98C;
                     color: #fff;
+                    border: 1px solid #84A98C;
                 }
             }
         }
@@ -123,7 +132,7 @@
         align-items: center;
 
         form {
-            width: 70%;
+            width: 80%;
             border: 1px solid lightgray;
             border-radius: 12px;
             padding: 50px;
@@ -131,9 +140,32 @@
             justify-content: space-between;
             align-items: center;
 
+            @media screen and (max-width:768px) {
+                flex-direction: column;
+            }
+
+            @media screen and (max-width:425px) {
+                padding: 25px;
+            }
+
+            @media screen and (max-width:375) {
+                width: 100%;
+            }
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+            font-size: 13px;
+            font-weight: 600;
+
+            @media screen and (max-width:768px) {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
             label {
-                font-size: 13px;
-                font-weight: 600;
                 margin-bottom: 10px;
             }
 
@@ -142,19 +174,16 @@
                 border: 1px solid lightgray;
                 padding: 10px 12px;
                 outline: none;
-                font-size: 13px;
 
                 &:focus {
                     border: 1px solid #709680;
                     outline: none;
                 }
             }
-        }
 
-        .field {
-            display: flex;
-            flex-direction: column;
-            width: 40%;
+            @media screen and (max-width:320px) {
+                font-size: 10px !important;
+            }
         }
 
         .submitBtn {
