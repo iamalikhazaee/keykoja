@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import React from 'react'
-import { Col, Row } from 'react-bootstrap'
+import { Button, Col, Row } from 'react-bootstrap'
 import Calender from '@/components/Calender/Calender.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faClock, faLocationPin } from '@fortawesome/free-solid-svg-icons';
@@ -11,8 +11,11 @@ import styles from '@/styles/guestPage.module.scss'
 export default function eventName() {
 
     const [selectedDate, setSelectedDate] = useState()
+    const [selectedTime, setSelectedTime] = useState()
     const [eventDetails, setEventDetails] = useState()
     const [eventTimes, setEventTimes] = useState()
+    const [guestName, setGuestName] = useState('')
+    const [guestEmail, setGuestEmail] = useState('')
     const [dates, setDates] = useState([])
     const [time, setTime] = useState()
     const jalali = JalaliDateTime();
@@ -40,61 +43,111 @@ export default function eventName() {
     }, [])
 
     const setDateAndTime = (d) => {
+        setSelectedTime(null)
         const t = []
         setSelectedDate(d)
         for (let i = 0; i < eventTimes.length; i++) {
             let day = jalali.toObject(new Date(eventTimes[i].date))
             if (day.day === d.day && `${day.year}-${day.month < 10 ? "0" : ""}${day.month}` === d.month) {
-                t.push(eventTimes[i].start_hour)
+                if (eventTimes[i].is_enable) {
+                    t.push(eventTimes[i])
+                }
             }
         }
         setTime(t)
     }
 
-    console.log(selectedDate)
+    const addGuest = () => {
+        const d = [];
+        for (let i = 0; i < dates.length; i++) {
+            let da = jalali.toObject(new Date(dates[i]))
+            d.push(`${da.year}-${da.month < 10 ? "0" : ""}${da.month}-${da.day}`)
+        }
+        if (selectedDate && !(d.includes(selectedDate.date)) || !selectedDate) {
+            alert('لطفا یک تاریخ معتبر انتخاب کنید.')
+        }
+        else if (selectedTime == null) {
+            alert('لطفا یک ساعت مناسب برای خود انتخاب کنید.')
+        }
+        else if (guestName === '' || guestEmail === '') {
+            alert('لطفا مشخصات خود را بصورت کامل وارد کنید.')
+        }
+        else {
+            axios.post('http://localhost:8000/core/GuestsReg/', {
+                name: guestName, email: guestEmail, approve: false, event: eventDetails.id, time: selectedTime.id
+            }).then((res) => {
+                console.log(res.data)
+            })
+            // console.log(selectedTime)
+            // console.log(eventDetails)
+        }
+    }
+
+    // console.log(dates)
+    console.log(eventDetails)
 
     return (
-        <Row className={styles.container}>
-            {eventDetails && eventTimes && (
-                <>
-                    <Col lg={3} md={3} sm={12} className={styles.eventDetails}>
-                        <div className={styles.title}>
-                            <FontAwesomeIcon icon={faCalendarAlt} />
-                            <span>کی کجا</span>
-                        </div>
-                        <span className={styles.eventName}>{eventDetails.name}</span>
-                        <div className={styles.eventTime}>
-                            <FontAwesomeIcon icon={faClock} />
-                            <span>مدت زمان: {eventDetails.time_unit}</span>
-                        </div>
-                        <div className={styles.eventPlace}>
-                            <FontAwesomeIcon icon={faLocationPin} />
-                            <span>محل برگزاری: {eventDetails.address}</span>
-                        </div>
-                        {/* <div>
+        <>
+            <Row className={styles.container}>
+                {eventDetails && eventTimes && (
+                    <>
+                        <Col lg={3} md={3} sm={12} className={styles.eventDetails}>
+                            <div className={styles.title}>
+                                <FontAwesomeIcon icon={faCalendarAlt} />
+                                <span>کی کجا</span>
+                            </div>
+                            <span className={styles.eventName}>{eventDetails.name}</span>
+                            <div className={styles.eventTime}>
+                                <FontAwesomeIcon icon={faClock} />
+                                <span>مدت زمان: {eventDetails.time_unit}</span>
+                            </div>
+                            <div className={styles.eventPlace}>
+                                <FontAwesomeIcon icon={faLocationPin} />
+                                <span>محل برگزاری: {eventDetails.address}</span>
+                            </div>
+                            {/* <div>
                     <span>یادداشت</span>
                 </div> */}
-                    </Col>
-                    <Col lg={5} md={9} sm={12}>
-                        <Calender setDate={setSelectedDate} dates={dates} setDateAndTime={setDateAndTime} />
-                    </Col>
+                        </Col>
+                        <Col lg={5} md={9} sm={12}>
+                            <Calender setDate={setSelectedDate} dates={dates} setDateAndTime={setDateAndTime} />
+                        </Col>
 
-                    <Col lg={3} md={12} sm={12} className={styles.timesContainer}>
-                        <div className={styles.header}>
-                            <span>تایم های قابل انتخاب</span>
+                        <Col lg={3} md={12} sm={12} className={styles.timesContainer}>
+                            <div className={styles.header}>
+                                <span>تایم های قابل انتخاب</span>
+                            </div>
+                            <div className={styles.times}>
+                                {time &&
+                                    time.map((item, index) => (
+                                        <div key={index} className={styles.time} onClick={() => setSelectedTime(item)}>
+                                            <span>{item.start_hour}</span>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </Col>
+                    </>
+                )}
+            </Row>
+
+            <Row className={styles.guestInfo}>
+                <Col lg={12} className={styles.guestInfoContainer}>
+                    <form>
+                        <div className={styles.field}>
+                            <label htmlFor='name'>نام و نام خانوادگی</label>
+                            <input id='name' type='text' value={guestName} onChange={(e) => setGuestName(e.target.value)} />
                         </div>
-                        <div className={styles.times}>
-                            {time &&
-                                time.map((item, index) => (
-                                    <div key={index} className={styles.time}>
-                                        <span>{item}</span>
-                                    </div>
-                                ))
-                            }
+                        <div className={styles.field}>
+                            <label htmlFor='email'>ایمیل</label>
+                            <input id='email' type='email' value={guestEmail} onChange={(e) => setGuestEmail(e.target.value)} />
                         </div>
-                    </Col>
-                </>
-            )}
-        </Row>
+                    </form>
+                    <Button className={styles.submitBtn} onClick={addGuest}>
+                        ثبت تایم
+                    </Button>
+                </Col>
+            </Row>
+        </>
     )
 }
