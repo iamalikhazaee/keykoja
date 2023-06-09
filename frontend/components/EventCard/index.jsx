@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import Switch from "@mui/material/Switch";
 import { alpha, styled } from "@mui/material/styles";
-import { pink } from "@mui/material/colors";
+import { green, pink } from "@mui/material/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPen,
@@ -15,13 +15,13 @@ import styles from "./styles.module.scss";
 
 const PinkSwitch = styled(Switch)(({ theme }) => ({
   "& .MuiSwitch-switchBase.Mui-checked": {
-    color: pink[300],
+    color: green[300],
     "&:hover": {
-      backgroundColor: alpha(pink[600], theme.palette.action.hoverOpacity),
+      backgroundColor: alpha(green[600], theme.palette.action.hoverOpacity),
     },
   },
   "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-    backgroundColor: pink[300],
+    backgroundColor: green[300],
   },
 }));
 
