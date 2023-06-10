@@ -63,11 +63,15 @@
 }
 
 .formContainer {
-    padding: 2rem;
+    padding: 2rem 0;
 
     .container {
         width: 100%;
         padding: 1rem 2rem;
+
+        @media screen and (max-width:425px) {
+            padding: 1rem;
+        }
 
         .field {
             width: 60%;

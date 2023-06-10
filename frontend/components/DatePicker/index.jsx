@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Animated } from "react-animated-css";
 import { JalaliDateTime } from "jalali-date-time";
-import { toPersianNum } from "./utils";
+import { toPersianNum } from "../Calender/utils";
 import {
   ContainerStyled,
   CalenderHeader,
@@ -9,18 +9,20 @@ import {
   DaysRow,
   DayStyled,
   AvailableDate,
-} from "./Calender.style";
+  SelectedDayStyled,
+} from "./Datepicker.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
   faSun,
 } from "@fortawesome/free-solid-svg-icons";
-const Calender = (props) => {
+
+const CustomizedDatePicker = (props) => {
   const [days, setDays] = useState("");
   const [now, setNow] = useState("");
   const [change, setChange] = useState(0);
-  // const [availableDates, setAvailableDates] = useState([]);
+  //   const [availableDates, setAvailableDates] = useState([]);
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);
 
   const jalali = JalaliDateTime();
@@ -28,6 +30,7 @@ const Calender = (props) => {
     setInitialRenderComplete(true);
     const today = jalali.toObject(new Date());
     setNow(today);
+    // console.log(today)
     if (today.month + change < 13) {
       const result = jalali.calendar(
         `${today.year}-${today.month + change < 10 ? "0" : ""}${
@@ -44,7 +47,6 @@ const Calender = (props) => {
     // setAvailableDates(dates);
   }, [change]);
 
-
   if (initialRenderComplete) {
     return (
       <Animated
@@ -57,13 +59,13 @@ const Calender = (props) => {
       >
         <ContainerStyled>
           <CalenderHeader>
-            <div onClick={() => setChange(change - 1)}>
+            <div onClick={() => setChange(change - 1)} style={{cursor: 'pointer'}}>
               <FontAwesomeIcon icon={faChevronRight} />
             </div>
             <div className="font__h2__bold" style={{ color: "#000" }}>
               {days.title}
             </div>
-            <div onClick={() => setChange(change + 1)}>
+            <div onClick={() => setChange(change + 1)}  style={{cursor: 'pointer', padding: '0 10px'}}>
               <FontAwesomeIcon icon={faChevronLeft} />
             </div>
           </CalenderHeader>
@@ -150,22 +152,31 @@ const Calender = (props) => {
             {days &&
               days.weeks.map((day, i) => (
                 <DaysRow key={i}>
-                  {day.map((d, index) =>
-                    props.dates.includes(d.date) ? (
-                      <AvailableDate onClick={() => props.setDateAndTime(d)}>
+                  {day.map((d, index) => (
+                    props.date !== undefined && props.date.date === d.date ? (
+                      <SelectedDayStyled key={index}>
                         {toPersianNum(d.day)}
-                      </AvailableDate>
+                      </SelectedDayStyled>
                     ) : (
                       <DayStyled
-                        month={days.month}
-                        today={d.month}
-                        key={index}
-                        onClick={() => props.setDateAndTime(d)}
-                      >
-                        {toPersianNum(d.day)}
-                      </DayStyled>
+                      month={days.month}
+                      today={d.month}
+                      key={index}
+                      onClick={() => props.setDate(d)}
+                    >
+                      {toPersianNum(d.day)}
+                      {/* {now.day === d.day &&
+                      `${now.year}-${now.month < 10 ? "0" : ""}${now.month}` ===
+                        d.month ? (
+                        <div className="test3">
+                          <FontAwesomeIcon icon={faSun} />
+                        </div>
+                      ) : (
+                        toPersianNum(d.day)
+                      )} */}
+                    </DayStyled>
                     )
-                  )}
+                  ))}
                 </DaysRow>
               ))}
           </div>
@@ -177,4 +188,4 @@ const Calender = (props) => {
   }
 };
 
-export default Calender;
+export default CustomizedDatePicker;

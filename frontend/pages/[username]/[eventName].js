@@ -7,6 +7,7 @@ import { faCalendarAlt, faClock, faLocationPin } from '@fortawesome/free-solid-s
 import axios from 'axios';
 import { JalaliDateTime } from "jalali-date-time";
 import styles from '@/styles/guestPage.module.scss'
+import { toPersianNum } from '@/components/Calender/utils';
 
 export default function eventName() {
 
@@ -47,8 +48,8 @@ export default function eventName() {
         const t = []
         setSelectedDate(d)
         for (let i = 0; i < eventTimes.length; i++) {
-            let day = jalali.toObject(new Date(eventTimes[i].date))
-            if (day.day === d.day && `${day.year}-${day.month < 10 ? "0" : ""}${day.month}` === d.month) {
+            if (eventTimes[i].date === d.date) {
+                console.log(eventTimes[i])
                 if (eventTimes[i].is_enable) {
                     t.push(eventTimes[i])
                 }
@@ -58,12 +59,12 @@ export default function eventName() {
     }
 
     const addGuest = () => {
-        const d = [];
-        for (let i = 0; i < dates.length; i++) {
-            let da = jalali.toObject(new Date(dates[i]))
-            d.push(`${da.year}-${da.month < 10 ? "0" : ""}${da.month}-${da.day}`)
-        }
-        if (selectedDate && !(d.includes(selectedDate.date)) || !selectedDate) {
+        // const d = [];
+        // for (let i = 0; i < dates.length; i++) {
+        //     let da = jalali.toObject(new Date(dates[i]))
+        //     d.push(`${da.year}-${da.month < 10 ? "0" : ""}${da.month}-${da.day}`)
+        // }
+        if (selectedDate && !(dates.includes(selectedDate.date)) || !selectedDate) {
             alert('لطفا یک تاریخ معتبر انتخاب کنید.')
         }
         else if (selectedTime == null) {
@@ -117,7 +118,7 @@ export default function eventName() {
                                 {time &&
                                     time.map((item, index) => (
                                         <div key={index} className={styles.time} onClick={() => setSelectedTime(item)}>
-                                            <span>{item.start_hour}</span>
+                                            <span>{toPersianNum(item.start_hour)}</span>
                                         </div>
                                     ))
                                 }

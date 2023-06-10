@@ -1,0 +1,110 @@
+.time {
+
+    input {
+        width: 100% !important;
+        padding: .8rem;
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        outline: none;
+        font-size: 15px;
+        direction: ltr !important;
+        text-align: right;
+
+        &:focus {
+            outline: none;
+            border: 1px solid #4297A0;
+        }
+    }
+
+    .timeDropdown {
+        display: flex;
+        max-height: 200px;
+        max-width: 200px;
+        direction: ltr !important;
+        position: absolute;
+        top: 45px;
+        border: 2px solid lightgray;
+        border-radius: 12px;
+        padding: .5rem;
+        background-color: #fff;
+        z-index: 10;
+
+        .hours {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: scroll;
+            width: 65px;
+
+            .active {
+                background-color: #52796f;
+            }
+
+            span {
+                margin: 4px 0;
+                cursor: pointer;
+                transition: ease-in .1s;
+                width: 100%;
+                text-align: center;
+                border-radius: 50px;
+
+                &:hover {
+                    background-color: #52796f;
+                }
+            }
+        }
+
+        .minutes {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: scroll;
+            width: 65px;
+
+            .active {
+                background-color: #52796f;
+            }
+
+            span {
+                margin: 4px 0;
+                cursor: pointer;
+                transition: ease-in .1s;
+                width: 100%;
+                text-align: center;
+                border-radius: 50px;
+
+                &:hover {
+                    background-color: #52796f;
+                }
+            }
+        }
+
+        .zones {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: scroll;
+            width: 65px;
+            font-size: 12px;
+            font-weight: 600;
+
+            .active {
+                background-color: #52796f;
+            }
+
+            span {
+                margin: 4px 0;
+                cursor: pointer;
+                transition: ease-in .1s;
+                width: 100%;
+                text-align: center;
+                border-radius: 50px;
+                padding: .5rem;
+
+                &:hover {
+                    background-color: #52796f;
+                }
+            }
+        }
+    }
+}
