@@ -61,3 +61,23 @@ export const HeaderStyled = styled.div`
   margin-bottom: 16px;
   height: 40px;
 `;
+
+export const SelectedDayStyled = styled.div`
+  font-weight: 900;
+  font-size: 16px;
+  color: #fff;
+  background-color: #52796F;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: allowed;
+  padding: 6px;
+  border-radius: 10px;
+  transition: ease-in .1s;
+
+  // :hover {
+  //   background-color: #52796F;
+  //   color: #F4EAE6;
+  // }
+`;

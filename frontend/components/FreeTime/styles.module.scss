@@ -23,7 +23,7 @@
 
         label {
             font-weight: 600;
-            margin-bottom: .5rem;
+            margin-bottom: 15px;
         }
 
         input {
@@ -159,6 +159,17 @@
             text-align: center;
             font-size: 12px;
             border-bottom: 1px solid lightgray;
+
+            #trashIcon {
+                cursor: pointer;
+                color: red;
+                font-size: 13px;
+            }
+
+            #editIcon {
+                cursor: pointer;
+                color: #52796F;
+            }
         }
     }
 }

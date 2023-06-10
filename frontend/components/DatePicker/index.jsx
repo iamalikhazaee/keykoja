@@ -9,6 +9,7 @@ import {
   DaysRow,
   DayStyled,
   AvailableDate,
+  SelectedDayStyled,
 } from "./Datepicker.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -29,7 +30,7 @@ const CustomizedDatePicker = (props) => {
     setInitialRenderComplete(true);
     const today = jalali.toObject(new Date());
     setNow(today);
-    console.log(today)
+    // console.log(today)
     if (today.month + change < 13) {
       const result = jalali.calendar(
         `${today.year}-${today.month + change < 10 ? "0" : ""}${
@@ -58,13 +59,13 @@ const CustomizedDatePicker = (props) => {
       >
         <ContainerStyled>
           <CalenderHeader>
-            <div onClick={() => setChange(change - 1)}>
+            <div onClick={() => setChange(change - 1)} style={{cursor: 'pointer'}}>
               <FontAwesomeIcon icon={faChevronRight} />
             </div>
             <div className="font__h2__bold" style={{ color: "#000" }}>
               {days.title}
             </div>
-            <div onClick={() => setChange(change + 1)}>
+            <div onClick={() => setChange(change + 1)}  style={{cursor: 'pointer', padding: '0 10px'}}>
               <FontAwesomeIcon icon={faChevronLeft} />
             </div>
           </CalenderHeader>
@@ -152,13 +153,19 @@ const CustomizedDatePicker = (props) => {
               days.weeks.map((day, i) => (
                 <DaysRow key={i}>
                   {day.map((d, index) => (
-                    <DayStyled
+                    props.date !== undefined && props.date.date === d.date ? (
+                      <SelectedDayStyled key={index}>
+                        {toPersianNum(d.day)}
+                      </SelectedDayStyled>
+                    ) : (
+                      <DayStyled
                       month={days.month}
                       today={d.month}
                       key={index}
                       onClick={() => props.setDate(d)}
                     >
-                      {now.day === d.day &&
+                      {toPersianNum(d.day)}
+                      {/* {now.day === d.day &&
                       `${now.year}-${now.month < 10 ? "0" : ""}${now.month}` ===
                         d.month ? (
                         <div className="test3">
@@ -166,8 +173,9 @@ const CustomizedDatePicker = (props) => {
                         </div>
                       ) : (
                         toPersianNum(d.day)
-                      )}
+                      )} */}
                     </DayStyled>
+                    )
                   ))}
                 </DaysRow>
               ))}
