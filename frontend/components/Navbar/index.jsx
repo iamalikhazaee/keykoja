@@ -25,14 +25,17 @@ export default function Navbar() {
   useEffect(() => {
     setUserDetails(JSON.parse(localStorage.getItem("userDetails")));
 
-    window.onclick = (event) => {
-      if (event.target.contains(wrapperRef.current)
-        && event.target !== wrapperRef.current) {
-        setUserMenu(false)
-      } else {
-        console.log(`You clicked Inside the box at ${new Date().toLocaleString()}`);
+    let handler = (event) => {
+      if (!wrapperRef.current.contains(event.target)) {
+        setUserMenu(false);
       }
-    }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
   }, []);
 
   const handleLogout = () => {
@@ -50,7 +53,7 @@ export default function Navbar() {
           <FontAwesomeIcon icon={faCalendarAlt} id={styles.logo} />
           <h1>کی کجا</h1>
         </a>
-        <div className={styles.userMenu}>
+        <div className={styles.userMenu} ref={wrapperRef}>
           <button
             type="button"
             className={styles.userBtn}
@@ -70,7 +73,6 @@ export default function Navbar() {
             <div
               className={styles.menu}
               id={styles.userDropdown}
-              ref={wrapperRef}
             >
               <div className={styles.menuHeader}>
                 <span>
