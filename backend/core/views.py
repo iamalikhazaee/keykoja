@@ -163,9 +163,11 @@ class getTimeForReservation(viewsets.ModelViewSet):
         queryset = Event_time.objects.filter(event__event_domain = event_name , profile__domain = username)
         return queryset
     
-class getEventForLink(viewsets.ModelViewset):
-    serializers = NewEventSerializer
+class getEventForLink(viewsets.ModelViewSet):
+    def get_serializer_class(self):
+        return NewEventSerializer
+    # serializers = NewEventSerializer
     def get_queryset(self):
         username = self.kwargs.get('username')
-        queryset = Event.objects.filter( owner__domain = username , is_enable = True)
+        queryset = Event.objects.filter(owner__domain = username)
         return queryset
