@@ -17,7 +17,6 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import EventCard from "@/components/EventCard";
 
-
 const PinkSwitch = styled(Switch)(({ theme }) => ({
     '& .MuiSwitch-switchBase.Mui-checked': {
         color: pink[300],
@@ -62,15 +61,31 @@ export default function Dashboard() {
                 'Authorization': `Bearer ${token}`
             }
         }).then((res) => {
-            console.log(res)
+            // console.log(res)
             axios.get('http://127.0.0.1:8000/core/NewEvent/', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             }).then((res) => {
                 setEvents(res.data)
-                console.log(res.data)
+                // console.log(res.data)
             })
+        })
+    }
+
+    const handleDeleteEvent = (id, index) => {
+        const token = JSON.parse(Cookies.get('token'));
+        // console.log(id)
+        // console.log(index)
+        axios.delete(`http://127.0.0.1:8000/core/NewEvent/${id}/`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then((res) => {
+            var copyArray = [...events];
+            copyArray.splice(index, 1);
+            setEvents(copyArray);
+            console.log(res.data)
         })
     }
 
@@ -104,7 +119,7 @@ export default function Dashboard() {
             <Container className={styles.container}>
                 <Row className={styles.row}>
                     {events.map((item, index) => (
-                        <EventCard key={index} item={item} handleEnable={handleEventEnable} />
+                        <EventCard key={index} index={index} item={item} handleEnable={handleEventEnable} deleteEvent={handleDeleteEvent} />
                     ))}
                 </Row>
             </Container>

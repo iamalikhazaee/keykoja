@@ -1,6 +1,6 @@
 .cardContainer {
 
-    @media screen and (max-width:768px) {
+    @media screen and (max-width:992px) {
         margin-bottom: 1.5rem;
     }
 
@@ -13,6 +13,8 @@
             justify-content: space-between;
             align-items: center;
             background-color: #CAD2C5;
+            padding: 0 !important;
+            padding: 10px 5px !important;
             // border-radius: 15px;
 
             .icons {
@@ -20,10 +22,11 @@
                 color: gray;
 
                 svg {
-                    padding: 0 .5rem;
+                    padding: 0 .2rem;
                     margin: 0 .5rem;
                     cursor: pointer;
                 }
+
             }
         }
 
@@ -86,6 +89,59 @@
             .copyBtn {
                 cursor: not-allowed;
                 pointer-events: none;
+            }
+        }
+    }
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 200px;
+    background-color: #fff;
+    border: 1px solid lightgray;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    .modalText {
+        font-size: 13px;
+        font-weight: 600;
+        margin: 10px 0 70px 0;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .modalBtns {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        
+        .btn {
+            width: 40%;
+            background-color: #fff;
+            border: 1px solid #52796F;
+            color: #52796F;
+            font-size: 13px;
+            font-weight: 600;
+            transition: ease-in-out .3s !important;
+            
+            &:hover {
+                border: none;
+                background-color: #52796F;
+                color: #fff;
             }
         }
     }
