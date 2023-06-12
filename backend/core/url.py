@@ -11,7 +11,6 @@ router.register(r'Availability', AvailabilityViewset, basename='Availabilities')
 router.register(r'EventTime', EventTimeViewSet, basename='Event_Time')
 router.register(r'register', RegisterViewSet, basename='register')
 router.register(r'GuestsReg', GuestRegisterViewSet, basename='GuestsReg')
-router.register(r'EventList', getEventForLink, basename='EventList')
 urlpatterns = [
     path('', include(router.urls))
 ]
