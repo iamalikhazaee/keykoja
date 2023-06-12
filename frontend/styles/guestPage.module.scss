@@ -117,6 +117,14 @@
                     border: 1px solid #84A98C;
                 }
             }
+
+            .emptyMsg {
+                width: 100%;
+                font-size: 12px;
+                padding: 12px;
+                // border: 1px solid lightgray;
+                border-radius: 12px;
+            }
         }
     }
 }

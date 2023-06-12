@@ -76,9 +76,9 @@ export default function eventName() {
         else {
             axios.all([
                 axios.post('http://localhost:8000/core/GuestsReg/', {
-                name: guestName, email: guestEmail, approve: false, event: eventDetails.id, time: selectedTime.id
-            }),
-            axios.patch(`http://localhost:8000/core/EventTime/${selectedTime.id}/`, {is_enable: false})
+                    name: guestName, email: guestEmail, approve: false, event: eventDetails.id, time: selectedTime.id
+                }),
+                axios.patch(`http://localhost:8000/core/EventTime/${selectedTime.id}/`, { is_enable: false })
             ]).then(axios.spread((res1, res2) => {
                 console.log(res1)
                 console.log(res2)
@@ -115,12 +115,19 @@ export default function eventName() {
                                 <span>تایم های قابل انتخاب</span>
                             </div>
                             <div className={styles.times}>
-                                {time &&
-                                    time.map((item, index) => (
-                                        <div key={index} className={styles.time} onClick={() => setSelectedTime(item)}>
-                                            <span>{toPersianNum(item.start_hour)}</span>
+                                {time && (
+                                    time.length == 0 ? (
+                                        <div className={styles.emptyMsg}>
+                                            <span>متاسفانه زمان خالی برای این تاریخ وجود ندارد.</span>
                                         </div>
-                                    ))
+                                    ) : (
+                                        time.map((item, index) => (
+                                            <div key={index} className={styles.time} onClick={() => setSelectedTime(item)}>
+                                                <span>{toPersianNum(item.start_hour)}</span>
+                                            </div>
+                                        ))
+                                    )
+                                )
                                 }
                             </div>
                         </Col>
