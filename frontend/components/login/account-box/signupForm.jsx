@@ -10,8 +10,8 @@ import { Marginer } from "@/components/marginer";
 import { useContext, useState } from "react";
 import { AccountContext } from "./accountContext";
 import { useRouter } from "next/router";
-// import { useRecoilState } from "recoil";
-// import { current_user } from '../../../atoms'
+import { useRecoilState } from "recoil";
+import { current_user } from '../../../atoms'
 import Cookies from "js-cookie";
 import axios from "axios";
 

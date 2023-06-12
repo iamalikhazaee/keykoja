@@ -50,6 +50,7 @@ export default function FreeTime(props) {
         })
         .then((res) => {
           console.log(res.data);
+          setTimes([])
         });
     }
   };

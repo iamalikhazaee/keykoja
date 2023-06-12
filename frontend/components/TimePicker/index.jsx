@@ -1,19 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { hours, minutes } from "./utils";
 import { toPersianNum } from "../Calender/utils";
-import styles from "./styles.module.scss"
+import styles from "./styles.module.scss";
+import { useEffect } from "react";
 
 export default function TimePicker(props) {
-    const [showTimes, setShowTimes] = useState(false)
-    const [hour, setHour] = useState(toPersianNum("00"))
-    const [min, setMin] = useState(toPersianNum("00"))
-    // const [time, setTime] = useState(toPersianNum("00:00"))
+  const [showTimes, setShowTimes] = useState(false);
+  const [hour, setHour] = useState(toPersianNum("00"));
+  const [min, setMin] = useState(toPersianNum("00"));
+  // const [time, setTime] = useState(toPersianNum("00:00"));
+  let timeRef = useRef();
 
-    // console.log(toEnglishNum(hour))
-    // console.log(toEnglishNum(min))
+
+  useEffect(() => {
+    let handler = (event) => {
+      if (!timeRef.current.contains(event.target)) {
+        setShowTimes(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+}, []);
+
 
   return (
-    <div className={styles.time}>
+    <div className={styles.time} ref={timeRef}>
       <input
         id="time"
         type="text"
@@ -26,12 +41,14 @@ export default function TimePicker(props) {
         // onChange={() => props.setTime(`${hour}:${min}`)}
       />
       {showTimes && (
-        <div className={styles.timeDropdown}>
+        <div className={styles.timeDropdown} >
           <div className={styles.hours}>
             {hours.map((item, index) => (
               <span
                 key={index}
-                className={`${props.hour === toPersianNum(item) ? styles.active : null}`}
+                className={`${
+                  props.hour === toPersianNum(item) ? styles.active : null
+                }`}
                 onClick={() => props.setHour(toPersianNum(item))}
               >
                 {toPersianNum(item)}
@@ -42,7 +59,9 @@ export default function TimePicker(props) {
             {minutes.map((item, index) => (
               <span
                 key={index}
-                className={`${props.min === toPersianNum(item) ? styles.active : null}`}
+                className={`${
+                  props.min === toPersianNum(item) ? styles.active : null
+                }`}
                 onClick={() => props.setMin(toPersianNum(item))}
               >
                 {toPersianNum(item)}
