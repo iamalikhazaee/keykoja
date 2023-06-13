@@ -133,7 +133,7 @@ export default function EventCard(props) {
           <Button
             className={styles.copyBtn}
             onClick={() => {
-              navigator.clipboard.writeText(props.item.event_domain);
+              navigator.clipboard.writeText(`http://localhost:3000/${user.domain}/${props.item.event_domain}`);
             }}
           >
             <span>کپی لینک</span>

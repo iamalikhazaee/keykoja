@@ -35,11 +35,12 @@ export function SignupForm() {
         domain: link,
       })
       .then((res) => {
-        console.log(res);
         // setCurrentUser(res.data)
+        console.log(res.data)
         localStorage.setItem('userDetails', JSON.stringify(res.data))
         localStorage.setItem('token', JSON.stringify(res.data.token.access))
         Cookies.set("auth", true);
+        Cookies.set("token", JSON.stringify(res.data.token.access));
         router.push("/dashboard");
       });
   };
