@@ -42,7 +42,7 @@ export const DayStyled = styled.div`
   width: 40px;
   display: flex;
   justify-content: center;
-  cursor: pointer;
+  // cursor: pointer;
   pointer-events: not-allowed;
   padding: 6px;
   border-radius: 10px;
@@ -81,4 +81,25 @@ export const AvailableDate = styled.div`
     background-color: #52796F;
     color: #F4EAE6;
   }
+`;
+
+export const DisableDate = styled.div`
+  font-weight: 900;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.25);
+  // color: rgba(0, 0, 0, 0.25);
+  width: 40px%;
+  display: flex;
+  justify-content: center;
+  // cursor: pointer;
+  pointer-events: not-allowed;
+  // background-color: #84A98C;
+  padding: 6px;
+  border-radius: 10px;
+  transition: ease-in .1s;
+
+  // :hover {
+  //   background-color: #52796F;
+  //   color: #F4EAE6;
+  // }
 `;

@@ -9,6 +9,7 @@ import {
   DaysRow,
   DayStyled,
   AvailableDate,
+  DisableDate,
 } from "./Calender.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -44,6 +45,7 @@ const Calender = (props) => {
     // setAvailableDates(dates);
   }, [change]);
 
+  console.log(now);
 
   if (initialRenderComplete) {
     return (
@@ -150,20 +152,30 @@ const Calender = (props) => {
             {days &&
               days.weeks.map((day, i) => (
                 <DaysRow key={i}>
-                  {day.map((d, index) =>
-                    props.dates.includes(d.date) ? (
-                      <AvailableDate onClick={() => props.setDateAndTime(d)}>
-                        {toPersianNum(d.day)}
-                      </AvailableDate>
-                    ) : (
-                      <DayStyled
-                        month={days.month}
-                        today={d.month}
-                        key={index}
-                        onClick={() => props.setDateAndTime(d)}
-                      >
-                        {toPersianNum(d.day)}
-                      </DayStyled>
+                  {day.map(
+                    (d, index) => (
+                        now.year === Number(d.date.split("-")[0]) &&
+                        now.month === Number(d.date.split("-")[1]) &&
+                        now.day <= d.day ? (
+                          props.dates.includes(d.date) ? (
+                            <AvailableDate
+                              onClick={() => props.setDateAndTime(d)}
+                            >
+                              {toPersianNum(d.day)}
+                            </AvailableDate>
+                          ) : (
+                            <DayStyled
+                              month={days.month}
+                              today={d.month}
+                              key={index}
+                              onClick={() => props.setDateAndTime(d)}
+                            >
+                              {toPersianNum(d.day)}
+                            </DayStyled>
+                          )
+                        ) : (
+                          <DisableDate>{toPersianNum(d.day)}</DisableDate>
+                        )
                     )
                   )}
                 </DaysRow>
