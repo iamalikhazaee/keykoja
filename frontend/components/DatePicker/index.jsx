@@ -10,6 +10,7 @@ import {
   DayStyled,
   AvailableDate,
   SelectedDayStyled,
+  DisableDate
 } from "./Datepicker.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -59,13 +60,19 @@ const CustomizedDatePicker = (props) => {
       >
         <ContainerStyled>
           <CalenderHeader>
-            <div onClick={() => setChange(change - 1)} style={{cursor: 'pointer'}}>
+            <div
+              onClick={() => setChange(change - 1)}
+              style={{ cursor: "pointer" }}
+            >
               <FontAwesomeIcon icon={faChevronRight} />
             </div>
             <div className="font__h2__bold" style={{ color: "#000" }}>
               {days.title}
             </div>
-            <div onClick={() => setChange(change + 1)}  style={{cursor: 'pointer', padding: '0 10px'}}>
+            <div
+              onClick={() => setChange(change + 1)}
+              style={{ cursor: "pointer", padding: "0 10px" }}
+            >
               <FontAwesomeIcon icon={faChevronLeft} />
             </div>
           </CalenderHeader>
@@ -152,31 +159,30 @@ const CustomizedDatePicker = (props) => {
             {days &&
               days.weeks.map((day, i) => (
                 <DaysRow key={i}>
-                  {day.map((d, index) => (
-                    props.date !== undefined && props.date.date === d.date ? (
-                      <SelectedDayStyled key={index}>
-                        {toPersianNum(d.day)}
-                      </SelectedDayStyled>
-                    ) : (
-                      <DayStyled
-                      month={days.month}
-                      today={d.month}
-                      key={index}
-                      onClick={() => props.setDate(d)}
-                    >
-                      {toPersianNum(d.day)}
-                      {/* {now.day === d.day &&
-                      `${now.year}-${now.month < 10 ? "0" : ""}${now.month}` ===
-                        d.month ? (
-                        <div className="test3">
-                          <FontAwesomeIcon icon={faSun} />
-                        </div>
+                  {day.map((d, index) =>
+                    now.year === Number(d.date.split("-")[0]) &&
+                    now.month === Number(d.date.split("-")[1]) &&
+                    now.day <= d.day ? (
+                      props.date !== undefined && props.date.date === d.date ? (
+                        <SelectedDayStyled key={index}>
+                          {toPersianNum(d.day)}
+                        </SelectedDayStyled>
                       ) : (
-                        toPersianNum(d.day)
-                      )} */}
-                    </DayStyled>
+                        <DayStyled
+                          month={days.month}
+                          today={d.month}
+                          key={index}
+                          onClick={() => props.setDate(d)}
+                        >
+                          {toPersianNum(d.day)}
+                        </DayStyled>
+                      )
+                    ) : (
+                      <DisableDate key={index}>
+                        {toPersianNum(d.day)}
+                      </DisableDate>
                     )
-                  ))}
+                  )}
                 </DaysRow>
               ))}
           </div>

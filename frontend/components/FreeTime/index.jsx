@@ -9,6 +9,7 @@ import jwt from "jwt-decode";
 import axios from "axios";
 import TimePicker from "../TimePicker";
 import { toPersianNum, toEnglishNum } from "../Calender/utils";
+import { useRouter } from "next/router";
 
 export default function FreeTime(props) {
   const [date, setDate] = useState();
@@ -17,6 +18,7 @@ export default function FreeTime(props) {
   const [endHour, setEndHour] = useState(toPersianNum("00"));
   const [endMin, setEndMin] = useState(toPersianNum("00"));
   const [times, setTimes] = useState([]);
+  const router = useRouter()
   // const [timeIsSet, setTimeIsSet] = useState(false);
 
   const handleAddTime = () => {
@@ -51,6 +53,7 @@ export default function FreeTime(props) {
         .then((res) => {
           console.log(res.data);
           setTimes([])
+          router.push("/dashboard");
         });
     }
   };

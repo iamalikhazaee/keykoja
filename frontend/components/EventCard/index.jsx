@@ -17,22 +17,6 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import { Typography } from "@mui/material";
-
-const style = {
-  direction: "rtl",
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 300,
-  bgcolor: "background.paper",
-  border: "1px solid lightgray",
-  boxShadow: 24,
-  borderRadius: 2,
-  // fontSize: 12,
-  p: 4,
-};
 
 const PinkSwitch = styled(Switch)(({ theme }) => ({
   "& .MuiSwitch-switchBase.Mui-checked": {
@@ -101,7 +85,12 @@ export default function EventCard(props) {
                     >
                       بله
                     </Button>
-                    <Button className={styles.btn} onClick={() => setOpen(false)}>خیر</Button>
+                    <Button
+                      className={styles.btn}
+                      onClick={() => setOpen(false)}
+                    >
+                      خیر
+                    </Button>
                   </div>
                 </Box>
               </Fade>
@@ -115,6 +104,11 @@ export default function EventCard(props) {
           <Card.Subtitle className={`${styles.cardSubtitle} mb-2 text-muted`}>
             {props.item.type}
           </Card.Subtitle>
+          {props.showNotice && (
+            <Card.Subtitle className={styles.timeNotice}>
+              برای این رویداد زمان ثبت نکرده اید.
+            </Card.Subtitle>
+          )}
         </Card.Body>
         <Card.Footer
           className={`${styles.cardFooter} ${!enable && styles.disabledFooter}`}
@@ -133,7 +127,9 @@ export default function EventCard(props) {
           <Button
             className={styles.copyBtn}
             onClick={() => {
-              navigator.clipboard.writeText(`http://localhost:3000/${user.domain}/${props.item.event_domain}`);
+              navigator.clipboard.writeText(
+                `http://localhost:3000/${user.domain}/${props.item.event_domain}`
+              );
             }}
           >
             <span>کپی لینک</span>

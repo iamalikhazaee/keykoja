@@ -43,16 +43,12 @@ export default function Dashboard() {
             }
         }).then((res) => {
             setEvents(res.data)
-            // console.log(res.data)
-            // console.log(user)
         })
-        // if (!localStorage.getItem('token')) {
-        //     router.push({
-        //         pathname: '/'
-        //     })
-        // }
-        // console.log(user)
     }, [])
+
+    // const showNotice = (id) => {
+
+    // }
 
     const handleEventEnable = (e, id) => {
         const token = JSON.parse(Cookies.get('token'));

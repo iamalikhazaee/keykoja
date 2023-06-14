@@ -45,8 +45,6 @@ const Calender = (props) => {
     // setAvailableDates(dates);
   }, [change]);
 
-  console.log(now);
-
   if (initialRenderComplete) {
     return (
       <Animated
@@ -59,13 +57,13 @@ const Calender = (props) => {
       >
         <ContainerStyled>
           <CalenderHeader>
-            <div onClick={() => setChange(change - 1)}>
+            <div onClick={() => setChange(change - 1)} style={{cursor: 'pointer'}} >
               <FontAwesomeIcon icon={faChevronRight} />
             </div>
             <div className="font__h2__bold" style={{ color: "#000" }}>
               {days.title}
             </div>
-            <div onClick={() => setChange(change + 1)}>
+            <div onClick={() => setChange(change + 1)} style={{cursor: 'pointer', padding: '0 10px'}} >
               <FontAwesomeIcon icon={faChevronLeft} />
             </div>
           </CalenderHeader>
@@ -158,7 +156,7 @@ const Calender = (props) => {
                         now.month === Number(d.date.split("-")[1]) &&
                         now.day <= d.day ? (
                           props.dates.includes(d.date) ? (
-                            <AvailableDate
+                            <AvailableDate key={index}
                               onClick={() => props.setDateAndTime(d)}
                             >
                               {toPersianNum(d.day)}
@@ -174,7 +172,7 @@ const Calender = (props) => {
                             </DayStyled>
                           )
                         ) : (
-                          <DisableDate>{toPersianNum(d.day)}</DisableDate>
+                          <DisableDate key={index}>{toPersianNum(d.day)}</DisableDate>
                         )
                     )
                   )}
