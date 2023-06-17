@@ -29,7 +29,7 @@
     "moment": "^2.29.4",
     "next": "13.4.3",
     "node-sass": "^7.0.3",
-    "react": "18.2.0",
+    "react": "^18.2.0",
     "react-animated-css": "^1.2.1",
     "react-bootstrap": "^2.7.4",
     "react-bootstrap-time-picker": "^2.0.1",
