@@ -94,7 +94,7 @@
     }
 }
 
-.modal {
+.deleteModal {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -113,6 +113,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    outline: none;
 
     .modalText {
         font-size: 13px;
@@ -128,7 +129,7 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
-        
+
         .btn {
             width: 40%;
             background-color: #fff;
@@ -137,11 +138,191 @@
             font-size: 13px;
             font-weight: 600;
             transition: ease-in-out .3s !important;
-            
+
             &:hover {
                 border: none;
                 background-color: #52796F;
                 color: #fff;
+            }
+        }
+    }
+}
+
+.editModal {
+    direction: rtl;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    // height: 200px;
+    background-color: #fff;
+    border: 1px solid lightgray;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    outline: none;
+
+    .tabContainer {
+        width: 100%;
+
+        .tabs {
+            width: 100%;
+            padding: 0;
+        }
+
+        .tabContent {
+            margin: 1rem 0 !important;
+
+            .fields {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                .field {
+                    width: 45%;
+                    margin: 0 0 1rem 4rem;
+                    display: flex;
+                    flex-direction: column;
+                    // align-items: flex-start;
+                    justify-content: center;
+
+                    label {
+                        display: block;
+                        margin-bottom: .5rem;
+                        font-size: 12px;
+                        line-height: 20px;
+                        font-weight: 500;
+                        color: rgb(17 24 39);
+                    }
+
+                    input,
+                    textarea {
+                        // background-color: rgb(243 244 246);
+                        border: 1px solid rgb(209 213 219);
+                        color: rgb(17 24 39);
+                        font-size: 12px;
+                        line-height: 20px;
+                        border-radius: 8px;
+                        display: block;
+                        width: 100%;
+                        padding: 1rem;
+
+                        &:focus {
+                            outline: none;
+                            border: 1px solid #354F52;
+                        }
+
+                    }
+
+                    select {
+                        // background-color: rgb(243 244 246);
+                        border: 1px solid rgb(209 213 219);
+                        color: rgba(17, 24, 39, .7);
+                        font-size: 13px;
+                        font-weight: 600;
+                        line-height: 20px;
+                        border-radius: 8px;
+                        display: block;
+                        width: 100%;
+                        padding: 1rem;
+
+                        &:focus {
+                            outline: none;
+                            border: 1px solid #354F52;
+                        }
+                    }
+
+                    .inputGroup {
+                        direction: ltr !important;
+                        width: 100% !important;
+                        display: flex;
+                        align-items: center;
+
+                        .mutedText {
+                            background-color: rgb(243 244 246);
+                            border: 1px solid rgb(209 213 219);
+                            line-height: 20px;
+                            padding: 1rem;
+                            border-radius: 8px 0 0 8px;
+                            direction: ltr !important;
+                            font-size: 13px;
+                            font-weight: 600;
+                            color: rgba(#000, .6);
+                        }
+
+                        input {
+                            border-radius: 0 8px 8px 0;
+                        }
+                    }
+                }
+
+                .submitBtn {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: .5rem 0;
+                    padding: .5rem 0;
+
+                    button {
+                        padding: 1rem;
+                        font-size: 10px !important;
+                        // font-weight: 600;
+                        border-radius: 12px;
+                        background-color: #fff;
+                        color: #709680;
+                        border: 1px solid #709680;
+                        transition: ease-in .3s;
+
+                        &:hover {
+                            background-color: #709680;
+                            color: #fff;
+                        }
+                    }
+                }
+
+                .timeContainer {
+
+                    // .cardsContainer {}
+
+                    .addBtn {
+                        margin: 2rem 0;
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        padding: 1rem 0;
+
+                        button {
+                            padding: 1rem;
+                            border: none;
+                            font-size: 12px;
+                            border-radius: 12px;
+                            background-color: #fff;
+                            color: #709680;
+                            border: 1px solid #709680;
+                            display: flex;
+                            align-items: center;
+                            transition: ease-in .3s;
+
+                            svg {
+                                margin-right: .2rem;
+                            }
+
+                            &:hover {
+                                background-color: #709680;
+                                color: #fff;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

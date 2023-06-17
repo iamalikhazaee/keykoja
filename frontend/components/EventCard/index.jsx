@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import Switch from "@mui/material/Switch";
 import { alpha, styled } from "@mui/material/styles";
@@ -17,6 +17,10 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
+import axios from "axios";
+import jwt from 'jwt-decode';
 
 const PinkSwitch = styled(Switch)(({ theme }) => ({
   "& .MuiSwitch-switchBase.Mui-checked": {
@@ -33,10 +37,49 @@ const PinkSwitch = styled(Switch)(({ theme }) => ({
 export default function EventCard(props) {
   const enable = props.item.is_enable;
   const user = JSON.parse(localStorage.getItem("userDetails"));
-  const [open, setOpen] = useState(false);
+  const [name, setName] = useState(props.item.name);
+  const [type, setType] = useState(props.item.type);
+  const [location, setLocation] = useState(props.item.place);
+  const [address, setAddress] = useState(props.item.address);
+  const [message, setMessage] = useState(props.item.message);
+  const [domain, setDomain] = useState(props.item.event_domain);
+  const [userToken, setUserToken] = useState()
+  const [openDelete, setOpenDelete] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+
+  useEffect(() => {
+    setUserToken(localStorage.getItem("token"))
+}, [])
 
   const openEventLink = (url) => {
     window.open(url, "_blank", "noreferrer");
+  };
+
+  const editEvent = (e) => {
+    // e.preventDefault();
+    const token = jwt(JSON.parse(userToken))
+    // console.log(message);
+    axios
+      .put(
+        `http://127.0.0.1:8000/core/NewEvent/${props.item.id}/`,
+        {
+          owner: props.item.owner,
+          name: name,
+          type,
+          place: location,
+          address: address,
+          message: message,
+          event_domain: domain,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(userToken)}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      });
   };
 
   return (
@@ -49,19 +92,17 @@ export default function EventCard(props) {
             size="small"
           />
           <div className={styles.icons}>
-            <FontAwesomeIcon icon={faPen} />
-            {/* <FontAwesomeIcon icon={faEllipsisVertical} /> */}
             <FontAwesomeIcon
-              icon={faTrash}
+              icon={faPen}
               onClick={() => {
-                setOpen(true);
+                setOpenEdit(true);
               }}
             />
             <Modal
               aria-labelledby="transition-modal-title"
               aria-describedby="transition-modal-description"
-              open={open}
-              onClose={() => setOpen(false)}
+              open={openEdit}
+              onClose={() => setOpenEdit(false)}
               closeAfterTransition
               slots={{ backdrop: Backdrop }}
               slotProps={{
@@ -70,8 +111,165 @@ export default function EventCard(props) {
                 },
               }}
             >
-              <Fade in={open}>
-                <Box className={styles.modal}>
+              <Fade in={openEdit}>
+                <Box className={styles.editModal}>
+                  <div className={styles.tabContainer}>
+                    {/* <h4>React-Bootstrap Tab Component</h4> */}
+                    <Tabs defaultActiveKey="first" className={styles.tabs}>
+                      <Tab
+                        eventKey="first"
+                        title="تنظیمات پایه"
+                        className={styles.tabContent}
+                      >
+                        <form>
+                          <div className={styles.fields}>
+                            <div className={styles.field}>
+                              <label htmlFor="title">عنوان رویداد</label>
+                              <input
+                                id="title"
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                              />
+                            </div>
+                          </div>
+
+                          <div className={styles.fields}>
+                            <div className={styles.field}>
+                              <label htmlFor="type">نوع رویداد</label>
+                              <select
+                                id="type"
+                                value={type}
+                                onChange={(e) => setType(e.target.value)}
+                              >
+                                <option>یک به یک</option>
+                                <option>گروهی</option>
+                              </select>
+                            </div>
+                            <div
+                              className={styles.field}
+                              style={{ margin: "0 0 1rem 0" }}
+                            >
+                              <label htmlFor="link">لینک رویداد</label>
+                              <div className={styles.inputGroup}>
+                                <div className={styles.mutedText}>
+                                  {user.domain}/
+                                </div>
+                                <input
+                                  type="text"
+                                  id="link"
+                                  required
+                                  value={domain}
+                                  onChange={(e) => setDomain(e.target.value)}
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            className={styles.fields}
+                            style={{ justifyContent: "flex-start" }}
+                          >
+                            <div className={styles.field}>
+                              <label htmlFor="location">
+                                محل برگزاری رویداد
+                              </label>
+                              <select
+                                id="location"
+                                value={location}
+                                onChange={(e) => setLocation(e.target.value)}
+                              >
+                                <option>محل برگزاری را انتخاب کنید</option>
+                                <option>حضوری</option>
+                                <option>Google meet</option>
+                                <option>Skype</option>
+                                <option>Whatsapp</option>
+                              </select>
+                            </div>
+                            {location === undefined ||
+                            location === "محل برگزاری را انتخاب کنید" ? (
+                              <></>
+                            ) : (
+                              <div
+                                className={styles.field}
+                                style={{ margin: "0 0 1rem 0" }}
+                              >
+                                <label htmlFor="title">
+                                  {location === undefined && "طریقه ارتباط"}
+                                  {location === "حضوری" && "آدرس"}
+                                  {location === "Google meet" && "لینک"}
+                                  {location === "Skype" && "شماره تلفن"}
+                                  {location === "Whatsapp" && "شماره تلفن"}
+                                </label>
+                                <input
+                                  id="title"
+                                  type="text"
+                                  value={address}
+                                  onChange={(e) => setAddress(e.target.value)}
+                                />
+                              </div>
+                            )}
+                          </div>
+
+                          <div className={styles.fields}>
+                            <div
+                              className={styles.field}
+                              style={{ width: "100%", margin: "0 0 1rem 0" }}
+                            >
+                              <div>
+                                <label htmlFor="message">پیام مربوطه</label>
+                                <textarea
+                                  id="message"
+                                  // rows="2"
+                                  placeholder="پیام مربوط به رویداد را بنویسید..."
+                                  value={message}
+                                  onChange={(e) => setMessage(e.target.value)}
+                                ></textarea>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className={styles.fields}>
+                            <div className={styles.submitBtn}>
+                              <button onClick={editEvent}>ذخیره تغییرات</button>
+                            </div>
+                          </div>
+                        </form>
+                      </Tab>
+                      <Tab
+                        eventKey="second"
+                        title="زمان های آزاد"
+                        className={styles.tabContent}
+                      >
+                        Hii, I am 2nd tab content
+                      </Tab>
+                    </Tabs>
+                  </div>
+                </Box>
+              </Fade>
+            </Modal>
+            {/* <FontAwesomeIcon icon={faEllipsisVertical} /> */}
+            <FontAwesomeIcon
+              icon={faTrash}
+              onClick={() => {
+                setOpenDelete(true);
+              }}
+            />
+            <Modal
+              aria-labelledby="transition-modal-title"
+              aria-describedby="transition-modal-description"
+              open={openDelete}
+              onClose={() => setOpenDelete(false)}
+              closeAfterTransition
+              slots={{ backdrop: Backdrop }}
+              slotProps={{
+                backdrop: {
+                  timeout: 500,
+                },
+              }}
+            >
+              <Fade in={openDelete}>
+                <Box className={styles.deleteModal}>
                   <div className={styles.modalText}>
                     <p>آیا برای حذف کردن اطمینان دارید؟</p>
                   </div>
@@ -80,14 +278,14 @@ export default function EventCard(props) {
                       className={styles.btn}
                       onClick={() => {
                         props.deleteEvent(props.item.id, props.index);
-                        setOpen(false);
+                        setOpenDelete(false);
                       }}
                     >
                       بله
                     </Button>
                     <Button
                       className={styles.btn}
-                      onClick={() => setOpen(false)}
+                      onClick={() => setOpenDelete(false)}
                     >
                       خیر
                     </Button>

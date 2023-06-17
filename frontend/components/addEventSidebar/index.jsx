@@ -11,9 +11,8 @@ import styles from "./styles.module.scss";
 import { useRecoilState } from "recoil";
 import { current_form } from "@/atoms";
 
-export default function SidebarMenu() {
-  const [selected, setSelected] = useRecoilState(current_form)
-
+export default function SidebarMenu(props) {
+  const [selected, setSelected] = useRecoilState(current_form);
 
   return (
     <>
@@ -21,7 +20,13 @@ export default function SidebarMenu() {
         <div className={styles.responsiveMenu}>
           <ul className={styles.menu}>
             <li className={styles.menuItem}>
-              <a href="#" className={`${selected == 'تنظیمات پایه' ? styles.active : null} ${styles.itemLink}`} onClick={() => setSelected('تنظیمات پایه')}>
+              <a
+                href="#"
+                className={`${props.step == 1 ? styles.active : null} ${
+                  styles.itemLink
+                }`}
+                onClick={() => setSelected("تنظیمات پایه")}
+              >
                 <FontAwesomeIcon
                   icon={faListCheck}
                   className={styles.itemIcon}
@@ -30,19 +35,31 @@ export default function SidebarMenu() {
               </a>
             </li>
             <li className={styles.menuItem}>
-              <a href="#" className={styles.itemLink} onClick={() => setSelected('زمان های آزاد')}>
+              <a
+                href="#"
+                className={styles.itemLink}
+                // onClick={() => setSelected('زمان های آزاد')}
+              >
                 <FontAwesomeIcon icon={faClock} className={styles.itemIcon} />
                 <span className={styles.itemText}>زمان های آزاد</span>
               </a>
             </li>
             <li className={styles.menuItem}>
-              <a href="#" className={styles.itemLink} onClick={() => setSelected('تنظیمات پیشرفته')}>
+              <a
+                href="#"
+                className={styles.itemLink}
+                // onClick={() => setSelected('تنظیمات پیشرفته')}
+              >
                 <FontAwesomeIcon icon={faGears} className={styles.itemIcon} />
                 <span className={styles.itemText}>تنظیمات پیشرفته</span>
               </a>
             </li>
             <li className={styles.menuItem}>
-              <a href="#" className={styles.itemLink} onClick={() => setSelected('پرسش از مهمان')}>
+              <a
+                href="#"
+                className={styles.itemLink}
+                // onClick={() => setSelected('پرسش از مهمان')}
+              >
                 <FontAwesomeIcon
                   icon={faQuestion}
                   className={styles.itemIcon}
@@ -51,7 +68,11 @@ export default function SidebarMenu() {
               </a>
             </li>
             <li className={styles.menuItem}>
-              <a href="#" className={styles.itemLink} onClick={() => setSelected('اطلاع رسانی ها')}>
+              <a
+                href="#"
+                className={styles.itemLink}
+                // onClick={() => setSelected('اطلاع رسانی ها')}
+              >
                 <FontAwesomeIcon icon={faBell} className={styles.itemIcon} />
                 <span className={styles.itemText}>اطلاع رسانی ها</span>
               </a>
@@ -60,12 +81,17 @@ export default function SidebarMenu() {
         </div>
       </div>
 
-      
       <div className={styles.sidebarContainer}>
         <div className={styles.sidebarMenu}>
           <ul className={styles.menu}>
             <li className={styles.menuItem}>
-              <a href="#" className={`${selected == 'تنظیمات پایه' ? styles.active : null} ${styles.itemLink}`} onClick={() => setSelected('تنظیمات پایه')}>
+              <a
+                href="#"
+                className={`${props.step == 1 ? styles.active : null} ${
+                  styles.itemLink
+                }`}
+                // onClick={() => setSelected('تنظیمات پایه')}
+              >
                 <FontAwesomeIcon
                   icon={faListCheck}
                   className={styles.itemIcon}
@@ -74,19 +100,37 @@ export default function SidebarMenu() {
               </a>
             </li>
             <li className={styles.menuItem}>
-              <a href="#" className={`${selected == 'زمان های آزاد' ? styles.active : null} ${styles.itemLink}`} onClick={() => setSelected('زمان های آزاد')}>
+              <a
+                href="#"
+                className={`${props.step == 2 ? styles.active : null} ${
+                  styles.itemLink
+                }`}
+                // onClick={() => setSelected('زمان های آزاد')}
+              >
                 <FontAwesomeIcon icon={faClock} className={styles.itemIcon} />
                 <span className={styles.itemText}>زمان های آزاد</span>
               </a>
             </li>
             <li className={styles.menuItem}>
-              <a href="#" className={`${selected == 'تنظیمات پیشرفته' ? styles.active : null} ${styles.itemLink}`} onClick={() => setSelected('تنظیمات پیشرفته')}>
+              <a
+                href="#"
+                className={`${props.step == 3 ? styles.active : null} ${
+                  styles.itemLink
+                }`}
+                // onClick={() => setSelected('تنظیمات پیشرفته')}
+              >
                 <FontAwesomeIcon icon={faGears} className={styles.itemIcon} />
                 <span className={styles.itemText}>تنظیمات پیشرفته</span>
               </a>
             </li>
             <li className={styles.menuItem}>
-              <a href="#" className={`${selected == 'پرسش از مهمان' ? styles.active : null} ${styles.itemLink}`} onClick={() => setSelected('پرسش از مهمان')}>
+              <a
+                href="#"
+                className={`${props.step == 4 ? styles.active : null} ${
+                  styles.itemLink
+                }`}
+                // onClick={() => setSelected('پرسش از مهمان')}
+              >
                 <FontAwesomeIcon
                   icon={faQuestion}
                   className={styles.itemIcon}
@@ -95,7 +139,13 @@ export default function SidebarMenu() {
               </a>
             </li>
             <li className={styles.menuItem}>
-              <a href="#" className={`${selected == 'اطلاع رسانی ها' ? styles.active : null} ${styles.itemLink}`} onClick={() => setSelected('اطلاع رسانی ها')}>
+              <a
+                href="#"
+                className={`${props.step == 4 ? styles.active : null} ${
+                  styles.itemLink
+                }`}
+                // onClick={() => setSelected('اطلاع رسانی ها')}
+              >
                 <FontAwesomeIcon icon={faBell} className={styles.itemIcon} />
                 <span className={styles.itemText}>اطلاع رسانی ها</span>
               </a>
