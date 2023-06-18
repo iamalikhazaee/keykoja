@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Card, Button } from "react-bootstrap";
+import { Col, Card, Button, Row } from "react-bootstrap";
 import Switch from "@mui/material/Switch";
 import { alpha, styled } from "@mui/material/styles";
 import { green } from "@mui/material/colors";
@@ -9,6 +9,7 @@ import {
   faEllipsisVertical,
   faCopy,
   faTrash,
+  faAdd
 } from "@fortawesome/free-solid-svg-icons";
 // import { useRecoilValue } from "recoil";
 // import { current_user } from "@/atoms";
@@ -20,7 +21,9 @@ import Fade from "@mui/material/Fade";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import axios from "axios";
-import jwt from 'jwt-decode';
+import jwt from "jwt-decode";
+import TimePicker from "../TimePicker";
+import Calender from "../Calender/Calender.component";
 
 const PinkSwitch = styled(Switch)(({ theme }) => ({
   "& .MuiSwitch-switchBase.Mui-checked": {
@@ -43,13 +46,28 @@ export default function EventCard(props) {
   const [address, setAddress] = useState(props.item.address);
   const [message, setMessage] = useState(props.item.message);
   const [domain, setDomain] = useState(props.item.event_domain);
-  const [userToken, setUserToken] = useState()
+  const [userToken, setUserToken] = useState();
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [dates, setDates] = useState([]);
+  const [times, setTimes] = useState([]);
 
   useEffect(() => {
-    setUserToken(localStorage.getItem("token"))
-}, [])
+    setUserToken(localStorage.getItem("token"));
+    const domain = JSON.parse(localStorage.getItem("userDetails")).domain;
+    axios
+      .get(`http://127.0.0.1:8000/${domain}/${props.item.event_domain}/time`)
+      .then((res) => {
+        const d = [];
+        const t = [];
+        for (let i = 0; i < res.data.length; i++) {
+          d.push(res.data[i].date);
+          t.push(res.data[i]);
+        }
+        setDates(d);
+        setTimes(t);
+      });
+  }, []);
 
   const openEventLink = (url) => {
     window.open(url, "_blank", "noreferrer");
@@ -57,7 +75,7 @@ export default function EventCard(props) {
 
   const editEvent = (e) => {
     // e.preventDefault();
-    const token = jwt(JSON.parse(userToken))
+    const token = jwt(JSON.parse(userToken));
     // console.log(message);
     axios
       .put(
@@ -241,7 +259,76 @@ export default function EventCard(props) {
                         title="زمان های آزاد"
                         className={styles.tabContent}
                       >
-                        Hii, I am 2nd tab content
+                        {/* <CustomizedDatePicker setDate={setDate} date={date} /> */}
+                        <Row>
+                          <Col lg={7}>
+                            <Calender
+                              dates={dates}
+                              style={{ maxHeight: "300px" }}
+                            />
+                          </Col>
+                          <Col lg={5} md={6} className={styles.timeSection}>
+                            <div className={styles.times}>
+                              <div className={styles.timeContainer}>
+                                <label htmlFor="time">ساعت شروع</label>
+                                <div className={styles.timePicker}>
+                                  <TimePicker
+                                    // setHour={setStartHour}
+                                    // setMin={setStartMin}
+                                    // hour={startHour}
+                                    // min={startMin}
+                                  />
+                                </div>
+                              </div>
+
+                              <div className={styles.timeContainer}>
+                                <label htmlFor="time">ساعت پایان</label>
+                                <div className={styles.timePicker}>
+                                  <TimePicker
+                                    // setHour={setEndHour}
+                                    // setMin={setEndMin}
+                                    // hour={endHour}
+                                    // min={endMin}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className={styles.addBtn}>
+                              <button 
+                              // onClick={handleAddTime}
+                              >
+                                افزودن
+                                <FontAwesomeIcon icon={faAdd} />
+                              </button>
+                            </div>
+                          </Col>
+                          <table className={styles.timeTable}>
+                            <thead>
+                              <tr>
+                                <th>تاریخ</th>
+                                <th>ساعت شروع</th>
+                                <th>ساعت پایان</th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {times.map((item, index) => (
+                                <tr key={index}>
+                                  <td>{item.date}</td>
+                                  <td>{item.start_hour}</td>
+                                  <td>{item.end_hour}</td>
+                                  <td>
+                                    <FontAwesomeIcon
+                                      icon={faTrash}
+                                      id={styles.trashIcon}
+                                    />
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </Row>
                       </Tab>
                     </Tabs>
                   </div>
