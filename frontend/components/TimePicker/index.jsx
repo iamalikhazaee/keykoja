@@ -6,8 +6,8 @@ import { useEffect } from "react";
 
 export default function TimePicker(props) {
   const [showTimes, setShowTimes] = useState(false);
-  const [hour, setHour] = useState(toPersianNum("00"));
-  const [min, setMin] = useState(toPersianNum("00"));
+  // const [hour, setHour] = useState(toPersianNum("00"));
+  // const [min, setMin] = useState(toPersianNum("00"));
   // const [time, setTime] = useState(toPersianNum("00:00"));
   let timeRef = useRef();
 
