@@ -33,11 +33,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         user = ProfileUser.objects.create_user(**validated_data)
         return user
 
-class GuestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Guest
-        fields = "__all__"
-
 class NewEventSerializer(serializers.ModelSerializer):
 
      class Meta:
@@ -49,3 +44,10 @@ class EventTimeSerializer(serializers.ModelSerializer):
      class Meta:
         model = Event_time
         fields = ["id", 'profile', 'event', 'date', 'start_hour', 'end_hour', 'is_enable']
+
+class GuestSerializer(serializers.ModelSerializer):
+    event = NewEventSerializer()
+    time = EventTimeSerializer()
+    class Meta:
+        model = Guest
+        fields = "__all__"
