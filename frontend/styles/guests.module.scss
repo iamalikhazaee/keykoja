@@ -2,10 +2,81 @@
     direction: rtl !important;
     padding-top: 3%;
 
+    h6 {
+        font-size: 13px;
+        padding: 1rem;
+        margin: 0;
+        background-color: #CAD2c5;
+        color: #2f3e46;
+        border-radius: 12px;
+        text-align: center;
+        line-height: 1.8;
+    }
+
     .eventContainer {
+        max-height: 400px;
+        overflow-y: scroll;
         padding: 2rem 1rem;
         margin: 2rem;
-        box-shadow: 0 0 4px 0 rgba(0,0,0,0.1),0 0 3px 0 rgba(0,0,0,0.06);
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1), 0 0 3px 0 rgba(0, 0, 0, 0.06);
         border-radius: 12px;
+
+        .header {
+            width: 100%;
+            border-bottom: 1px solid #52796F;
+            padding-bottom: 1rem;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.6);
+            position: relative;
+
+            .icon {
+                position: absolute;
+                top: -33px;
+                right: -16px;
+                font-size: 20px;
+                transform: rotate(270deg);
+                color: #52796F;
+            }
+        }
+
+        .guests {
+            margin-top: 1rem;
+            padding: 1rem;
+            font-size: 13px;
+
+            span {
+                color: rgba(0, 0, 0, 0.6);
+            }
+
+            .timeTable {
+                width: 100%;
+                padding: 1rem;
+                border-radius: 12px;
+
+                th {
+                    width: 50%;
+                    padding: 1.5rem 0;
+                    text-align: center;
+                    font-size: 13px;
+                    font-weight: 600;
+                    border-bottom: 1px solid lightgray;
+                }
+
+                td {
+                    padding: 1.5rem 0;
+                    text-align: center;
+                    font-size: 12px;
+                    border-bottom: 1px solid lightgray;
+
+                }
+                .noGuestMsg {
+                    width: 100% !important;
+                    margin: 1rem 2rem;
+                    color: rgba(0, 0, 0, 0.6);
+                    text-align: right;
+                }
+            }
+        }
     }
 }

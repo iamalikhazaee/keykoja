@@ -46,7 +46,7 @@ export default function Navbar() {
     localStorage.removeItem("token");
     Cookies.remove("auth");
     Cookies.remove("token");
-    router.push("http://localhost:3000/");
+    // router.push("http://localhost:3000/");
   };
 
   // const openEventLink = (url) => {
@@ -98,7 +98,7 @@ export default function Navbar() {
                   </a>
                 </li>
                 <li onClick={handleLogout}>
-                  <a href="" className={styles.links}>
+                  <a href="http://localhost:3000" className={styles.links}>
                     <FontAwesomeIcon
                       icon={faSignOutAlt}
                       className={styles.icon}

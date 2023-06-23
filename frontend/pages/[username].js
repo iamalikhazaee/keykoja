@@ -7,8 +7,8 @@ import { useState } from 'react'
 import axios from 'axios'
 import { Col, Container, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import styles from '@/styles/userDomain.module.scss'
 import { faTag } from '@fortawesome/free-solid-svg-icons'
+import styles from '@/styles/userDomain.module.scss'
 
 export default function EventsAndGuests() {
     // const token = Cookies.get('token')

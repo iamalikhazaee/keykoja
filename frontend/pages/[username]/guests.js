@@ -5,6 +5,8 @@ import Navbar from '@/components/Navbar'
 import { Container, Row } from 'react-bootstrap'
 import Cookies from 'js-cookie'
 import styles from '@/styles/guests.module.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTag } from '@fortawesome/free-solid-svg-icons'
 
 export default function guests() {
     const router = useRouter()
@@ -30,8 +32,8 @@ export default function guests() {
     }, [])
 
     const returnGuests = (id) => {
-        for(let i=0; i<guests.length; i++) {
-            if(guests[i].event === id) {
+        for (let i = 0; i < guests.length; i++) {
+            if (guests[i].event === id) {
                 return (<h1>ok</h1>)
             }
         }
@@ -45,22 +47,31 @@ export default function guests() {
                 {events.map((event, i) => (
                     <Row key={i} className={styles.eventContainer}>
                         <div className={styles.header}>
-                            <div>
-                                <span>{event.name}</span>
-                            </div>
+                            <FontAwesomeIcon icon={faTag} className={styles.icon} />
+                            <span>{event.name}</span>
                         </div>
                         <div className={styles.guests}>
-                            <h6>مهمانان این رویداد :</h6>
-                            {guests.map((guest, index) => (
-                                guest.event === event.id ? 
-                                (
-                                    <div key={index}>
-                                        <span>{guest.name}</span>
-                                        <span>{guest.email}</span>
-                                    </div>
-                                ) 
-                                : (<div key={index}></div>)
-                            ))}
+                            <p>مهمانان این رویداد :</p>
+                            <table className={styles.timeTable}>
+                                <thead>
+                                    <tr>
+                                        <th>نام و نام خانوادگی</th>
+                                        <th>ایمیل</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {guests.map((guest, index) => (
+                                        guest.event === event.id ?
+                                            (
+                                                <tr key={index}>
+                                                    <td>{guest.name}</td>
+                                                    <td>{guest.email}</td>
+                                                </tr>
+                                            )
+                                            : (<tr key={index}><div className={styles.noGuestMsg}>مهمانی برای این رویداد ثبت نشده است.</div></tr>)
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     </Row>
                 ))}
