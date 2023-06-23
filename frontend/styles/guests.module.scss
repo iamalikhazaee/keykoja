@@ -14,7 +14,7 @@
     }
 
     .eventContainer {
-        max-height: 400px;
+        max-height: 350px;
         overflow-y: scroll;
         padding: 2rem 1rem;
         margin: 2rem;
@@ -23,7 +23,7 @@
 
         .header {
             width: 100%;
-            border-bottom: 1px solid #52796F;
+            border-bottom: 2px solid #52796F;
             padding-bottom: 1rem;
             font-size: 14px;
             font-weight: 600;
@@ -49,32 +49,25 @@
                 color: rgba(0, 0, 0, 0.6);
             }
 
-            .timeTable {
-                width: 100%;
-                padding: 1rem;
-                border-radius: 12px;
+            .guestsHeader {
+                border-bottom: 2px solid #CAD2c5;
+                padding: 1rem 0;
+                margin-bottom: 1rem;
 
-                th {
-                    width: 50%;
-                    padding: 1.5rem 0;
+                .colItem {
                     text-align: center;
-                    font-size: 13px;
-                    font-weight: 600;
-                    border-bottom: 1px solid lightgray;
                 }
+            }
+            .guestRow {
+                border-bottom: 1px solid lightgray;
+                padding-bottom: 1rem;
+                margin: 1rem 0;
 
-                td {
-                    padding: 1.5rem 0;
+                .guestName {
                     text-align: center;
-                    font-size: 12px;
-                    border-bottom: 1px solid lightgray;
-
                 }
-                .noGuestMsg {
-                    width: 100% !important;
-                    margin: 1rem 2rem;
-                    color: rgba(0, 0, 0, 0.6);
-                    text-align: right;
+                .guestEmail {
+                    text-align: center;
                 }
             }
         }
