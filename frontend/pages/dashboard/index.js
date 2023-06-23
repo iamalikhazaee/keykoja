@@ -3,31 +3,28 @@ import EventModal from "@/components/addEventModal";
 import Navbar from "@/components/Navbar";
 import styles from '@/styles/dashboard.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAdd, faPen, faEllipsisVertical, faCopy } from "@fortawesome/free-solid-svg-icons";
+import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { Col, Container, Row, Card, Button } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import axios from "axios";
-import Switch from '@mui/material/Switch';
-import { alpha, styled } from '@mui/material/styles';
-import { pink } from '@mui/material/colors';
 // import { useRecoilValue } from "recoil";
 // import { current_user } from "@/atoms";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import EventCard from "@/components/EventCard";
 
-const PinkSwitch = styled(Switch)(({ theme }) => ({
-    '& .MuiSwitch-switchBase.Mui-checked': {
-        color: pink[300],
-        '&:hover': {
-            backgroundColor: alpha(pink[600], theme.palette.action.hoverOpacity),
-        },
-    },
-    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-        backgroundColor: pink[300],
-    },
-}));
+// const PinkSwitch = styled(Switch)(({ theme }) => ({
+//     '& .MuiSwitch-switchBase.Mui-checked': {
+//         color: pink[300],
+//         '&:hover': {
+//             backgroundColor: alpha(pink[600], theme.palette.action.hoverOpacity),
+//         },
+//     },
+//     '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+//         backgroundColor: pink[300],
+//     },
+// }));
 
 export default function Dashboard() {
     const [showModal, setShowModal] = useState(false);
@@ -91,7 +88,7 @@ export default function Dashboard() {
             <Navbar />
             <nav className={styles.secondNavbar}>
                 <div className={styles.navbarContainer}>
-                    <DropdownButton
+                    {/* <DropdownButton
                         className={styles.eventTypeBtn}
                         // as={ButtonGroup}
                         id={`dropdown-button-drop-end`}
@@ -101,7 +98,7 @@ export default function Dashboard() {
                     >
                         <Dropdown.Item eventKey="1" className={styles.eventType}>یک به یک</Dropdown.Item>
                         <Dropdown.Item eventKey="2" className={styles.eventType}>گروهی</Dropdown.Item>
-                    </DropdownButton>
+                    </DropdownButton> */}
                     <div className={styles.addEvent}>
                         <button
                             onClick={() => router.push({ pathname: '/dashboard/newEvent/' })}>

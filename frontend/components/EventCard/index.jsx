@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Col, Card, Button } from "react-bootstrap";
+import { Col, Card, Button, Row } from "react-bootstrap";
 import Switch from "@mui/material/Switch";
 import { alpha, styled } from "@mui/material/styles";
 import { green } from "@mui/material/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPen,
-  faEllipsisVertical,
   faCopy,
   faTrash,
+  faAdd,
 } from "@fortawesome/free-solid-svg-icons";
 // import { useRecoilValue } from "recoil";
 // import { current_user } from "@/atoms";
@@ -20,7 +20,11 @@ import Fade from "@mui/material/Fade";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import axios from "axios";
-import jwt from 'jwt-decode';
+import jwt from "jwt-decode";
+import TimePicker from "../TimePicker";
+import Calender from "../Calender/Calender.component";
+import CustomizedDatePicker from "../DatePicker";
+import { toPersianNum } from "../Calender/utils";
 
 const PinkSwitch = styled(Switch)(({ theme }) => ({
   "& .MuiSwitch-switchBase.Mui-checked": {
@@ -43,13 +47,32 @@ export default function EventCard(props) {
   const [address, setAddress] = useState(props.item.address);
   const [message, setMessage] = useState(props.item.message);
   const [domain, setDomain] = useState(props.item.event_domain);
-  const [userToken, setUserToken] = useState()
+  const [userToken, setUserToken] = useState();
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [date, setDate] = useState([]);
+  const [times, setTimes] = useState([]);
+  const [startHour, setStartHour] = useState(toPersianNum("00"));
+  const [startMin, setStartMin] = useState(toPersianNum("00"));
+  const [endHour, setEndHour] = useState(toPersianNum("00"));
+  const [endMin, setEndMin] = useState(toPersianNum("00"));
 
   useEffect(() => {
-    setUserToken(localStorage.getItem("token"))
-}, [])
+    setUserToken(localStorage.getItem("token"));
+    const domain = JSON.parse(localStorage.getItem("userDetails")).domain;
+    axios
+      .get(`http://127.0.0.1:8000/${domain}/${props.item.event_domain}/time`)
+      .then((res) => {
+        const d = [];
+        const t = [];
+        for (let i = 0; i < res.data.length; i++) {
+          d.push(res.data[i].date);
+          t.push(res.data[i]);
+        }
+        // setDates(d);
+        setTimes(t);
+      });
+  }, []);
 
   const openEventLink = (url) => {
     window.open(url, "_blank", "noreferrer");
@@ -57,7 +80,7 @@ export default function EventCard(props) {
 
   const editEvent = (e) => {
     // e.preventDefault();
-    const token = jwt(JSON.parse(userToken))
+    const token = jwt(JSON.parse(userToken));
     // console.log(message);
     axios
       .put(
@@ -80,6 +103,35 @@ export default function EventCard(props) {
       .then((res) => {
         console.log(res.data);
       });
+  };
+
+  const deleteTime = (index) => {
+    // const domain = JSON.parse(localStorage.getItem("userDetails")).domain;
+    // axios.delete(`http://127.0.0.1:8000/${domain}/${props.item.event_domain}/time/${id}`)
+    // .then((res) => {
+    //   console.log(res.data)
+    // })
+    var copyArray = [...times];
+    copyArray.splice(index, 1);
+    setTimes(copyArray);
+  };
+
+  const handleAddTime = () => {
+    if (!date) {
+      alert("لطفا تاریخ مورد نظر خود را انتخاب نمایید.");
+    } else {
+      const newTime = {
+        date: toPersianNum(date.date),
+        start_hour: toPersianNum(`${startHour}:${startMin}`),
+        end_hour: toPersianNum(`${endHour}:${endMin}`),
+      };
+      setTimes((v) => [...v, newTime]);
+      setDate(undefined);
+      setStartHour(toPersianNum("00"));
+      setStartMin(toPersianNum("00"));
+      setEndHour(toPersianNum("00"));
+      setEndMin(toPersianNum("00"));
+    }
   };
 
   return (
@@ -241,7 +293,87 @@ export default function EventCard(props) {
                         title="زمان های آزاد"
                         className={styles.tabContent}
                       >
-                        Hii, I am 2nd tab content
+                        {/* <CustomizedDatePicker setDate={setDate} date={date} /> */}
+                        {/* <Row>
+                          <p>در این بخش شما میتوانید زمان هایی که ثبت کرده اید را ویرایش کنید. </p>
+                          <p>اگر هیچ زمانی ثبت نکرده اید میتوانید در اینجا اضافه کنید و یا میتوانید زمان های ثبت شده ای که نیاز به ویرایش دارند را حذف کرده و مجدد تایم مورد نظر خودتان را اضافه کنید.</p>
+                        </Row> */}
+                        <Row>
+                          <Col col={12} style={{maxHeight: '300px', overflow: 'scroll', marginBottom: '2rem'}}>
+                            <table className={styles.timeTable}>
+                              <thead>
+                                <tr>
+                                  <th>تاریخ</th>
+                                  <th>ساعت شروع</th>
+                                  <th>ساعت پایان</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {times.map((item, index) => (
+                                  <tr key={index}>
+                                    <td>{toPersianNum(item.date)}</td>
+                                    <td>{toPersianNum(item.start_hour)}</td>
+                                    <td>{toPersianNum(item.end_hour)}</td>
+                                    <td>
+                                      <FontAwesomeIcon
+                                        icon={faTrash}
+                                        id={styles.trashIcon}
+                                        onClick={() => deleteTime(index)}
+                                      />
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col lg={7}>
+                            {/* <Calender
+                              dates={dates}
+                              style={{ maxHeight: "300px" }}
+                            /> */}
+                            <CustomizedDatePicker
+                              setDate={setDate}
+                              date={date}
+                            />
+                          </Col>
+                          <Col lg={5} md={6} className={styles.timeSection}>
+                            <div className={styles.times}>
+                              <div className={styles.timeContainer}>
+                                <label htmlFor="time">ساعت شروع</label>
+                                <div className={styles.timePicker}>
+                                  <TimePicker
+                                    setHour={setStartHour}
+                                    setMin={setStartMin}
+                                    hour={startHour}
+                                    min={startMin}
+                                  />
+                                </div>
+                              </div>
+
+                              <div className={styles.timeContainer}>
+                                <label htmlFor="time">ساعت پایان</label>
+                                <div className={styles.timePicker}>
+                                  <TimePicker
+                                    setHour={setEndHour}
+                                    setMin={setEndMin}
+                                    hour={endHour}
+                                    min={endMin}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className={styles.addBtn}>
+                              <button onClick={handleAddTime}>
+                                افزودن
+                                <FontAwesomeIcon icon={faAdd} />
+                              </button>
+                            </div>
+                          </Col>
+                        </Row>
                       </Tab>
                     </Tabs>
                   </div>

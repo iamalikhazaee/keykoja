@@ -10,10 +10,13 @@ import {
   faInfoCircle,
   faSignOutAlt,
   faCalendarAlt,
+  faUserCheck,
+  faUserTag,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./styles.module.scss";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import Link from "next/link";
 
 export default function Navbar() {
   const [userMenu, setUserMenu] = useState(false);
@@ -46,6 +49,10 @@ export default function Navbar() {
     router.push("http://localhost:3000/");
   };
 
+  const openEventLink = (url) => {
+    window.open(url, "_blank", "noreferrer");
+  };
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarContainer}>
@@ -70,10 +77,7 @@ export default function Navbar() {
             />
           </button>
           {userMenu && (
-            <div
-              className={styles.menu}
-              id={styles.userDropdown}
-            >
+            <div className={styles.menu} id={styles.userDropdown}>
               <div className={styles.menuHeader}>
                 <span>
                   {userDetails.first_name} {userDetails.last_name}
@@ -91,48 +95,6 @@ export default function Navbar() {
                       className={styles.icon}
                     />
                     تنظیمات حساب
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className={styles.links}>
-                    <FontAwesomeIcon
-                      icon={faCalendar}
-                      className={styles.icon}
-                    />
-                    اتصال تقویم ها
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className={styles.links}>
-                    <FontAwesomeIcon
-                      icon={faPuzzlePiece}
-                      className={styles.icon}
-                    />
-                    یکپارچه سازی
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className={styles.links}>
-                    <FontAwesomeIcon
-                      icon={faShareAlt}
-                      className={styles.icon}
-                    />
-                    هم رسانی لینک
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className={styles.links}>
-                    <FontAwesomeIcon icon={faGem} className={styles.icon} />
-                    مدیریت اشتراک
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className={styles.links}>
-                    <FontAwesomeIcon
-                      icon={faInfoCircle}
-                      className={styles.icon}
-                    />
-                    راهنما
                   </a>
                 </li>
                 <li onClick={handleLogout}>
@@ -178,15 +140,26 @@ export default function Navbar() {
         >
           <ul className={styles.menu}>
             <li>
-              <a href="#" aria-current="page">
-                رویدادهای ثبت شده
+              <a
+                href={`/${userDetails.domain}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faUserCheck} />
+                جلسات هماهنگ شده
               </a>
             </li>
             <li>
-              <a href="#">الگوهای زمانی</a>
+              <a href={`/${userDetails.domain}`} target="_blank">
+                <FontAwesomeIcon icon={faUserTag} />
+                دامنه شما
+              </a>
             </li>
             <li>
-              <a href="#">گردش کار</a>
+              <a href="#" target="_blank">
+                <FontAwesomeIcon icon={faInfoCircle} />
+                راهنما
+              </a>
             </li>
           </ul>
         </div>

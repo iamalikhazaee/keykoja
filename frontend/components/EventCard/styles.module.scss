@@ -6,7 +6,6 @@
 
     .card {
 
-        // border-radius: 15px;
         .cardHeader {
             width: 100%;
             display: flex;
@@ -155,7 +154,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 700px;
-    // height: 200px;
+    max-height: 600px;
+    overflow-y: scroll;
     background-color: #fff;
     border: 1px solid lightgray;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
@@ -176,10 +176,11 @@
         .tabs {
             width: 100%;
             padding: 0;
+            font-size: 13px;
         }
 
         .tabContent {
-            margin: 1rem 0 !important;
+            margin-top: 1rem !important;
 
             .fields {
                 display: flex;
@@ -205,7 +206,6 @@
 
                     input,
                     textarea {
-                        // background-color: rgb(243 244 246);
                         border: 1px solid rgb(209 213 219);
                         color: rgb(17 24 39);
                         font-size: 12px;
@@ -223,7 +223,6 @@
                     }
 
                     select {
-                        // background-color: rgb(243 244 246);
                         border: 1px solid rgb(209 213 219);
                         color: rgba(17, 24, 39, .7);
                         font-size: 13px;
@@ -275,7 +274,6 @@
                     button {
                         padding: 1rem;
                         font-size: 10px !important;
-                        // font-weight: 600;
                         border-radius: 12px;
                         background-color: #fff;
                         color: #709680;
@@ -321,6 +319,114 @@
                                 color: #fff;
                             }
                         }
+                    }
+                }
+            }
+
+            .timeTable {
+                width: 100%;
+                padding: 1rem;
+                border-radius: 12px;
+
+                th {
+                    padding: 1.5rem 0;
+                    text-align: center;
+                    font-size: 13px;
+                    font-weight: 600;
+                    border-bottom: 1px solid lightgray;
+                }
+
+                td {
+                    padding: 1.5rem 0;
+                    text-align: center;
+                    font-size: 12px;
+                    border-bottom: 1px solid lightgray;
+
+                    #trashIcon {
+                        cursor: pointer;
+                        color: red;
+                        font-size: 13px;
+                    }
+
+                    #editIcon {
+                        cursor: pointer;
+                        color: #52796F;
+                    }
+                }
+            }
+
+            .timeSection {
+                display: flex;
+                flex-direction: column;
+                // margin-right: 20px;
+                padding: 0 20px;
+
+                @media screen and (max-width:425px) {
+                    padding: 0 10px;
+                }
+
+                .times {
+                    display: flex;
+                    flex-direction: column;
+
+                    .timeContainer {
+                        display: flex;
+                        flex-direction: column;
+                        margin-bottom: 30px;
+
+                        label {
+                            font-weight: 600;
+                            margin-bottom: .5rem;
+                            font-size: 14px;
+                        }
+
+                        .timePicker {
+                            position: relative;
+                            font-size: 13px;
+                            padding-right: 10px;
+
+                            input {
+                                padding: 10px;
+                                border: 1px solid lightgray;
+                                border-radius: 10px;
+                                outline: none;
+
+                                &:focus {
+                                    outline: none !important;
+                                    border: 1px solid #709680 !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .addBtn {
+                margin-top: 1.5rem;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                // padding: 1rem 0;
+
+                button {
+                    padding: .5rem;
+                    border: none;
+                    font-size: 10px;
+                    border-radius: 10px;
+                    background-color: #fff;
+                    color: #709680;
+                    display: flex;
+                    align-items: center;
+                    transition: ease-in .2s;
+                    border: 1px solid #709680;
+
+                    svg {
+                        margin-right: .2rem;
+                    }
+
+                    &:hover {
+                        background-color: #709680;
+                        color: #fff;
                     }
                 }
             }
