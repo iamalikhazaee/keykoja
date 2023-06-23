@@ -6,7 +6,6 @@ import { green } from "@mui/material/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPen,
-  faEllipsisVertical,
   faCopy,
   faTrash,
   faAdd,

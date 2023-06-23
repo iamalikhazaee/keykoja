@@ -6,7 +6,6 @@
 
     .card {
 
-        // border-radius: 15px;
         .cardHeader {
             width: 100%;
             display: flex;
@@ -181,7 +180,7 @@
         }
 
         .tabContent {
-            margin: 1rem 0 !important;
+            margin-top: 1rem !important;
 
             .fields {
                 display: flex;
@@ -207,7 +206,6 @@
 
                     input,
                     textarea {
-                        // background-color: rgb(243 244 246);
                         border: 1px solid rgb(209 213 219);
                         color: rgb(17 24 39);
                         font-size: 12px;
@@ -225,7 +223,6 @@
                     }
 
                     select {
-                        // background-color: rgb(243 244 246);
                         border: 1px solid rgb(209 213 219);
                         color: rgba(17, 24, 39, .7);
                         font-size: 13px;
@@ -277,7 +274,6 @@
                     button {
                         padding: 1rem;
                         font-size: 10px !important;
-                        // font-weight: 600;
                         border-radius: 12px;
                         background-color: #fff;
                         color: #709680;
@@ -331,9 +327,6 @@
                 width: 100%;
                 padding: 1rem;
                 border-radius: 12px;
-                // margin-bottom: 3rem;
-                // max-height: 100px;
-                // overflow: scroll;
 
                 th {
                     padding: 1.5rem 0;
@@ -391,21 +384,6 @@
                             position: relative;
                             font-size: 13px;
                             padding-right: 10px;
-
-                            // .costumInput {
-                            //     // width: 300px !important;
-                            //     padding: 10px;
-                            //     border: 1px solid lightgray;
-                            //     border-radius: 10px;
-                            //     outline: none;
-                            //     // direction: rtl !important;
-                            //     // text-align: right;
-
-                            //     &:focus {
-                            //         outline: none;
-                            //         border: 1px solid #709680;
-                            //     }
-                            // }
 
                             input {
                                 padding: 10px;

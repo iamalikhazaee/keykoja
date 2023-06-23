@@ -1,0 +1,78 @@
+.container {
+    direction: rtl !important;
+    padding: 3% 5%;
+
+    .content {
+        border: 1px solid rgb(229, 229, 229);
+        padding: 2rem;
+        border-radius: 12px;
+        // -webkit-box-shadow: 9px 9px 15px -7px rgba(166, 154, 166, .7);
+        // -moz-box-shadow: 9px 9px 15px -7px rgba(166, 154, 166, .7);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+        .welcome {
+            padding: 1rem 0;
+            text-align: center;
+            color: rgba($color: #000000, $alpha: .6);
+            margin-bottom: 1rem;
+
+            .welcomeText {
+                font-size: 14px;
+                font-weight: 600;
+            }
+        }
+
+        .events {
+            // border: 1px solid rgb(229, 229, 229);
+            // padding: 1rem;
+            display: flex;
+            justify-content: space-around;
+
+            .eventsContainer {
+                // border: 1px solid rgb(229, 229, 229);
+                box-shadow: 0 0 4px 0 rgba(0,0,0,0.1),0 0 3px 0 rgba(0,0,0,0.06);
+                border-radius: 12px;
+                padding: 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 1rem 0;
+                cursor: pointer;
+                transition: all .5s;
+                position: relative;
+
+                &:hover {
+                    box-shadow: 10px 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+                }
+
+                .icon {
+                    position: absolute;
+                    top: -5px;
+                    right: -5px;
+                    font-size: 20px;
+                    transform: rotate(270deg);
+                    color: #52796F;
+                }
+
+                .eventName {
+                    font-size: 13px;
+                    font-weight: 600;
+                }
+
+                .eventDetail {
+                    font-size: 11px;
+                    font-weight: 600;
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    justify-content: center;
+                    color: rgba($color: #000000, $alpha: .6);
+
+                    p {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
