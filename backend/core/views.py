@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.contrib.auth import authenticate
 
 from rest_framework import viewsets
@@ -12,8 +11,6 @@ from datetime import timedelta, datetime
 
 from .models import *
 from .serializer import *
-# Create your views here.
-
 
 class CustomLoginView(APIView):
     serializer_class = CustomLoginSerializer
@@ -45,11 +42,9 @@ class CustomLoginView(APIView):
             # Authentication failed
             return Response({'detail': 'Authentication failed'})
 
-
 class RegisterViewSet(viewsets.ModelViewSet):
     queryset = ProfileUser.objects.all()
     serializer_class = ProfileSerializer
-
 
 class ProfileViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
@@ -77,33 +72,6 @@ class ProfileViewSet(viewsets.ModelViewSet):
         serializer = AvailabilitySerializer(availability, many =True)
         return Response(serializer.data)
 
-
-class AvailabilityViewset(viewsets.ModelViewSet):
-    queryset =  Availability.objects.all()
-    serializer_class = AvailabilitySerializer
-    
-    # @action(detail=True, methods=['get'], url_path='time-units')
-    # def get_time_units(self, request, pk=None):
-    #     availability = Availability.objects.get(pk=pk)
-    #     start_hour = availability.start_time.hour
-    #     end_hour = availability.end_time.hour
-    #     count = (end_hour - start_hour)/unit_time
-    #     time_units = []
-    #     time_units.append(start_hour)
-
-    #     while count > 0 :
-    #         start_hour = start_hour + unit_time
-    #         count = count - 1 
-    #         if (start_hour <= end_hour) and (start_hour + unit_time <= end_hour) :
-    #             time_units.append(start_hour)
-
-    #     return Response({
-    #         'start_hour': start_hour,
-    #         'end_hour': end_hour,
-    #         'time_units': time_units,
-    #     })
-
-
 class GuestViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
@@ -112,9 +80,9 @@ class GuestViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Guest.objects.filter(event__owner = user)
+        queryset = Guest.objects.select_related('event','time').filter(event__owner = user)
         return queryset
-
+    
     @action(detail=True, methods=['Get','put'])
     def approve(self, request, pk=None):
         Guest = self.get_object()
@@ -153,7 +121,6 @@ class voucher(viewsets.ModelViewSet):
         event_name = self.kwargs.get('event_name')
         queryset = Event.objects.filter(event_domain = event_name , owner__domain = username , is_enable = True)
         return queryset
-
 
 class getTimeForReservation(viewsets.ModelViewSet):
     serializer_class = EventTimeSerializer

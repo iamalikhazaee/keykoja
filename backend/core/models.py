@@ -12,32 +12,6 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
 
-class Availability(models.Model):
-    profile = models.ForeignKey('ProfileUser', on_delete=models.CASCADE)
-    DAYS_OF_WEEK = (
-        ('Monday', 'Monday'),
-        ('Tuesday', 'Tuesday'),
-        ('Wednesday', 'Wednesday'),
-        ('Thursday', 'Thursday'),
-        ('Friday', 'Friday'),
-        ('Saturday', 'Saturday'),
-        ('Sunday', 'Sunday')
-    )
-    day_of_week = models.CharField(max_length=255 ,choices=DAYS_OF_WEEK)
-    start_time = models.TimeField()
-    end_time = models.TimeField()
-    
-    class Meta:
-        db_table = ''
-        managed = True
-        # unique_together = ('profile',)
-        verbose_name = 'Availability'
-        verbose_name_plural = 'Availabilities'
-
-    def __str__(self):
-        return  f'{self.profile}' + "-----" + f'{self.day_of_week}' + "-----" + f'{str(self.start_time)}'
-
-
 class MyProfileUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -78,35 +52,6 @@ class ProfileUser(AbstractBaseUser,PermissionsMixin):
             'access': str(refresh.access_token),
         }
 
-# class Profile(models.Model):
-#     user = models.OneToOneField(User , on_delete=models.CASCADE ,null=True,blank=True)
-#     email = models.EmailField(null=False, blank=False ,unique=True)
-#     password = models.CharField(max_length=255)
-
-#     first_name = models.CharField(max_length=255)
-#     last_name = models.CharField(max_length=255)
-#     domain = models.CharField(max_length=50,unique=True)
-
-#     def save(self, *args, **kwargs):
-#         if not self.pk:  # If the profile is being created
-#             user = User.objects.create_user(username=self.domain, email=self.email, password=self.password)
-#             user.first_name = self.first_name
-#             user.last_name = self.last_name
-#             user.save()
-#             self.user = user
-#         super().save(*args, **kwargs)
-
-#     # availability = models.ManyToManyField(Availability)
-#     # free_time = ArrayField(ArrayField(models.CharField(max_length=10), size=2), default=list)
-#     def __str__(self):
-#        return self.first_name + self.last_name
-
-#     class Meta:
-#         db_table = ''
-#         managed = True
-#         verbose_name = 'Profile'
-#         verbose_name_plural = 'Profiles'
-
 
 class Event(models.Model):
     owner = models.ForeignKey(ProfileUser,on_delete=models.CASCADE)
@@ -120,9 +65,9 @@ class Event(models.Model):
     time_unit = models.DecimalField(max_digits=5, decimal_places=1, default=1.5)
     MY_CHOICES_place = (
         ('حضوری', 'حضوری'),
-        ('Google meet', 'Google meet'),
-        ('Skype', 'Skype'),
-        ('Whatsapp', 'Whatsapp'),
+        ('گوگل میت', 'گوگل میت'),
+        ('اسکایپ', 'اسکایپ'),
+        ('واتساپ', 'واتساپ'),
     )
     place = models.CharField(max_length=50, choices=MY_CHOICES_place)
     address = models.CharField(max_length=255,default=' ',blank=True)
@@ -177,7 +122,3 @@ class Guest(models.Model):
         verbose_name = 'Guest'
         verbose_name_plural = 'Guests'
 
-# @receiver(post_save, sender = settings.AUTH_USER_MODEL)
-# def create_auth_token(sender,instance = None,created = False , **kwargs):
-#     if created :
-#         Token.objects.create( user = instance)
