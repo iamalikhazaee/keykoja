@@ -46,12 +46,12 @@ export default function Navbar() {
     localStorage.removeItem("token");
     Cookies.remove("auth");
     Cookies.remove("token");
-    router.push("http://localhost:3000/");
+    // router.push("http://localhost:3000/");
   };
 
-  const openEventLink = (url) => {
-    window.open(url, "_blank", "noreferrer");
-  };
+  // const openEventLink = (url) => {
+  //   window.open(url, "_blank", "noreferrer");
+  // };
 
   return (
     <nav className={styles.navbar}>
@@ -98,7 +98,7 @@ export default function Navbar() {
                   </a>
                 </li>
                 <li onClick={handleLogout}>
-                  <a href="" className={styles.links}>
+                  <a href="http://localhost:3000" className={styles.links}>
                     <FontAwesomeIcon
                       icon={faSignOutAlt}
                       className={styles.icon}
@@ -141,8 +141,8 @@ export default function Navbar() {
           <ul className={styles.menu}>
             <li>
               <a
-                href={`/${userDetails.domain}`}
-                target="_blank"
+                href={`/${userDetails.domain}/guests`}
+                // target="_blank"
                 rel="noopener noreferrer"
               >
                 <FontAwesomeIcon icon={faUserCheck} />

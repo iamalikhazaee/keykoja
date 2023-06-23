@@ -43,9 +43,6 @@ export default function Dashboard() {
         })
     }, [])
 
-    // const showNotice = (id) => {
-
-    // }
 
     const handleEventEnable = (e, id) => {
         const token = JSON.parse(Cookies.get('token'));
