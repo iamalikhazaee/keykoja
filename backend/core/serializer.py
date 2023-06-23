@@ -1,8 +1,7 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework import serializers
-from .models import *
 
+from .models import *
 
 class CustomLoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
@@ -16,13 +15,6 @@ class CustomLoginSerializer(serializers.Serializer):
         # For example, check if the email and password are valid
 
         return attrs
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id','username','password','email']
-
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -41,25 +33,16 @@ class ProfileSerializer(serializers.ModelSerializer):
         user = ProfileUser.objects.create_user(**validated_data)
         return user
 
-
-class AvailabilitySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Availability
-        fields = ["id", "profile", "day_of_week", "start_time", "end_time"]
-
-
 class GuestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Guest
         fields = "__all__"
-
 
 class NewEventSerializer(serializers.ModelSerializer):
 
      class Meta:
         model = Event
         fields = ["id", 'owner', 'name', 'type', 'place', 'address', 'massage', 'event_domain', "time_unit","is_enable"]
-
 
 class EventTimeSerializer(serializers.ModelSerializer):
 
