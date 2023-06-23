@@ -49,9 +49,9 @@ export default function Navbar() {
     router.push("http://localhost:3000/");
   };
 
-  const openEventLink = (url) => {
-    window.open(url, "_blank", "noreferrer");
-  };
+  // const openEventLink = (url) => {
+  //   window.open(url, "_blank", "noreferrer");
+  // };
 
   return (
     <nav className={styles.navbar}>
@@ -141,8 +141,8 @@ export default function Navbar() {
           <ul className={styles.menu}>
             <li>
               <a
-                href={`/${userDetails.domain}`}
-                target="_blank"
+                href={`/${userDetails.domain}/guests`}
+                // target="_blank"
                 rel="noopener noreferrer"
               >
                 <FontAwesomeIcon icon={faUserCheck} />
