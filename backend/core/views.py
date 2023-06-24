@@ -104,7 +104,7 @@ class NewEventViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Event.objects.filter(owner=user) 
+        queryset = Event.objects.filter(owner=user).order_by('-is_enable') 
         return queryset
 
     def create_link(self):
