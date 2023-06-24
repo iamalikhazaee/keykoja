@@ -141,11 +141,21 @@ export default function EventCard(props) {
 
   const handleSubmitTimes = () => {
     for (let i = 0; i < times.length; i++) {
-      setExtraTimes((v) => [...v, times[i]]);
       axios
         .delete(`http://localhost:8000/core/EventTime/${times[i].id}/`)
         .then((res) => {
           console.log(res.data);
+          axios
+            .post("http://127.0.0.1:8000/core/EventTime/", {
+              profile: jwt(user.token.access).user_id,
+              event: props.item.id,
+              date: toEnglishNum(times[i].date),
+              start_hour: toEnglishNum(times[i].start_hour),
+              end_hour: toEnglishNum(times[i].end_hour),
+            })
+            .then((res) => {
+              console.log(res.data)
+            });
         });
     }
     for (let i = 0; i < extraTimes.length; i++) {
@@ -158,7 +168,7 @@ export default function EventCard(props) {
           end_hour: toEnglishNum(extraTimes[i].end_hour),
         })
         .then((res) => {
-          setOpenEdit(false)
+          setOpenEdit(false);
         });
     }
   };
