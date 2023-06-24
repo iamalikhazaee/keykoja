@@ -80,7 +80,7 @@ class GuestViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Guest.objects.select_related('event','time').filter(event__owner = user)
+        queryset = Guest.objects.select_related('event','time').filter(event__owner = user).order_by('time')
         return queryset
     
     @action(detail=True, methods=['Get','put'])
