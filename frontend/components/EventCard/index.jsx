@@ -24,7 +24,7 @@ import jwt from "jwt-decode";
 import TimePicker from "../TimePicker";
 import Calender from "../Calender/Calender.component";
 import CustomizedDatePicker from "../DatePicker";
-import { toPersianNum } from "../Calender/utils";
+import { toPersianNum, toEnglishNum } from "../Calender/utils";
 
 const PinkSwitch = styled(Switch)(({ theme }) => ({
   "& .MuiSwitch-switchBase.Mui-checked": {
@@ -52,6 +52,7 @@ export default function EventCard(props) {
   const [openEdit, setOpenEdit] = useState(false);
   const [date, setDate] = useState([]);
   const [times, setTimes] = useState([]);
+  const [extraTimes, setExtraTimes] = useState([]);
   const [startHour, setStartHour] = useState(toPersianNum("00"));
   const [startMin, setStartMin] = useState(toPersianNum("00"));
   const [endHour, setEndHour] = useState(toPersianNum("00"));
@@ -79,9 +80,7 @@ export default function EventCard(props) {
   };
 
   const editEvent = (e) => {
-    // e.preventDefault();
     const token = jwt(JSON.parse(userToken));
-    // console.log(message);
     axios
       .put(
         `http://127.0.0.1:8000/core/NewEvent/${props.item.id}/`,
@@ -105,15 +104,21 @@ export default function EventCard(props) {
       });
   };
 
-  const deleteTime = (index) => {
-    // const domain = JSON.parse(localStorage.getItem("userDetails")).domain;
-    // axios.delete(`http://127.0.0.1:8000/${domain}/${props.item.event_domain}/time/${id}`)
-    // .then((res) => {
-    //   console.log(res.data)
-    // })
+  const deleteTime = (index, i) => {
+    axios
+      .delete(`http://localhost:8000/core/EventTime/${index}/`)
+      .then((res) => {
+        console.log(res.data);
+      });
     var copyArray = [...times];
-    copyArray.splice(index, 1);
+    copyArray.splice(i, 1);
     setTimes(copyArray);
+  };
+
+  const deleteExtraTime = (index) => {
+    var copyArray = [...extraTimes];
+    copyArray.splice(index, 1);
+    setExtraTimes(copyArray);
   };
 
   const handleAddTime = () => {
@@ -125,12 +130,36 @@ export default function EventCard(props) {
         start_hour: toPersianNum(`${startHour}:${startMin}`),
         end_hour: toPersianNum(`${endHour}:${endMin}`),
       };
-      setTimes((v) => [...v, newTime]);
+      setExtraTimes((v) => [...v, newTime]);
       setDate(undefined);
       setStartHour(toPersianNum("00"));
       setStartMin(toPersianNum("00"));
       setEndHour(toPersianNum("00"));
       setEndMin(toPersianNum("00"));
+    }
+  };
+
+  const handleSubmitTimes = () => {
+    for (let i = 0; i < times.length; i++) {
+      setExtraTimes((v) => [...v, times[i]]);
+      axios
+        .delete(`http://localhost:8000/core/EventTime/${times[i].id}/`)
+        .then((res) => {
+          console.log(res.data);
+        });
+    }
+    for (let i = 0; i < extraTimes.length; i++) {
+      axios
+        .post("http://127.0.0.1:8000/core/EventTime/", {
+          profile: jwt(user.token.access).user_id,
+          event: props.item.id,
+          date: toEnglishNum(extraTimes[i].date),
+          start_hour: toEnglishNum(extraTimes[i].start_hour),
+          end_hour: toEnglishNum(extraTimes[i].end_hour),
+        })
+        .then((res) => {
+          setOpenEdit(false)
+        });
     }
   };
 
@@ -299,7 +328,14 @@ export default function EventCard(props) {
                           <p>اگر هیچ زمانی ثبت نکرده اید میتوانید در اینجا اضافه کنید و یا میتوانید زمان های ثبت شده ای که نیاز به ویرایش دارند را حذف کرده و مجدد تایم مورد نظر خودتان را اضافه کنید.</p>
                         </Row> */}
                         <Row>
-                          <Col col={12} style={{maxHeight: '300px', overflow: 'scroll', marginBottom: '2rem'}}>
+                          <Col
+                            col={12}
+                            style={{
+                              maxHeight: "300px",
+                              overflow: "scroll",
+                              marginBottom: "2rem",
+                            }}
+                          >
                             <table className={styles.timeTable}>
                               <thead>
                                 <tr>
@@ -319,7 +355,23 @@ export default function EventCard(props) {
                                       <FontAwesomeIcon
                                         icon={faTrash}
                                         id={styles.trashIcon}
-                                        onClick={() => deleteTime(index)}
+                                        onClick={() =>
+                                          deleteTime(item.id, index)
+                                        }
+                                      />
+                                    </td>
+                                  </tr>
+                                ))}
+                                {extraTimes.map((item, index) => (
+                                  <tr key={index}>
+                                    <td>{toPersianNum(item.date)}</td>
+                                    <td>{toPersianNum(item.start_hour)}</td>
+                                    <td>{toPersianNum(item.end_hour)}</td>
+                                    <td>
+                                      <FontAwesomeIcon
+                                        icon={faTrash}
+                                        id={styles.trashIcon}
+                                        onClick={() => deleteExtraTime(index)}
                                       />
                                     </td>
                                   </tr>
@@ -330,10 +382,6 @@ export default function EventCard(props) {
                         </Row>
                         <Row>
                           <Col lg={7}>
-                            {/* <Calender
-                              dates={dates}
-                              style={{ maxHeight: "300px" }}
-                            /> */}
                             <CustomizedDatePicker
                               setDate={setDate}
                               date={date}
@@ -374,13 +422,19 @@ export default function EventCard(props) {
                             </div>
                           </Col>
                         </Row>
+                        <Row>
+                          <Col col={12} className={styles.saveBtn}>
+                            <button onClick={handleSubmitTimes}>
+                              ذخیره تغییرات
+                            </button>
+                          </Col>
+                        </Row>
                       </Tab>
                     </Tabs>
                   </div>
                 </Box>
               </Fade>
             </Modal>
-            {/* <FontAwesomeIcon icon={faEllipsisVertical} /> */}
             <FontAwesomeIcon
               icon={faTrash}
               onClick={() => {

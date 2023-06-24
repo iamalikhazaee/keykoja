@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTag } from '@fortawesome/free-solid-svg-icons'
 
 export default function guests() {
-    const router = useRouter()
+    // const router = useRouter()
     const [events, setEvents] = useState([])
     const [guests, setGuests] = useState([])
 
@@ -27,6 +27,7 @@ export default function guests() {
                 }
             }).then((res) => {
                 setGuests(res.data)
+                console.log(res.data)
             })
         })
     }, [])
@@ -55,16 +56,22 @@ export default function guests() {
                                     <Row className={styles.guestsHeader}>
                                         <Col className={styles.colItem}>نام و نام خانوادگی</Col>
                                         <Col className={styles.colItem}>ایمیل</Col>
+                                        <Col className={styles.colItem}>تاریخ</Col>
+                                        <Col className={styles.colItem}>ساعت شروع</Col>
+                                        <Col className={styles.colItem}>ساعت پایان</Col>
                                     </Row>
                                     {guests.map((guest, index) => (
-                                        guest.event === event.id ?
+                                        guest.event.id === event.id ?
                                             (
                                                 <Row key={index} className={styles.guestRow}>
-                                                    <Col className={styles.guestName}>{guest.name}</Col>
-                                                    <Col className={styles.guestEmail}>{guest.email}</Col>
+                                                    <Col className={styles.guestRowItem}>{guest.name}</Col>
+                                                    <Col className={styles.guestRowItem}>{guest.email}</Col>
+                                                    <Col className={styles.guestRowItem}>{guest.time.date}</Col>
+                                                    <Col className={styles.guestRowItem}>{guest.time.start_hour}</Col>
+                                                    <Col className={styles.guestRowItem}>{guest.time.end_hour}</Col>
                                                 </Row>
                                             )
-                                            : (<div className={styles.noGuestMsg}>مهمانی برای این رویداد ثبت نشده است.</div>)
+                                            : (<div key={index} className={styles.noGuestMsg}></div>)
                                     ))}
                         </div>
                     </Row>
