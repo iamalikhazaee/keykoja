@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Navbar from '@/components/Navbar'
-import { Container, Row } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import Cookies from 'js-cookie'
 import styles from '@/styles/guests.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -52,26 +52,20 @@ export default function guests() {
                         </div>
                         <div className={styles.guests}>
                             <p>مهمانان این رویداد :</p>
-                            <table className={styles.timeTable}>
-                                <thead>
-                                    <tr>
-                                        <th>نام و نام خانوادگی</th>
-                                        <th>ایمیل</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                    <Row className={styles.guestsHeader}>
+                                        <Col className={styles.colItem}>نام و نام خانوادگی</Col>
+                                        <Col className={styles.colItem}>ایمیل</Col>
+                                    </Row>
                                     {guests.map((guest, index) => (
                                         guest.event === event.id ?
                                             (
-                                                <tr key={index}>
-                                                    <td>{guest.name}</td>
-                                                    <td>{guest.email}</td>
-                                                </tr>
+                                                <Row key={index} className={styles.guestRow}>
+                                                    <Col className={styles.guestName}>{guest.name}</Col>
+                                                    <Col className={styles.guestEmail}>{guest.email}</Col>
+                                                </Row>
                                             )
-                                            : (<tr key={index}><div className={styles.noGuestMsg}>مهمانی برای این رویداد ثبت نشده است.</div></tr>)
+                                            : (<div className={styles.noGuestMsg}>مهمانی برای این رویداد ثبت نشده است.</div>)
                                     ))}
-                                </tbody>
-                            </table>
                         </div>
                     </Row>
                 ))}
