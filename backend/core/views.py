@@ -76,7 +76,7 @@ class GuestViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
-    serializer_class = GuestSerializer
+    serializer_class = GuestListSerializer
 
     def get_queryset(self):
         user = self.request.user
