@@ -53,8 +53,9 @@ class GuestSerializer(serializers.ModelSerializer):
 
 
 class GuestListSerializer(serializers.ModelSerializer):
+
     event = NewEventSerializer()
     time = EventTimeSerializer()
-    class Meta :
-        model : Guest
+    class Meta:
+        model = Guest
         fields = "__all__"
