@@ -1,6 +1,64 @@
 .container {
     direction: rtl !important;
-    padding-top: 3%;
+    padding: 1.5rem 0 0 0;
+
+    .secondNavbar {
+        background-color: #fff;
+        color: gray;
+        font-size: 13px;
+        padding: 0;
+
+        .navbarContainer {
+            // max-width: 1280px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+
+            .backBtn {
+                button {
+                    transition: ease-in .2s;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 10rem;
+                    padding: 1rem;
+                    border-radius: 12px;
+                    background: #fff;
+                    color: #709680;
+                    border: 1px solid #709680;
+                    font-size: 12px;
+
+                    &:hover {
+                        background-color: #709680;
+                        color: #fff;
+                    }
+                }
+            }
+
+            .addEvent {
+                button {
+                    transition: ease-in-out .3s;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 10rem;
+                    padding: 1rem;
+                    border-radius: 12px;
+                    background: #709680;
+                    color: #fff;
+                    border: none;
+                    font-size: 12px;
+
+                    &:hover {
+                        opacity: .9;
+                    }
+                }
+            }
+        }
+    }
 
     h6 {
         font-size: 13px;
