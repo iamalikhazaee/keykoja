@@ -57,7 +57,7 @@ export function LoginForm(props) {
         />
       </FormContainer>
       <Marginer direction="vertical" margin={10} />
-      <MutedLink href="#">رمز عبور خود را فراموش کرده اید؟</MutedLink>
+      {/* <MutedLink href="#">رمز عبور خود را فراموش کرده اید؟</MutedLink> */}
       <Marginer direction="vertical" margin="1.6em" />
       <SubmitButton onClick={handleLogin} type="submit">
         ورود

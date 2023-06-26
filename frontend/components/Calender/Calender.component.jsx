@@ -57,13 +57,19 @@ const Calender = (props) => {
       >
         <ContainerStyled>
           <CalenderHeader>
-            <div onClick={() => setChange(change - 1)} style={{cursor: 'pointer'}} >
+            <div
+              onClick={() => setChange(change - 1)}
+              style={{ cursor: "pointer" }}
+            >
               <FontAwesomeIcon icon={faChevronRight} />
             </div>
             <div className="font__h2__bold" style={{ color: "#000" }}>
               {days.title}
             </div>
-            <div onClick={() => setChange(change + 1)} style={{cursor: 'pointer', padding: '0 10px'}} >
+            <div
+              onClick={() => setChange(change + 1)}
+              style={{ cursor: "pointer", padding: "0 10px" }}
+            >
               <FontAwesomeIcon icon={faChevronLeft} />
             </div>
           </CalenderHeader>
@@ -150,30 +156,41 @@ const Calender = (props) => {
             {days &&
               days.weeks.map((day, i) => (
                 <DaysRow key={i}>
-                  {day.map(
-                    (d, index) => (
-                        now.year === Number(d.date.split("-")[0]) &&
-                        now.month === Number(d.date.split("-")[1]) &&
-                        now.day <= d.day ? (
-                          props.dates.includes(d.date) ? (
-                            <AvailableDate key={index}
-                              onClick={() => props.setDateAndTime(d)}
-                            >
-                              {toPersianNum(d.day)}
-                            </AvailableDate>
-                          ) : (
-                            <DayStyled
-                              month={days.month}
-                              today={d.month}
-                              key={index}
-                              onClick={() => props.setDateAndTime(d)}
-                            >
-                              {toPersianNum(d.day)}
-                            </DayStyled>
-                          )
-                        ) : (
-                          <DisableDate key={index}>{toPersianNum(d.day)}</DisableDate>
-                        )
+                  {day.map((d, index) =>
+                    now.year === Number(d.date.split("-")[0]) &&
+                    now.month === Number(d.date.split("-")[1]) &&
+                    now.day <= d.day ? (
+                      props.dates.includes(d.date) ? (
+                        <AvailableDate
+                          key={index}
+                          onClick={() => props.setDateAndTime(d)}
+                        >
+                          {toPersianNum(d.day)}
+                        </AvailableDate>
+                      ) : (
+                        <DayStyled
+                          month={days.month}
+                          today={d.month}
+                          key={index}
+                          onClick={() => props.setDateAndTime(d)}
+                        >
+                          {toPersianNum(d.day)}
+                        </DayStyled>
+                      )
+                    ) : now.year <= Number(d.date.split("-")[0]) &&
+                      now.month <= Number(d.date.split("-")[1]) ? (
+                      <DayStyled
+                        month={days.month}
+                        today={d.month}
+                        key={index}
+                        onClick={() => props.setDateAndTime(d)}
+                      >
+                        {toPersianNum(d.day)}
+                      </DayStyled>
+                    ) : (
+                      <DisableDate key={index}>
+                        {toPersianNum(d.day)}
+                      </DisableDate>
                     )
                   )}
                 </DaysRow>

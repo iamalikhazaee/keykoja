@@ -87,7 +87,6 @@ export const DisableDate = styled.div`
   font-weight: 900;
   font-size: 16px;
   color: rgba(0, 0, 0, 0.25);
-  // color: rgba(0, 0, 0, 0.25);
   width: 40px;
   display: flex;
   justify-content: center;
