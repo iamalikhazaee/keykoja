@@ -49,13 +49,14 @@ export default function eventName() {
         setSelectedDate(d)
         for (let i = 0; i < eventTimes.length; i++) {
             if (eventTimes[i].date === d.date) {
-                console.log(eventTimes[i])
+                // console.log(eventTimes[i])
                 if (eventTimes[i].is_enable) {
                     t.push(eventTimes[i])
                 }
             }
         }
         setTime(t)
+        // console.log(t)
     }
 
     const addGuest = () => {
@@ -122,9 +123,9 @@ export default function eventName() {
                                         </div>
                                     ) : (
                                         time.map((item, index) => (
-                                            <div key={index} className={styles.time} onClick={() => setSelectedTime(item)}>
-                                                <span>{toPersianNum(item.start_hour)}</span>
-                                            </div>
+                                            <button key={index} className={styles.time} onClick={() => setSelectedTime(item)}>
+                                                {toPersianNum(item.start_hour)}
+                                            </button>
                                         ))
                                     )
                                 )

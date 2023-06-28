@@ -107,11 +107,18 @@
                 font-weight: 600;
                 color: rgba(0, 0, 0, 0.6);
                 text-align: center;
-                cursor: pointer;
+                // cursor: pointer;
                 transition: ease-in .2s;
                 margin: 15px 0;
+                outline: none;
 
                 &:hover {
+                    background-color: #84A98C;
+                    color: #fff;
+                    border: 1px solid #84A98C;
+                }
+
+                &:focus {
                     background-color: #84A98C;
                     color: #fff;
                     border: 1px solid #84A98C;

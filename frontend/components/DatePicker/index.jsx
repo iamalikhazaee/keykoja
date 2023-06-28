@@ -10,7 +10,7 @@ import {
   DayStyled,
   AvailableDate,
   SelectedDayStyled,
-  DisableDate
+  DisableDate,
 } from "./Datepicker.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -177,6 +177,16 @@ const CustomizedDatePicker = (props) => {
                           {toPersianNum(d.day)}
                         </DayStyled>
                       )
+                    ) : now.year <= Number(d.date.split("-")[0]) &&
+                      now.month <= Number(d.date.split("-")[1]) ? (
+                      <DayStyled
+                        month={days.month}
+                        today={d.month}
+                        key={index}
+                        onClick={() => props.setDateAndTime(d)}
+                      >
+                        {toPersianNum(d.day)}
+                      </DayStyled>
                     ) : (
                       <DisableDate key={index}>
                         {toPersianNum(d.day)}
