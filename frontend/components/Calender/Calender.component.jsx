@@ -178,7 +178,8 @@ const Calender = (props) => {
                         </DayStyled>
                       )
                     ) : now.year <= Number(d.date.split("-")[0]) &&
-                      now.month <= Number(d.date.split("-")[1]) ? (
+                      now.month <= Number(d.date.split("-")[1]) &&
+                      now.day <= Number(d.day) ? (
                       <DayStyled
                         month={days.month}
                         today={d.month}
