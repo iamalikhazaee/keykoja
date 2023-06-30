@@ -1,237 +1,83 @@
-.navbar {
-    background-color: #354F52;
-    padding: .25rem 1rem;
-    direction: rtl !important;
+.navbarContainer {
+    @media screen and (max-width: 425px) {
+        padding: .5rem;
+    }
 
-    .navbarContainer {
-        max-width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        margin: 0 auto;
-        padding: .5rem 1.5rem;
-
-        @media screen and (max-width: 425px) {
-            padding: .5rem;
+    .userMenu {
+        @media screen and (min-width: 768px) {
+            order: 2;
         }
 
-        .navbarLogo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: #fff;
-
-            #logo {
-                margin-left: .5rem;
-                font-size: 30px;
+        .userBtn {
+            @media screen and (min-width: 768px) {
+                margin-right: 0;
             }
 
-            h1 {
-                align-self: center;
-                margin-right: .5rem;
-                font-weight: 600;
-                white-space: nowrap;
-                font-size: 20px;
+            .openMenu {
+                clip: rect(0, 0, 0, 0);
+            }
+        }
+
+        .menu {
+            @media screen and (max-width: 768px) {
+                top: 45px;
+            }
+
+            .menuList {
+                padding: .5rem 0;
+                list-style: none;
                 margin: 0;
             }
         }
 
-        .userMenu {
+        .burgerBtn {
+            @media screen and (min-width:768px) {
+                display: none;
+            }
+
+            span {
+                clip: rect(0, 0, 0, 0);
+            }
+        }
+    }
+
+    .middleMenu {
+        @media screen and (max-width: 768px) {
+            border: 1px solid white;
+            margin: 1rem 0;
+            padding: 1rem .5rem;
+            border-radius: 12px;
+        }
+        @media screen and (min-width: 768px) {
             display: flex;
-            align-items: center;
-            position: relative;
+            width: auto;
+            order: 1;
+        }
 
+        .menu {
             @media screen and (min-width: 768px) {
-                order: 2;
+                padding: 0px;
+                flex-direction: row;
+                margin-top: 0px;
+                border-width: 0px;
             }
 
-            .userBtn {
-                display: flex;
-                margin-right: .75rem;
-                font-size: 14px;
-                line-height: 20px;
-                background: none;
-                border: none;
-
-                @media screen and (min-width: 768px) {
-                    margin-right: 0;
-                }
-
-                .openMenu {
-                    position: absolute;
-                    width: 1px;
-                    height: 1px;
-                    padding: 0;
-                    margin: -1px;
-                    overflow: hidden;
-                    clip: rect(0, 0, 0, 0);
-                    white-space: nowrap;
-                    border-width: 0;
-                }
+            @media screen and (max-width: 375px) {
+                font-size: 11px;
             }
 
-            .menu {
-                position: absolute;
-                z-index: 50;
-                top: 30px;
-                left: 0;
-                width: 150px;
-                // margin: 1rem 0;
-                font-size: 16px;
-                line-height: 24px;
-                background-color: #F4EAE6;
-                border-radius: 12px;
-
-                @media screen and (max-width: 768px) {
-                    top: 45px;
-                }
-
-                .menuHeader {
-                    padding: .75rem;
-                    border-bottom: 1px solid rgba(107, 114, 128, .2);
-
-                    span {
-                        display: block;
-                        font-size: 14px;
-                        line-height: 20px;
-                        color: rgb(107, 114, 128);
+            li {
+                a {
+                    @media screen and (max-width: 375px) {
+                        margin: 0;
+                        padding: .3rem .5rem !important;
                     }
-                }
-
-                .menuList {
-                    padding: .5rem 0;
-                    list-style: none;
-                    margin: 0;
-
-                    .links {
-                        display: flex;
-                        justify-content: flex-start;
-                        align-items: center;
-                        padding: .5rem 1rem;
-                        color: rgb(107, 114, 128);
-                        text-decoration: none;
-                        font-size: 12px;
-
-                        &:hover {
-                            background-color: rgb(243, 244, 246);
-                        }
-
-                        .icon {
-                            margin-left: .5rem;
-                            font-size: 15px;
-                            color: gray;
-                        }
-                    }
-                }
-            }
-
-            .burgerBtn {
-                display: inline-flex;
-                margin-right: .75rem;
-                align-items: center;
-                padding: .5rem;
-                margin-left: .25rem;
-                font-size: 14px;
-                line-height: 20px;
-                color: rgb(107 114 128);
-                border-radius: 8px;
-                border: none;
-                outline: none;
-
-                @media screen and (min-width:768px) {
-                    display: none;
-                }
-
-                &:hover {
-                    background-color: rgb(243 244 246);
-                }
-
-                &:focus {
-                    border: none;
-                    outline: none;
-                }
-
-                span {
-                    position: absolute;
-                    width: 1px;
-                    height: 1px;
-                    padding: 0;
-                    margin: -1px;
-                    overflow: hidden;
-                    clip: rect(0, 0, 0, 0);
-                    white-space: nowrap;
-                    border-width: 0;
                 }
 
                 svg {
-                    width: 1.5rem;
-                    height: 1.5rem;
+                    margin-left: 6px;
                 }
             }
-        }
-
-        .middleMenu {
-            transition: ease-in-out .5s;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-
-            @media screen and (min-width: 768px) {
-                display: flex;
-                width: auto;
-                order: 1;
-            }
-
-            .menu {
-                display: flex;
-                flex-direction: column;
-                font-weight: 500;
-                font-size: 14px;
-                padding: 1rem;
-                margin-top: 1rem;
-                margin-bottom: 0;
-                border: 1px solid rgb(243 244 246);
-                border-radius: 8px;
-                background-color: #354F52;
-                list-style: none;
-
-                @media screen and (min-width: 768px) {
-                    padding: 0px;
-                    flex-direction: row;
-                    margin-top: 0px;
-                    border-width: 0px;
-                }
-
-                @media screen and (max-width: 375px) {
-                    font-size: 11px;
-                }
-
-                li {
-                    a {
-                        text-decoration: none;
-                        display: flex;
-                        align-items: center;
-                        padding: .5rem 1rem;
-                        margin-left: 28px;
-                        color: #fff;
-                        border-radius: 12px;
-
-                        &:hover {
-                            background-color: #52796F;
-                            color: #fff;
-                        }
-                    }
-
-                    svg {
-                        margin-left: 6px;
-                    }
-                }
-            }
-        }
-
-        .hidden {
-            display: none;
         }
     }
 }

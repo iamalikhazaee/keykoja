@@ -2,19 +2,19 @@ import { useContext, useState } from "react";
 import {
   BoxContainer,
   FormContainer,
-  Input,
+  // Input,
   MutedLink,
-  BoldLink,
-  SubmitButton,
-  Label,
+  BoldLink
 } from "./common";
-import { Marginer } from "@/components/marginer";
 import { AccountContext } from "./accountContext";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { Input } from "@/components/common/authInput";
+import { Label } from "@/components/common/Label";
+import { Button } from "@/components/common/authBtn";
 
-export function LoginForm(props) {
+export function LoginForm () {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -28,18 +28,18 @@ export function LoginForm(props) {
         password: password,
       })
       .then((res) => {
-        console.log(res.data.user);
-        localStorage.setItem("userDetails", JSON.stringify(res.data.user));
-        localStorage.setItem("token", JSON.stringify(res.data.access));
-        Cookies.set("auth", true);
-        Cookies.set("token", JSON.stringify(res.data.access));
-        router.push("/dashboard");
+        console.log(res.data);
+        // localStorage.setItem("userDetails", JSON.stringify(res.data.user));
+        // localStorage.setItem("token", JSON.stringify(res.data.access));
+        // Cookies.set("auth", true);
+        // Cookies.set("token", JSON.stringify(res.data.access));
+        // router.push("/dashboard");
       });
   };
 
   return (
-    <BoxContainer>
-      <FormContainer>
+    <div className="w-full flex flex-col items-center mt-3">
+      <div className="w-full flex flex-col">
         <Label>ایمیل</Label>
         <Input
           value={email}
@@ -47,7 +47,6 @@ export function LoginForm(props) {
           type="email"
           placeholder="ایمیل"
         />
-        <Marginer direction="vertical" margin={10} />
         <Label>رمز عبور</Label>
         <Input
           value={password}
@@ -55,20 +54,16 @@ export function LoginForm(props) {
           type="password"
           placeholder="رمز عبور"
         />
-      </FormContainer>
-      <Marginer direction="vertical" margin={10} />
-      {/* <MutedLink href="#">رمز عبور خود را فراموش کرده اید؟</MutedLink> */}
-      <Marginer direction="vertical" margin="1.6em" />
-      <SubmitButton onClick={handleLogin} type="submit">
+      </div>
+      <Button onClick={handleLogin} type="submit">
         ورود
-      </SubmitButton>
-      <Marginer direction="vertical" margin="1em" />
-      <MutedLink href="">
+      </Button>
+      <span className="text-[10px] text-gray-400 font-medium decoration-transparent" href="">
         حساب کاربری ندارید؟{" "}
-        <BoldLink href="" onClick={switchToSignup}>
+        <span className="text-[10px] text-[#2f5061] font-medium decoration-transparent mx-1 cursor-pointer" href="" onClick={switchToSignup}>
           ثبت‌نام کنید
-        </BoldLink>
-      </MutedLink>
-    </BoxContainer>
+        </span>
+      </span>
+    </div>
   );
 }

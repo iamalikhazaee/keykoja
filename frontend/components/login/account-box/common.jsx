@@ -86,7 +86,7 @@ export const SelectBox = styled.select`
   border: 1px solid rgba(200, 200, 200, 0.3);
   border-radius: 12px;
   padding: 10px;
-  margin: 10px 0;
+  margin-bottom: 10px;
   transition: all 200ms ease-in-out;
   font-size: 12px;
   direction: rtl;

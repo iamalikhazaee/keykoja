@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import EventModal from "@/components/addEventModal";
 import Navbar from "@/components/Navbar";
 import styles from '@/styles/dashboard.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -105,7 +104,7 @@ export default function Dashboard() {
                     </div>
                 </div>
             </nav>
-            {showModal && <EventModal show={showModal} onHide={() => setShowModal(false)} />}
+            {/* {showModal && <EventModal show={showModal} onHide={() => setShowModal(false)} />} */}
             <Container className={styles.container}>
                 <Row className={styles.row}>
                     {events.map((item, index) => (

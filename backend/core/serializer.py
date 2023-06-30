@@ -19,7 +19,7 @@ class CustomLoginSerializer(serializers.Serializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProfileUser
-        fields = ['id','email', 'password', 'first_name', 'last_name', 'domain','avatar','theme','about','position','activation_field']
+        fields = ['id','email', 'password', 'first_name', 'last_name', 'domain','avatar','theme','about','position','activation_field', 'token']
         extra_kwargs = {'password': {'write_only': True}}
 
     def get_token(self, obj):

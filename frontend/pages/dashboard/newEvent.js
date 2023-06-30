@@ -52,7 +52,7 @@ export default function newEvent() {
             }
         )
             .then((res) => {
-                setForm('زمان های آزاد')
+                // setForm('زمان های آزاد')
                 setEvent(res.data.id)
                 console.log(res.data.id)
                 setSteps(2)
@@ -80,7 +80,7 @@ export default function newEvent() {
                 </nav>
             </Row>
             <Row className="m-0" style={{ direction: 'rtl' }}>
-                <Col lg={3} md={3} sm={3} xs={12}>
+                <Col lg={3} md={3} sm={3} xs={12} className="p-0">
                     <SidebarMenu step={steps} />
                 </Col>
                 <Col lg={9} md={9} sm={9} xs={12} className={styles.formContainer}>
