@@ -30,11 +30,26 @@ class MyProfileUserManager(BaseUserManager):
 
 
 class ProfileUser(AbstractBaseUser,PermissionsMixin):
+    MY_CHOICES_ACTIVATION = (
+        ('درمانی', 'درمانی'),
+        ('آموزشی', 'آموزشی'),
+        ('اداری', 'اداری')
+    )
+    MY_CHOICES_THEME = (
+        ('theme 1', 'theme 1'),
+        ('theme 2', 'theme 2'),
+        ('theme 3', 'theme 3')
+    )
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     domain = models.CharField(max_length=50, unique=True)
+    avatar = models.ImageField(blank=True)
+    theme = models.CharField(max_length=50 ,choices= MY_CHOICES_THEME , default='theme 1')
+    about = models.TextField(default=' ', blank= True)
+    position = models.CharField(max_length=255 , default=' ',blank= True)
+    activation_field = models.CharField(max_length=50 , choices=MY_CHOICES_ACTIVATION , default='درمانی')
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
