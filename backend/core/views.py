@@ -51,26 +51,22 @@ class ProfileViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     
     serializer_class = ProfileSerializer
-
+    
     def get_queryset(self):
         user = self.request.user
         queryset = ProfileUser.objects.filter(email=user.email)
         return queryset
 
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', True)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
 
-    @action(detail=True, methods=['get'])
-    def guests(self, request, pk=None):
-        profile = self.get_object()
-        guests = Guest.objects.filter(event__owner=profile)
-        serializer = GuestSerializer(guests, many=True)
-        return Response(serializer.data)
-    
-    @action(detail=True, methods=['get'])
-    def free_times(self, request, pk=None):
-        profile = self.get_object()
-        availability = Availability.objects.filter(profile = profile)
-        serializer = AvailabilitySerializer(availability, many =True)
-        return Response(serializer.data)
+    def perform_update(self, serializer):
+        serializer.save()
 
 class GuestViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
