@@ -1,17 +1,16 @@
 .appContainer {
     // min-height: 100vh;
-    width: 100%;
+    max-width: 500px;
     // height: 100%;
     display: flex;
     // flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 2rem 0 !important;
+    margin: 2rem auto !important;
     padding: 0 1rem;
-
-
+    
     .boxContainer {
-        width: 280px;
+        width: 100%;
         min-height: 600px;
         display: flex;
         flex-direction: column;
@@ -23,7 +22,7 @@
 
         .topContainer {
             width: 100%;
-            height: 200px;
+            height: 180px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;

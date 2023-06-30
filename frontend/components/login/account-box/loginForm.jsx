@@ -6,6 +6,7 @@ import {
   MutedLink,
   BoldLink,
   SubmitButton,
+  Label,
 } from "./common";
 import { Marginer } from "@/components/marginer";
 import { AccountContext } from "./accountContext";
@@ -43,12 +44,15 @@ export function LoginForm(props) {
   return (
     <BoxContainer>
       <FormContainer>
+        <Label>ایمیل</Label>
         <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
           placeholder="ایمیل"
         />
+        <Marginer direction="vertical" margin={10} />
+        <Label>رمز عبور</Label>
         <Input
           value={password}
           onChange={(e) => setPassword(e.target.value)}

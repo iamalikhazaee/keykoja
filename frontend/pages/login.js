@@ -8,29 +8,29 @@ import styles from '@/styles/login.module.scss'
 
 const BackDrop = styled(motion.div)`
   width: 160%;
-  height: 550px;
+  height: 2550px;
   position: absolute;
   display: flex;
   flex-direction: column;
   border-radius: 50%;
-  transform: rotate(60deg);
+  transform: rotate(2deg);
   top: -290px;
   left: -70px;
-  background: #4297A0;
+  background: #354F52;
 `;
 
 const backdropVariants = {
     expanded: {
-        width: "300%",
+        width: "200%",
         height: "1050px",
         borderRadius: "20%",
-        transform: "rotate(60deg)",
+        transform: "rotate(5deg)",
     },
     collapsed: {
         width: "160%",
-        height: "550px",
+        height: "460px",
         borderRadius: "50%",
-        transform: "rotate(60deg)",
+        transform: "rotate(5deg)",
     },
 };
 
