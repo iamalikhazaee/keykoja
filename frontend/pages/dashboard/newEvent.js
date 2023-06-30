@@ -6,15 +6,12 @@ import { faAdd, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import styles from '@/styles/newEvent.module.scss'
 import { Row, Col } from "react-bootstrap";
 import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
-import { current_form } from "@/atoms";
 import FreeTime from "@/components/FreeTime";
 import jwt from 'jwt-decode'
 import axios from "axios";
 
 export default function newEvent() {
     const router = useRouter();
-    const [form, setForm] = useRecoilState(current_form)
     const [userDetails, setUserDetails] = useState({})
     const [userToken, setUserToken] = useState()
     const [event, setEvent] = useState()

@@ -6,20 +6,18 @@ import {
   MutedLink,
   BoldLink,
   SubmitButton,
+  Label,
 } from "./common";
 import { Marginer } from "@/components/marginer";
 import { AccountContext } from "./accountContext";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
-import { current_user } from "@/atoms";
 
 export function LoginForm(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  // const [currentUser, setCurrentUser] = useRecoilState(current_user)
 
   const { switchToSignup } = useContext(AccountContext);
 
@@ -31,7 +29,6 @@ export function LoginForm(props) {
       })
       .then((res) => {
         console.log(res.data.user);
-        // setCurrentUser(res.data);
         localStorage.setItem("userDetails", JSON.stringify(res.data.user));
         localStorage.setItem("token", JSON.stringify(res.data.access));
         Cookies.set("auth", true);
@@ -43,12 +40,15 @@ export function LoginForm(props) {
   return (
     <BoxContainer>
       <FormContainer>
+        <Label>ایمیل</Label>
         <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
           placeholder="ایمیل"
         />
+        <Marginer direction="vertical" margin={10} />
+        <Label>رمز عبور</Label>
         <Input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -57,7 +57,7 @@ export function LoginForm(props) {
         />
       </FormContainer>
       <Marginer direction="vertical" margin={10} />
-      <MutedLink href="#">رمز عبور خود را فراموش کرده اید؟</MutedLink>
+      {/* <MutedLink href="#">رمز عبور خود را فراموش کرده اید؟</MutedLink> */}
       <Marginer direction="vertical" margin="1.6em" />
       <SubmitButton onClick={handleLogin} type="submit">
         ورود

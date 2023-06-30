@@ -8,11 +8,8 @@ import {
   faBell,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./styles.module.scss";
-import { useRecoilState } from "recoil";
-import { current_form } from "@/atoms";
 
 export default function SidebarMenu(props) {
-  const [selected, setSelected] = useRecoilState(current_form);
 
   return (
     <>

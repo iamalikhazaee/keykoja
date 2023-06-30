@@ -76,7 +76,7 @@
         border: 1px solid lightgray;
         padding: 20px 0;
         border-radius: 12px;
-        max-height: 350px;
+        max-height: auto;
         overflow-y: scroll;
 
         @media screen and (max-width:992px) {
@@ -103,15 +103,22 @@
                 border: 1px solid #354F52;
                 border-radius: 12px;
                 padding: 10px 30px;
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: 600;
-                color: rgba(0, 0, 0, 0.6);
+                color: #354F52;
                 text-align: center;
-                cursor: pointer;
+                // cursor: pointer;
                 transition: ease-in .2s;
                 margin: 15px 0;
+                outline: none;
 
                 &:hover {
+                    background-color: #84A98C;
+                    color: #fff;
+                    border: 1px solid #84A98C;
+                }
+
+                &:focus {
                     background-color: #84A98C;
                     color: #fff;
                     border: 1px solid #84A98C;

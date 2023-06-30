@@ -6,10 +6,10 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Cookies from 'js-cookie'
 import styles from '@/styles/guests.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTag } from '@fortawesome/free-solid-svg-icons'
+import { faTag, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 export default function guests() {
-    // const router = useRouter()
+    const router = useRouter()
     const [events, setEvents] = useState([])
     const [guests, setGuests] = useState([])
 
@@ -32,18 +32,28 @@ export default function guests() {
         })
     }, [])
 
-    const returnGuests = (id) => {
-        for (let i = 0; i < guests.length; i++) {
-            if (guests[i].event === id) {
-                return (<h1>ok</h1>)
-            }
-        }
+    const handleBackBtn = () => {
+        router.push({
+            pathname: '/dashboard'
+        })
     }
 
     return (
         <div>
             <Navbar />
             <Container className={styles.container}>
+                <Row>
+                    <nav className={styles.secondNavbar}>
+                        <div className={styles.navbarContainer}>
+                            <div className={styles.backBtn}>
+                                <button onClick={handleBackBtn}>
+                                    <FontAwesomeIcon icon={faChevronRight} />
+                                    بازگشت به داشبورد
+                                </button>
+                            </div>
+                        </div>
+                    </nav>
+                </Row>
                 <h6>در این بخش شما میتوانید رویدادهای خود را به همراه مهمانانی که جلسه رزرو کرده اند مشاهده نمایید.</h6>
                 {events.map((event, i) => (
                     <Row key={i} className={styles.eventContainer}>
@@ -53,26 +63,26 @@ export default function guests() {
                         </div>
                         <div className={styles.guests}>
                             <p>مهمانان این رویداد :</p>
-                                    <Row className={styles.guestsHeader}>
-                                        <Col className={styles.colItem}>نام و نام خانوادگی</Col>
-                                        <Col className={styles.colItem}>ایمیل</Col>
-                                        <Col className={styles.colItem}>تاریخ</Col>
-                                        <Col className={styles.colItem}>ساعت شروع</Col>
-                                        <Col className={styles.colItem}>ساعت پایان</Col>
-                                    </Row>
-                                    {guests.map((guest, index) => (
-                                        guest.event.id === event.id ?
-                                            (
-                                                <Row key={index} className={styles.guestRow}>
-                                                    <Col className={styles.guestRowItem}>{guest.name}</Col>
-                                                    <Col className={styles.guestRowItem}>{guest.email}</Col>
-                                                    <Col className={styles.guestRowItem}>{guest.time.date}</Col>
-                                                    <Col className={styles.guestRowItem}>{guest.time.start_hour}</Col>
-                                                    <Col className={styles.guestRowItem}>{guest.time.end_hour}</Col>
-                                                </Row>
-                                            )
-                                            : (<div key={index} className={styles.noGuestMsg}></div>)
-                                    ))}
+                            <Row className={styles.guestsHeader}>
+                                <Col className={styles.colItem}>نام و نام خانوادگی</Col>
+                                <Col className={styles.colItem}>ایمیل</Col>
+                                <Col className={styles.colItem}>تاریخ</Col>
+                                <Col className={styles.colItem}>ساعت شروع</Col>
+                                <Col className={styles.colItem}>ساعت پایان</Col>
+                            </Row>
+                            {guests.map((guest, index) => (
+                                guest.event.id === event.id ?
+                                    (
+                                        <Row key={index} className={styles.guestRow}>
+                                            <Col className={styles.guestRowItem}>{guest.name}</Col>
+                                            <Col className={styles.guestRowItem}>{guest.email}</Col>
+                                            <Col className={styles.guestRowItem}>{guest.time.date}</Col>
+                                            <Col className={styles.guestRowItem}>{guest.time.start_hour}</Col>
+                                            <Col className={styles.guestRowItem}>{guest.time.end_hour}</Col>
+                                        </Row>
+                                    )
+                                    : (<div key={index} className={styles.noGuestMsg}></div>)
+                            ))}
                         </div>
                     </Row>
                 ))}

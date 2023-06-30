@@ -89,7 +89,7 @@ export default function Navbar() {
                 aria-labelledby="user-menu-button"
               >
                 <li>
-                  <a href="#" className={styles.links}>
+                  <a href="http://localhost:3000/dashboard/profile-settings" className={styles.links}>
                     <FontAwesomeIcon
                       icon={faUserCircle}
                       className={styles.icon}
