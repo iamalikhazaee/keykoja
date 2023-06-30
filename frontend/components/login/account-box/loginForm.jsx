@@ -13,14 +13,11 @@ import { AccountContext } from "./accountContext";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
-import { current_user } from "@/atoms";
 
 export function LoginForm(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  // const [currentUser, setCurrentUser] = useRecoilState(current_user)
 
   const { switchToSignup } = useContext(AccountContext);
 
@@ -32,7 +29,6 @@ export function LoginForm(props) {
       })
       .then((res) => {
         console.log(res.data.user);
-        // setCurrentUser(res.data);
         localStorage.setItem("userDetails", JSON.stringify(res.data.user));
         localStorage.setItem("token", JSON.stringify(res.data.access));
         Cookies.set("auth", true);
