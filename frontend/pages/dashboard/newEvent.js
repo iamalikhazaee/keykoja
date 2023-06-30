@@ -52,7 +52,7 @@ export default function newEvent() {
             }
         )
             .then((res) => {
-                setForm('زمان های آزاد')
+                // setForm('زمان های آزاد')
                 setEvent(res.data.id)
                 console.log(res.data.id)
                 setSteps(2)

@@ -1,7 +1,4 @@
-import {
-  SelectBox,
-  Option,
-} from "./common";
+import { Option } from "./common";
 import { useContext, useState } from "react";
 import { AccountContext } from "./accountContext";
 import { useRouter } from "next/router";
@@ -15,6 +12,7 @@ import { Input } from "@/components/common/authInput";
 import { TextArea } from "@/components/common/Textarea";
 import { Label } from "@/components/common/Label";
 import { Button } from "@/components/common/authBtn";
+import SelectBox from "@/components/common/SelectBox";
 
 export function SignupForm() {
   const { switchToSignin } = useContext(AccountContext);
@@ -23,6 +21,8 @@ export function SignupForm() {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [link, setLink] = useState("");
+  const [field, setField] = useState("");
+  const [position, setPosition] = useState("");
   const router = useRouter();
   const [step, setStep] = useState(1);
 
@@ -99,20 +99,12 @@ export function SignupForm() {
             <div className="w-full flex justify-between">
               <div className="w-1/2 ml-2">
                 <Label>حوزه فعالیت</Label>
-                <SelectBox>
-                  <Option>s</Option>
-                  <Option>s</Option>
-                  <Option>s</Option>
-                </SelectBox>
+                <SelectBox options={["اداری", "آموزشی", "درمانی"]} value={field} setValue={setField} />
               </div>
 
               <div className="w-1/2">
                 <Label>سمت شغلی</Label>
-                <SelectBox>
-                  <Option>s</Option>
-                  <Option>s</Option>
-                  <Option>s</Option>
-                </SelectBox>
+                <SelectBox options={["اداری", "آموزشی", "درمانی"]} value={position} setValue={setPosition} />
               </div>
             </div>
 
@@ -133,9 +125,21 @@ export function SignupForm() {
                 alignItems: "center",
               }}
             >
-              <Image alt="pallette" src={Green} width={300} />
-              <Image alt="pallette" src={Blue} width={300} />
-              <Image alt="pallette" src={Violet} width={300} />
+              <div className="w-full p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg ">
+                <div className="w-1/3 h-12 bg-[#05668D]"></div>
+                <div className="w-1/3 h-12 bg-[#028090]"></div>
+                <div className="w-1/3 h-12 bg-[#00A896]"></div>
+              </div>
+              <div className="w-full p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg">
+                <div className="w-1/3 h-12 bg-[#A3B18A]"></div>
+                <div className="w-1/3 h-12 bg-[#588157]"></div>
+                <div className="w-1/3 h-12 bg-[#3A5A40]"></div>
+              </div>
+              <div className="w-full p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg">
+                <div className="w-1/3 h-12 bg-[#EFD9CE]"></div>
+                <div className="w-1/3 h-12 bg-[#DEC0F1]"></div>
+                <div className="w-1/3 h-12 bg-[#B79CED]"></div>
+              </div>
             </div>
           </div>
 

@@ -5,7 +5,6 @@ import Calender from '@/components/Calender/Calender.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faClock, faLocationPin } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import { JalaliDateTime } from "jalali-date-time";
 import styles from '@/styles/guestPage.module.scss'
 import { toPersianNum } from '@/components/Calender/utils';
 
@@ -19,7 +18,6 @@ export default function eventName() {
     const [guestEmail, setGuestEmail] = useState('')
     const [dates, setDates] = useState([])
     const [time, setTime] = useState()
-    const jalali = JalaliDateTime();
 
     // console.log(selectedDate)
 
