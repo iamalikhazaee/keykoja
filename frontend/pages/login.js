@@ -89,15 +89,11 @@ export default function AccountBox() {
                             {active === "signin" && (
                                 <div className={styles.headerContainer}>
                                     <h2 className={styles.headerText}>ورود به حساب کاربری</h2>
-                                    {/* <h2 className={styles.headerText}>Back</h2> */}
-                                    {/* <h5 className={styles.smallText}>Please sign-in to continue!</h5> */}
                                 </div>
                             )}
                             {active === "signup" && (
                                 <div className={styles.headerContainer}>
                                     <h2 className={styles.headerText}>ثبت نام</h2>
-                                    {/* <h2 className={styles.headerText}>Account</h2> */}
-                                    {/* <h5 className={styles.smallText}>Please sign-up to continue!</h5> */}
                                 </div>
                             )}
                         </div>

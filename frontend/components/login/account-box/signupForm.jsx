@@ -1,16 +1,7 @@
 import {
-  BoxContainer,
-  FormContainer,
-  Input,
-  MutedLink,
-  BoldLink,
-  SubmitButton,
   SelectBox,
   Option,
-  Label,
-  TextArea,
 } from "./common";
-import { Marginer } from "@/components/marginer";
 import { useContext, useState } from "react";
 import { AccountContext } from "./accountContext";
 import { useRouter } from "next/router";
@@ -20,6 +11,10 @@ import Image from "next/image";
 import Green from "@/public/green.png";
 import Blue from "@/public/blue.png";
 import Violet from "@/public/violet.png";
+import { Input } from "@/components/common/authInput";
+import { TextArea } from "@/components/common/Textarea";
+import { Label } from "@/components/common/Label";
+import { Button } from "@/components/common/authBtn";
 
 export function SignupForm() {
   const { switchToSignin } = useContext(AccountContext);
@@ -51,10 +46,10 @@ export function SignupForm() {
   };
 
   return (
-    <BoxContainer>
+    <div className="w-full flex flex-col items-center mt-3">
       {step === 1 && (
         <>
-          <FormContainer>
+          <div className="w-full flex flex-col">
             <Label>ایمیل</Label>
             <Input
               value={email}
@@ -62,7 +57,6 @@ export function SignupForm() {
               type="email"
               placeholder="ایمیل"
             />
-            <Marginer direction="vertical" margin={10} />
             <Label>نام</Label>
             <Input
               value={firstName}
@@ -70,7 +64,6 @@ export function SignupForm() {
               type="text"
               placeholder="نام"
             />
-            <Marginer direction="vertical" margin={10} />
             <Label>نام خانوادگی</Label>
             <Input
               value={lastName}
@@ -78,7 +71,7 @@ export function SignupForm() {
               type="text"
               placeholder="نام خانوادگی"
             />
-            <Marginer direction="vertical" margin={10} />
+
             <Label>رمز عبور</Label>
             <Input
               value={password}
@@ -86,8 +79,6 @@ export function SignupForm() {
               type="password"
               placeholder="رمز عبور"
             />
-            <Marginer direction="vertical" margin={10} />
-            {/* <Input type="password" placeholder="تائید رمز عبور" /> */}
             <Label>لینک</Label>
             <Input
               value={link}
@@ -95,30 +86,36 @@ export function SignupForm() {
               type="text"
               placeholder="لینک"
             />
-          </FormContainer>
-          <Marginer direction="vertical" margin={20} />
-          <SubmitButton type="submit" onClick={() => setStep(2)}>
+          </div>
+
+          <Button type="submit" onClick={() => setStep(2)}>
             ادامه
-          </SubmitButton>
+          </Button>
         </>
       )}
       {step === 2 && (
         <>
-          <FormContainer>
-            <Label>حوزه فعالیت</Label>
-            <SelectBox>
-              <Option>s</Option>
-              <Option>s</Option>
-              <Option>s</Option>
-            </SelectBox>
-            <Marginer direction="vertical" margin={10} />
-            <Label>سمت شغلی</Label>
-            <SelectBox>
-              <Option>s</Option>
-              <Option>s</Option>
-              <Option>s</Option>
-            </SelectBox>
-            <Marginer direction="vertical" margin={10} />
+          <div className="w-full flex flex-col">
+            <div className="w-full flex justify-between">
+              <div className="w-1/2 ml-2">
+                <Label>حوزه فعالیت</Label>
+                <SelectBox>
+                  <Option>s</Option>
+                  <Option>s</Option>
+                  <Option>s</Option>
+                </SelectBox>
+              </div>
+
+              <div className="w-1/2">
+                <Label>سمت شغلی</Label>
+                <SelectBox>
+                  <Option>s</Option>
+                  <Option>s</Option>
+                  <Option>s</Option>
+                </SelectBox>
+              </div>
+            </div>
+
             <Label>تصویر آواتار</Label>
             <Input
               // value={password}
@@ -126,38 +123,44 @@ export function SignupForm() {
               type="file"
               placeholder="تصویر پروفایل"
             />
-            <Marginer direction="vertical" margin={10} />
             <Label>درباره من / پیام خوش آمد گویی</Label>
-            <TextArea></TextArea>
-            <Marginer direction="vertical" margin={10} />
+            <TextArea rows={3}></TextArea>
             <Label>تم رنگ</Label>
-            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-              <Image src={Green} width={300} height={50} />
-              <Marginer direction="vertical" margin={10} />
-              <Image src={Blue} width={300} height={50} />
-              <Marginer direction="vertical" margin={10} />
-              <Image src={Violet} width={300} height={50} />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Image alt="pallette" src={Green} width={300} />
+              <Image alt="pallette" src={Blue} width={300} />
+              <Image alt="pallette" src={Violet} width={300} />
             </div>
-          </FormContainer>
-          <Marginer direction="vertical" margin={20} />
+          </div>
 
-          <SubmitButton type="submit" onClick={() => setStep(2)}>
+          <Button type="submit" onClick={handleRegister}>
             ثبت نام
-          </SubmitButton>
-          <Marginer direction="vertical" margin={20} />
-          <SubmitButton type="submit" onClick={() => setStep(1)}>
+          </Button>
+          <Button type="submit" onClick={() => setStep(1)}>
             بازگشت
-          </SubmitButton>
+          </Button>
         </>
       )}
-      <Marginer direction="vertical" margin="1em" />
-      <MutedLink href="#">
+      <span
+        className="text-[10px] text-gray-400 font-medium decoration-transparent"
+        href="#"
+      >
         حساب کاربری دارید؟
-        <BoldLink href="#" onClick={switchToSignin}>
+        <span
+          className="text-[10px] text-[#2f5061] font-medium decoration-transparent mx-1 cursor-pointer"
+          href="#"
+          onClick={switchToSignin}
+        >
           وارد شوید
-        </BoldLink>
-      </MutedLink>
-    </BoxContainer>
+        </span>
+      </span>
+    </div>
   );
 }
 

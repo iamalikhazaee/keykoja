@@ -1,6 +1,6 @@
-// @tailwind base;
-// @tailwind components;
-// @tailwind utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @font-face {
   font-family: 'IRAN-SANS';
@@ -33,7 +33,7 @@ body {
 
 * {
   font-family: 'IRAN-SANS';
-  // direction: rtl !important;
+  direction: rtl !important;
 
   ::-webkit-scrollbar {
     width: 10px;

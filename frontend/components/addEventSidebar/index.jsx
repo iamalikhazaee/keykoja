@@ -10,192 +10,162 @@ import {
 import styles from "./styles.module.scss";
 
 export default function SidebarMenu(props) {
-
   return (
     <>
-      <div className={styles.responsiveMenuContainer}>
-        <div className={styles.responsiveMenu}>
-          <ul className={styles.menu}>
-            <li className={styles.menuItem}>
+      <div
+        className={`${styles.responsiveMenuContainer} w-full block border border-b-[1px] border-gray-300`}
+      >
+        <div className="w-full">
+          <ul className="list-none flex overflow-x-scroll p-0 m-0 w-full py-4 px-2">
+            <li className="min-w-[130px] flex justify-center items-center">
               <a
                 href="#"
-                className={`${props.step == 1 ? styles.active : null} ${
-                  styles.itemLink
+                className={`decoration-transparent text-xs text-gray-400 hover:text-[#52819A]  ${
+                  props.step == 1 ? "text-[#52819A]" : ""
                 }`}
                 onClick={() => setSelected("تنظیمات پایه")}
               >
-                <FontAwesomeIcon
-                  icon={faListCheck}
-                  className={styles.itemIcon}
-                />
-                <span className={styles.itemText}>تنظیمات پایه</span>
+                <FontAwesomeIcon icon={faListCheck} className="ml-2" />
+                <span className="w-full">تنظیمات پایه</span>
               </a>
             </li>
-            <li className={styles.menuItem}>
+            <li className="min-w-[130px] flex justify-center items-center">
               <a
                 href="#"
-                className={styles.itemLink}
+                className="decoration-transparent text-xs text-gray-400 hover:text-[#52819A]"
                 // onClick={() => setSelected('زمان های آزاد')}
               >
-                <FontAwesomeIcon icon={faClock} className={styles.itemIcon} />
-                <span className={styles.itemText}>زمان های آزاد</span>
+                <FontAwesomeIcon icon={faClock} className="ml-2" />
+                <span className="w-full">زمان های آزاد</span>
               </a>
             </li>
-            <li className={styles.menuItem}>
+            <li className="min-w-[130px] flex justify-center items-center">
               <a
                 href="#"
-                className={styles.itemLink}
+                className="decoration-transparent text-xs text-gray-400 hover:text-[#52819A]"
                 // onClick={() => setSelected('تنظیمات پیشرفته')}
               >
-                <FontAwesomeIcon icon={faGears} className={styles.itemIcon} />
-                <span className={styles.itemText}>تنظیمات پیشرفته</span>
+                <FontAwesomeIcon icon={faGears} className="ml-2" />
+                <span className="w-full">تنظیمات پیشرفته</span>
               </a>
             </li>
-            <li className={styles.menuItem}>
+            <li className="min-w-[130px] flex justify-center items-center">
               <a
                 href="#"
-                className={styles.itemLink}
+                className="decoration-transparent text-xs text-gray-400 hover:text-[#52819A]"
                 // onClick={() => setSelected('پرسش از مهمان')}
               >
-                <FontAwesomeIcon
-                  icon={faQuestion}
-                  className={styles.itemIcon}
-                />
-                <span className={styles.itemText}>پرسش از مهمان</span>
+                <FontAwesomeIcon icon={faQuestion} className="ml-2" />
+                <span className="w-full">پرسش از مهمان</span>
               </a>
             </li>
-            <li className={styles.menuItem}>
+            <li className="min-w-[130px] flex justify-center items-center">
               <a
                 href="#"
-                className={styles.itemLink}
+                className="decoration-transparent text-xs text-gray-400 hover:text-[#52819A]"
                 // onClick={() => setSelected('اطلاع رسانی ها')}
               >
-                <FontAwesomeIcon icon={faBell} className={styles.itemIcon} />
-                <span className={styles.itemText}>اطلاع رسانی ها</span>
+                <FontAwesomeIcon icon={faBell} className="ml-2" />
+                <span className="w-full">اطلاع رسانی ها</span>
               </a>
             </li>
           </ul>
         </div>
       </div>
 
-      <div className={styles.sidebarContainer}>
-        <div className={styles.sidebarMenu}>
-          <ul className={styles.menu}>
-            <li className={styles.menuItem}>
+      <div
+        className={`${styles.sidebarContainer} p-4 flex flex-col items-center sticky top-0`}
+      >
+        <div className="w-full">
+          <ul className="list-none flex flex-col items-start p-2 m-0">
+            <li className="my-4">
               <a
                 href="#"
-                className={`${props.step == 1 ? styles.active : null} ${
-                  styles.itemLink
-                }`}
+                className={`${
+                  props.step == 1 ? "text-[rgb(132,169,140)]" : ""
+                } decoration-transparent flex items-center font-semibold text-slate-400 transition-all duration-75 hover:text-[#84A98C] `}
                 // onClick={() => setSelected('تنظیمات پایه')}
               >
                 <FontAwesomeIcon
                   icon={faListCheck}
-                  className={styles.itemIcon}
+                  className={`ml-2 ${styles.itemIcon}`}
                 />
-                <span className={styles.itemText}>تنظیمات پایه</span>
+                <span className={`${styles.itemText} text-xs`}>
+                  تنظیمات پایه
+                </span>
               </a>
             </li>
-            <li className={styles.menuItem}>
+            <li className="my-4">
               <a
                 href="#"
-                className={`${props.step == 2 ? styles.active : null} ${
-                  styles.itemLink
-                }`}
+                className={`${
+                  props.step == 2 ? "text-[rgb(132,169,140)]" : ""
+                } decoration-transparent flex items-center font-semibold text-slate-400 transition-all duration-75 hover:text-[#84A98C] `}
                 // onClick={() => setSelected('زمان های آزاد')}
               >
-                <FontAwesomeIcon icon={faClock} className={styles.itemIcon} />
-                <span className={styles.itemText}>زمان های آزاد</span>
+                <FontAwesomeIcon
+                  icon={faClock}
+                  className={`ml-2 ${styles.itemIcon}`}
+                />
+                <span className={`${styles.itemText} text-xs`}>
+                  زمان های آزاد
+                </span>
               </a>
             </li>
-            <li className={styles.menuItem}>
+            <li className="my-4">
               <a
                 href="#"
-                className={`${props.step == 3 ? styles.active : null} ${
-                  styles.itemLink
-                }`}
+                className={`${
+                  props.step == 3 ? "text-[rgb(132,169,140)]" : ""
+                } decoration-transparent flex items-center font-semibold text-slate-400 transition-all duration-75 hover:text-[#84A98C] `}
                 // onClick={() => setSelected('تنظیمات پیشرفته')}
               >
-                <FontAwesomeIcon icon={faGears} className={styles.itemIcon} />
-                <span className={styles.itemText}>تنظیمات پیشرفته</span>
+                <FontAwesomeIcon
+                  icon={faGears}
+                  className={`ml-2 ${styles.itemIcon}`}
+                />
+                <span className={`${styles.itemText} text-xs`}>
+                  تنظیمات پیشرفته
+                </span>
               </a>
             </li>
-            <li className={styles.menuItem}>
+            <li className="my-4">
               <a
                 href="#"
-                className={`${props.step == 4 ? styles.active : null} ${
-                  styles.itemLink
-                }`}
+                className={`${
+                  props.step == 4 ? "text-[rgb(132,169,140)]" : ""
+                } decoration-transparent flex items-center font-semibold text-slate-400 transition-all duration-75 hover:text-[#84A98C] `}
                 // onClick={() => setSelected('پرسش از مهمان')}
               >
                 <FontAwesomeIcon
                   icon={faQuestion}
-                  className={styles.itemIcon}
+                  className={`ml-2 ${styles.itemIcon}`}
                 />
-                <span className={styles.itemText}>پرسش از مهمان</span>
+                <span className={`${styles.itemText} text-xs`}>
+                  پرسش از مهمان
+                </span>
               </a>
             </li>
-            <li className={styles.menuItem}>
+            <li className="my-4">
               <a
                 href="#"
-                className={`${props.step == 4 ? styles.active : null} ${
-                  styles.itemLink
-                }`}
+                className={`${
+                  props.step == 5 ? "text-[rgb(132,169,140)]" : ""
+                } decoration-transparent flex items-center font-semibold text-slate-400 transition-all duration-75 hover:text-[#84A98C] `}
                 // onClick={() => setSelected('اطلاع رسانی ها')}
               >
-                <FontAwesomeIcon icon={faBell} className={styles.itemIcon} />
-                <span className={styles.itemText}>اطلاع رسانی ها</span>
+                <FontAwesomeIcon
+                  icon={faBell}
+                  className={`ml-2 ${styles.itemIcon}`}
+                />
+                <span className={`${styles.itemText} text-xs`}>
+                  اطلاع رسانی ها
+                </span>
               </a>
             </li>
           </ul>
         </div>
       </div>
-      {/* <div className="container-fluid">
-        <div className="row">
-          <div className="bg-dark col-auto col-md-2 min-vh-100 d-flex flex-column justify-content-between">
-            <div>
-              <a className="text-decoration-none text-white d-flex align-items-center ms-3 mt-3 d-none d-sm-inline">
-                <span className="ms-1 py-2 py-sm-0 fs-4 d-none d-sm-inline">
-                  Brand
-                </span>
-              </a>
-              <hr className="text-secondary d-none d-sm-block" />
-              <ul className="nav nav-pills flex-column mt-3 mt-sm-0">
-                <li className="nav-item text-white fs-4 my-1 py-2 py-sm-0">
-                  <a href="#" className="nav-link" aria-current="page">
-                    <FontAwesomeIcon icon={faListCheck} />
-                    <span className="ms-3 d-none d-sm-inline">Dashboard</span>
-                  </a>
-                </li>
-                <li className="nav-item text-white fs-4 my-1 py-2 py-sm-0">
-                  <a href="#" className="nav-link" aria-current="page">
-                    <FontAwesomeIcon icon={faClock} />
-                    <span className="ms-3 d-none d-sm-inline">Home</span>
-                  </a>
-                </li>
-                <li className="nav-item text-white fs-4 my-1 py-2 py-sm-0">
-                  <a href="#" className="nav-link" aria-current="page">
-                    <FontAwesomeIcon icon={faGears} />
-                    <span className="ms-3 d-none d-sm-inline">Orders</span>
-                  </a>
-                </li>
-                <li className="nav-item text-white fs-4 my-1 py-2 py-sm-0">
-                  <a href="#" className="nav-link" aria-current="page">
-                    <FontAwesomeIcon icon={faQuestion} />
-                    <span className="ms-3 d-none d-sm-inline">Orders</span>
-                  </a>
-                </li>
-                <li className="nav-item text-white fs-4 my-1 py-2 py-sm-0">
-                  <a href="#" className="nav-link" aria-current="page">
-                    <FontAwesomeIcon icon={faBell} />
-                    <span className="ms-3 d-none d-sm-inline">Orders</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 }
