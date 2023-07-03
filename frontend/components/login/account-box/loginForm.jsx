@@ -29,11 +29,11 @@ export function LoginForm () {
       })
       .then((res) => {
         console.log(res.data);
-        // localStorage.setItem("userDetails", JSON.stringify(res.data.user));
-        // localStorage.setItem("token", JSON.stringify(res.data.access));
-        // Cookies.set("auth", true);
-        // Cookies.set("token", JSON.stringify(res.data.access));
-        // router.push("/dashboard");
+        localStorage.setItem("userDetails", JSON.stringify(res.data.user));
+        localStorage.setItem("token", JSON.stringify(res.data.access));
+        Cookies.set("auth", true);
+        Cookies.set("token", JSON.stringify(res.data.access));
+        router.push("/dashboard");
       });
   };
 

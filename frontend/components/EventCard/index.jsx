@@ -25,6 +25,7 @@ import TimePicker from "../TimePicker";
 import Calender from "../Calender/Calender.component";
 import CustomizedDatePicker from "../DatePicker";
 import { toPersianNum, toEnglishNum } from "../Calender/utils";
+import ConfirmationModal from "../Modals/Confirmation";
 
 const PinkSwitch = styled(Switch)(({ theme }) => ({
   "& .MuiSwitch-switchBase.Mui-checked": {
@@ -154,7 +155,7 @@ export default function EventCard(props) {
               end_hour: toEnglishNum(times[i].end_hour),
             })
             .then((res) => {
-              console.log(res.data)
+              console.log(res.data);
             });
         });
     }
@@ -451,7 +452,17 @@ export default function EventCard(props) {
                 setOpenDelete(true);
               }}
             />
-            <Modal
+            {/* {openDelete && ( */}
+              <ConfirmationModal
+                text="آیا برای حذف کردن اطمینان دارید؟"
+                confirmText="بله"
+                cancelText="خیر"
+                btnAction={() => props.deleteEvent(props.item.id, props.index)}
+                open={openDelete}
+                setOpen={setOpenDelete}
+              />
+             {/* )} */}
+            {/* <Modal
               aria-labelledby="transition-modal-title"
               aria-describedby="transition-modal-description"
               open={openDelete}
@@ -488,7 +499,7 @@ export default function EventCard(props) {
                   </div>
                 </Box>
               </Fade>
-            </Modal>
+            </Modal> */}
           </div>
         </Card.Header>
         <Card.Body className={!enable && styles.disabledBody}>

@@ -10,16 +10,17 @@ import axios from "axios";
 import TimePicker from "../TimePicker";
 import { toPersianNum, toEnglishNum } from "../Calender/utils";
 import { useRouter } from "next/router";
+import NotificationModal from "../Modals/Notification";
 
 export default function FreeTime(props) {
+  const [openModal, setOpenModal] = useState(false);
   const [date, setDate] = useState();
   const [startHour, setStartHour] = useState(toPersianNum("00"));
   const [startMin, setStartMin] = useState(toPersianNum("00"));
   const [endHour, setEndHour] = useState(toPersianNum("00"));
   const [endMin, setEndMin] = useState(toPersianNum("00"));
   const [times, setTimes] = useState([]);
-  const router = useRouter()
-  // const [timeIsSet, setTimeIsSet] = useState(false);
+  const router = useRouter();
 
   const handleAddTime = () => {
     if (!date) {
@@ -52,8 +53,8 @@ export default function FreeTime(props) {
         })
         .then((res) => {
           console.log(res.data);
-          setTimes([])
-          router.push("/dashboard");
+          setTimes([]);
+          setOpenModal(true);
         });
     }
   };
@@ -63,6 +64,10 @@ export default function FreeTime(props) {
     copyArray.splice(index, 1);
     setTimes(copyArray);
   };
+
+  const clickNotificationBtn = () => {
+    router.push("/dashboard");
+  }
 
   return (
     <>
@@ -145,6 +150,13 @@ export default function FreeTime(props) {
       <Row className={styles.addAllBtn}>
         <button onClick={handleAddAll}>افزودن تایم ها</button>
       </Row>
+      <NotificationModal
+        text="رویداد مورد نظر شما با موفقیت افزوده شد."
+        confirmText="متوجه شدم"
+        open={openModal}
+        setOpen={setOpenModal}
+        btnAction={clickNotificationBtn}
+      />
     </>
   );
 }
