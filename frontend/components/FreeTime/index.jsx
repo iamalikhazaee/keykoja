@@ -11,9 +11,11 @@ import TimePicker from "../TimePicker";
 import { toPersianNum, toEnglishNum } from "../Calender/utils";
 import { useRouter } from "next/router";
 import NotificationModal from "../Modals/Notification";
+import ConfirmationModal from "../Modals/Confirmation";
 
 export default function FreeTime(props) {
   const [openModal, setOpenModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [date, setDate] = useState();
   const [startHour, setStartHour] = useState(toPersianNum("00"));
   const [startMin, setStartMin] = useState(toPersianNum("00"));
@@ -67,7 +69,7 @@ export default function FreeTime(props) {
 
   const clickNotificationBtn = () => {
     router.push("/dashboard");
-  }
+  };
 
   return (
     <>
@@ -135,12 +137,17 @@ export default function FreeTime(props) {
                     <FontAwesomeIcon
                       id={styles.trashIcon}
                       icon={faTrash}
-                      onClick={() => deleteSelectedTime(index)}
+                      onClick={() => setOpenDeleteModal(true)}
+                    />
+                    <ConfirmationModal
+                      text="آیا از حذف این تایم اطمینان دارید؟"
+                      confirmText="بله"
+                      cancelText="خیر"
+                      btnAction={() => deleteSelectedTime(index)}
+                      open={openDeleteModal}
+                      setOpen={setOpenDeleteModal}
                     />
                   </td>
-                  {/* <td>
-                    <FontAwesomeIcon id={styles.editIcon} icon={faEdit} />
-                  </td> */}
                 </tr>
               ))}
             </tbody>
