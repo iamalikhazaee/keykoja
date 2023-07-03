@@ -29,11 +29,11 @@ export function LoginForm () {
       })
       .then((res) => {
         console.log(res.data);
-        // localStorage.setItem("userDetails", JSON.stringify(res.data.user));
-        // localStorage.setItem("token", JSON.stringify(res.data.access));
-        // Cookies.set("auth", true);
-        // Cookies.set("token", JSON.stringify(res.data.access));
-        // router.push("/dashboard");
+        localStorage.setItem("userDetails", JSON.stringify(res.data.user));
+        localStorage.setItem("token", JSON.stringify(res.data.access));
+        Cookies.set("auth", true);
+        Cookies.set("token", JSON.stringify(res.data.access));
+        router.push("/dashboard");
       });
   };
 
@@ -55,7 +55,7 @@ export function LoginForm () {
           placeholder="رمز عبور"
         />
       </div>
-      <Button onClick={handleLogin} type="submit">
+      <Button onClick={handleLogin} type="submit" bg={'#354F52'} text={'#fff'}>
         ورود
       </Button>
       <span className="text-[10px] text-gray-400 font-medium decoration-transparent" href="">

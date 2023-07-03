@@ -13,6 +13,11 @@ import { TextArea } from "@/components/common/Textarea";
 import { Label } from "@/components/common/Label";
 import { Button } from "@/components/common/authBtn";
 import SelectBox from "@/components/common/SelectBox";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronCircleRight,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 export function SignupForm() {
   const { switchToSignin } = useContext(AccountContext);
@@ -88,7 +93,12 @@ export function SignupForm() {
             />
           </div>
 
-          <Button type="submit" onClick={() => setStep(2)}>
+          <Button
+            type="submit"
+            onClick={() => setStep(2)}
+            bg={"#354F52"}
+            text={"#fff"}
+          >
             ادامه
           </Button>
         </>
@@ -99,12 +109,20 @@ export function SignupForm() {
             <div className="w-full flex justify-between">
               <div className="w-1/2 ml-2">
                 <Label>حوزه فعالیت</Label>
-                <SelectBox options={["اداری", "آموزشی", "درمانی"]} value={field} setValue={setField} />
+                <SelectBox
+                  options={["اداری", "آموزشی", "درمانی"]}
+                  value={field}
+                  setValue={setField}
+                />
               </div>
 
               <div className="w-1/2">
                 <Label>سمت شغلی</Label>
-                <SelectBox options={["اداری", "آموزشی", "درمانی"]} value={position} setValue={setPosition} />
+                <SelectBox
+                  options={["اداری", "آموزشی", "درمانی"]}
+                  value={position}
+                  setValue={setPosition}
+                />
               </div>
             </div>
 
@@ -125,30 +143,44 @@ export function SignupForm() {
                 alignItems: "center",
               }}
             >
-              <div className="w-full p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg ">
-                <div className="w-1/3 h-12 bg-[#05668D]"></div>
-                <div className="w-1/3 h-12 bg-[#028090]"></div>
-                <div className="w-1/3 h-12 bg-[#00A896]"></div>
-              </div>
-              <div className="w-full p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg">
-                <div className="w-1/3 h-12 bg-[#A3B18A]"></div>
-                <div className="w-1/3 h-12 bg-[#588157]"></div>
-                <div className="w-1/3 h-12 bg-[#3A5A40]"></div>
-              </div>
-              <div className="w-full p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg">
-                <div className="w-1/3 h-12 bg-[#EFD9CE]"></div>
-                <div className="w-1/3 h-12 bg-[#DEC0F1]"></div>
-                <div className="w-1/3 h-12 bg-[#B79CED]"></div>
+              <div className="w-full flex">
+                <div className="w-1/3 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg ">
+                  <div className="w-1/3 h-12 bg-[#05668D]"></div>
+                  <div className="w-1/3 h-12 bg-[#028090]"></div>
+                  <div className="w-1/3 h-12 bg-[#00A896]"></div>
+                </div>
+                <div className="w-1/3 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg">
+                  <div className="w-1/3 h-12 bg-[#A3B18A]"></div>
+                  <div className="w-1/3 h-12 bg-[#588157]"></div>
+                  <div className="w-1/3 h-12 bg-[#3A5A40]"></div>
+                </div>
+                <div className="w-1/3 p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg">
+                  <div className="w-1/3 h-12 bg-[#EFD9CE]"></div>
+                  <div className="w-1/3 h-12 bg-[#DEC0F1]"></div>
+                  <div className="w-1/3 h-12 bg-[#B79CED]"></div>
+                </div>
               </div>
             </div>
           </div>
 
-          <Button type="submit" onClick={handleRegister}>
-            ثبت نام
-          </Button>
-          <Button type="submit" onClick={() => setStep(1)}>
-            بازگشت
-          </Button>
+          <div className="flex w-full mb-4">
+            <Button
+              type="submit"
+              onClick={handleRegister}
+              bg={"#354F52"}
+              text={"#fff"}
+            >
+              ثبت نام
+            </Button>
+            <Button
+              type="submit"
+              onClick={() => setStep(1)}
+              bg={"#f6f7f8"}
+              text={"#707475"}
+            >
+              بازگشت
+            </Button>
+          </div>
         </>
       )}
       <span

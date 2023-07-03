@@ -1,8 +1,10 @@
 .cardContainer {
-
     margin-bottom: 1.5rem;
+    max-height: 600px;
 
     .card {
+        height: 100%;
+        width: 100%;
 
         .cardHeader {
             width: 100%;
@@ -28,13 +30,13 @@
         }
 
         .cardTitle {
-            font-size: 17px;
+            font-size: 14px;
             font-weight: 600;
             margin: .5rem 0;
         }
 
         .cardSubtitle {
-            font-size: 13px;
+            font-size: 11px;
             margin: .5rem 0;
         }
 

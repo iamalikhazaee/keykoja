@@ -7,6 +7,7 @@ import { faCalendarAlt, faClock, faLocationPin } from '@fortawesome/free-solid-s
 import axios from 'axios';
 import styles from '@/styles/guestPage.module.scss'
 import { toPersianNum } from '@/components/Calender/utils';
+import NotificationModal from '@/components/Modals/Notification';
 
 export default function eventName() {
 
@@ -18,6 +19,7 @@ export default function eventName() {
     const [guestEmail, setGuestEmail] = useState('')
     const [dates, setDates] = useState([])
     const [time, setTime] = useState()
+    const [openModal, setOpenModal] = useState(false)
 
     // console.log(selectedDate)
 
@@ -29,15 +31,11 @@ export default function eventName() {
             .then(axios.spread((res1, res2) => {
                 setEventDetails(res1.data[0])
                 setEventTimes(res2.data)
-                // console.log(res1.data[0])
-                // console.log(res2.data)
                 const d = []
                 for (let i = 0; i < res2.data.length; i++) {
-                    // setDates([...dates, res2.data[i].date])
                     d.push(res2.data[i].date)
                 }
                 setDates(d)
-                // console.log(d)
             }))
     }, [])
 
@@ -47,14 +45,12 @@ export default function eventName() {
         setSelectedDate(d)
         for (let i = 0; i < eventTimes.length; i++) {
             if (eventTimes[i].date === d.date) {
-                // console.log(eventTimes[i])
                 if (eventTimes[i].is_enable) {
                     t.push(eventTimes[i])
                 }
             }
         }
         setTime(t)
-        // console.log(t)
     }
 
     const addGuest = () => {
@@ -81,6 +77,11 @@ export default function eventName() {
             ]).then(axios.spread((res1, res2) => {
                 console.log(res1)
                 console.log(res2)
+                setOpenModal(true)
+                setSelectedDate(undefined)
+                setSelectedTime(undefined)
+                setGuestName('')
+                setGuestEmail('')
             }))
         }
     }
@@ -151,6 +152,13 @@ export default function eventName() {
                     </Button>
                 </Col>
             </Row>
+            <NotificationModal
+                text="زمان انتخابی شما برای این رویداد با موفقیت ثبت شد."
+                confirmText="متوجه شدم"
+                open={openModal}
+                setOpen={setOpenModal}
+                btnAction={() => setTime(undefined)}
+            />
         </>
     )
 }

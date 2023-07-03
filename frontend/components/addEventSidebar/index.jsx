@@ -20,10 +20,10 @@ export default function SidebarMenu(props) {
             <li className="min-w-[130px] flex justify-center items-center">
               <a
                 href="#"
-                className={`decoration-transparent text-xs text-gray-400 hover:text-[#52819A]  ${
-                  props.step == 1 ? "text-[#52819A]" : ""
-                }`}
-                onClick={() => setSelected("تنظیمات پایه")}
+                className={`${
+                  props.step === 1 ? "text-[#52819A]" : "text-gray-400"
+                } decoration-transparent text-xs hover:text-[#52819A]`}
+                // onClick={() => setSelected("تنظیمات پایه")}
               >
                 <FontAwesomeIcon icon={faListCheck} className="ml-2" />
                 <span className="w-full">تنظیمات پایه</span>
@@ -32,7 +32,9 @@ export default function SidebarMenu(props) {
             <li className="min-w-[130px] flex justify-center items-center">
               <a
                 href="#"
-                className="decoration-transparent text-xs text-gray-400 hover:text-[#52819A]"
+                className={`${
+                  props.step === 2 ? "text-[#52819A]" : "text-gray-400"
+                } decoration-transparent text-xs hover:text-[#52819A]`}
                 // onClick={() => setSelected('زمان های آزاد')}
               >
                 <FontAwesomeIcon icon={faClock} className="ml-2" />
@@ -42,7 +44,9 @@ export default function SidebarMenu(props) {
             <li className="min-w-[130px] flex justify-center items-center">
               <a
                 href="#"
-                className="decoration-transparent text-xs text-gray-400 hover:text-[#52819A]"
+                className={`${
+                  props.step === 3 ? "text-[#52819A]" : "text-gray-400"
+                } decoration-transparent text-xs hover:text-[#52819A]`}
                 // onClick={() => setSelected('تنظیمات پیشرفته')}
               >
                 <FontAwesomeIcon icon={faGears} className="ml-2" />
@@ -52,7 +56,9 @@ export default function SidebarMenu(props) {
             <li className="min-w-[130px] flex justify-center items-center">
               <a
                 href="#"
-                className="decoration-transparent text-xs text-gray-400 hover:text-[#52819A]"
+                className={`${
+                  props.step === 4 ? "text-[#52819A]" : "text-gray-400"
+                } decoration-transparent text-xs hover:text-[#52819A]`}
                 // onClick={() => setSelected('پرسش از مهمان')}
               >
                 <FontAwesomeIcon icon={faQuestion} className="ml-2" />
@@ -62,7 +68,9 @@ export default function SidebarMenu(props) {
             <li className="min-w-[130px] flex justify-center items-center">
               <a
                 href="#"
-                className="decoration-transparent text-xs text-gray-400 hover:text-[#52819A]"
+                className={`${
+                  props.step === 5 ? "text-[#52819A]" : "text-gray-400"
+                } decoration-transparent text-xs hover:text-[#52819A]`}
                 // onClick={() => setSelected('اطلاع رسانی ها')}
               >
                 <FontAwesomeIcon icon={faBell} className="ml-2" />
@@ -82,8 +90,10 @@ export default function SidebarMenu(props) {
               <a
                 href="#"
                 className={`${
-                  props.step == 1 ? "text-[rgb(132,169,140)]" : ""
-                } decoration-transparent flex items-center font-semibold text-slate-400 transition-all duration-75 hover:text-[#84A98C] `}
+                  props.step === 1
+                    ? "text-[rgb(132,169,140)]"
+                    : "text-slate-400"
+                } decoration-transparent flex items-center font-semibold  transition-all duration-75 hover:text-[#84A98C] `}
                 // onClick={() => setSelected('تنظیمات پایه')}
               >
                 <FontAwesomeIcon
@@ -99,8 +109,8 @@ export default function SidebarMenu(props) {
               <a
                 href="#"
                 className={`${
-                  props.step == 2 ? "text-[rgb(132,169,140)]" : ""
-                } decoration-transparent flex items-center font-semibold text-slate-400 transition-all duration-75 hover:text-[#84A98C] `}
+                  props.step == 2 ? "text-[rgb(132,169,140)]" : "text-slate-400"
+                } decoration-transparent flex items-center font-semibold transition-all duration-75 hover:text-[#84A98C] `}
                 // onClick={() => setSelected('زمان های آزاد')}
               >
                 <FontAwesomeIcon
@@ -116,8 +126,8 @@ export default function SidebarMenu(props) {
               <a
                 href="#"
                 className={`${
-                  props.step == 3 ? "text-[rgb(132,169,140)]" : ""
-                } decoration-transparent flex items-center font-semibold text-slate-400 transition-all duration-75 hover:text-[#84A98C] `}
+                  props.step == 3 ? "text-[rgb(132,169,140)]" : "text-slate-400"
+                } decoration-transparent flex items-center font-semibold transition-all duration-75 hover:text-[#84A98C] `}
                 // onClick={() => setSelected('تنظیمات پیشرفته')}
               >
                 <FontAwesomeIcon
@@ -133,8 +143,8 @@ export default function SidebarMenu(props) {
               <a
                 href="#"
                 className={`${
-                  props.step == 4 ? "text-[rgb(132,169,140)]" : ""
-                } decoration-transparent flex items-center font-semibold text-slate-400 transition-all duration-75 hover:text-[#84A98C] `}
+                  props.step == 4 ? "text-[rgb(132,169,140)]" : "text-slate-400"
+                } decoration-transparent flex items-center font-semibold transition-all duration-75 hover:text-[#84A98C] `}
                 // onClick={() => setSelected('پرسش از مهمان')}
               >
                 <FontAwesomeIcon
@@ -150,8 +160,8 @@ export default function SidebarMenu(props) {
               <a
                 href="#"
                 className={`${
-                  props.step == 5 ? "text-[rgb(132,169,140)]" : ""
-                } decoration-transparent flex items-center font-semibold text-slate-400 transition-all duration-75 hover:text-[#84A98C] `}
+                  props.step == 5 ? "text-[rgb(132,169,140)]" : "text-slate-400"
+                } decoration-transparent flex items-center font-semibold transition-all duration-75 hover:text-[#84A98C] `}
                 // onClick={() => setSelected('اطلاع رسانی ها')}
               >
                 <FontAwesomeIcon

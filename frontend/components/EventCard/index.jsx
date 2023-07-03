@@ -25,6 +25,7 @@ import TimePicker from "../TimePicker";
 import Calender from "../Calender/Calender.component";
 import CustomizedDatePicker from "../DatePicker";
 import { toPersianNum, toEnglishNum } from "../Calender/utils";
+import ConfirmationModal from "../Modals/Confirmation";
 
 const PinkSwitch = styled(Switch)(({ theme }) => ({
   "& .MuiSwitch-switchBase.Mui-checked": {
@@ -57,6 +58,8 @@ export default function EventCard(props) {
   const [startMin, setStartMin] = useState(toPersianNum("00"));
   const [endHour, setEndHour] = useState(toPersianNum("00"));
   const [endMin, setEndMin] = useState(toPersianNum("00"));
+  const [deleteTimeModal, setDeleteTimeModal] = useState(false);
+  const [deleteExtraTimeModal, setDeleteExtraTimeModal] = useState(false);
 
   useEffect(() => {
     setUserToken(localStorage.getItem("token"));
@@ -154,7 +157,7 @@ export default function EventCard(props) {
               end_hour: toEnglishNum(times[i].end_hour),
             })
             .then((res) => {
-              console.log(res.data)
+              console.log(res.data);
             });
         });
     }
@@ -365,11 +368,19 @@ export default function EventCard(props) {
                                       <FontAwesomeIcon
                                         icon={faTrash}
                                         id={styles.trashIcon}
-                                        onClick={() =>
-                                          deleteTime(item.id, index)
-                                        }
+                                        onClick={() => setDeleteTimeModal(true)}
                                       />
                                     </td>
+                                    <ConfirmationModal
+                                      text="آیا از حذف کردن این تایم اطمینان دارید؟"
+                                      confirmText="بله"
+                                      cancelText="خیر"
+                                      btnAction={() =>
+                                        deleteTime(item.id, index)
+                                      }
+                                      open={deleteTimeModal}
+                                      setOpen={setDeleteTimeModal}
+                                    />
                                   </tr>
                                 ))}
                                 {extraTimes.map((item, index) => (
@@ -381,9 +392,19 @@ export default function EventCard(props) {
                                       <FontAwesomeIcon
                                         icon={faTrash}
                                         id={styles.trashIcon}
-                                        onClick={() => deleteExtraTime(index)}
+                                        onClick={() =>
+                                          setDeleteExtraTimeModal(true)
+                                        }
                                       />
                                     </td>
+                                    <ConfirmationModal
+                                      text="آیا از حذف کردن این تایم اطمینان دارید؟"
+                                      confirmText="بله"
+                                      cancelText="خیر"
+                                      btnAction={() => deleteExtraTime(index)}
+                                      open={deleteExtraTimeModal}
+                                      setOpen={setDeleteExtraTimeModal}
+                                    />
                                   </tr>
                                 ))}
                               </tbody>
@@ -451,44 +472,6 @@ export default function EventCard(props) {
                 setOpenDelete(true);
               }}
             />
-            <Modal
-              aria-labelledby="transition-modal-title"
-              aria-describedby="transition-modal-description"
-              open={openDelete}
-              onClose={() => setOpenDelete(false)}
-              closeAfterTransition
-              slots={{ backdrop: Backdrop }}
-              slotProps={{
-                backdrop: {
-                  timeout: 500,
-                },
-              }}
-            >
-              <Fade in={openDelete}>
-                <Box className={styles.deleteModal}>
-                  <div className={styles.modalText}>
-                    <p>آیا برای حذف کردن اطمینان دارید؟</p>
-                  </div>
-                  <div className={styles.modalBtns}>
-                    <Button
-                      className={styles.btn}
-                      onClick={() => {
-                        props.deleteEvent(props.item.id, props.index);
-                        setOpenDelete(false);
-                      }}
-                    >
-                      بله
-                    </Button>
-                    <Button
-                      className={styles.btn}
-                      onClick={() => setOpenDelete(false)}
-                    >
-                      خیر
-                    </Button>
-                  </div>
-                </Box>
-              </Fade>
-            </Modal>
           </div>
         </Card.Header>
         <Card.Body className={!enable && styles.disabledBody}>
@@ -530,6 +513,14 @@ export default function EventCard(props) {
             <FontAwesomeIcon icon={faCopy} />
           </Button>
         </Card.Footer>
+        <ConfirmationModal
+          text="آیا از حذف کردن این رویداد اطمینان دارید؟"
+          confirmText="بله"
+          cancelText="خیر"
+          btnAction={() => props.deleteEvent(props.item.id, props.index)}
+          open={openDelete}
+          setOpen={setOpenDelete}
+        />
       </Card>
     </Col>
   );
