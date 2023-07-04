@@ -2,21 +2,16 @@ import { Option } from "./common";
 import { useContext, useState } from "react";
 import { AccountContext } from "./accountContext";
 import { useRouter } from "next/router";
-import Cookies from "js-cookie";
-import axios from "axios";
-import Image from "next/image";
-import Green from "@/public/green.png";
-import Blue from "@/public/blue.png";
-import Violet from "@/public/violet.png";
-import { Input } from "@/components/common/authInput";
-import { TextArea } from "@/components/common/Textarea";
-import { Label } from "@/components/common/Label";
+import Input from "@/components/common/authInput";
+import TextArea from "@/components/common/Textarea";
+import Label from "@/components/common/Label";
 import { Button } from "@/components/common/authBtn";
 import SelectBox from "@/components/common/SelectBox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronCircleRight,
   faChevronRight,
+  faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 
 export function SignupForm() {
@@ -26,28 +21,59 @@ export function SignupForm() {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [link, setLink] = useState("");
-  const [field, setField] = useState("");
+  const [avatar, setAvatar] = useState([]);
+  const [theme, setTheme] = useState("");
+  const [about, setAbout] = useState("");
   const [position, setPosition] = useState("");
+  const [field, setField] = useState("");
   const router = useRouter();
   const [step, setStep] = useState(1);
+  const [showAvatar, setShowAvatar] = useState(false);
+
+  function handleUpload(e) {
+    let file = e.target.files[0];
+    let reader = new FileReader();
+    reader.onload = function () {
+      setAvatar(reader.result);
+    };
+    reader.readAsDataURL(file);
+    setShowAvatar(true);
+  }
 
   const handleRegister = () => {
-    axios
-      .post("http://127.0.0.1:8000/core/register/", {
-        email: email,
-        password: password,
-        first_name: firstName,
-        last_name: lastName,
-        domain: link,
-      })
-      .then((res) => {
-        console.log(res.data);
-        localStorage.setItem("userDetails", JSON.stringify(res.data));
-        localStorage.setItem("token", JSON.stringify(res.data.token.access));
-        Cookies.set("auth", true);
-        Cookies.set("token", JSON.stringify(res.data.token.access));
-        router.push("/dashboard");
-      });
+    console.log({
+          email: email,
+          password: password,
+          first_name: firstName,
+          last_name: lastName,
+          domain: link,
+          avatar: avatar,
+          theme: theme,
+          about: about,
+          position: position,
+          activation_field: field,
+        })
+    // axios
+    //   .post("http://127.0.0.1:8000/core/register/", {
+    //     email: email,
+    //     password: password,
+    //     first_name: firstName,
+    //     last_name: lastName,
+    //     domain: link,
+    //     avatar: avatar,
+    //     theme: theme,
+    //     about: about,
+    //     position: position,
+    //     activation_field: field,
+    //   })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     localStorage.setItem("userDetails", JSON.stringify(res.data));
+    //     localStorage.setItem("token", JSON.stringify(res.data.token.access));
+    //     Cookies.set("auth", true);
+    //     Cookies.set("token", JSON.stringify(res.data.token.access));
+    //     router.push("/dashboard");
+    //   });
   };
 
   return (
@@ -55,21 +81,21 @@ export function SignupForm() {
       {step === 1 && (
         <>
           <div className="w-full flex flex-col">
-            <Label>ایمیل</Label>
+            <Label value='ایمیل' />
             <Input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
               placeholder="ایمیل"
             />
-            <Label>نام</Label>
+            <Label value='نام' />
             <Input
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               type="text"
               placeholder="نام"
             />
-            <Label>نام خانوادگی</Label>
+            <Label value='نام خانوادگی' />
             <Input
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
@@ -77,14 +103,14 @@ export function SignupForm() {
               placeholder="نام خانوادگی"
             />
 
-            <Label>رمز عبور</Label>
+            <Label value='رمز عبور' />
             <Input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               placeholder="رمز عبور"
             />
-            <Label>لینک</Label>
+            <Label value='لینک' />
             <Input
               value={link}
               onChange={(e) => setLink(e.target.value)}
@@ -108,34 +134,64 @@ export function SignupForm() {
           <div className="w-full flex flex-col">
             <div className="w-full flex justify-between">
               <div className="w-1/2 ml-2">
-                <Label>حوزه فعالیت</Label>
+                <Label value='حوزه فعالیت' />
                 <SelectBox
                   options={["اداری", "آموزشی", "درمانی"]}
                   value={field}
                   setValue={setField}
+                  placeholder="حوزه فعالیت را انتخاب کنید"
                 />
               </div>
 
               <div className="w-1/2">
-                <Label>سمت شغلی</Label>
-                <SelectBox
-                  options={["اداری", "آموزشی", "درمانی"]}
+                <Label value='سمت شغلی' />
+                <Input
+                  type="text"
+                  placeholder="سمت"
                   value={position}
-                  setValue={setPosition}
+                  onChange={(e) => setPosition(e.target.value)}
                 />
               </div>
             </div>
 
-            <Label>تصویر آواتار</Label>
-            <Input
-              // value={password}
-              // onChange={(e) => setPassword(e.target.value)}
+            <Label value='تصویر آواتار' />
+            <input
+              id="avatar"
               type="file"
-              placeholder="تصویر پروفایل"
+              className="hidden"
+              accept="image/*"
+              onChange={(event) => handleUpload(event)}
             />
-            <Label>درباره من / پیام خوش آمد گویی</Label>
-            <TextArea rows={3}></TextArea>
-            <Label>تم رنگ</Label>
+            <div className="w-full flex flex-col justify-between mb-2">
+              <div className="w-full flex justify-center items-center">
+                {showAvatar ? (
+                  <img
+                    src={avatar}
+                    className="w-[80px] h-[80px] rounded-[100%] mb-1"
+                  />
+                ) : (
+                  <div className="w-[80px] h-[80px] rounded-[100%] mb-1 border border-slate-400 text-[8px] flex justify-center items-center text-center">
+                    تصویر آواتار خود را بارگذاری کنید.
+                  </div>
+                )}
+              </div>
+              <div
+                className="w-full flex justify-end items-center cursor-pointer"
+                onClick={() => document.getElementById("avatar").click()}
+              >
+                <span className="w-full flex flex-col justify-center items-center mt-1 py-1 px-3 text-[9px] text-gray-500 border border-slate-400 rounded-md ">
+                  <FontAwesomeIcon icon={faUpload} className="mb-1" />
+                  بارگذاری فایل
+                </span>
+              </div>
+            </div>
+            <Label value='درباره من / پیام خوش آمد گویی' />
+            <TextArea
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
+              placeholder='یک پیام خوش آمد گویی و یا توضیح مختصر درباره خودتان وارد کنید.'
+            ></TextArea>
+            <Label value='تم رنگ' />
             <div
               style={{
                 display: "flex",
@@ -144,17 +200,26 @@ export function SignupForm() {
               }}
             >
               <div className="w-full flex">
-                <div className="w-1/3 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg ">
+                <div
+                  className="w-1/3 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg "
+                  onClick={() => setTheme("theme 1")}
+                >
                   <div className="w-1/3 h-12 bg-[#05668D]"></div>
                   <div className="w-1/3 h-12 bg-[#028090]"></div>
                   <div className="w-1/3 h-12 bg-[#00A896]"></div>
                 </div>
-                <div className="w-1/3 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg">
+                <div
+                  className="w-1/3 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg"
+                  onClick={() => setTheme("theme 2")}
+                >
                   <div className="w-1/3 h-12 bg-[#A3B18A]"></div>
                   <div className="w-1/3 h-12 bg-[#588157]"></div>
                   <div className="w-1/3 h-12 bg-[#3A5A40]"></div>
                 </div>
-                <div className="w-1/3 p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg">
+                <div
+                  className="w-1/3 p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg"
+                  onClick={() => setTheme("theme 3")}
+                >
                   <div className="w-1/3 h-12 bg-[#EFD9CE]"></div>
                   <div className="w-1/3 h-12 bg-[#DEC0F1]"></div>
                   <div className="w-1/3 h-12 bg-[#B79CED]"></div>
