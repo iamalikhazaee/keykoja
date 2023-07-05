@@ -84,10 +84,11 @@ export default function Navbar() {
             >
               Open user menu
             </span>
-            <FontAwesomeIcon
+            {/* <FontAwesomeIcon
               icon={faUser}
               style={{ fontSize: 25, color: "white" }}
-            />
+            /> */}
+            <img src={`https://keykoja.iran.liara.run/${userDetails.avatar}`} className="w-10 h-10 rounded-[100%] object-cover" />
           </button>
           {userMenu && (
             <div
