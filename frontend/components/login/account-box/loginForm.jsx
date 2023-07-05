@@ -23,7 +23,7 @@ export function LoginForm () {
 
   const handleLogin = () => {
     axios
-      .post("http://127.0.0.1:8000/core/login/", {
+      .post("https://keykoja.iran.liara.run/core/login/", {
         email: email,
         password: password,
       })

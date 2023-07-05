@@ -15,13 +15,13 @@ export default function guests() {
 
     useEffect(() => {
         const token = JSON.parse(Cookies.get('token'));
-        axios.get('http://127.0.0.1:8000/core/NewEvent/', {
+        axios.get('https://keykoja.iran.liara.run/core/NewEvent/', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         }).then((res) => {
             setEvents(res.data)
-            axios.get('http://localhost:8000/core/GuestsList/', {
+            axios.get('https://keykoja.iran.liara.run/core/GuestsList/', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

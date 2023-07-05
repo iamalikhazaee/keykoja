@@ -40,7 +40,7 @@ export function SignupForm() {
 
   const handleRegister = () => {
     axios
-      .post("http://127.0.0.1:8000/core/register/", {
+      .post("https://keykoja.iran.liara.run/core/register/", {
         email: email,
         password: password,
         first_name: firstName,
