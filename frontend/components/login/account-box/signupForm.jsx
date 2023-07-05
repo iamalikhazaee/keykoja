@@ -8,11 +8,9 @@ import Label from "@/components/common/Label";
 import { Button } from "@/components/common/authBtn";
 import SelectBox from "@/components/common/SelectBox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronCircleRight,
-  faChevronRight,
-  faUpload,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 export function SignupForm() {
   const { switchToSignin } = useContext(AccountContext);
@@ -21,7 +19,7 @@ export function SignupForm() {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [link, setLink] = useState("");
-  const [avatar, setAvatar] = useState([]);
+  const [avatar, setAvatar] = useState(null);
   const [theme, setTheme] = useState("");
   const [about, setAbout] = useState("");
   const [position, setPosition] = useState("");
@@ -41,39 +39,27 @@ export function SignupForm() {
   }
 
   const handleRegister = () => {
-    console.log({
-          email: email,
-          password: password,
-          first_name: firstName,
-          last_name: lastName,
-          domain: link,
-          avatar: avatar,
-          theme: theme,
-          about: about,
-          position: position,
-          activation_field: field,
-        })
-    // axios
-    //   .post("http://127.0.0.1:8000/core/register/", {
-    //     email: email,
-    //     password: password,
-    //     first_name: firstName,
-    //     last_name: lastName,
-    //     domain: link,
-    //     avatar: avatar,
-    //     theme: theme,
-    //     about: about,
-    //     position: position,
-    //     activation_field: field,
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     localStorage.setItem("userDetails", JSON.stringify(res.data));
-    //     localStorage.setItem("token", JSON.stringify(res.data.token.access));
-    //     Cookies.set("auth", true);
-    //     Cookies.set("token", JSON.stringify(res.data.token.access));
-    //     router.push("/dashboard");
-    //   });
+    axios
+      .post("http://127.0.0.1:8000/core/register/", {
+        email: email,
+        password: password,
+        first_name: firstName,
+        last_name: lastName,
+        domain: link,
+        avatar: avatar,
+        theme: theme,
+        about: about,
+        position: position,
+        activation_field: field,
+      })
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem("userDetails", JSON.stringify(res.data));
+        localStorage.setItem("token", JSON.stringify(res.data.token.access));
+        Cookies.set("auth", true);
+        Cookies.set("token", JSON.stringify(res.data.token.access));
+        router.push("/dashboard");
+      });
   };
 
   return (
@@ -81,21 +67,21 @@ export function SignupForm() {
       {step === 1 && (
         <>
           <div className="w-full flex flex-col">
-            <Label value='ایمیل' />
+            <Label value="ایمیل" />
             <Input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
               placeholder="ایمیل"
             />
-            <Label value='نام' />
+            <Label value="نام" />
             <Input
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               type="text"
               placeholder="نام"
             />
-            <Label value='نام خانوادگی' />
+            <Label value="نام خانوادگی" />
             <Input
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
@@ -103,14 +89,14 @@ export function SignupForm() {
               placeholder="نام خانوادگی"
             />
 
-            <Label value='رمز عبور' />
+            <Label value="رمز عبور" />
             <Input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               placeholder="رمز عبور"
             />
-            <Label value='لینک' />
+            <Label value="لینک" />
             <Input
               value={link}
               onChange={(e) => setLink(e.target.value)}
@@ -134,7 +120,7 @@ export function SignupForm() {
           <div className="w-full flex flex-col">
             <div className="w-full flex justify-between">
               <div className="w-1/2 ml-2">
-                <Label value='حوزه فعالیت' />
+                <Label value="حوزه فعالیت" />
                 <SelectBox
                   options={["اداری", "آموزشی", "درمانی"]}
                   value={field}
@@ -144,7 +130,7 @@ export function SignupForm() {
               </div>
 
               <div className="w-1/2">
-                <Label value='سمت شغلی' />
+                <Label value="سمت شغلی" />
                 <Input
                   type="text"
                   placeholder="سمت"
@@ -154,7 +140,7 @@ export function SignupForm() {
               </div>
             </div>
 
-            <Label value='تصویر آواتار' />
+            <Label value="تصویر آواتار" />
             <input
               id="avatar"
               type="file"
@@ -185,13 +171,13 @@ export function SignupForm() {
                 </span>
               </div>
             </div>
-            <Label value='درباره من / پیام خوش آمد گویی' />
+            <Label value="درباره من / پیام خوش آمد گویی" />
             <TextArea
               value={about}
               onChange={(e) => setAbout(e.target.value)}
-              placeholder='یک پیام خوش آمد گویی و یا توضیح مختصر درباره خودتان وارد کنید.'
+              placeholder="یک پیام خوش آمد گویی و یا توضیح مختصر درباره خودتان وارد کنید."
             ></TextArea>
-            <Label value='تم رنگ' />
+            <Label value="تم رنگ" />
             <div
               style={{
                 display: "flex",
