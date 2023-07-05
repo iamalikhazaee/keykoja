@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
+# from .config import EMAIL_PASSWORD
+# import smtplib
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -111,14 +114,30 @@ WSGI_APPLICATION = 'keykoja.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'keykoja-db',
+#         'USER': 'root',
+#         'PASSWORD': 'i6YvURli5XJOJAMZrvaaPFnk',
+#         'HOST': 'aberama.iran.liara.ir',
+#         'PORT': '5432',
+#         # "OPTIONS": {
+#         #     "charset": "utf8mb4",
+#         # },
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'keykoja',
-        'USER': 'fateme',
-        'PASSWORD': '1234',
+        'USER': 'alikhazaei',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5432',
+        # "OPTIONS": {
+        #     "charset": "utf8mb4",
+        # },
     }
 }
 
@@ -168,3 +187,29 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
   'http://localhost:3000',
 )
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'keykoja97@gmail.com'
+# EMAIL_HOST_PASSWORD = "Project*university1397"
+# EMAIL_USE_TLS = True  
+# DEFAULT_FROM_EMAIL = 'keykoja97@gmail.com'
+
+# smtp_server = 'smtp.gmail.com'
+# smtp_port = 587
+# username = 'keykoja97@gmail.com'
+# password = EMAIL_PASSWORD
+
+# try:
+#     server = smtplib.SMTP(smtp_server, smtp_port)
+#     server.starttls()
+#     server.login(username, password)
+#     print("SMTP authentication successful!")
+# except smtplib.SMTPAuthenticationError as e:
+#     print("SMTP authentication failed:", e)
+# finally:
+#     server.quit()
