@@ -34,6 +34,7 @@ export default function SelectBox(props) {
         <input
           value={props.value}
           className="px-1 box-border focus:border-none focus:outline-none text-[11px] cursor-pointer"
+          placeholder={props.placeholder}
         ></input>
         {showDropDown && (
           <div className="absolute top-10 -left-[1px] bg-white z-10 w-full border border-gray-300 rounded-xl text-[11px] shadow-md">

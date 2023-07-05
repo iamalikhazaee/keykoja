@@ -1,17 +1,15 @@
-import styled from "styled-components";
+import React from "react";
 
-export const TextArea = styled.textarea`
-  border: 1px solid rgb(209 213 219);
-  color: rgb(17 24 39);
-  font-size: 11px;
-  line-height: 20px;
-  border-radius: 8px;
-  display: block;
-  width: 100%;
-  padding: .5rem;
+function Textarea({ value, placeholder, onChange }) {
+  return (
+    <textarea
+      rows={3}
+      value={value}
+      placeholder={placeholder}
+      onChange={onChange}
+      className="border border-[rgb(209 213 219)] text-[rgb(17 24 39)] text-[11px] leading-5 rounded-lg block w-full p-2 focus:outline-none focus:border-[#354f52]"
+    ></textarea>
+  );
+}
 
-  &:focus {
-    outline: none;
-    border: 1px solid #354f52;
-  }
-`;
+export default Textarea;

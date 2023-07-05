@@ -335,11 +335,6 @@ export default function EventCard(props) {
                         title="زمان های آزاد"
                         className={styles.tabContent}
                       >
-                        {/* <CustomizedDatePicker setDate={setDate} date={date} /> */}
-                        {/* <Row>
-                          <p>در این بخش شما میتوانید زمان هایی که ثبت کرده اید را ویرایش کنید. </p>
-                          <p>اگر هیچ زمانی ثبت نکرده اید میتوانید در اینجا اضافه کنید و یا میتوانید زمان های ثبت شده ای که نیاز به ویرایش دارند را حذف کرده و مجدد تایم مورد نظر خودتان را اضافه کنید.</p>
-                        </Row> */}
                         <Row>
                           <Col
                             col={12}
