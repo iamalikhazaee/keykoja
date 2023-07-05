@@ -9,6 +9,11 @@ import { useRouter } from "next/router";
 import FreeTime from "@/components/FreeTime";
 import jwt from 'jwt-decode'
 import axios from "axios";
+import Label from "@/components/common/Label";
+import Input from "@/components/common/authInput";
+import SelectBox from "@/components/common/SelectBox";
+import Textarea from "@/components/common/Textarea";
+
 
 export default function newEvent() {
     const router = useRouter();
@@ -16,7 +21,7 @@ export default function newEvent() {
     const [userToken, setUserToken] = useState()
     const [event, setEvent] = useState()
     const [name, setName] = useState("");
-    const [type, setType] = useState("یک به یک");
+    const [type, setType] = useState();
     const [location, setLocation] = useState()
     const [address, setAddress] = useState("")
     const [message, setMessage] = useState("");
@@ -89,46 +94,43 @@ export default function newEvent() {
                             (<form>
                                 <div className={styles.fields}>
                                     <div className={styles.field}>
-                                        <label htmlFor="owner">صاحب رویداد</label>
-                                        <input
-                                            readOnly
+                                        <Label value='صاحب رویداد' />
+                                        <Input
                                             type="text"
-                                            id="owner"
-                                            aria-label="disabled input 2"
                                             value={`${userDetails.first_name} ${userDetails.last_name}`}
-                                            onChange={(e) => setOwner(e.target.value)}
+                                            onChange={(e) => <></>}
                                         />
                                     </div>
                                     <div className={styles.field}>
-                                        <label htmlFor="title">عنوان رویداد</label>
-                                        <input id="title" type="text"
+                                        <Label value='عنوان رویداد' />
+                                        <Input
+                                            type="text"
                                             value={name}
-                                            onChange={(e) => setName(e.target.value)} />
+                                            onChange={(e) => setName(e.target.value)}
+                                            placeholder='عنوان'
+                                        />
                                     </div>
                                 </div>
 
                                 <div className={styles.fields}>
                                     <div className={styles.field}>
-                                        <label htmlFor="type">نوع رویداد</label>
-                                        <select
-                                            id="type"
+                                        <Label value='نوع رویداد' />
+                                        <SelectBox
+                                            options={["یک به یک", "گروهی"]}
                                             value={type}
-                                            onChange={(e) => setType(e.target.value)}
-                                        >
-                                            <option>یک به یک</option>
-                                            <option>گروهی</option>
-                                        </select>
+                                            setValue={setType}
+                                            placeholder="نوع رویداد را انتخاب کنید"
+                                        />
                                     </div>
                                     <div className={styles.field}>
-                                        <label htmlFor="link">لینک رویداد</label>
+                                        <Label value='لینک رویداد' />
                                         <div className={styles.inputGroup}>
                                             <div className={styles.mutedText}>{userDetails.domain}/</div>
-                                            <input
+                                            <Input
                                                 type="text"
-                                                id="link"
-                                                required
                                                 value={domain}
                                                 onChange={(e) => setDomain(e.target.value)}
+                                                placeholder='لینک'
                                             />
                                         </div>
                                     </div>
@@ -136,33 +138,26 @@ export default function newEvent() {
 
                                 <div className={styles.fields} style={{ justifyContent: 'flex-start' }}>
                                     <div className={styles.field}>
-                                        <label htmlFor="location">محل برگزاری رویداد</label>
-                                        <select
-                                            id="location"
+                                        <Label value='محل برگزاری رویداد' />
+                                        <SelectBox
+                                            options={["حضوری", "گوگل میت", "اسکایپ", "واتساپ"]}
                                             value={location}
-                                            onChange={(e) => setLocation(e.target.value)}
-                                        >
-                                            <option>محل برگزاری را انتخاب کنید</option>
-                                            <option>حضوری</option>
-                                            <option>Google meet</option>
-                                            <option>Skype</option>
-                                            <option>Whatsapp</option>
-                                        </select>
+                                            setValue={setLocation}
+                                            placeholder="محل برگزاری را انتخاب کنید"
+                                        />
                                     </div>
-                                    {/* {location === undefined || location === 'محل برگزاری را انتخاب کنید' ? (
-                                        <></>) :
-                                        ( */}
                                     <div className={styles.field}>
-                                        <label htmlFor="title">
-                                            {location === undefined && 'طریقه ارتباط'}
-                                            {location === 'حضوری' && 'آدرس'}
-                                            {location === 'Google meet' && 'لینک'}
-                                            {location === 'Skype' && 'شماره تلفن'}
-                                            {location === 'Whatsapp' && 'شماره تلفن'}
-                                        </label>
-                                        <input id="title" type="text"
+                                        <Label value={`${location === undefined ? 'طریقه ارتباط' :
+                                            (location === 'حضوری' ? 'آدرس' :
+                                                (location === 'گوگل میت' ? 'لینک' :
+                                                    (location === 'اسکایپ' ? 'شماره تلفن' :
+                                                        (location === 'واتساپ' && 'شماره تلفن'))))}`} />
+                                        <Input
+                                            type="text"
                                             value={address}
-                                            onChange={(e) => setAddress(e.target.value)} />
+                                            onChange={(e) => setAddress(e.target.value)}
+                                            placeholder='آدرس'
+                                        />
                                     </div>
                                     {/* )
                                     } */}
@@ -171,14 +166,12 @@ export default function newEvent() {
                                 <div className={styles.fields}>
                                     <div className={styles.field} style={{ width: '100%' }}>
                                         <div className={`w-100`}>
-                                            <label htmlFor="message">پیام مربوطه</label>
-                                            <textarea
-                                                id="message"
-                                                // rows="2"
-                                                placeholder="پیام مربوط به رویداد را بنویسید..."
+                                            <Label value='پیام مربوطه' />
+                                            <Textarea
+                                                placeholder="پیام مربوط به رویداد را اینجا بنویسید..."
                                                 value={message}
                                                 onChange={handleMessage}
-                                            ></textarea>
+                                            ></Textarea>
                                         </div>
                                     </div>
                                 </div>

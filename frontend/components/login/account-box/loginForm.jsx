@@ -10,8 +10,8 @@ import { AccountContext } from "./accountContext";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
-import { Input } from "@/components/common/authInput";
-import { Label } from "@/components/common/Label";
+import Input from "@/components/common/authInput";
+import Label from "@/components/common/Label";
 import { Button } from "@/components/common/authBtn";
 
 export function LoginForm () {
@@ -40,14 +40,14 @@ export function LoginForm () {
   return (
     <div className="w-full flex flex-col items-center mt-3">
       <div className="w-full flex flex-col">
-        <Label>ایمیل</Label>
+        <Label value='ایمیل' />
         <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
           placeholder="ایمیل"
         />
-        <Label>رمز عبور</Label>
+        <Label value='رمز عبور' />
         <Input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
