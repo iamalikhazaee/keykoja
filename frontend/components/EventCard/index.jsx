@@ -65,7 +65,7 @@ export default function EventCard(props) {
     setUserToken(localStorage.getItem("token"));
     const domain = JSON.parse(localStorage.getItem("userDetails")).domain;
     axios
-      .get(`http://127.0.0.1:8000/${domain}/${props.item.event_domain}/time`)
+      .get(`https://keykoja.iran.liara.run/${domain}/${props.item.event_domain}/time`)
       .then((res) => {
         const d = [];
         const t = [];
@@ -86,7 +86,7 @@ export default function EventCard(props) {
     const token = jwt(JSON.parse(userToken));
     axios
       .put(
-        `http://127.0.0.1:8000/core/NewEvent/${props.item.id}/`,
+        `https://keykoja.iran.liara.run/core/NewEvent/${props.item.id}/`,
         {
           owner: props.item.owner,
           name: name,
@@ -109,7 +109,7 @@ export default function EventCard(props) {
 
   const deleteTime = (index, i) => {
     axios
-      .delete(`http://localhost:8000/core/EventTime/${index}/`)
+      .delete(`https://keykoja.iran.liara.run/core/EventTime/${index}/`)
       .then((res) => {
         console.log(res.data);
       });
@@ -145,11 +145,11 @@ export default function EventCard(props) {
   const handleSubmitTimes = () => {
     for (let i = 0; i < times.length; i++) {
       axios
-        .delete(`http://localhost:8000/core/EventTime/${times[i].id}/`)
+        .delete(`https://keykoja.iran.liara.run/core/EventTime/${times[i].id}/`)
         .then((res) => {
           console.log(res.data);
           axios
-            .post("http://127.0.0.1:8000/core/EventTime/", {
+            .post("https://keykoja.iran.liara.run/core/EventTime/", {
               profile: jwt(user.token.access).user_id,
               event: props.item.id,
               date: toEnglishNum(times[i].date),
@@ -163,7 +163,7 @@ export default function EventCard(props) {
     }
     for (let i = 0; i < extraTimes.length; i++) {
       axios
-        .post("http://127.0.0.1:8000/core/EventTime/", {
+        .post("https://keykoja.iran.liara.run/core/EventTime/", {
           profile: jwt(user.token.access).user_id,
           event: props.item.id,
           date: toEnglishNum(extraTimes[i].date),

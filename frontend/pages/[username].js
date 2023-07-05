@@ -17,7 +17,7 @@ export default function EventsAndGuests() {
     const [events, setEvents] = useState([])
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/${keyword}/`).then((res) => {
+        axios.get(`https://keykoja.iran.liara.run/${keyword}/`).then((res) => {
             setEvents(res.data)
         })
     })

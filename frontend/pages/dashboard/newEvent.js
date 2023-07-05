@@ -48,7 +48,7 @@ export default function newEvent() {
     const addEvent = (e) => {
         e.preventDefault()
         const token = jwt(JSON.parse(userToken))
-        axios.post('http://127.0.0.1:8000/core/NewEvent/',
+        axios.post('https://keykoja.iran.liara.run/core/NewEvent/',
             { owner: token.user_id, name: name, type: type, place: location, address: address, message: message, event_domain: domain },
             {
                 headers: {

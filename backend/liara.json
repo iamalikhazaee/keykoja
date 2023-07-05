@@ -1,0 +1,9 @@
+{
+    "app": "keykoja",
+    "disks": [
+        {
+            "name": "avatars",
+            "mountTo": "media/avatars"
+        }
+    ]
+}

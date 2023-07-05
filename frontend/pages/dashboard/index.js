@@ -33,7 +33,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         const token = JSON.parse(Cookies.get('token'));
-        axios.get('http://127.0.0.1:8000/core/NewEvent/', {
+        axios.get('https://keykoja.iran.liara.run/core/NewEvent/', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -45,13 +45,13 @@ export default function Dashboard() {
 
     const handleEventEnable = (e, id) => {
         const token = JSON.parse(Cookies.get('token'));
-        axios.patch(`http://127.0.0.1:8000/core/NewEvent/${id}/`, { is_enable: e.target.checked }, {
+        axios.patch(`https://keykoja.iran.liara.run/core/NewEvent/${id}/`, { is_enable: e.target.checked }, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         }).then((res) => {
             // console.log(res)
-            axios.get('http://127.0.0.1:8000/core/NewEvent/', {
+            axios.get('https://keykoja.iran.liara.run/core/NewEvent/', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -66,7 +66,7 @@ export default function Dashboard() {
         const token = JSON.parse(Cookies.get('token'));
         // console.log(id)
         // console.log(index)
-        axios.delete(`http://127.0.0.1:8000/core/NewEvent/${id}/`, {
+        axios.delete(`https://keykoja.iran.liara.run/core/NewEvent/${id}/`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

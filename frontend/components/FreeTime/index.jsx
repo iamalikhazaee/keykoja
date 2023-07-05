@@ -46,7 +46,7 @@ export default function FreeTime(props) {
     const token = jwt(JSON.parse(localStorage.getItem("token")));
     for (let i = 0; i < times.length; i++) {
       axios
-        .post("http://127.0.0.1:8000/core/EventTime/", {
+        .post("https://keykoja.iran.liara.run/core/EventTime/", {
           profile: token.user_id,
           event: props.event_id,
           date: toEnglishNum(times[i].date),

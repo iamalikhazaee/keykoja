@@ -25,8 +25,8 @@ export default function eventName() {
 
     useEffect(() => {
         axios.all([
-            axios.get(`http://127.0.0.1:8000${window.location.pathname}/`),
-            axios.get(`http://127.0.0.1:8000${window.location.pathname}/time`)
+            axios.get(`https://keykoja.iran.liara.run${window.location.pathname}/`),
+            axios.get(`https://keykoja.iran.liara.run${window.location.pathname}/time`)
         ])
             .then(axios.spread((res1, res2) => {
                 setEventDetails(res1.data[0])
@@ -70,10 +70,10 @@ export default function eventName() {
         }
         else {
             axios.all([
-                axios.post('http://localhost:8000/core/GuestsReg/', {
+                axios.post('https://keykoja.iran.liara.run/core/GuestsReg/', {
                     name: guestName, email: guestEmail, approve: false, event: eventDetails.id, time: selectedTime.id
                 }),
-                axios.patch(`http://localhost:8000/core/EventTime/${selectedTime.id}/`, { is_enable: false })
+                axios.patch(`https://keykoja.iran.liara.run/core/EventTime/${selectedTime.id}/`, { is_enable: false })
             ]).then(axios.spread((res1, res2) => {
                 console.log(res1)
                 console.log(res2)

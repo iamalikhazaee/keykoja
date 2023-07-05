@@ -45,7 +45,7 @@ class ProfileUser(AbstractBaseUser,PermissionsMixin):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     domain = models.CharField(max_length=50, unique=True)
-    avatar = models.ImageField(blank=True,null=True,upload_to='images/')
+    avatar = models.ImageField(blank=True,null=True,upload_to='avatars')
     theme = models.CharField(max_length=50 ,choices= MY_CHOICES_THEME , default='theme 1')
     about = models.TextField(default=' ', blank= True)
     position = models.CharField(max_length=255 , default=' ',blank= True)
