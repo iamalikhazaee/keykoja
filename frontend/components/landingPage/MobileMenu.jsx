@@ -47,7 +47,7 @@ export default function MobileMenu() {
       >
         <span className="sr-only">Menu</span>
         <svg
-          className="w-6 h-6 fill-current text-gray-300 hover:text-gray-200 transition duration-150 ease-in-out"
+          className="w-6 h-6 fill-current text-[#2d6a4f] hover:opacity-80 transition duration-150 ease-in-out"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -68,23 +68,14 @@ export default function MobileMenu() {
             : { maxHeight: 0, opacity: 0.8 }
         }
       >
-        <ul className="bg-gray-800 px-4 py-2">
+        <ul className="bg-white border border-slate-200 rounded-lg px-4 py-2 mb-0">
           <li>
             <Link
-              href="/signin"
-              className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center"
+              href="/login"
+              className="flex font-medium w-full text-white bg-[#2d6a4f] hover:text-gray-200 py-2 justify-center decoration-transparent text-[12px] rounded-lg"
               onClick={() => setMobileNavOpen(false)}
             >
-              Sign in
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/signup"
-              className="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out"
-              onClick={() => setMobileNavOpen(false)}
-            >
-              Sign up
+              ورود به حساب کاربری
             </Link>
           </li>
         </ul>

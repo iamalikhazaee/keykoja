@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import Ali from "@/public/images/ali.jpg";
 import Fateme from "@/public/images/fateme.jpg";
+import Divider from "@/public/images/divider.png"
 
 export default function Testimonials() {
   return (
@@ -10,14 +11,15 @@ export default function Testimonials() {
         <div className="py-12 md:py-20">
           {/* Section header */}
           <div className="w-full mx-auto text-center py-12 mb-10 bg-[#1b4332] text-[#d8f3dc]">
-            <h2 className="text-xl mb-4">تیم ما</h2>
-            <p className="text-[13px]">
-              تیم ما یک تیم کوچیک هستن که سعی کردن ایده ای که مدت ها توی ذهنشون داشتن رو پیاده سازی کنن.
+            <h2 className="md:text-lg text-base mb-4">تیم ما</h2>
+            <p className="md:text-sm text-[10px] leading-7">
+              تیم ما یک تیم کوچیک هستن که سعی کردن ایده ای که مدت ها توی ذهنشون
+              داشتن رو پیاده سازی کنن.
             </p>
           </div>
 
           {/* Testimonials */}
-          <div className="w-full px-5 grid gap-8 lg:grid-cols-2 lg:gap-6 items-start">
+          <div className="w-full md:px-5 px-2 grid gap-8 lg:grid-cols-2 lg:gap-6 items-start">
             {/* 1st testimonial */}
             <div
               className="flex flex-col h-full p-6 border border-slate-200 rounded-lg shadow-md bg-[#b7e4c7]"
@@ -26,10 +28,8 @@ export default function Testimonials() {
               <div>
                 <div className="relative inline-flex flex-col mb-4">
                   <Image
-                    className="rounded-full"
+                    className="rounded-full md:w-[70px] md:h-[70px] w-[50px] h-[50px] object-cover"
                     src={Ali}
-                    width={48}
-                    height={48}
                     alt="Testimonial 01"
                   />
                   <svg
@@ -41,17 +41,13 @@ export default function Testimonials() {
                   </svg>
                 </div>
               </div>
-              <blockquote className="text-sm leading-7 text-[#1b4332] grow">
-               علی توی این پروژه کل زیر ساخت رو طراحی و پیاده سازی کرده. طراحی دیتابیس و توسعه بک اند رو علی انجام داده.
+              <blockquote className="md:text-sm text-xs leading-7 text-[#1b4332] grow">
+                علی توی این پروژه کل زیر ساخت رو طراحی و پیاده سازی کرده. طراحی
+                دیتابیس و توسعه بک اند رو علی انجام داده.
               </blockquote>
               <div className="text-[#1b4332] font-medium pt-3 border-t border-[#1b4332]">
-                <cite className="text-sm not-italic">علی خزاعی</cite>{" "}
-                -{" "}
-                <span
-                  className="text-sm"
-                >
-                  UX Board
-                </span>
+                <cite className="md:text-sm text-xs not-italic">علی خزاعی</cite>{" "}
+                - <span className="md:text-sm text-xs">UX Board</span>
               </div>
             </div>
 
@@ -64,10 +60,8 @@ export default function Testimonials() {
               <div>
                 <div className="relative inline-flex flex-col mb-4">
                   <Image
-                    className="rounded-full"
+                    className="rounded-full md:w-[70px] md:h-[70px] w-[50px] h-[50px] object-cover"
                     src={Fateme}
-                    width={48}
-                    height={48}
                     alt="Testimonial 02"
                   />
                   <svg
@@ -79,21 +73,26 @@ export default function Testimonials() {
                   </svg>
                 </div>
               </div>
-              <blockquote className="text-sm leading-7 text-[#b7e4c7] grow">
-                فاطمه توی این پروژه مسئولیت طراحی و پیاده سازی هر آنچه که میبینید رو داشته. بخش فرانت اند و طراحی این پروژه به عهده فاطمه بوده.
+              <blockquote className="md:text-sm text-xs leading-7 text-[#b7e4c7] grow">
+                فاطمه توی این پروژه مسئولیت طراحی و پیاده سازی هر آنچه که
+                میبینید رو داشته. بخش فرانت اند و طراحی این پروژه به عهده فاطمه
+                بوده.
               </blockquote>
               <div className="text-[#b7e4c7] font-medium pt-3 border-t border-[#b7e4c7]">
-                <cite className="text-sm not-italic">فاطمه حنیفی</cite>{" "}
+                <cite className="md:text-sm text-xs not-italic">
+                  فاطمه حنیفی
+                </cite>{" "}
                 -{" "}
-                <span
-                  className="text-sm"
-                >
+                <span className="md:text-sm text-xs">
                   UI designer and Front-end developer
                 </span>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div className="px-4">
+        <Image src={Divider} className="w-full" />
       </div>
     </section>
   );

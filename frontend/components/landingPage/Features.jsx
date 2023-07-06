@@ -7,10 +7,10 @@ export default function Features() {
         <div className="py-12">
           {/* Section header */}
           <div className="w-full mx-auto text-center py-12 px-10 bg-[#1b4332] mb-10">
-            <h2 className="mb-4 text-lg text-[#d8f3dc]">
+            <h2 className="mb-4 md:text-lg text-base text-[#d8f3dc]">
               هماهنگی جلساتتون رو آنلاین انجام بدین
             </h2>
-            <p className="text-sm leading-7 text-[#74c69d]">
+            <p className="md:text-sm text-[10px] leading-7 text-[#d8f3dc]">
               با استفاده از کی کجا و امکانات متعددش، کارهای مربوط به رزرو نوبت و
               مدیریت تایمتون رو آسانتر کنید و وقتتون رو برای کارای هماهنگی تلف
               نکنید.
@@ -24,7 +24,7 @@ export default function Features() {
           >
             {/* 1st item */}
             <div
-              className="h-72 bg-[#2d6a4f] text-[#d8f3dc] relative flex flex-col items-center border-t border-slate-100 cursor-pointer px-3 py-3 rounded-md shadow-md transition-transform duration-500 hover:-translate-y-4"
+              className="md:h-72 border border-[#2d6a4f] text-[#2d6a4f] relative flex flex-col items-center border-t cursor-pointer px-3 py-3 rounded-lg shadow-md transition-transform duration-500 hover:-translate-y-4"
               data-aos="fade-up"
               data-aos-anchor="[data-aos-id-blocks]"
             >
@@ -34,13 +34,13 @@ export default function Features() {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <rect
-                  className="fill-current text-[#d8f3dc]"
+                  className="fill-current text-[#2d6a4f]"
                   width="64"
                   height="64"
                   rx="32"
                 />
                 <path
-                  className="stroke-current text-[#081c15]"
+                  className="stroke-current text-[#fff]"
                   d="M30 39.313l-4.18 2.197L27 34.628l-5-4.874 6.91-1.004L32 22.49l3.09 6.26L42 29.754l-3 2.924"
                   strokeLinecap="square"
                   strokeWidth="2"
@@ -48,14 +48,14 @@ export default function Features() {
                   fillRule="evenodd"
                 />
                 <path
-                  className="stroke-current text-[#081c15]"
+                  className="stroke-current text-[#fff]"
                   d="M43 42h-9M43 37h-9"
                   strokeLinecap="square"
                   strokeWidth="2"
                 />
               </svg>
-              <h4 className="text-base mb-2">قابل استفاده برای همه</h4>
-              <p className="text-[13px] text-center leading-7">
+              <h4 className="md:text-base text-sm mb-2">قابل استفاده برای همه</h4>
+              <p className="md:text-[13px] text-[10px] text-center leading-7">
                 مهم نیست که چه سمتی دارید و مشغول چه کاری هستید و یا اصلا
                 جلساتتون به چه منظور هست. اینجا میتونید هر جلسه با هر مدت زمانی
                 رو ثبت کنید و با مراجعه کنندگانتون به اشتراک بذارید.
@@ -64,7 +64,7 @@ export default function Features() {
 
             {/* 2nd item */}
             <div
-              className="h-72 bg-[#2d6a4f] text-[#d8f3dc] relative flex flex-col items-center border-t border-slate-100 cursor-pointer px-3 py-3 rounded-md shadow-md transition-transform duration-500 hover:-translate-y-4"
+              className="md:h-72 border border-[#2d6a4f] text-[#2d6a4f] relative flex flex-col items-center border-t cursor-pointer px-3 py-3 rounded-lg shadow-md transition-transform duration-500 hover:-translate-y-4"
               data-aos="fade-up"
               data-aos-anchor="[data-aos-id-blocks]"
             >
@@ -73,9 +73,9 @@ export default function Features() {
                 viewBox="0 0 64 64"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <rect className="fill-current" width="64" height="64" rx="32" />
+                <rect className="fill-current text-[#2d6a4f]" width="64" height="64" rx="32" />
                 <path
-                  className="stroke-current text-[#081c15]"
+                  className="stroke-current text-[#fff]"
                   d="M30 39.313l-4.18 2.197L27 34.628l-5-4.874 6.91-1.004L32 22.49l3.09 6.26L42 29.754l-3 2.924"
                   strokeLinecap="square"
                   strokeWidth="2"
@@ -83,14 +83,14 @@ export default function Features() {
                   fillRule="evenodd"
                 />
                 <path
-                  className="stroke-current text-[#081c15]"
+                  className="stroke-current text-[#fff]"
                   d="M43 42h-9M43 37h-9"
                   strokeLinecap="square"
                   strokeWidth="2"
                 />
               </svg>
-              <h4 className="text-base mb-2">ساده و آسان</h4>
-              <p className="text-[13px] text-center leading-7">
+              <h4 className="md:text-base mb-2 text-sm">ساده و آسان</h4>
+              <p className="md:text-[13px] text-[10px] text-center leading-7">
                 یک ویژگی مهم این سیستم اینه که کار کردن باهاش بسیار ساده و راحته
                 و بدون دردسر و پیچیدگی میتونید ازش استفاده کنید.
               </p>
@@ -98,7 +98,7 @@ export default function Features() {
 
             {/* 3rd item */}
             <div
-              className="h-72 bg-[#2d6a4f] text-[#d8f3dc] relative flex flex-col items-center border-t border-slate-100 cursor-pointer px-3 py-3 rounded-md shadow-md transition-transform duration-500 hover:-translate-y-4"
+              className="md:h-72 border border-[#2d6a4f] text-[#2d6a4f] relative flex flex-col items-center border-t cursor-pointer px-3 py-3 rounded-lg shadow-md transition-transform duration-500 hover:-translate-y-4"
               data-aos="fade-up"
               data-aos-anchor="[data-aos-id-blocks]"
             >
@@ -107,9 +107,9 @@ export default function Features() {
                 viewBox="0 0 64 64"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <rect className="fill-current" width="64" height="64" rx="32" />
+                <rect className="fill-current text-[#2d6a4f]" width="64" height="64" rx="32" />
                 <path
-                  className="stroke-current text-[#081c15]"
+                  className="stroke-current text-[#fff]"
                   d="M30 39.313l-4.18 2.197L27 34.628l-5-4.874 6.91-1.004L32 22.49l3.09 6.26L42 29.754l-3 2.924"
                   strokeLinecap="square"
                   strokeWidth="2"
@@ -117,14 +117,14 @@ export default function Features() {
                   fillRule="evenodd"
                 />
                 <path
-                  className="stroke-current text-[#081c15]"
+                  className="stroke-current text-[#fff]"
                   d="M43 42h-9M43 37h-9"
                   strokeLinecap="square"
                   strokeWidth="2"
                 />
               </svg>
-              <h4 className="text-base mb-2">قابلیت شخصی سازی</h4>
-              <p className="text-[13px] text-center leading-7">
+              <h4 className="md:text-base mb-2 text-sm">قابلیت شخصی سازی</h4>
+              <p className="md:text-[13px] text-[10px] text-center leading-7">
                 ما موقع ثبت نام ازتون اطلاعی درباره حوزه فعالیت و سمت شغلی که
                 دارین، میگیریم. همچنین موقع ثبت نام میتونید تم رنگی مد نظرتون رو
                 انتخاب کنید. با دادن این اطلاعات به ما، این امکان براتون فراهم
@@ -134,7 +134,7 @@ export default function Features() {
 
             {/* 4th item */}
             <div
-              className="h-72 bg-[#2d6a4f] text-[#d8f3dc] relative flex flex-col items-center border-t border-slate-100 cursor-pointer px-3 py-3 rounded-md shadow-md transition-transform duration-500 hover:-translate-y-4"
+              className="md:h-72 border border-[#2d6a4f] text-[#2d6a4f] relative flex flex-col items-center border-t cursor-pointer px-3 py-3 rounded-lg shadow-md transition-transform duration-500 hover:-translate-y-4"
               data-aos="fade-up"
               data-aos-anchor="[data-aos-id-blocks]"
             >
@@ -143,7 +143,7 @@ export default function Features() {
                 viewBox="0 0 64 64"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <rect className="fill-current" width="64" height="64" rx="32" />
+                <rect className="fill-current text-[#2d6a4f]" width="64" height="64" rx="32" />
                 <g
                   transform="translate(21 22)"
                   strokeLinecap="square"
@@ -152,23 +152,23 @@ export default function Features() {
                   fillRule="evenodd"
                 >
                   <path
-                    className="stroke-current text-[#081c15]"
+                    className="stroke-current text-[#fff]"
                     d="M17 2V0M19.121 2.879l1.415-1.415M20 5h2M19.121 7.121l1.415 1.415M17 8v2M14.879 7.121l-1.415 1.415M14 5h-2M14.879 2.879l-1.415-1.415"
                   />
                   <circle
-                    className="stroke-current text-[#081c15]"
+                    className="stroke-current text-[#fff]"
                     cx="17"
                     cy="5"
                     r="3"
                   />
                   <path
-                    className="stroke-current text-[#081c15]"
+                    className="stroke-current text-[#fff]"
                     d="M8.86 1.18C3.8 1.988 0 5.6 0 10c0 5 4.9 9 11 9a10.55 10.55 0 003.1-.4L20 21l-.6-5.2a9.125 9.125 0 001.991-2.948"
                   />
                 </g>
               </svg>
-              <h4 className="text-base mb-2">پشتیبانی</h4>
-              <p className="text-[13px] text-center leading-7">
+              <h4 className="md:text-base mb-2 text-sm">پشتیبانی</h4>
+              <p className="md:text-[13px] text-[10px] text-center leading-7">
                 درسته ک استفاده از این سیستم خیلی راحته و پیچیدگی نداره، ولی
                 بازم هر کجا به مشکل برخوردین، تیم پشتیبانی ما آماده شنیدن و حل
                 کردن مشکلاتتون هستن.
