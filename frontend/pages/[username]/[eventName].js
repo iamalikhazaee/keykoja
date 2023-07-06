@@ -3,7 +3,7 @@ import React from 'react'
 import { Button, Col, Row } from 'react-bootstrap'
 import Calender from '@/components/Calender/Calender.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt, faClock, faLocationPin } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt, faClock, faLocationPin, faNoteSticky } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import styles from '@/styles/guestPage.module.scss'
 import { toPersianNum } from '@/components/Calender/utils';
@@ -104,6 +104,10 @@ export default function eventName() {
                             <div className={styles.eventPlace}>
                                 <FontAwesomeIcon icon={faLocationPin} />
                                 <span>محل برگزاری: {eventDetails.address}</span>
+                            </div>
+                            <div className='w-full pr-[15px] pl-5 leading-7 flex items-center text-sm font-semibold text-[#00000080] my-[15px]'>
+                                <FontAwesomeIcon icon={faNoteSticky} className='ml-2' />
+                                <span>با سلام. اینجا میتونید تایم خودتون برای کلاس آموزش گیتار حضوری ثبت کنید.</span>
                             </div>
                         </Col>
                         <Col lg={5} md={9} sm={12}>
