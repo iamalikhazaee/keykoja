@@ -1,4 +1,4 @@
-import LandingVector from "@/public/images/vector.jpg";
+import LandingVector from "@/public/images/vector1.jpg";
 import Image from "next/image";
 import Background from "@/public/images/background.png"
 // import ModalVideo from "@/components/modal-video";
@@ -9,7 +9,7 @@ export default function Hero() {
       <div className="w-full px-5 py-5 relative">
         {/* Illustration behind hero content */}
         <div
-          className="absolute w-full left-0 bottom-0 hidden lg:block md:block pointer-events-none px-5"
+          className="absolute w-full top-32 left-0 bottom-0 hidden lg:block md:block pointer-events-none px-5"
           aria-hidden="true"
           data-aos="fade-up"
           data-aos-delay="400"
@@ -33,7 +33,7 @@ export default function Hero() {
             </p>
           </div>
           <div className="w-full flex justify-center">
-            <Image src={LandingVector} className="lg:w-[600px] lg:h-[500px] md:w-[400px] md:h-[300px] sm:w-[300px] sm:h-[200px] rounded-md" />
+            <Image src={LandingVector} className="lg:w-[600px] lg:h-[400px] md:w-[400px] md:h-[300px] sm:w-[300px] sm:h-[200px] rounded-md" />
           </div>
 
           {/* <ModalVideo
