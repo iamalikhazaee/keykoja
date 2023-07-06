@@ -5,13 +5,13 @@ import {  faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header() {
   return (
-    <header className="w-full z-30 shadow-md fixed bg-[#b7e4c7]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <header className="w-full z-30 shadow-md fixed bg-[#e9f5db]">
+      <div className="w-full px-5 sm:px-6">
         <div className="flex items-center justify-between h-20">
           {/* Site branding */}
           <div className="shrink-0 mr-4">
             {/* Logo */}
-            <Link href="/" className="flex items-center decoration-transparent text-[#2d6a4f] transition-all duration-500 hover:text-purple-700" aria-label="Cruip">
+            <Link href="/" className="flex items-center decoration-transparent text-[#2d6a4f] transition-all duration-500 hover:text-[#081c15]" aria-label="Cruip">
               <FontAwesomeIcon icon={faCalendarAlt} className="text-3xl ml-3" />
               <h1 className="text-2xl mb-0">کی کجا</h1>
             </Link>

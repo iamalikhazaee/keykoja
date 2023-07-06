@@ -6,10 +6,10 @@ import Background from "@/public/images/background.png"
 export default function Hero() {
   return (
     <section>
-      <div className="max-w-6xl mx-auto px-4 py-5 sm:px-6 relative">
+      <div className="w-full px-5 py-5 relative">
         {/* Illustration behind hero content */}
         <div
-          className="absolute max-w-full left-0 bottom-0 hidden lg:block pointer-events-none"
+          className="absolute w-full left-0 bottom-0 hidden lg:block md:block pointer-events-none px-5"
           aria-hidden="true"
           data-aos="fade-up"
           data-aos-delay="400"
@@ -18,14 +18,14 @@ export default function Hero() {
         </div>
 
         {/* Hero content */}
-        <div className="relative pt-32 pb-12">
+        <div className="relative md:pt-32 pt-28 md:pb-12 pb-8">
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center ">
-            <h1 className="mb-4 text-2xl text-[#2d6a4f] animate-bounce" data-aos="fade-up">
+            <h1 className="mb-4 md:text-2xl text-xl text-[#2d6a4f] animate-bounce leading-7" data-aos="fade-up">
               به کی کجا خوش اومدید
             </h1>
             <p
-              className="text-base text-gray-500 mb-8 animate-pulse"
+              className="md:text-base text-sm leading-7 text-gray-500 mb-8 animate-pulse"
               data-aos="fade-up"
               data-aos-delay="200"
             >
@@ -33,7 +33,7 @@ export default function Hero() {
             </p>
           </div>
           <div className="w-full flex justify-center">
-            <Image src={LandingVector} className="w-[600px] h-[500px] rounded-md" />
+            <Image src={LandingVector} className="lg:w-[600px] lg:h-[500px] md:w-[400px] md:h-[300px] sm:w-[300px] sm:h-[200px] rounded-md" />
           </div>
 
           {/* <ModalVideo
