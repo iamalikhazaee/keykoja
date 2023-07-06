@@ -29,29 +29,24 @@ export function SignupForm() {
   const [showAvatar, setShowAvatar] = useState(false);
 
   function handleUpload(e) {
-    let file = e.target.files[0];
-    let reader = new FileReader();
-    reader.onload = function () {
-      setAvatar(reader.result);
-    };
-    reader.readAsDataURL(file);
-    setShowAvatar(true);
+    setAvatar(e.target.files[0]);
+    setShowAvatar(true)
   }
 
   const handleRegister = () => {
+    let data = new FormData();
+    data.append('email', email)
+    data.append('password', password)
+    data.append('first_name', firstName)
+    data.append('last_name', lastName)
+    data.append('domain', link)
+    data.append('avatar', avatar)
+    data.append('theme', theme)
+    data.append('about', about)
+    data.append('position', position)
+    data.append('activation_field', field)
     axios
-      .post("https://keykoja.iran.liara.run/core/register/", {
-        email: email,
-        password: password,
-        first_name: firstName,
-        last_name: lastName,
-        domain: link,
-        avatar: avatar,
-        theme: theme,
-        about: about,
-        position: position,
-        activation_field: field,
-      })
+      .post("https://keykoja.iran.liara.run/core/register/", data)
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("userDetails", JSON.stringify(res.data));
@@ -152,8 +147,8 @@ export function SignupForm() {
               <div className="w-full flex justify-center items-center">
                 {showAvatar ? (
                   <img
-                    src={avatar}
-                    className="w-[80px] h-[80px] rounded-[100%] mb-1"
+                    src={URL.createObjectURL(avatar)}
+                    className="w-[80px] h-[80px] rounded-[100%] mb-1 object-cover"
                   />
                 ) : (
                   <div className="w-[80px] h-[80px] rounded-[100%] mb-1 border border-slate-400 text-[8px] flex justify-center items-center text-center">
