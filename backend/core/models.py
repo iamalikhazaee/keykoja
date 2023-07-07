@@ -47,7 +47,7 @@ class ProfileUser(AbstractBaseUser,PermissionsMixin):
     last_name = models.CharField(max_length=255)
     domain = models.CharField(max_length=50, unique=True)
     avatar = models.ImageField(blank=True,null=True,upload_to='avatars')
-    theme = models.CharField(max_length=50 ,choices= MY_CHOICES_THEME )
+    theme = models.CharField(max_length=50 ,choices= MY_CHOICES_THEME , default="[#3A5A40,#588157,#A3B18A]")
     about = models.TextField(default=' ', blank= True)
     position = models.CharField(max_length=255 , default=' ',blank= True)
     activation_field = models.CharField(max_length=50 , choices=MY_CHOICES_ACTIVATION , default='درمانی')
