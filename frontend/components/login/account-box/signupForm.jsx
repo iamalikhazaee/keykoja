@@ -209,7 +209,7 @@ export function SignupForm() {
             </div>
           </div>
 
-          <div className="flex w-full mb-4">
+          <div className="flex justify-center w-full mb-4">
             <Button
               type="submit"
               onClick={handleRegister}

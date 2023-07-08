@@ -4,7 +4,7 @@ import {
   FormContainer,
   // Input,
   MutedLink,
-  BoldLink
+  BoldLink,
 } from "./common";
 import { AccountContext } from "./accountContext";
 import axios from "axios";
@@ -14,7 +14,7 @@ import Input from "@/components/common/authInput";
 import Label from "@/components/common/Label";
 import { Button } from "@/components/common/authBtn";
 
-export function LoginForm () {
+export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -40,14 +40,14 @@ export function LoginForm () {
   return (
     <div className="w-full flex flex-col items-center mt-3">
       <div className="w-full flex flex-col">
-        <Label value='ایمیل' />
+        <Label value="ایمیل" />
         <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
           placeholder="ایمیل"
         />
-        <Label value='رمز عبور' />
+        <Label value="رمز عبور" />
         <Input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -55,12 +55,26 @@ export function LoginForm () {
           placeholder="رمز عبور"
         />
       </div>
-      <Button onClick={handleLogin} type="submit" bg={'#354F52'} text={'#fff'}>
-        ورود
-      </Button>
-      <span className="text-[10px] text-gray-400 font-medium decoration-transparent" href="">
+      <div className="w-1/2 mx-auto flex justify-center">
+        <Button
+          onClick={handleLogin}
+          type="submit"
+          bg={"#354F52"}
+          text={"#fff"}
+        >
+          ورود
+        </Button>
+      </div>
+      <span
+        className="text-[10px] text-gray-400 font-medium decoration-transparent"
+        href=""
+      >
         حساب کاربری ندارید؟{" "}
-        <span className="text-[10px] text-[#2f5061] font-medium decoration-transparent mx-1 cursor-pointer" href="" onClick={switchToSignup}>
+        <span
+          className="text-[10px] text-[#2f5061] font-medium decoration-transparent mx-1 cursor-pointer"
+          href=""
+          onClick={switchToSignup}
+        >
           ثبت‌نام کنید
         </span>
       </span>

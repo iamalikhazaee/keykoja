@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { hours, minutes } from "./utils";
-import { toPersianNum } from "../Calender/utils";
+import { toPersianNum } from "../../utils/utils";
 import styles from "./styles.module.scss";
 import { useEffect } from "react";
 
