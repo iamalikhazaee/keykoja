@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faClock, faLocationPin, faNoteSticky } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import styles from '@/styles/guestPage.module.scss'
-import { toPersianNum } from '@/components/Calender/utils';
+import { toPersianNum } from '@/utils/utils';
 import NotificationModal from '@/components/Modals/Notification';
 
 export default function eventName() {

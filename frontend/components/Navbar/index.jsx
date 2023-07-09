@@ -1,13 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faUser,
   faUserCircle,
-  faCalendar,
-  faPuzzlePiece,
-  faShareAlt,
-  faGem,
-  faInfoCircle,
   faSignOutAlt,
   faCalendarAlt,
   faUserCheck,
@@ -21,7 +15,7 @@ import Link from "next/link";
 export default function Navbar() {
   const [userMenu, setUserMenu] = useState(false);
   const [items, setItems] = useState(false);
-  const router = useRouter();
+  // const router = useRouter();
   const [userDetails, setUserDetails] = useState({});
   const wrapperRef = useRef();
 

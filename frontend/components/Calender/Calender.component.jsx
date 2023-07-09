@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Animated } from "react-animated-css";
 import { JalaliDateTime } from "jalali-date-time";
-import { toPersianNum } from "./utils";
+import { toPersianNum } from "../../utils/utils";
 import {
   ContainerStyled,
   CalenderHeader,
