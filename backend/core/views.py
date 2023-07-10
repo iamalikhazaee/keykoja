@@ -46,6 +46,13 @@ class RegisterViewSet(viewsets.ModelViewSet):
     queryset = ProfileUser.objects.all()
     serializer_class = ProfileSerializer
 
+class ThemeViewSet(viewsets.ModelViewSet):
+    queryset = Theme.objects.all()
+    serializer_class = themeSerializer
+
+    def get_queryset(self):
+        return self.queryset
+    
 class ProfileViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]

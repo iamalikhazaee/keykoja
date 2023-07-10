@@ -16,7 +16,14 @@ class CustomLoginSerializer(serializers.Serializer):
 
         return attrs
 
+
+class themeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Theme
+        fields = ['id','color_name','pallete_1','pallete_2','pallete_3']
 class ProfileSerializer(serializers.ModelSerializer):
+
+    theme = themeSerializer()
     class Meta:
         model = ProfileUser
         fields = ['id','email', 'password', 'first_name', 'last_name', 'domain','avatar','theme','about','position','activation_field', 'token']
