@@ -23,10 +23,12 @@ class themeSerializer(serializers.ModelSerializer):
         fields = ['id','color_name','pallete_1','pallete_2','pallete_3']
 class ProfileSerializer(serializers.ModelSerializer):
 
-    theme = themeSerializer()
+    # theme = serializers.PrimaryKeyRelatedField(queryset=Theme.objects.all())
+    theme = themeSerializer(read_only=True)
+    theme_id = serializers.PrimaryKeyRelatedField(queryset=Theme.objects.all(), source='theme', write_only=True)
     class Meta:
         model = ProfileUser
-        fields = ['id','email', 'password', 'first_name', 'last_name', 'domain','avatar','theme','about','position','activation_field', 'token']
+        fields = ['id','email', 'password', 'first_name', 'last_name', 'domain','avatar','theme','theme_id','about','position','activation_field', 'token']
         extra_kwargs = {'password': {'write_only': True}}
 
     def get_token(self, obj):
