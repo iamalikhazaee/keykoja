@@ -10,15 +10,17 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import EventCard from "@/components/EventCard";
+import FilledBtn from "@/components/common/FilledBtn";
 
 
 export default function Dashboard() {
-    const [showModal, setShowModal] = useState(false);
     const [events, setEvents] = useState([]);
+    const [theme, setTheme] = useState();
     const router = useRouter()
 
     useEffect(() => {
         const token = JSON.parse(Cookies.get('token'));
+        setTheme(JSON.parse(localStorage.getItem("userDetails")).theme)
         axios.get('https://keykoja.iran.liara.run/core/NewEvent/', {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -68,25 +70,15 @@ export default function Dashboard() {
     return (
         <>
             <Navbar />
-            <nav className={styles.secondNavbar}>
-                <div className={styles.navbarContainer}>
-                    {/* <DropdownButton
-                        className={styles.eventTypeBtn}
-                        // as={ButtonGroup}
-                        id={`dropdown-button-drop-end`}
-                        drop='down'
-                        // variant="secondary"
-                        title='نوع رویدادهای من'
-                    >
-                        <Dropdown.Item eventKey="1" className={styles.eventType}>یک به یک</Dropdown.Item>
-                        <Dropdown.Item eventKey="2" className={styles.eventType}>گروهی</Dropdown.Item>
-                    </DropdownButton> */}
-                    <div className={styles.addEvent}>
-                        <button
+            <nav className="bg-white text-[13px]">
+                <div className="w-full flex flex-wrap items-center justify-end my-0 mx-auto p-4">
+                    <div>
+                        <FilledBtn
+                            bg={theme? theme.pallete_2 : ''}
                             onClick={() => router.push({ pathname: '/dashboard/newEvent/' })}>
                             افزودن رویداد جدید
-                            <FontAwesomeIcon icon={faAdd} />
-                        </button>
+                            <FontAwesomeIcon icon={faAdd} className="mr-1" />
+                        </FilledBtn>
                     </div>
                 </div>
             </nav>

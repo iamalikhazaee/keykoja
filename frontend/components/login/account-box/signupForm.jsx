@@ -20,7 +20,7 @@ export function SignupForm() {
   const [password, setPassword] = useState("");
   const [link, setLink] = useState("");
   const [avatar, setAvatar] = useState(null);
-  const [theme, setTheme] = useState("");
+  const [theme, setTheme] = useState();
   const [about, setAbout] = useState("");
   const [position, setPosition] = useState("");
   const [field, setField] = useState("");
@@ -41,7 +41,7 @@ export function SignupForm() {
     data.append('last_name', lastName)
     data.append('domain', link)
     data.append('avatar', avatar)
-    data.append('theme', theme)
+    data.append('theme_id', theme)
     data.append('about', about)
     data.append('position', position)
     data.append('activation_field', field)
@@ -182,28 +182,28 @@ export function SignupForm() {
             >
               <div className="w-full flex">
                 <div
-                  className="w-1/3 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg "
-                  onClick={() => setTheme("theme 1")}
+                  className={`${theme === 2 && "shadow-xl -mt-2"} w-1/3 h-14 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg `}
+                  onClick={() => setTheme(2)}
                 >
-                  <div className="w-1/3 h-12 bg-[#05668D]"></div>
-                  <div className="w-1/3 h-12 bg-[#028090]"></div>
-                  <div className="w-1/3 h-12 bg-[#00A896]"></div>
+                  <div className="w-1/3 h-full bg-[#05668D]"></div>
+                  <div className="w-1/3 h-full bg-[#028090]"></div>
+                  <div className="w-1/3 h-full bg-[#00A896]"></div>
                 </div>
                 <div
-                  className="w-1/3 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg"
-                  onClick={() => setTheme("theme 2")}
+                  className={`${theme === 1 && "shadow-xl -mt-2"} w-1/3 h-14 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg`}
+                  onClick={() => setTheme(1)}
                 >
-                  <div className="w-1/3 h-12 bg-[#A3B18A]"></div>
-                  <div className="w-1/3 h-12 bg-[#588157]"></div>
-                  <div className="w-1/3 h-12 bg-[#3A5A40]"></div>
+                  <div className="w-1/3 h-full bg-[#A3B18A]"></div>
+                  <div className="w-1/3 h-full bg-[#588157]"></div>
+                  <div className="w-1/3 h-full bg-[#3A5A40]"></div>
                 </div>
                 <div
-                  className="w-1/3 p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg"
-                  onClick={() => setTheme("theme 3")}
+                  className={`${theme === 3 && "shadow-xl -mt-2"} w-1/3 h-14 p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg`}
+                  onClick={() => setTheme(3)}
                 >
-                  <div className="w-1/3 h-12 bg-[#EFD9CE]"></div>
-                  <div className="w-1/3 h-12 bg-[#DEC0F1]"></div>
-                  <div className="w-1/3 h-12 bg-[#B79CED]"></div>
+                  <div className="w-1/3 h-full bg-[#EFD9CE]"></div>
+                  <div className="w-1/3 h-full bg-[#DEC0F1]"></div>
+                  <div className="w-1/3 h-full bg-[#B79CED]"></div>
                 </div>
               </div>
             </div>

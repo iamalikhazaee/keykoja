@@ -11,8 +11,6 @@ import SelectBox from '@/components/common/SelectBox'
 import Textarea from '@/components/common/Textarea'
 import { Button } from '@/components/common/authBtn'
 import axios from 'axios'
-// import Cookies from 'js-cookie'
-// import jwt from 'jwt-decode'
 
 export default function ProfileSettings() {
     const [id, setId] = useState(0)
@@ -29,7 +27,6 @@ export default function ProfileSettings() {
     const [originalAvatar, setOriginalAvatar] = useState(true)
 
     useEffect(() => {
-        // const token = jwt(JSON.parse(Cookies.get('token')))
         const user = JSON.parse(localStorage.getItem('userDetails'))
         setId(user.id)
         setToken(user.token.access)
@@ -39,7 +36,7 @@ export default function ProfileSettings() {
         setLink(user.domain)
         setField(user.activation_field)
         setPosition(user.position)
-        setAvatar(avatar == null ? null : `${user.avatar}`)
+        setAvatar(avatar == null ? null : `https://keykoja.iran.liara.run/${user.avatar}`)
         setAbout(user.about)
         setTheme(user.theme)
     }, [])

@@ -107,7 +107,7 @@ function EditEvent(props) {
               end_hour: toEnglishNum(times[i].end_hour),
             })
             .then((res) => {
-              console.log(res.data);
+            //   console.log(res.data);
             });
         });
     }

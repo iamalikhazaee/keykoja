@@ -13,11 +13,13 @@ import Label from "@/components/common/Label";
 import Input from "@/components/common/authInput";
 import SelectBox from "@/components/common/SelectBox";
 import Textarea from "@/components/common/Textarea";
+import FilledBtn from "@/components/common/FilledBtn";
 
 
 export default function newEvent() {
     const router = useRouter();
     const [userDetails, setUserDetails] = useState({})
+    const [theme, setTheme] = useState()
     const [userToken, setUserToken] = useState()
     const [event, setEvent] = useState()
     const [name, setName] = useState("");
@@ -27,11 +29,11 @@ export default function newEvent() {
     const [message, setMessage] = useState("");
     const [domain, setDomain] = useState("");
     const [steps, setSteps] = useState(1);
-    // const [times, setTimes] = useState([new Date()]);
 
 
     useEffect(() => {
         setUserDetails(JSON.parse(localStorage.getItem("userDetails")))
+        setTheme(JSON.parse(localStorage.getItem("userDetails")).theme)
         setUserToken(localStorage.getItem("token"))
     }, [])
 
@@ -40,10 +42,6 @@ export default function newEvent() {
             pathname: '/dashboard'
         })
     }
-
-    const handleMessage = (event) => {
-        setMessage(event.target.value);
-    };
 
     const addEvent = (e) => {
         e.preventDefault()
@@ -74,11 +72,13 @@ export default function newEvent() {
             <Row className={styles.row}>
                 <nav className={styles.secondNavbar}>
                     <div className={styles.navbarContainer}>
-                        <div className={styles.backBtn}>
-                            <button onClick={handleBackBtn}>
-                                <FontAwesomeIcon icon={faChevronRight} />
+                        <div>
+                            <FilledBtn
+                                bg={theme ? theme.pallete_2 : ''}
+                                onClick={handleBackBtn}>
+                                <FontAwesomeIcon icon={faChevronRight} className="ml-1" />
                                 بازگشت به داشبورد
-                            </button>
+                            </FilledBtn>
                         </div>
                     </div>
                 </nav>
@@ -177,7 +177,7 @@ export default function newEvent() {
 
                                 <div className={styles.fields}>
                                     <div className={styles.submitBtn}>
-                                        <button onClick={addEvent}>تائید و ادامه</button>
+                                        <FilledBtn bg={theme ? theme.pallete_2 : ''} onClick={addEvent}>تائید و ادامه</FilledBtn>
                                     </div>
                                 </div>
                             </form>)

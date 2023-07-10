@@ -3,7 +3,7 @@ import React from 'react'
 import { Button, Col, Row } from 'react-bootstrap'
 import Calender from '@/components/Calender/Calender.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt, faClock, faLocationPin, faNoteSticky } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt, faClock, faLocationPin, faNoteSticky, faTag } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import styles from '@/styles/guestPage.module.scss'
 import { toPersianNum } from '@/utils/utils';
@@ -53,12 +53,7 @@ export default function eventName() {
         setTime(t)
     }
 
-    const addGuest = () => {
-        // const d = [];
-        // for (let i = 0; i < dates.length; i++) {
-        //     let da = jalali.toObject(new Date(dates[i]))
-        //     d.push(`${da.year}-${da.month < 10 ? "0" : ""}${da.month}-${da.day}`)
-        // }
+    const addGuest = (e) => {
         if (selectedDate && !(dates.includes(selectedDate.date)) || !selectedDate) {
             alert('لطفا یک تاریخ معتبر انتخاب کنید.')
         }
@@ -68,7 +63,7 @@ export default function eventName() {
         else if (guestName === '' || guestEmail === '') {
             alert('لطفا مشخصات خود را بصورت کامل وارد کنید.')
         }
-        else {
+        if (eventDetails.type === 'یک به یک') {
             axios.all([
                 axios.post('https://keykoja.iran.liara.run/core/GuestsReg/', {
                     name: guestName, email: guestEmail, approve: false, event: eventDetails.id, time: selectedTime.id
@@ -84,6 +79,17 @@ export default function eventName() {
                 setGuestEmail('')
             }))
         }
+        else if (eventDetails.type === 'گروهی') {
+            axios.post('https://keykoja.iran.liara.run/core/GuestsReg/', {
+                name: guestName, email: guestEmail, approve: false, event: eventDetails.id, time: selectedTime.id
+            }).then((res) => {
+                setOpenModal(true)
+                setSelectedDate(undefined)
+                setSelectedTime(undefined)
+                setGuestName('')
+                setGuestEmail('')
+            })
+        }
     }
 
     return (
@@ -98,8 +104,8 @@ export default function eventName() {
                             </div>
                             <span className={styles.eventName}>{eventDetails.name}</span>
                             <div className={styles.eventTime}>
-                                <FontAwesomeIcon icon={faClock} />
-                                <span>مدت زمان: {eventDetails.time_unit}</span>
+                                <FontAwesomeIcon icon={faTag} />
+                                <span>نوع رویداد: {eventDetails.type}</span>
                             </div>
                             <div className={styles.eventPlace}>
                                 <FontAwesomeIcon icon={faLocationPin} />
