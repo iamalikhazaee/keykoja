@@ -7,28 +7,14 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Container, Row } from "react-bootstrap";
 import axios from "axios";
-// import { useRecoilValue } from "recoil";
-// import { current_user } from "@/atoms";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import EventCard from "@/components/EventCard";
 
-// const PinkSwitch = styled(Switch)(({ theme }) => ({
-//     '& .MuiSwitch-switchBase.Mui-checked': {
-//         color: pink[300],
-//         '&:hover': {
-//             backgroundColor: alpha(pink[600], theme.palette.action.hoverOpacity),
-//         },
-//     },
-//     '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-//         backgroundColor: pink[300],
-//     },
-// }));
 
 export default function Dashboard() {
     const [showModal, setShowModal] = useState(false);
     const [events, setEvents] = useState([]);
-    // const user = useRecoilValue(current_user)
     const router = useRouter()
 
     useEffect(() => {

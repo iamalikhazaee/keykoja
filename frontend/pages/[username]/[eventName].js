@@ -105,9 +105,9 @@ export default function eventName() {
                                 <FontAwesomeIcon icon={faLocationPin} />
                                 <span>محل برگزاری: {eventDetails.address}</span>
                             </div>
-                            <div className='w-full pr-[15px] pl-5 leading-7 flex items-center text-sm font-semibold text-[#00000080] my-[15px]'>
-                                <FontAwesomeIcon icon={faNoteSticky} className='ml-2' />
-                                <span>با سلام. اینجا میتونید تایم خودتون برای کلاس آموزش گیتار حضوری ثبت کنید.</span>
+                            <div className='w-full pr-[15px] pl-5 leading-7 flex items-start text-xs font-semibold text-[#00000080] my-[15px]'>
+                                <FontAwesomeIcon icon={faNoteSticky} className='ml-2 mt-2' />
+                                <span>{eventDetails.massage}</span>
                             </div>
                         </Col>
                         <Col lg={5} md={9} sm={12}>

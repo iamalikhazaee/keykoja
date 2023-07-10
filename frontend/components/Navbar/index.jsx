@@ -11,6 +11,7 @@ import styles from "./styles.module.scss";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   const [userMenu, setUserMenu] = useState(false);
@@ -43,9 +44,9 @@ export default function Navbar() {
     // router.push("http://localhost:3000/");
   };
 
-  // const openEventLink = (url) => {
-  //   window.open(url, "_blank", "noreferrer");
-  // };
+  const myLoader = (src) => {
+    return `${src}`;
+  };
 
   return (
     <nav className="bg-[#354F52] py-1 px-2">
@@ -82,7 +83,14 @@ export default function Navbar() {
               icon={faUser}
               style={{ fontSize: 25, color: "white" }}
             /> */}
-            <img src={`https://keykoja.iran.liara.run/${userDetails.avatar}`} className="w-10 h-10 rounded-[100%] object-cover" />
+            <Image
+              alt="avatar"
+              loader={() => myLoader(userDetails.avatar)}
+              src={userDetails.avatar}
+              width={70}
+              height={70}
+              className="w-10 h-10 rounded-[100%] object-cover"
+            />
           </button>
           {userMenu && (
             <div
@@ -100,8 +108,8 @@ export default function Navbar() {
                 aria-labelledby="user-menu-button"
               >
                 <li>
-                  <a
-                    href="http://localhost:3000/dashboard/profile-settings"
+                  <Link
+                    href="/dashboard/profile-settings"
                     className="w-full flex justify-start items-center py-2 pr-3 my-2 text-slate-400 decoration-transparent text-xs hover:bg-slate-50 hover:text-gray-500"
                   >
                     <FontAwesomeIcon
@@ -109,11 +117,11 @@ export default function Navbar() {
                       className="ml-2 text-sm text-slate-500"
                     />
                     تنظیمات حساب
-                  </a>
+                  </Link>
                 </li>
                 <li onClick={handleLogout}>
-                  <a
-                    href="http://localhost:3000"
+                  <Link
+                    href="/"
                     className="w-full flex justify-start items-center py-2 pr-3 my-2 text-slate-400 decoration-transparent text-xs hover:bg-slate-50 hover:text-gray-500"
                   >
                     <FontAwesomeIcon
@@ -121,7 +129,7 @@ export default function Navbar() {
                       className="ml-2 text-sm text-slate-500"
                     />
                     خروج
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -163,7 +171,7 @@ export default function Navbar() {
             className={`${styles.menu} flex flex-col font-medium text-sm mb-0 bg-[#354F52] list-none `}
           >
             <li>
-              <a
+              <Link
                 href={`/${userDetails.domain}/guests`}
                 // target="_blank"
                 rel="noopener noreferrer"
@@ -171,17 +179,17 @@ export default function Navbar() {
               >
                 <FontAwesomeIcon icon={faUserCheck} className="ml-[6px]" />
                 جلسات هماهنگ شده
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href={`/${userDetails.domain}`}
                 target="_blank"
                 className="decoration-transparent flex items-center py-2 px-4 ml-7 text-white rounded-xl hover:bg-[#52796F] hover:text-white"
               >
                 <FontAwesomeIcon icon={faUserTag} className="ml-[6px]" />
                 دامنه شما
-              </a>
+              </Link>
             </li>
             {/* <li>
               <a

@@ -49,7 +49,7 @@ export default function newEvent() {
         e.preventDefault()
         const token = jwt(JSON.parse(userToken))
         axios.post('https://keykoja.iran.liara.run/core/NewEvent/',
-            { owner: token.user_id, name: name, type: type, place: location, address: address, message: message, event_domain: domain },
+            { owner: token.user_id, name: name, type: type, place: location, address: address, massage: message, event_domain: domain },
             {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(userToken)}`
@@ -57,9 +57,8 @@ export default function newEvent() {
             }
         )
             .then((res) => {
-                // setForm('زمان های آزاد')
                 setEvent(res.data.id)
-                console.log(res.data.id)
+                console.log(res.data)
                 setSteps(2)
             })
     }
@@ -168,9 +167,9 @@ export default function newEvent() {
                                         <div className={`w-100`}>
                                             <Label value='پیام مربوطه' />
                                             <Textarea
-                                                placeholder="پیام مربوط به رویداد را اینجا بنویسید..."
                                                 value={message}
-                                                onChange={handleMessage}
+                                                onChange={(e) => setMessage(e.target.value)}
+                                                placeholder="پیام مربوط به رویداد را اینجا بنویسید..."
                                             ></Textarea>
                                         </div>
                                     </div>

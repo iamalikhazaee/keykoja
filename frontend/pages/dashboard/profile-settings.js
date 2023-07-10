@@ -39,7 +39,7 @@ export default function ProfileSettings() {
         setLink(user.domain)
         setField(user.activation_field)
         setPosition(user.position)
-        setAvatar(avatar == null ? null : `https://keykoja.iran.liara.run${user.avatar}`)
+        setAvatar(avatar == null ? null : `${user.avatar}`)
         setAbout(user.about)
         setTheme(user.theme)
     }, [])
@@ -59,13 +59,13 @@ export default function ProfileSettings() {
         data.append('first_name', firstName)
         data.append('last_name', lastName)
         data.append('domain', link)
-        data.append('avatar', avatar)
         data.append('theme', theme)
         data.append('about', about)
         data.append('position', position)
         data.append('activation_field', field)
-
-        console.log(data.values)
+        if (originalAvatar === false) {
+            data.append('avatar', avatar)
+        }
 
         axios.patch(`https://keykoja.iran.liara.run/core/register/${id}/`, data, {
             headers: {
@@ -73,6 +73,7 @@ export default function ProfileSettings() {
             }
         }).then((res) => {
             console.log(res.data)
+            localStorage.setItem('userDetails', JSON.stringify(res.data))
         })
     }
 
@@ -82,12 +83,10 @@ export default function ProfileSettings() {
             <Navbar />
             <nav className='bg-white text-[13px] shadow-sm'>
                 <div className='w-full flex flex-wrap items-center justify-between my-0 mx-auto p-4 py-3'>
-                    {/* <div> */}
                     <a href='http://localhost:3000/dashboard' className={styles.backBtn}>
                         <FontAwesomeIcon icon={faChevronRight} />
                         بازگشت به داشبورد
                     </a>
-                    {/* </div> */}
                 </div>
             </nav>
             <div className='mt-8 px-16'>
@@ -129,8 +128,6 @@ export default function ProfileSettings() {
                         <Label value='ایمیل' />
                         <Input type='text' value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
-                    {/* </div> */}
-                    {/* <div className='grid grid-cols-9 gap-5 items-center'> */}
                     <div className='sm:col-span-3 md:col-span-3 lg:col-span-4 flex flex-col my-4'>
                         <Label value='لینک' />
                         <div className='w-full flex flex-row-reverse items-center'>
@@ -150,7 +147,6 @@ export default function ProfileSettings() {
                             options={["اداری", "آموزشی", "درمانی"]}
                             value={field}
                             setValue={setField}
-                        // placeholder="نوع رویداد را انتخاب کنید"
                         />
                     </div>
                     <div className='sm:col-span-3 md:col-span-3 lg:col-span-4 flex flex-col my-4'>
@@ -167,28 +163,28 @@ export default function ProfileSettings() {
                     <Label value="تم رنگ" />
                     <div className='w-full flex justify-center'>
                         <div
-                            className={`${theme === 'theme 1' ? 'shadow-lg' : ''} w-1/3 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg `}
-                            onClick={() => setTheme("[#1E6091, #1a759F, #168AAD]")}
+                            className={`${theme === '[#1E6091,#1a759F,#168AAD]' ? 'shadow-xl -mt-2' : ''} w-1/3 h-14 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg `}
+                            onClick={() => setTheme("[#1E6091,#1a759F,#168AAD]")}
                         >
-                            <div className="w-1/3 h-12 bg-[#1e6091]"></div>
-                            <div className="w-1/3 h-12 bg-[#1a759f]"></div>
-                            <div className="w-1/3 h-12 bg-[#168aad]"></div>
+                            <div className="w-1/3 h-full bg-[#1e6091]"></div>
+                            <div className="w-1/3 h-full bg-[#1a759f]"></div>
+                            <div className="w-1/3 h-full bg-[#168aad]"></div>
                         </div>
                         <div
-                            className={`${theme === 'theme 2' ? 'shadow-lg' : ''} w-1/3 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg`}
-                            onClick={() => setTheme("[#3A5A40, #588157, #A3B18A]")}
+                            className={`${theme === '[#3A5A40,#588157,#A3B18A]' ? 'shadow-lg -mt-2' : ''} w-1/3 h-14 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg`}
+                            onClick={() => setTheme("[#3A5A40,#588157,#A3B18A]")}
                         >
-                            <div className="w-1/3 h-12 bg-[#3a5a40]"></div>
-                            <div className="w-1/3 h-12 bg-[#588157]"></div>
-                            <div className="w-1/3 h-12 bg-[#a3b18a]"></div>
+                            <div className="w-1/3 h-full bg-[#3a5a40]"></div>
+                            <div className="w-1/3 h-full bg-[#588157]"></div>
+                            <div className="w-1/3 h-full bg-[#a3b18a]"></div>
                         </div>
                         <div
-                            className={`${theme === 'theme 3' ? 'shadow-lg' : ''} w-1/3 p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg`}
-                            onClick={() => setTheme("[#C8B6FF, #E7C6FF, #FFD6FF]")}
+                            className={`${theme === '[#C8B6FF,#E7C6FF,#FFD6FF]' ? 'shadow-lg -mt-2' : ''} w-1/3 h-14 p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg`}
+                            onClick={() => setTheme("[#C8B6FF,#E7C6FF,#FFD6FF]")}
                         >
-                            <div className="w-1/3 h-12 bg-[#c8b6ff]"></div>
-                            <div className="w-1/3 h-12 bg-[#e7c6ff]"></div>
-                            <div className="w-1/3 h-12 bg-[#ffd6ff]"></div>
+                            <div className="w-1/3 h-full bg-[#c8b6ff]"></div>
+                            <div className="w-1/3 h-full bg-[#e7c6ff]"></div>
+                            <div className="w-1/3 h-full bg-[#ffd6ff]"></div>
                         </div>
                     </div>
                 </div>
