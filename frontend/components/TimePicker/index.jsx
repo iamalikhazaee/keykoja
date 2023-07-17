@@ -35,7 +35,7 @@ export default function TimePicker(props) {
           setShowTimes(!showTimes);
         }}
         value={`${props.hour}:${props.min}`}
-        // onChange={() => props.setTime(`${hour}:${min}`)}
+        onChange={() => props.setTime(`${hour}:${min}`)}
       />
       {showTimes && (
         <div className={styles.timeDropdown} >

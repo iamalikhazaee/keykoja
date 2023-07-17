@@ -161,8 +161,29 @@ const CustomizedDatePicker = (props) => {
                 <DaysRow key={i}>
                   {day.map((d, index) =>
                     now.year === Number(d.date.split("-")[0]) &&
-                    now.month === Number(d.date.split("-")[1]) &&
-                    now.day <= d.day ? (
+                    now.month === Number(d.date.split("-")[1]) ? (
+                      now.day <= d.day ? (
+                        props.date !== undefined &&
+                        props.date.date === d.date ? (
+                          <SelectedDayStyled key={index}>
+                            {toPersianNum(d.day)}
+                          </SelectedDayStyled>
+                        ) : (
+                          <DayStyled
+                            month={days.month}
+                            today={d.month}
+                            key={index}
+                            onClick={() => props.setDate(d)}
+                          >
+                            {toPersianNum(d.day)}
+                          </DayStyled>
+                        )
+                      ) : (
+                        <DisableDate key={index}>
+                          {toPersianNum(d.day)}
+                        </DisableDate>
+                      )
+                    ) : now.month <= Number(d.date.split("-")[1]) ? (
                       props.date !== undefined && props.date.date === d.date ? (
                         <SelectedDayStyled key={index}>
                           {toPersianNum(d.day)}
@@ -177,21 +198,12 @@ const CustomizedDatePicker = (props) => {
                           {toPersianNum(d.day)}
                         </DayStyled>
                       )
-                    ) : now.year <= Number(d.date.split("-")[0]) &&
-                      now.month <= Number(d.date.split("-")[1]) &&
-                      now.day <= Number(d.day) ? (
-                      <DayStyled
-                        month={days.month}
-                        today={d.month}
-                        key={index}
-                        onClick={() => props.setDate(d)}
-                      >
-                        {toPersianNum(d.day)}
-                      </DayStyled>
                     ) : (
-                      <DisableDate key={index}>
-                        {toPersianNum(d.day)}
-                      </DisableDate>
+                      now.month > Number(d.date.split("-")[1]) && (
+                        <DisableDate key={index}>
+                          {toPersianNum(d.day)}
+                        </DisableDate>
+                      )
                     )
                   )}
                 </DaysRow>
