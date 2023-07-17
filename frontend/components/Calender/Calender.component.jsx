@@ -15,13 +15,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
-  faSun,
 } from "@fortawesome/free-solid-svg-icons";
 const Calender = (props) => {
   const [days, setDays] = useState("");
   const [now, setNow] = useState("");
   const [change, setChange] = useState(0);
-  // const [availableDates, setAvailableDates] = useState([]);
   const [initialRenderComplete, setInitialRenderComplete] = useState(false);
 
   const jalali = JalaliDateTime();
@@ -37,12 +35,6 @@ const Calender = (props) => {
       );
       setDays(result);
     }
-    // const dates = [];
-    // for (let i = 0; i < props.dates.length; i++) {
-    //   const d = jalali.toObject(new Date(props.dates[i]));
-    //   dates.push(`${d.year}-${d.month < 10 ? "0" : ""}${d.month}-${d.day}`);
-    // }
-    // setAvailableDates(dates);
   }, [change]);
 
   if (initialRenderComplete) {
@@ -158,8 +150,31 @@ const Calender = (props) => {
                 <DaysRow key={i}>
                   {day.map((d, index) =>
                     now.year === Number(d.date.split("-")[0]) &&
-                    now.month === Number(d.date.split("-")[1]) &&
-                    now.day <= d.day ? (
+                    now.month === Number(d.date.split("-")[1]) ? (
+                      now.day <= d.day ? (
+                        props.dates.includes(d.date) ? (
+                          <AvailableDate
+                            key={index}
+                            onClick={() => props.setDateAndTime(d)}
+                          >
+                            {toPersianNum(d.day)}
+                          </AvailableDate>
+                        ) : (
+                          <DayStyled
+                            month={days.month}
+                            today={d.month}
+                            key={index}
+                            onClick={() => props.setDateAndTime(d)}
+                          >
+                            {toPersianNum(d.day)}
+                          </DayStyled>
+                        )
+                      ) : (
+                        <DisableDate key={index}>
+                          {toPersianNum(d.day)}
+                        </DisableDate>
+                      )
+                    ) : now.month <= Number(d.date.split("-")[1]) ? (
                       props.dates.includes(d.date) ? (
                         <AvailableDate
                           key={index}
@@ -177,21 +192,12 @@ const Calender = (props) => {
                           {toPersianNum(d.day)}
                         </DayStyled>
                       )
-                    ) : now.year <= Number(d.date.split("-")[0]) &&
-                      now.month <= Number(d.date.split("-")[1]) &&
-                      now.day <= Number(d.day) ? (
-                      <DayStyled
-                        month={days.month}
-                        today={d.month}
-                        key={index}
-                        onClick={() => props.setDateAndTime(d)}
-                      >
-                        {toPersianNum(d.day)}
-                      </DayStyled>
                     ) : (
-                      <DisableDate key={index}>
-                        {toPersianNum(d.day)}
-                      </DisableDate>
+                      now.month > Number(d.date.split("-")[1]) && (
+                        <DisableDate key={index}>
+                          {toPersianNum(d.day)}
+                        </DisableDate>
+                      )
                     )
                   )}
                 </DaysRow>

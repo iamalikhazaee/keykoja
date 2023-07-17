@@ -13,11 +13,13 @@ import Label from "@/components/common/Label";
 import Input from "@/components/common/authInput";
 import SelectBox from "@/components/common/SelectBox";
 import Textarea from "@/components/common/Textarea";
+import FilledBtn from "@/components/common/FilledBtn";
 
 
 export default function newEvent() {
     const router = useRouter();
     const [userDetails, setUserDetails] = useState({})
+    const [theme, setTheme] = useState()
     const [userToken, setUserToken] = useState()
     const [event, setEvent] = useState()
     const [name, setName] = useState("");
@@ -27,11 +29,11 @@ export default function newEvent() {
     const [message, setMessage] = useState("");
     const [domain, setDomain] = useState("");
     const [steps, setSteps] = useState(1);
-    // const [times, setTimes] = useState([new Date()]);
 
 
     useEffect(() => {
         setUserDetails(JSON.parse(localStorage.getItem("userDetails")))
+        setTheme(JSON.parse(localStorage.getItem("userDetails")).theme)
         setUserToken(localStorage.getItem("token"))
     }, [])
 
@@ -41,15 +43,11 @@ export default function newEvent() {
         })
     }
 
-    const handleMessage = (event) => {
-        setMessage(event.target.value);
-    };
-
     const addEvent = (e) => {
         e.preventDefault()
         const token = jwt(JSON.parse(userToken))
         axios.post('https://keykoja.iran.liara.run/core/NewEvent/',
-            { owner: token.user_id, name: name, type: type, place: location, address: address, message: message, event_domain: domain },
+            { owner: token.user_id, name: name, type: type, place: location, address: address, massage: message, event_domain: domain },
             {
                 headers: {
                     'Authorization': `Bearer ${JSON.parse(userToken)}`
@@ -57,9 +55,8 @@ export default function newEvent() {
             }
         )
             .then((res) => {
-                // setForm('زمان های آزاد')
                 setEvent(res.data.id)
-                console.log(res.data.id)
+                console.log(res.data)
                 setSteps(2)
             })
     }
@@ -75,11 +72,13 @@ export default function newEvent() {
             <Row className={styles.row}>
                 <nav className={styles.secondNavbar}>
                     <div className={styles.navbarContainer}>
-                        <div className={styles.backBtn}>
-                            <button onClick={handleBackBtn}>
-                                <FontAwesomeIcon icon={faChevronRight} />
+                        <div>
+                            <FilledBtn
+                                bg={theme ? theme.pallete_2 : ''}
+                                onClick={handleBackBtn}>
+                                <FontAwesomeIcon icon={faChevronRight} className="ml-1" />
                                 بازگشت به داشبورد
-                            </button>
+                            </FilledBtn>
                         </div>
                     </div>
                 </nav>
@@ -168,9 +167,9 @@ export default function newEvent() {
                                         <div className={`w-100`}>
                                             <Label value='پیام مربوطه' />
                                             <Textarea
-                                                placeholder="پیام مربوط به رویداد را اینجا بنویسید..."
                                                 value={message}
-                                                onChange={handleMessage}
+                                                onChange={(e) => setMessage(e.target.value)}
+                                                placeholder="پیام مربوط به رویداد را اینجا بنویسید..."
                                             ></Textarea>
                                         </div>
                                     </div>
@@ -178,7 +177,7 @@ export default function newEvent() {
 
                                 <div className={styles.fields}>
                                     <div className={styles.submitBtn}>
-                                        <button onClick={addEvent}>تائید و ادامه</button>
+                                        <FilledBtn bg={theme ? theme.pallete_2 : ''} onClick={addEvent}>تائید و ادامه</FilledBtn>
                                     </div>
                                 </div>
                             </form>)

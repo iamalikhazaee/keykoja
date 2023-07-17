@@ -27,7 +27,6 @@ export default function Header() {
                 >
                   ورود به حساب کاربری
                 </Link>
-              
             </div>
           </nav>
 
