@@ -1,5 +1,6 @@
 from datetime import timedelta
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager ,PermissionsMixin
+from django.contrib.postgres.fields import JSONField
 from rest_framework_simplejwt.tokens import RefreshToken    
 from django.db import models
 import datetime
@@ -28,6 +29,13 @@ class MyProfileUserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(email, password, **extra_fields)
 
+class Theme(models.Model):
+    color_name = models.CharField(max_length=20)
+    pallete_1 = models.CharField(max_length=20)
+    pallete_2 = models.CharField(max_length=20)
+    pallete_3 = models.CharField(max_length=20)
+    def __str__(self):
+        return self.color_name
 
 class ProfileUser(AbstractBaseUser,PermissionsMixin):
     MY_CHOICES_ACTIVATION = (
@@ -36,9 +44,9 @@ class ProfileUser(AbstractBaseUser,PermissionsMixin):
         ('اداری', 'اداری')
     )
     MY_CHOICES_THEME = (
-        ('theme 1', 'theme 1'),
-        ('theme 2', 'theme 2'),
-        ('theme 3', 'theme 3')
+        ('["1E6091","1A759F","168AAD"]','a'),
+        ('["3A5A40",588157,#A3B18A]','b'),
+        ('[#C8B6FF,#E7C6FF,#FFD6FF]','c')
     )
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
@@ -46,7 +54,8 @@ class ProfileUser(AbstractBaseUser,PermissionsMixin):
     last_name = models.CharField(max_length=255)
     domain = models.CharField(max_length=50, unique=True)
     avatar = models.ImageField(blank=True,null=True,upload_to='avatars')
-    theme = models.CharField(max_length=50 ,choices= MY_CHOICES_THEME , default='theme 1')
+    # theme = models.CharField(max_length=50 ,choices= MY_CHOICES_THEME , default="[#3A5A40,#588157,#A3B18A]")
+    theme = models.ForeignKey(Theme,on_delete=models.PROTECT , blank=True , null= True,default=1)
     about = models.TextField(default=' ', blank= True)
     position = models.CharField(max_length=255 , default=' ',blank= True)
     activation_field = models.CharField(max_length=50 , choices=MY_CHOICES_ACTIVATION , default='درمانی')
