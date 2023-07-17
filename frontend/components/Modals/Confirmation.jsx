@@ -27,7 +27,7 @@ function ConfirmationModal({ text, confirmText, cancelText, btnAction, open, set
           </div>
           <div className="w-full flex justify-between">
             <button
-              className="w-2/5 border py-2 rounded-lg border-[#52796F] text-[#52796F] text-xs font-semibold transition duration-300 hover:border-none hover:bg-[#52796F] hover:text-white"
+              className="w-2/5 border py-2 rounded-lg border-slate-100 text-slate-500 text-xs font-semibold transition duration-300 hover:border-none hover:bg-slate-400 hover:text-white"
               onClick={() => {
                 btnAction();
                 setOpen(false);
@@ -36,7 +36,7 @@ function ConfirmationModal({ text, confirmText, cancelText, btnAction, open, set
               {confirmText}
             </button>
             <button
-              className="w-2/5 border py-2 rounded-lg border-[#52796F] text-[#52796F] text-xs font-semibold transition duration-300 hover:border-none hover:bg-[#52796F] hover:text-white"
+              className="w-2/5 border py-2 rounded-lg border-slate-100 text-slate-500 text-xs font-semibold transition duration-300 hover:border-none hover:bg-slate-400 hover:text-white"
               onClick={() => setOpen(false)}
             >
               {cancelText}

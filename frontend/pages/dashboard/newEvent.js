@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar"
 import SidebarMenu from "@/components/addEventSidebar"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAdd, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import styles from '@/styles/newEvent.module.scss'
-import { Row, Col } from "react-bootstrap";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
 import FreeTime from "@/components/FreeTime";
 import jwt from 'jwt-decode'
@@ -61,17 +59,12 @@ export default function newEvent() {
             })
     }
 
-    const handleAddTime = () => {
-        const newTime = new Date()
-        setTimes(v => [...v, newTime])
-    }
-
     return (
         <>
             <Navbar />
-            <Row className={styles.row}>
-                <nav className={styles.secondNavbar}>
-                    <div className={styles.navbarContainer}>
+            <div className="m-0 shadow-md">
+                <nav className="bg-white text-xs">
+                    <div className="flex flex-wrap items-center justify-between my-0 mx-auto py-3 px-4">
                         <div>
                             <FilledBtn
                                 bg={theme ? theme.pallete_2 : ''}
@@ -82,17 +75,17 @@ export default function newEvent() {
                         </div>
                     </div>
                 </nav>
-            </Row>
-            <Row className="m-0" style={{ direction: 'rtl' }}>
-                <Col lg={3} md={3} sm={3} xs={12} className="p-0">
+            </div>
+            <div className="grid grid-cols-12 gap-2 m-0" style={{ direction: 'rtl' }}>
+                <div className="lg:col-span-2 md:col-span-3 sm:col-span-2 xs:col-span-12 p-0">
                     <SidebarMenu step={steps} />
-                </Col>
-                <Col lg={9} md={9} sm={9} xs={12} className={styles.formContainer}>
-                    <div className={styles.container}>
+                </div>
+                <div className={`lg:col-span-9 md:col-span-9 sm:col-span-9 xs:col-span-12 py-8`}>
+                    <div className='px-3 lg:pl-7'>
                         {steps === 1 ?
                             (<form>
-                                <div className={styles.fields}>
-                                    <div className={styles.field}>
+                                <div className='grid grid-cols-4 gap-3'>
+                                    <div className='sm:col-span-2 xs:col-span-4'>
                                         <Label value='صاحب رویداد' />
                                         <Input
                                             type="text"
@@ -100,7 +93,7 @@ export default function newEvent() {
                                             onChange={(e) => <></>}
                                         />
                                     </div>
-                                    <div className={styles.field}>
+                                    <div className="sm:col-span-2 xs:col-span-4">
                                         <Label value='عنوان رویداد' />
                                         <Input
                                             type="text"
@@ -111,8 +104,8 @@ export default function newEvent() {
                                     </div>
                                 </div>
 
-                                <div className={styles.fields}>
-                                    <div className={styles.field}>
+                                <div className='grid grid-cols-4 gap-3'>
+                                    <div className="sm:col-span-2 xs:col-span-4">
                                         <Label value='نوع رویداد' />
                                         <SelectBox
                                             options={["یک به یک", "گروهی"]}
@@ -121,22 +114,26 @@ export default function newEvent() {
                                             placeholder="نوع رویداد را انتخاب کنید"
                                         />
                                     </div>
-                                    <div className={styles.field}>
+                                    <div className="sm:col-span-2 xs:col-span-4">
                                         <Label value='لینک رویداد' />
-                                        <div className={styles.inputGroup}>
-                                            <div className={styles.mutedText}>{userDetails.domain}/</div>
-                                            <Input
-                                                type="text"
-                                                value={domain}
-                                                onChange={(e) => setDomain(e.target.value)}
-                                                placeholder='لینک'
-                                            />
+                                        <div className="w-full flex items-center flex-row-reverse">
+                                            <div className="bg-[#f3f4f6] border border-[#d1d5db] leading-5 p-2 rounded-tl-lg rounded-bl-lg text-xs font-semibold text-slate-500 mb-[5px] flex flex-row-reverse">{userDetails.domain}
+                                                <span>/</span>
+                                            </div>
+                                            <div className="w-full -ml-3">
+                                                <Input
+                                                    type="text"
+                                                    value={domain}
+                                                    onChange={(e) => setDomain(e.target.value)}
+                                                    placeholder='لینک'
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className={styles.fields} style={{ justifyContent: 'flex-start' }}>
-                                    <div className={styles.field}>
+                                <div className='grid grid-cols-4 gap-3' style={{ justifyContent: 'flex-start' }}>
+                                    <div className="sm:col-span-2 xs:col-span-4">
                                         <Label value='محل برگزاری رویداد' />
                                         <SelectBox
                                             options={["حضوری", "گوگل میت", "اسکایپ", "واتساپ"]}
@@ -145,7 +142,7 @@ export default function newEvent() {
                                             placeholder="محل برگزاری را انتخاب کنید"
                                         />
                                     </div>
-                                    <div className={styles.field}>
+                                    <div className="sm:col-span-2 xs:col-span-4">
                                         <Label value={`${location === undefined ? 'طریقه ارتباط' :
                                             (location === 'حضوری' ? 'آدرس' :
                                                 (location === 'گوگل میت' ? 'لینک' :
@@ -162,23 +159,19 @@ export default function newEvent() {
                                     } */}
                                 </div>
 
-                                <div className={styles.fields}>
-                                    <div className={styles.field} style={{ width: '100%' }}>
-                                        <div className={`w-100`}>
-                                            <Label value='پیام مربوطه' />
-                                            <Textarea
-                                                value={message}
-                                                onChange={(e) => setMessage(e.target.value)}
-                                                placeholder="پیام مربوط به رویداد را اینجا بنویسید..."
-                                            ></Textarea>
-                                        </div>
+                                <div className="w-full mb-4">
+                                    <div className={`w-100`}>
+                                        <Label value='پیام مربوطه' />
+                                        <Textarea
+                                            value={message}
+                                            onChange={(e) => setMessage(e.target.value)}
+                                            placeholder="پیام مربوط به رویداد را اینجا بنویسید..."
+                                        ></Textarea>
                                     </div>
                                 </div>
 
-                                <div className={styles.fields}>
-                                    <div className={styles.submitBtn}>
-                                        <FilledBtn bg={theme ? theme.pallete_2 : ''} onClick={addEvent}>تائید و ادامه</FilledBtn>
-                                    </div>
+                                <div className="w-full flex justify-center">
+                                    <FilledBtn bg={theme ? theme.pallete_2 : ''} onClick={addEvent}>تائید و ادامه</FilledBtn>
                                 </div>
                             </form>)
                             : <></>
@@ -186,22 +179,11 @@ export default function newEvent() {
 
                         {steps === 2 ? (
                             <FreeTime event_id={event} />
-                            // <div className={styles.timeContainer}>
-                            //     <Row className={styles.cardsContainer}>
-                            //         {times.map((item, index) => <FreeTime key={index} />)}
-                            //     </Row>
-                            //     {/* <div className={styles.addBtn}>
-                            //         <button onClick={handleAddTime}>
-                            //             افزودن زمان
-                            //             <FontAwesomeIcon icon={faAdd} />
-                            //         </button>
-                            //     </div> */}
-                            // </div>
                         ) : <></>
                         }
                     </div>
-                </Col>
-            </Row>
+                </div>
+            </div>
         </>
     )
 }

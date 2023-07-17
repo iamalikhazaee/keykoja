@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faListCheck,
@@ -10,6 +10,11 @@ import {
 import styles from "./styles.module.scss";
 
 export default function SidebarMenu(props) {
+  const [theme, setTheme] = useState();
+
+  useEffect(() => {
+    setTheme(JSON.parse(localStorage.getItem("userDetails")).theme);
+  }, []);
   return (
     <>
       <div
@@ -18,83 +23,105 @@ export default function SidebarMenu(props) {
         <div className="w-full">
           <ul className="list-none flex overflow-x-scroll p-0 m-0 w-full py-4 px-2">
             <li className="min-w-[130px] flex justify-center items-center">
-              <a
-                href="#"
+              <span
                 className={`${
-                  props.step === 1 ? "text-[#52819A]" : "text-gray-400"
-                } decoration-transparent text-xs hover:text-[#52819A]`}
-                // onClick={() => setSelected("تنظیمات پایه")}
+                  props.step === 1
+                    ? theme?.id === 2
+                      ? "text-palletteOneThird hover:text-palletteOneFirst"
+                      : theme?.id === 1
+                      ? "text-palletteTwoSecond hover:text-palletteTwoFirst"
+                      : "text-palletteThreeFirst hover:text-palletteThreeSecond"
+                    : "text-gray-400"
+                } decoration-transparent text-xs transition-all duration-300 cursor-pointer`}
               >
                 <FontAwesomeIcon icon={faListCheck} className="ml-2" />
                 <span className="w-full">تنظیمات پایه</span>
-              </a>
+              </span>
             </li>
             <li className="min-w-[130px] flex justify-center items-center">
-              <a
-                href="#"
+              <span
                 className={`${
-                  props.step === 2 ? "text-[#52819A]" : "text-gray-400"
-                } decoration-transparent text-xs hover:text-[#52819A]`}
-                // onClick={() => setSelected('زمان های آزاد')}
+                  props.step === 2
+                    ? theme?.id === 2
+                      ? "text-palletteOneThird hover:text-palletteOneFirst"
+                      : theme?.id === 1
+                      ? "text-palletteTwoSecond hover:text-palletteTwoFirst"
+                      : "text-palletteThreeFirst hover:text-palletteThreeSecond"
+                    : "text-gray-400"
+                } decoration-transparent text-xs transition-all duration-300 cursor-pointer`}
               >
                 <FontAwesomeIcon icon={faClock} className="ml-2" />
                 <span className="w-full">زمان های آزاد</span>
-              </a>
+              </span>
             </li>
             <li className="min-w-[130px] flex justify-center items-center">
-              <a
-                href="#"
+              <span
                 className={`${
-                  props.step === 3 ? "text-[#52819A]" : "text-gray-400"
-                } decoration-transparent text-xs hover:text-[#52819A]`}
-                // onClick={() => setSelected('تنظیمات پیشرفته')}
+                  props.step === 3
+                    ? theme?.id === 2
+                      ? "text-palletteOneThird hover:text-palletteOneFirst"
+                      : theme?.id === 1
+                      ? "text-palletteTwoSecond hover:text-palletteTwoFirst"
+                      : "text-palletteThreeFirst hover:text-palletteThreeSecond"
+                    : "text-gray-400"
+                } decoration-transparent text-xs transition-all duration-300 cursor-pointer`}
               >
                 <FontAwesomeIcon icon={faGears} className="ml-2" />
                 <span className="w-full">تنظیمات پیشرفته</span>
-              </a>
+              </span>
             </li>
             <li className="min-w-[130px] flex justify-center items-center">
-              <a
-                href="#"
+              <span
                 className={`${
-                  props.step === 4 ? "text-[#52819A]" : "text-gray-400"
-                } decoration-transparent text-xs hover:text-[#52819A]`}
-                // onClick={() => setSelected('پرسش از مهمان')}
+                  props.step === 4
+                    ? theme?.id === 2
+                      ? "text-palletteOneThird hover:text-palletteOneFirst"
+                      : theme?.id === 1
+                      ? "text-palletteTwoSecond hover:text-palletteTwoFirst"
+                      : "text-palletteThreeFirst hover:text-palletteThreeSecond"
+                    : "text-gray-400"
+                } decoration-transparent text-xs transition-all duration-300 cursor-pointer`}
               >
                 <FontAwesomeIcon icon={faQuestion} className="ml-2" />
                 <span className="w-full">پرسش از مهمان</span>
-              </a>
+              </span>
             </li>
             <li className="min-w-[130px] flex justify-center items-center">
-              <a
-                href="#"
+              <span
                 className={`${
-                  props.step === 5 ? "text-[#52819A]" : "text-gray-400"
-                } decoration-transparent text-xs hover:text-[#52819A]`}
-                // onClick={() => setSelected('اطلاع رسانی ها')}
+                  props.step === 5
+                    ? theme?.id === 2
+                      ? "text-palletteOneThird hover:text-palletteOneFirst"
+                      : theme?.id === 1
+                      ? "text-palletteTwoSecond hover:text-palletteTwoFirst"
+                      : "text-palletteThreeFirst hover:text-palletteThreeSecond"
+                    : "text-gray-400"
+                } decoration-transparent text-xs transition-all duration-300 cursor-pointer`}
               >
                 <FontAwesomeIcon icon={faBell} className="ml-2" />
                 <span className="w-full">اطلاع رسانی ها</span>
-              </a>
+              </span>
             </li>
           </ul>
         </div>
       </div>
 
       <div
-        className={`${styles.sidebarContainer} p-4 flex flex-col items-center sticky top-0`}
+        className={`${styles.sidebarContainer} py-4 px-2 flex flex-col items-center sticky top-0`}
       >
         <div className="w-full">
-          <ul className="list-none flex flex-col items-start p-2 m-0">
+          <ul className="list-none flex flex-col items-start py-2 px-4 m-0">
             <li className="my-4">
-              <a
-                href="#"
+              <span
                 className={`${
                   props.step === 1
-                    ? "text-[rgb(132,169,140)]"
-                    : "text-slate-400"
-                } decoration-transparent flex items-center font-semibold  transition-all duration-75 hover:text-[#84A98C] `}
-                // onClick={() => setSelected('تنظیمات پایه')}
+                    ? theme?.id === 2
+                      ? "text-palletteOneThird hover:text-palletteOneFirst"
+                      : theme?.id === 1
+                      ? "text-palletteTwoSecond hover:text-palletteTwoFirst"
+                      : "text-palletteThreeFirst hover:text-palletteThreeSecond"
+                    : "text-gray-400"
+                } decoration-transparent text-xs transition-all duration-300 cursor-pointer`}
               >
                 <FontAwesomeIcon
                   icon={faListCheck}
@@ -103,15 +130,19 @@ export default function SidebarMenu(props) {
                 <span className={`${styles.itemText} text-xs`}>
                   تنظیمات پایه
                 </span>
-              </a>
+              </span>
             </li>
             <li className="my-4">
-              <a
-                href="#"
+              <span
                 className={`${
-                  props.step == 2 ? "text-[rgb(132,169,140)]" : "text-slate-400"
-                } decoration-transparent flex items-center font-semibold transition-all duration-75 hover:text-[#84A98C] `}
-                // onClick={() => setSelected('زمان های آزاد')}
+                  props.step === 2
+                    ? theme?.id === 2
+                      ? "text-palletteOneThird hover:text-palletteOneFirst"
+                      : theme?.id === 1
+                      ? "text-palletteTwoSecond hover:text-palletteTwoFirst"
+                      : "text-palletteThreeFirst hover:text-palletteThreeSecond"
+                    : "text-gray-400"
+                } decoration-transparent text-xs transition-all duration-300 cursor-pointer`}
               >
                 <FontAwesomeIcon
                   icon={faClock}
@@ -120,15 +151,19 @@ export default function SidebarMenu(props) {
                 <span className={`${styles.itemText} text-xs`}>
                   زمان های آزاد
                 </span>
-              </a>
+              </span>
             </li>
             <li className="my-4">
-              <a
-                href="#"
+              <span
                 className={`${
-                  props.step == 3 ? "text-[rgb(132,169,140)]" : "text-slate-400"
-                } decoration-transparent flex items-center font-semibold transition-all duration-75 hover:text-[#84A98C] `}
-                // onClick={() => setSelected('تنظیمات پیشرفته')}
+                  props.step === 3
+                    ? theme?.id === 2
+                      ? "text-palletteOneThird hover:text-palletteOneFirst"
+                      : theme?.id === 1
+                      ? "text-palletteTwoSecond hover:text-palletteTwoFirst"
+                      : "text-palletteThreeFirst hover:text-palletteThreeSecond"
+                    : "text-gray-400"
+                } decoration-transparent text-xs transition-all duration-300 cursor-pointer`}
               >
                 <FontAwesomeIcon
                   icon={faGears}
@@ -137,15 +172,19 @@ export default function SidebarMenu(props) {
                 <span className={`${styles.itemText} text-xs`}>
                   تنظیمات پیشرفته
                 </span>
-              </a>
+              </span>
             </li>
             <li className="my-4">
-              <a
-                href="#"
+              <span
                 className={`${
-                  props.step == 4 ? "text-[rgb(132,169,140)]" : "text-slate-400"
-                } decoration-transparent flex items-center font-semibold transition-all duration-75 hover:text-[#84A98C] `}
-                // onClick={() => setSelected('پرسش از مهمان')}
+                  props.step === 4
+                    ? theme?.id === 2
+                      ? "text-palletteOneThird hover:text-palletteOneFirst"
+                      : theme?.id === 1
+                      ? "text-palletteTwoSecond hover:text-palletteTwoFirst"
+                      : "text-palletteThreeFirst hover:text-palletteThreeSecond"
+                    : "text-gray-400"
+                } decoration-transparent text-xs transition-all duration-300 cursor-pointer`}
               >
                 <FontAwesomeIcon
                   icon={faQuestion}
@@ -154,15 +193,19 @@ export default function SidebarMenu(props) {
                 <span className={`${styles.itemText} text-xs`}>
                   پرسش از مهمان
                 </span>
-              </a>
+              </span>
             </li>
             <li className="my-4">
-              <a
-                href="#"
+              <span
                 className={`${
-                  props.step == 5 ? "text-[rgb(132,169,140)]" : "text-slate-400"
-                } decoration-transparent flex items-center font-semibold transition-all duration-75 hover:text-[#84A98C] `}
-                // onClick={() => setSelected('اطلاع رسانی ها')}
+                  props.step === 5
+                    ? theme?.id === 2
+                      ? "text-palletteOneThird hover:text-palletteOneFirst"
+                      : theme?.id === 1
+                      ? "text-palletteTwoSecond hover:text-palletteTwoFirst"
+                      : "text-palletteThreeFirst hover:text-palletteThreeSecond"
+                    : "text-gray-400"
+                } decoration-transparent text-xs transition-all duration-300 cursor-pointer`}
               >
                 <FontAwesomeIcon
                   icon={faBell}
@@ -171,7 +214,7 @@ export default function SidebarMenu(props) {
                 <span className={`${styles.itemText} text-xs`}>
                   اطلاع رسانی ها
                 </span>
-              </a>
+              </span>
             </li>
           </ul>
         </div>

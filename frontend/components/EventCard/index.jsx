@@ -43,7 +43,7 @@ export default function EventCard(props) {
   return (
     <Col lg={3} md={4} sm={6} xs={12} className={styles.cardContainer}>
       <Card className={styles.card}>
-        <Card.Header className={styles.cardHeader}>
+        <Card.Header className={styles.cardHeader} style={{backgroundColor: `#${props.theme?.pallete_3}`}}>
           <PinkSwitch
             checked={props.item.is_enable}
             onChange={(e) => props.handleEnable(e, props.item.id)}
@@ -112,6 +112,7 @@ export default function EventCard(props) {
           {/* <a href={`http://localhost:3000/${user.domain}/${props.item.event_domain}`}>{props.item.event_domain}</a> */}
           <Button
             className={styles.copyBtn}
+            style={{backgroundColor: `#${props.theme?.pallete_1}`}}
             onClick={() => {
               navigator.clipboard.writeText(
                 `https://keykojaa.iran.liara.run/${user.domain}/${props.item.event_domain}`

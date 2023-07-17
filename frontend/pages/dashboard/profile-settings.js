@@ -9,10 +9,14 @@ import Input from '@/components/common/authInput'
 import Label from '@/components/common/Label'
 import SelectBox from '@/components/common/SelectBox'
 import Textarea from '@/components/common/Textarea'
-import { Button } from '@/components/common/authBtn'
 import axios from 'axios'
+import Link from 'next/link'
+import FilledBtn from '@/components/common/FilledBtn'
+import { useRouter } from 'next/router'
+import NotificationModal from '@/components/Modals/Notification'
 
 export default function ProfileSettings() {
+    const router = useRouter()
     const [id, setId] = useState(0)
     const [token, setToken] = useState()
     const [firstName, setFirstName] = useState('')
@@ -24,7 +28,9 @@ export default function ProfileSettings() {
     const [avatar, setAvatar] = useState('')
     const [about, setAbout] = useState('')
     const [theme, setTheme] = useState('')
+    const [pallette, setPallette] = useState()
     const [originalAvatar, setOriginalAvatar] = useState(true)
+    const [openModal, setOpenModal] = useState(false)
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('userDetails'))
@@ -36,9 +42,10 @@ export default function ProfileSettings() {
         setLink(user.domain)
         setField(user.activation_field)
         setPosition(user.position)
-        setAvatar(avatar == null ? null : `https://keykoja.iran.liara.run/${user.avatar}`)
+        setAvatar(avatar == null ? null : (user.avatar.startsWith("/me") ? `https://keykoja.iran.liara.run/${user.avatar}` : user.avatar))
         setAbout(user.about)
-        setTheme(user.theme)
+        setTheme(user.theme.id)
+        setPallette(user.theme)
     }, [])
 
     const myLoader = (src) => {
@@ -56,7 +63,7 @@ export default function ProfileSettings() {
         data.append('first_name', firstName)
         data.append('last_name', lastName)
         data.append('domain', link)
-        data.append('theme', theme)
+        data.append('theme_id', theme)
         data.append('about', about)
         data.append('position', position)
         data.append('activation_field', field)
@@ -71,7 +78,12 @@ export default function ProfileSettings() {
         }).then((res) => {
             console.log(res.data)
             localStorage.setItem('userDetails', JSON.stringify(res.data))
+            setOpenModal(true)
         })
+    }
+
+    const clickNotificationBtn = () => {
+        router.push("/dashboard")
     }
 
 
@@ -80,19 +92,22 @@ export default function ProfileSettings() {
             <Navbar />
             <nav className='bg-white text-[13px] shadow-sm'>
                 <div className='w-full flex flex-wrap items-center justify-between my-0 mx-auto p-4 py-3'>
-                    <a href='http://localhost:3000/dashboard' className={styles.backBtn}>
-                        <FontAwesomeIcon icon={faChevronRight} />
+                    <FilledBtn type="submit" onClick={() => router.push("/dashboard")} bg={pallette?.pallete_2}>
+                        <FontAwesomeIcon icon={faChevronRight} className='ml-1' />
                         بازگشت به داشبورد
-                    </a>
+                    </FilledBtn>
+                    {/* <Link href='/dashboard' className={styles.backBtn}>
+
+                    </Link> */}
                 </div>
             </nav>
             <div className='mt-8 px-16'>
                 <div className='grid sm:grid-cols-3 md:grid-cols-6 sm:gap-3 md:gap-5 items-center'>
                     <div className='sm:col-span-3 md:col-span-3 lg:col-span-3 flex flex-col items-center'>
                         {avatar == null ? (
-                            <FontAwesomeIcon icon={faUser} className='text-[40px] text-gray-600 mb-4' />
+                            <FontAwesomeIcon icon={faUser} className='text-[40px] text-gray-600 mb-3' />
                         ) : (
-                            <Image loader={() => myLoader(avatar)} src={originalAvatar ? avatar : URL.createObjectURL(avatar)} width={70} height={70} className='max-w-[70px] max-h-[70px] rounded-[100%] object-cover border border-slate-50 mb-2' />
+                            <Image loader={() => myLoader(avatar)} src={originalAvatar ? avatar : URL.createObjectURL(avatar)} width={70} height={70} className='max-w-[70px] max-h-[70px] rounded-[100%] object-cover border border-slate-50 mb-3' />
                         )}
                         <input
                             id="avatar"
@@ -101,7 +116,13 @@ export default function ProfileSettings() {
                             accept="image/*"
                             onChange={(event) => handleUpload(event)}
                         />
-                        <button onClick={() => document.getElementById("avatar").click()} className={styles.uploadAvatarBtn}>بارگذاری آواتار</button>
+                        <FilledBtn
+                            type="submit"
+                            onClick={() => document.getElementById("avatar").click()}
+                            bg={pallette?.pallete_2}
+                        >
+                            بارگذاری آواتار
+                        </FilledBtn>
                     </div>
                     <div className='sm:col-span-3 md:col-span-3 lg:col-span-3 flex flex-col my-4'>
                         <Label value='درباره من / پیام خوش آمدگویی' />
@@ -160,24 +181,24 @@ export default function ProfileSettings() {
                     <Label value="تم رنگ" />
                     <div className='w-full flex justify-center'>
                         <div
-                            className={`${theme === '[#1E6091,#1a759F,#168AAD]' ? 'shadow-xl -mt-2' : ''} w-1/3 h-14 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg `}
-                            onClick={() => setTheme("[#1E6091,#1a759F,#168AAD]")}
+                            className={`${theme === 2 ? 'shadow-xl -mt-2' : ''} w-1/3 h-14 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg `}
+                            onClick={() => setTheme(2)}
                         >
                             <div className="w-1/3 h-full bg-[#1e6091]"></div>
                             <div className="w-1/3 h-full bg-[#1a759f]"></div>
                             <div className="w-1/3 h-full bg-[#168aad]"></div>
                         </div>
                         <div
-                            className={`${theme === '[#3A5A40,#588157,#A3B18A]' ? 'shadow-lg -mt-2' : ''} w-1/3 h-14 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg`}
-                            onClick={() => setTheme("[#3A5A40,#588157,#A3B18A]")}
+                            className={`${theme === 1 ? 'shadow-lg -mt-2' : ''} w-1/3 h-14 p-1 ml-2 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg`}
+                            onClick={() => setTheme(1)}
                         >
                             <div className="w-1/3 h-full bg-[#3a5a40]"></div>
                             <div className="w-1/3 h-full bg-[#588157]"></div>
                             <div className="w-1/3 h-full bg-[#a3b18a]"></div>
                         </div>
                         <div
-                            className={`${theme === '[#C8B6FF,#E7C6FF,#FFD6FF]' ? 'shadow-lg -mt-2' : ''} w-1/3 h-14 p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg`}
-                            onClick={() => setTheme("[#C8B6FF,#E7C6FF,#FFD6FF]")}
+                            className={`${theme === 3 ? 'shadow-lg -mt-2' : ''} w-1/3 h-14 p-1 flex items-center cursor-pointer transition-all duration-500 hover:shadow-xl border border-slate-200 mb-3 rounded-lg`}
+                            onClick={() => setTheme(3)}
                         >
                             <div className="w-1/3 h-full bg-[#c8b6ff]"></div>
                             <div className="w-1/3 h-full bg-[#e7c6ff]"></div>
@@ -186,15 +207,21 @@ export default function ProfileSettings() {
                     </div>
                 </div>
                 <div className='md:w-1/2 sm:w-full md:mx-auto sm:mx-0 my-8 flex justify-center'>
-                    <Button
+                    <FilledBtn
                         type="submit"
                         onClick={handleProfileEdit}
-                        bg={"#354F52"}
-                        text={"#fff"}
+                        bg={pallette?.pallete_2}
                     >
                         ذخیره تغییرات
-                    </Button>
+                    </FilledBtn>
                 </div>
+                <NotificationModal
+                    text="تغییرات مورد نظر با موفقیت ثبت شدند."
+                    confirmText="متوجه شدم"
+                    open={openModal}
+                    setOpen={setOpenModal}
+                    btnAction={clickNotificationBtn}
+                />
             </div>
         </div>
     )

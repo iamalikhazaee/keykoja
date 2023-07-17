@@ -4,7 +4,7 @@ export const ContainerStyled = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 18px;
-  background: #CAD2C5;
+  background: lightgray;
   border-radius: 12px;
   direction: rtl;
 `;
@@ -15,6 +15,7 @@ export const CalenderHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 16px 0;
+  font-size: 12px;
 `;
 export const WeekdaysHeader = styled.div`
   display: flex;
@@ -25,7 +26,7 @@ export const WeekdaysHeader = styled.div`
   border-radius: 8px;
   width: 100%;
   padding: 5px 0;
-  font-size: 13px;
+  font-size: 11px;
 `;
 export const DaysRow = styled.div`
   display: flex;
@@ -34,6 +35,7 @@ export const DaysRow = styled.div`
   align-items: center;
   width: 100% !important;
   margin-top: 10px;
+  font-size: 12px;
 `;
 export const DayStyled = styled.div`
   font-weight: ${(props) => (props.month === props.today ? "900" : "400")};
@@ -47,9 +49,10 @@ export const DayStyled = styled.div`
   padding: 6px;
   border-radius: 10px;
   transition: ease-in .1s;
+  font-size: 12px;
 
   :hover {
-    background-color: #52796F;
+    background-color: #9ba0a8;
     color: #F4EAE6;
   }
 `;
@@ -64,9 +67,9 @@ export const HeaderStyled = styled.div`
 
 export const SelectedDayStyled = styled.div`
   font-weight: 900;
-  font-size: 16px;
+  // font-size: 16px;
   color: #fff;
-  background-color: #52796F;
+  background-color: #9ba0a8;
   width: 40px;
   display: flex;
   justify-content: center;
@@ -76,15 +79,11 @@ export const SelectedDayStyled = styled.div`
   border-radius: 10px;
   transition: ease-in .1s;
 
-  // :hover {
-  //   background-color: #52796F;
-  //   color: #F4EAE6;
-  // }
 `;
 
 export const DisableDate = styled.div`
   font-weight: 900;
-  font-size: 16px;
+  // font-size: 16px;
   color: rgba(0, 0, 0, 0.25);
   // color: rgba(0, 0, 0, 0.25);
   width: 40px;

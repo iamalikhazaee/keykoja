@@ -15,12 +15,16 @@ import Image from "next/image";
 export default function Navbar() {
   const [userMenu, setUserMenu] = useState(false);
   const [items, setItems] = useState(false);
-  const [userDetails, setUserDetails] = useState({});
+  const [userDetails, setUserDetails] = useState();
   const [theme, setTheme] = useState([]);
+  const [avatar, setAvatar] = useState("");
   const wrapperRef = useRef();
 
   useEffect(() => {
     setUserDetails(JSON.parse(localStorage.getItem("userDetails")));
+    let ava = JSON.parse(localStorage.getItem("userDetails")).avatar
+    let a = ava !== null && ava.startsWith("/me")
+    setAvatar(a ? `https://keykoja.iran.liara.run/${ava}` : ava)
     setTheme(JSON.parse(localStorage.getItem("userDetails")).theme)
 
     let handler = (event) => {
@@ -48,7 +52,10 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="py-1 px-2" style={{backgroundColor: `#${theme.pallete_1}`}}>
+    <nav
+      className="py-1 px-2"
+      style={{ backgroundColor: `#${theme.pallete_1}` }}
+    >
       <div
         className={`${styles.navbarContainer} max-w-full flex flex-wrap items-center justify-between my-0 mx-auto py-2 px-6`}
       >
@@ -80,10 +87,8 @@ export default function Navbar() {
             </span>
             <Image
               alt="avatar"
-              loader={() =>
-                myLoader(`${userDetails.avatar}`)
-              }
-              src={`${userDetails.avatar}`}
+              loader={() => myLoader(`${avatar}`)}
+              src={avatar}
               width={70}
               height={70}
               className="w-10 h-10 rounded-[100%] object-cover"
@@ -91,8 +96,7 @@ export default function Navbar() {
           </button>
           {userMenu && (
             <div
-              className={`${styles.menu} absolute z-50 top-[30px] left-0 w-[150px] text-base leading-6 rounded-xl`}
-              style={{backgroundColor: `#${theme.pallete_2}`}}
+              className={`${styles.menu} absolute z-50 top-[40px] -left-3 w-[150px] text-base leading-6 rounded-xl bg-[#f5f1ed]`}
               id={styles.userDropdown}
             >
               <div className="p-3 border-b border-slate-400">
@@ -167,14 +171,13 @@ export default function Navbar() {
         >
           <ul
             className={`${styles.menu} flex flex-col font-medium text-sm mb-0 list-none `}
-
           >
             <li>
               <Link
-                href={`/${userDetails.domain}/guests`}
+                href={`/${userDetails?.domain}/guests`}
                 // target="_blank"
                 rel="noopener noreferrer"
-                className="decoration-transparent flex text-white items-center py-2 px-4 ml-7 rounded-xl transition-all duration-300 hover:bg-slate-400"
+                className="decoration-transparent flex text-white items-center py-2 px-4 ml-7 rounded-xl transition-all duration-300"
               >
                 <FontAwesomeIcon icon={faUserCheck} className="ml-[6px]" />
                 جلسات هماهنگ شده
@@ -182,9 +185,9 @@ export default function Navbar() {
             </li>
             <li>
               <Link
-                href={`/${userDetails.domain}`}
+                href={`/${userDetails?.domain}`}
                 target="_blank"
-                className="decoration-transparent flex text-white items-center py-2 px-4 ml-7 rounded-xl transition-all duration-300 hover:bg-slate-400"
+                className="decoration-transparent flex text-white items-center py-2 px-4 ml-7 rounded-xl transition-all duration-300"
               >
                 <FontAwesomeIcon icon={faUserTag} className="ml-[6px]" />
                 دامنه شما

@@ -28,7 +28,6 @@ export function LoginForm() {
         password: password,
       })
       .then((res) => {
-        console.log(res.data);
         localStorage.setItem("userDetails", JSON.stringify(res.data.user));
         localStorage.setItem("token", JSON.stringify(res.data.access));
         Cookies.set("auth", true);

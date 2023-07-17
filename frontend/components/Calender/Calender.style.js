@@ -15,6 +15,7 @@ export const CalenderHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 16px 0;
+  font-size: 12px;
 `;
 export const WeekdaysHeader = styled.div`
   display: flex;
@@ -25,7 +26,7 @@ export const WeekdaysHeader = styled.div`
   border-radius: 8px;
   width: 100%;
   padding: 5px 0;
-  font-size: 13px;
+  font-size: 11px;
 `;
 export const DaysRow = styled.div`
   display: flex;
@@ -34,6 +35,7 @@ export const DaysRow = styled.div`
   align-items: center;
   width: 100% !important;
   margin-top: 10px;
+  font-size: 12px;
 `;
 export const DayStyled = styled.div`
   font-weight: 900;
@@ -47,6 +49,7 @@ export const DayStyled = styled.div`
   padding: 6px;
   border-radius: 10px;
   transition: ease-in .1s;
+  font-size: 12px;
 
   :hover {
     // background-color: #E57F84;
@@ -64,7 +67,6 @@ export const HeaderStyled = styled.div`
 
 export const AvailableDate = styled.div`
   font-weight: 900;
-  font-size: 16px;
   color: #000;
   // color: rgba(0, 0, 0, 0.25);
   width: 40px;
@@ -85,7 +87,6 @@ export const AvailableDate = styled.div`
 
 export const DisableDate = styled.div`
   font-weight: 900;
-  font-size: 16px;
   color: rgba(0, 0, 0, 0.25);
   width: 40px;
   display: flex;

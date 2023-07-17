@@ -47,7 +47,7 @@ export default function Testimonials() {
               </blockquote>
               <div className="text-[#1b4332] font-medium pt-3 border-t border-[#1b4332]">
                 <cite className="md:text-sm text-xs not-italic">علی خزاعی</cite>{" "}
-                - <span className="md:text-sm text-xs">UX Board</span>
+                - <span className="md:text-sm text-xs">Database designer and Back-end developer</span>
               </div>
             </div>
 

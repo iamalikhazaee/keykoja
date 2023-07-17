@@ -8,15 +8,13 @@ import {
   WeekdaysHeader,
   DaysRow,
   DayStyled,
-  AvailableDate,
   SelectedDayStyled,
   DisableDate,
 } from "./Datepicker.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
-  faChevronRight,
-  faSun,
+  faChevronRight
 } from "@fortawesome/free-solid-svg-icons";
 
 const CustomizedDatePicker = (props) => {
@@ -31,7 +29,6 @@ const CustomizedDatePicker = (props) => {
     setInitialRenderComplete(true);
     const today = jalali.toObject(new Date());
     setNow(today);
-    // console.log(today)
     if (today.month + change < 13) {
       const result = jalali.calendar(
         `${today.year}-${today.month + change < 10 ? "0" : ""}${
@@ -40,12 +37,6 @@ const CustomizedDatePicker = (props) => {
       );
       setDays(result);
     }
-    // const dates = [];
-    // for (let i = 0; i < props.dates.length; i++) {
-    //   const d = jalali.toObject(new Date(props.dates[i]));
-    //   dates.push(`${d.year}-${d.month < 10 ? "0" : ""}${d.month}-${d.day}`);
-    // }
-    // setAvailableDates(dates);
   }, [change]);
 
   if (initialRenderComplete) {

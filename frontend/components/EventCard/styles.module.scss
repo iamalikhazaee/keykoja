@@ -11,14 +11,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #CAD2C5;
             padding: 0 !important;
             padding: 10px 5px !important;
             // border-radius: 15px;
 
             .icons {
                 font-size: 14px;
-                color: gray;
+                color: white;
 
                 svg {
                     padding: 0 .2rem;
@@ -58,7 +57,6 @@
 
             .copyBtn {
                 font-size: 11px;
-                background-color: #52796F;
                 border: none;
                 outline: none;
 

@@ -11,7 +11,6 @@ import { faTag } from '@fortawesome/free-solid-svg-icons'
 import styles from '@/styles/userDomain.module.scss'
 
 export default function EventsAndGuests() {
-    // const token = Cookies.get('token')
     const router = useRouter()
     const keyword = router.query.username
     const [events, setEvents] = useState([])
@@ -23,7 +22,7 @@ export default function EventsAndGuests() {
     })
 
     const openGuestPage = (event_domain) => {
-        window.open(`http://localhost:3000/${keyword}/${event_domain}`, "_blank", "noreferrer");
+        window.open(`https://keykojaa.ir/${keyword}/${event_domain}`, "_blank", "noreferrer");
     }
 
     return (
@@ -37,7 +36,7 @@ export default function EventsAndGuests() {
                 <Row className={styles.events}>
                     {events.map((item, index) => (
                         <Col lg={5} md={5} key={index} className={styles.eventsContainer} onClick={() => openGuestPage(item.event_domain)}>
-                            <FontAwesomeIcon icon={faTag} className={styles.icon} />
+                            <FontAwesomeIcon icon={faTag} className={`${styles.icon} text-slate-400`} />
                             <div className={styles.eventName}>
                                 <span>{item.name}</span>
                             </div>

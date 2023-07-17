@@ -86,7 +86,7 @@ export default function Dashboard() {
             <Container className={styles.container}>
                 <Row className={styles.row}>
                     {events.map((item, index) => (
-                        <EventCard key={index} index={index} item={item} handleEnable={handleEventEnable} deleteEvent={handleDeleteEvent} />
+                        <EventCard theme={theme} key={index} index={index} item={item} handleEnable={handleEventEnable} deleteEvent={handleDeleteEvent} />
                     ))}
                 </Row>
             </Container>

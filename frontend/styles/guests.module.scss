@@ -60,17 +60,6 @@
         }
     }
 
-    h6 {
-        font-size: 13px;
-        padding: 1rem;
-        margin: 0;
-        background-color: #CAD2c5;
-        color: #2f3e46;
-        border-radius: 12px;
-        text-align: center;
-        line-height: 1.8;
-    }
-
     .eventContainer {
         max-height: 350px;
         overflow-y: scroll;
@@ -99,7 +88,6 @@
                 right: -16px;
                 font-size: 20px;
                 transform: rotate(270deg);
-                color: #52796F;
             }
         }
 
@@ -113,7 +101,7 @@
             }
 
             .guestsHeader {
-                border-bottom: 2px solid #CAD2c5;
+                border-bottom: 2px solid lightgray;
                 padding: 1rem 0;
                 margin-bottom: 1rem;
 

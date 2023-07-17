@@ -19,6 +19,9 @@ import ConfirmationModal from "./Confirmation";
 import axios from "axios";
 import Cookies from "js-cookie";
 import jwt from "jwt-decode";
+import FilledBtn from "../common/FilledBtn";
+import NotificationModal from "./Notification";
+import { useRouter } from "next/router";
 
 function EditEvent(props) {
   const [startHour, setStartHour] = useState(toPersianNum("00"));
@@ -29,6 +32,8 @@ function EditEvent(props) {
   const [deleteExtraTimeModal, setDeleteExtraTimeModal] = useState(false);
   const [extraTimes, setExtraTimes] = useState([]);
   const [times, setTimes] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     axios
@@ -71,6 +76,7 @@ function EditEvent(props) {
       )
       .then((res) => {
         // console.log(res.data);
+        setOpenModal(true);
       });
   };
 
@@ -107,29 +113,29 @@ function EditEvent(props) {
               end_hour: toEnglishNum(times[i].end_hour),
             })
             .then((res) => {
-            //   console.log(res.data);
+              //   console.log(res.data);
             });
-        });
-    }
-    for (let i = 0; i < extraTimes.length; i++) {
-      axios
-        .post("https://keykoja.iran.liara.run/core/EventTime/", {
-          profile: jwt(Cookies.get("token")).user_id,
-          event: props.id,
-          date: toEnglishNum(extraTimes[i].date),
-          start_hour: toEnglishNum(extraTimes[i].start_hour),
-          end_hour: toEnglishNum(extraTimes[i].end_hour),
-        })
-        .then((res) => {
-          props.setOpen(false);
+          });
+        }
+        for (let i = 0; i < extraTimes.length; i++) {
+          axios
+          .post("https://keykoja.iran.liara.run/core/EventTime/", {
+            profile: jwt(Cookies.get("token")).user_id,
+            event: props.id,
+            date: toEnglishNum(extraTimes[i].date),
+            start_hour: toEnglishNum(extraTimes[i].start_hour),
+            end_hour: toEnglishNum(extraTimes[i].end_hour),
+          })
+          .then((res) => {
+          setOpenModal(true)
         });
     }
   };
 
   const deleteExtraTime = (index) => {
     setExtraTimes((oldValues) => {
-        return oldValues.filter((_, i) => i !== index);
-      });
+      return oldValues.filter((_, i) => i !== index);
+    });
     // var copyArray = [...extraTimes];
     // copyArray.splice(index, 1);
     // setExtraTimes(copyArray);
@@ -149,6 +155,11 @@ function EditEvent(props) {
     // setTimes(copyArray);
   };
 
+  const handleReload = () => {
+    props.setOpen(false);
+    window.location.reload(true)
+  }
+
   return (
     <Modal
       aria-labelledby="transition-modal-title"
@@ -164,13 +175,13 @@ function EditEvent(props) {
       }}
     >
       <Fade in={props.open}>
-        <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[700px] max-h-[600px] overflow-y-scroll bg-white shadow-md rounded-xl py-6 px-8 flex flex-col justify-start items-center outline-none">
+        <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 max-h-[600px] overflow-y-scroll bg-white shadow-md rounded-xl py-6 px-4 flex flex-col justify-start items-center outline-none">
           <div className="w-full">
             <Tabs defaultActiveKey="first" className="w-full p-0 text-[13px]">
               <Tab eventKey="first" title="تنظیمات پایه" className="mt-4">
                 <form>
-                  <div className="flex justify-start items-center">
-                    <div className="w-[45%] mb-4 ml-16 flex flex-col justify-center">
+                  <div className="gird grid-cols-4 gap-2 flex justify-start items-center">
+                    <div className="lg:col-span-2 md:col-span-4 sm:col-span-4 xs:col-span-4 w-[48%] mb-4 ml-16 flex flex-col justify-center">
                       <Label value="عنوان رویداد"></Label>
                       <Input
                         type="text"
@@ -180,8 +191,8 @@ function EditEvent(props) {
                     </div>
                   </div>
 
-                  <div className="flex justify-start items-center">
-                    <div className="w-[45%] mb-4 ml-16 flex flex-col justify-center">
+                  <div className="grid grid-cols-4 gap-2 justify-start items-center">
+                    <div className="lg:col-span-2 md:col-span-4 sm:col-span-4 xs:col-span-4 w-full mb-4 ml-16 flex flex-col justify-center">
                       <Label value="نوع رویداد"></Label>
                       <SelectBox
                         options={["یک به یک", "گروهی"]}
@@ -190,13 +201,14 @@ function EditEvent(props) {
                       ></SelectBox>
                     </div>
                     <div
-                      className="w-[45%] mb-4 ml-16 flex flex-col justify-center"
+                      className="lg:col-span-2 md:col-span-4 sm:col-span-4 xs:col-span-4 w-full mb-4 ml-16 flex flex-col justify-center"
                       style={{ margin: "0 0 1rem 0" }}
                     >
                       <Label value="لینک رویداد"></Label>
                       <div className="flex flex-row-reverse w-full items-center">
-                        <div className="bg-[#f3f4f6] border border-[#d1d5db] leading-5 mb-[5px] py-2 px-4 rounded-tl-lg rounded-bl-lg text-left text-xs font-semibold text-gray-700">
-                          {props.userDomain}/
+                        <div className="flex flex-row-reverse bg-[#f3f4f6] border border-[#d1d5db] leading-5 mb-[5px] py-2 px-2 rounded-tl-lg rounded-bl-lg text-left text-xs font-semibold text-gray-700">
+                          {props.userDomain}
+                          <span>/</span>
                         </div>
                         <div className="w-full -ml-4">
                           <Input
@@ -210,10 +222,10 @@ function EditEvent(props) {
                   </div>
 
                   <div
-                    className="flex justify-start items-center"
+                    className="grid grid-cols-4 gap-2 justify-start items-center"
                     style={{ justifyContent: "flex-start" }}
                   >
-                    <div className="w-[45%] mb-4 ml-16 flex flex-col justify-center">
+                    <div className="lg:col-span-2 md:col-span-4 sm:col-span-4 xs:col-span-4 w-full mb-4 ml-16 flex flex-col justify-center">
                       <Label value="محل برگزاری رویداد"></Label>
                       <SelectBox
                         options={["حضوری", "گوگل میت", "اسکایپ", "واتساپ"]}
@@ -226,7 +238,7 @@ function EditEvent(props) {
                       <></>
                     ) : (
                       <div
-                        className="w-[45%] mb-4 ml-16 flex flex-col justify-center"
+                        className="lg:col-span-2 md:col-span-4 sm:col-span-4 xs:col-span-4 w-full mb-4 ml-16 flex flex-col justify-center"
                         style={{ margin: "0 0 1rem 0" }}
                       >
                         <Label
@@ -268,12 +280,13 @@ function EditEvent(props) {
 
                   <div className="flex justify-start items-center">
                     <div className="w-full flex justify-center items-center my-2 py-2">
-                      <button
-                        className="px-4 py-3 text-[10px] rounded-xl bg-white text-[#709680] border border-[#709680] transition-all duration-300"
+                      <FilledBtn
+                        type="submit"
                         onClick={editEvent}
+                        bg={"354F52"}
                       >
                         ذخیره تغییرات
-                      </button>
+                      </FilledBtn>
                     </div>
                   </div>
                 </form>
@@ -423,6 +436,14 @@ function EditEvent(props) {
               </Tab>
             </Tabs>
           </div>
+
+          <NotificationModal
+            text="اعمال تغییرات با موفقیت انجام شد."
+            confirmText="متوجه شدم"
+            open={openModal}
+            setOpen={setOpenModal}
+            btnAction={() => handleReload()}
+          />
         </Box>
       </Fade>
     </Modal>
